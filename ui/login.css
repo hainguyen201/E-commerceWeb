@@ -1,0 +1,106 @@
+body {
+    background-color: bisque;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.dialog {
+    z-index: 1;
+}
+
+#content {
+    /* opacity: 0.1; */
+    height: 100%;
+    width: 100%;
+    background-color: blue;
+    z-index: 0;
+}
+
+#di-login-signup {
+    display: flex;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* margin-top: auto;
+    margin-bottom: auto; */
+    width: 900px;
+    height: 630px;
+}
+
+#notif {
+    border-radius: 10px;
+    background-color: white;
+    width: 360px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#login-signup {
+    padding: 15px;
+    height: 100%;
+    width: 540px;
+    right: 0px;
+}
+
+#login-signup div {
+    background-color: white;
+}
+
+#notif h2 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+#notif p {
+    text-align: center;
+}
+
+#op-login, #op-signup {
+    padding: 15px;
+    margin-left: 30px;
+    border-bottom: 3px solid #1ba8ff;
+}
+
+.content.login, .content.signup {
+    padding: 35px 27px 35px 27px;
+    height: 440px;
+    width: 510;
+}
+
+.element {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+input.name, input.password, input.phone, input.email {
+    border-radius: 5px;
+    height: 22px;
+    width: 381px;
+    border: 1px solid #cccccc;
+    background-color: #e8f0fe;
+    padding: 6px 12px 6px 12px;
+}
+
+/* input.sex-male,input.sex-female{
+    height: 22px;
+    padding: 6px 12px 6px 12px;
+} */
+
+button.btn-login, button.btn-signup {
+    background-color: #fdd835;
+    width: 381px;
+    height: 41px;
+    border: none;
+    border-radius: 5px;
+}
+
+input:focus {
+    border: 1px solid #66afe9 !important;
+}
