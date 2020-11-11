@@ -6,6 +6,11 @@ var title = document.querySelector("#notif h2");
 var description = document.querySelector("#notif p");
 var checkboxMale = document.getElementsByClassName("sex-male")[0];
 var checkboxFemale = document.getElementsByClassName("sex-female")[0];
+var root = document.getElementById("root");
+var modalLoginSignup = document.getElementsByClassName("modal-login-signup")[0];
+var iconCloseModal = document.getElementsByClassName("icon-close")[0];
+
+modalLoginSignup.style.visibility = "hidden";
 
 function helloWorld() {
     console.log("Hello world!");
@@ -31,6 +36,11 @@ function changeContent() {
     //console.log(this.event.target.id); 
 }
 
+function openLoginSignupModal() {
+    modalLoginSignup.style.visibility = "visible";
+    root.style.opacity = 0.2;
+}
+
 var listCheckbox = [checkboxMale, checkboxFemale];
 
 onlyCheckOne = (e) => {
@@ -47,4 +57,13 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
+window.onclick = function (event) {
+    if (event.target == modalLoginSignup) {
+        onCloseModal();
+    }
+}
 
+function onCloseModal() {
+    root.style.opacity = 1;
+    modalLoginSignup.style.visibility = "hidden";
+}
