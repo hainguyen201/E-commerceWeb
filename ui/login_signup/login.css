@@ -56,19 +56,23 @@ body {
 }
 
 #notif p {
+    padding: 30px;
     text-align: center;
 }
 
 #op-login, #op-signup {
+    cursor: pointer;
     padding: 15px;
     margin-left: 30px;
+}
+
+#op-login {
     border-bottom: 3px solid #1ba8ff;
 }
 
 .content.login, .content.signup {
     padding: 35px 27px 35px 27px;
     height: 440px;
-    width: 510;
 }
 
 .element {
@@ -102,5 +106,10 @@ button.btn-login, button.btn-signup {
 }
 
 input:focus {
+    outline: 1px;
     border: 1px solid #66afe9 !important;
+}
+
+button {
+    cursor: pointer;
 }
