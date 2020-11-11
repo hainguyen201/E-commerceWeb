@@ -10,10 +10,10 @@
 
 <body>
     <div>
-        <div id="">
-            hello
+        <div id="root" class="">
+            <button onclick="openLoginSignupModal()">Đăng nhập</button>
         </div>
-        <div
+        <div class="modal-login-signup"
             style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
             <div id="di-login-signup" class="dialog">
                 <div id="notif">
@@ -24,6 +24,9 @@
                     <img src="./graphic-map.png" />
                 </div>
                 <div id="login-signup">
+                    <div class="icon iconx">
+                        <img class="icon icon-close" onclick="onCloseModal()" src="./iconx.png" />
+                    </div>
                     <div class="option" style="display: flex; height: 44px; border-bottom: 1px solid #f4f4f4;">
                         <div id="op-login" onclick="changeContent()">Đăng nhập</div>
                         <div id="op-signup" onclick="changeContent()">Tạo tài khoản</div>
