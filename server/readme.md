@@ -1,5 +1,13 @@
-#Title
-NodeJS Server for E-commerce Website
+# Title
+Node.JS Server for E-commerce Website
 
 ---
-##Req
+## Requirement
+
+Node.js 14.15.0
+
+## Install
+
+    $ git clone https://github.com/hainguyen201/E-commerceWeb
+    $ cd server
+    $ npm run start
