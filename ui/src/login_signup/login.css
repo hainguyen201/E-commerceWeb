@@ -111,11 +111,6 @@ input.name, input.password, input.phone, input.email {
     padding: 6px 12px 6px 12px;
 }
 
-/* input.sex-male,input.sex-female{
-    height: 22px;
-    padding: 6px 12px 6px 12px;
-} */
-
 button.btn-login, button.btn-signup {
     background-color: #fdd835;
     width: 381px;
