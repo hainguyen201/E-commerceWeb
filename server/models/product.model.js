@@ -9,5 +9,6 @@ const Product = function(product) {
     this.catalogID = product.catalogID;
     this.discount = product.discount;
     this.remain = product.remain;
-    this.created
+    this.created = product.created;
+    this.modified = product.modified;
 }

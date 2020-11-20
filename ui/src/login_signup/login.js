@@ -24,8 +24,7 @@ function changeContent() {
         opLogin.style.borderBottom = "3px solid #1ba8ff";
         title.innerHTML = "Đăng nhập"
         description.innerHTML = "Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn."
-    }
-    else {
+    } else {
         loginComponent.style.display = "none";
         signupComponent.style.display = "block";
         opLogin.style.borderBottom = "3px solid #fff";
@@ -57,7 +56,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -66,4 +65,15 @@ window.onclick = function (event) {
 function onCloseModal() {
     root.style.opacity = 1;
     modalLoginSignup.style.visibility = "hidden";
+}
+
+function redirect(path, param) {
+    param = [{ name: "param1", value: "value1" }, { name: "param2", value: 2 }]
+    var expath = ""
+    param.forEach(p => {
+        expath += p.name + '=' + p.value;
+        expath += '&';
+    })
+    window.location.href = path + '?' + expath;
+
 }
