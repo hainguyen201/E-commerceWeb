@@ -6,10 +6,16 @@ const url = require('url');
 const routes = require('./route/routes');
 const router = require('./route/router');
 
-const server = http.createServer(async (req, res) => {
-  await router(req, res, routes);
+const server = http.createServer(async(req, res) => {
+    const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+        'Access-Control-Max-Age': 2592000, // 30 days
+        /** add other headers as per requirement */
+    };
+    await router(req, res, routes);
 })
 
 server.listen(3000, () => {
-  console.log('Server is listening on port 3000');
+    console.log('Server is listening on port 3000');
 })

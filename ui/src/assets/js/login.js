@@ -9,8 +9,10 @@ var checkboxFemale = document.getElementsByClassName("sex-female")[0];
 var root = document.getElementById("root");
 var modalLoginSignup = document.getElementsByClassName("modal-login-signup")[0];
 var iconCloseModal = document.getElementsByClassName("icon-close")[0];
-
+var btnLogin = document.getElementById('btn-login');
 modalLoginSignup.style.visibility = "hidden";
+var base = new Base();
+var userService = new UserService();
 
 function helloWorld() {
     console.log("Hello world!");
@@ -24,8 +26,7 @@ function changeContent() {
         opLogin.style.borderBottom = "3px solid #1ba8ff";
         title.innerHTML = "Đăng nhập"
         description.innerHTML = "Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn."
-    }
-    else {
+    } else {
         loginComponent.style.display = "none";
         signupComponent.style.display = "block";
         opLogin.style.borderBottom = "3px solid #fff";
@@ -57,7 +58,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -67,3 +68,15 @@ function onCloseModal() {
     root.style.opacity = 1;
     modalLoginSignup.style.visibility = "hidden";
 }
+// var base = new Base();
+//kiểm tra input đầu vào
+function checkValidation() {
+    return true;
+}
+//lấy id của người dùng
+btnLogin.onclick = function(event) {
+    if (checkValidation()) {
+        base.redirect('/list_product/index.html', '')
+    }
+}
+userService.getUser('', '')
