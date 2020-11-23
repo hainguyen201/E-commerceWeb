@@ -1,22 +1,14 @@
 const { USER } = require('../config/db.config')
 const User = require('../models/user.model')
+const headers = require('../config/header.config')
 
 exports.findAll = (req, res, param) => {
-    const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
-        'Access-Control-Max-Age': 2592000,
-        "Content-Type": "application/json" // 30 days
-            /** add other headers as per requirement */
-    };
-
     User.getAll((err, data) => {
         if (err)
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving customers."
             })
         else {
-
             res.writeHead(200, headers)
             res.write(JSON.stringify(data))
             res.end()

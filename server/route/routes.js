@@ -1,15 +1,19 @@
 const userController = require('../controllers/user.controller')
-
-const routes = [
-    {
+const productController = require('../controllers/product.controller')
+const routes = [{
         method: 'GET',
-        path: '/user',
+        path: '/users',
         handler: userController.findAll
     },
     {
         method: 'GET',
-        path: /\/user\/([0-9a-z]+)/,
+        path: /\/users\/([0-9a-z]+)/,
         handler: userController.findOne
+    },
+    {
+        method: 'GET',
+        path: '/products',
+        handler: productController.findAll
     }
 ]
 module.exports = routes;
