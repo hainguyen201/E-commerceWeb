@@ -1,3 +1,5 @@
+var fs = require('fs')
+var path = require('path')
 module.exports.validationError = (res, error = 'Data provided is not valid') => {
     addHeaders(res);
 
@@ -5,7 +7,7 @@ module.exports.validationError = (res, error = 'Data provided is not valid') => 
 
     res.end(JSON.stringify({
         status: 'fail',
-            error
+        error
     }, null, 3));
 };
 
@@ -33,4 +35,9 @@ module.exports.success = (res, data = null) => {
 
 const addHeaders = (res) => {
     return res.setHeader('Content-Type', 'application/json');
+}
+const basepath = path.normalize(__dirname + '/../storage/image/');
+module.exports.base64_encode = (filepath) => {
+    var imageAsBase64 = fs.readFileSync(path.normalize(basepath + filepath), 'base64');
+    return imageAsBase64;
 }
