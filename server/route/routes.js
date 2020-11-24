@@ -11,6 +11,11 @@ const routes = [{
         handler: userController.findOne
     },
     {
+        method: 'PUT',
+        path: /\/users\/([0-9a-z]+)/,
+        handler: userController.updateUser
+    },
+    {
         method: 'GET',
         path: '/products',
         handler: productController.findAll
