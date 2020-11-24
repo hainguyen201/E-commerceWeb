@@ -16,14 +16,6 @@ const Product = function(product) {
 Product.getAll = result => {
     sqlString = 'select * from products';
     AbstractModel.queryExc(result, sqlString);
-    // sql.query('select * from products', (err, r) => {
-    //     if (err) {
-    //         console.log(err)
-    //         result(err, r)
-    //     } else {
-    //         result(null, r);
-    //     }
-    // })
 }
 Product.getProductByCatalogs = (catalogId, result) => {
     sqlString = `select * from products as p, catalogs as c

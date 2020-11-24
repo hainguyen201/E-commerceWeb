@@ -3,11 +3,16 @@ const headers = require('../config/header.config')
 const Products = require('../models/product.model.js')
 const helper = require('../utils/helper')
 const path = require('path')
+const abstractController = require('./abstract.controller')
+    /**
+     * Lấy toàn bộ danh sách sản phẩm
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} param 
+     */
 exports.findAll = (req, res, param) => {
+    console.log(res)
     Products.getAll((err, data) => {
-        console.log('data', data)
-        console.log('err', err)
-        console.log("check")
         if (err)
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving products."
@@ -15,11 +20,11 @@ exports.findAll = (req, res, param) => {
         else {
             data.forEach(element => {
                 element.ImageLink = helper.base64_encode(element.ImageLink);
-                console.log(element.ImageLink)
             });
-            res.writeHead(200, headers)
-            res.write(JSON.stringify(data))
-            res.end()
+            abstractController.sendData(res, data);
         }
     })
+}
+exports.findProductByCatalogID = (req, res, param) => {
+    console.log("param", res)
 }
