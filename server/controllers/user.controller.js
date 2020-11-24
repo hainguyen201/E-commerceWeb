@@ -2,6 +2,7 @@ const { USER } = require('../config/db.config')
 const User = require('../models/user.model')
 const headers = require('../config/header.config')
 const abstractController = require('./abstract.controller')
+const helper = require('../utils/helper')
     /**
      * Lấy toàn bộ user
      * @param {*} req 
@@ -37,4 +38,21 @@ exports.findOne = (req, res, param) => {
             abstractController.sendData(res, data);
         }
     })
+}
+exports.updateUser = (req, res, param) => {
+    let body = '';
+    req.on('data', chunk => {
+        console.log(chunk)
+    });
+    req.on('end', () => {
+        console.log(body)
+            // User.updateUser(param, body, (err, data) => {
+            //     if (err) {
+
+        //     } else {
+        //         abstractController.sendData(res, data)
+        //     }
+        // })
+    })
+
 }
