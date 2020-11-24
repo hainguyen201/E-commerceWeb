@@ -14,6 +14,12 @@ const routes = [{
         method: 'GET',
         path: '/products',
         handler: productController.findAll
+    },
+    {
+        method: 'GET',
+        path: /\/products\/([0-9a-z]+)/,
+        handler: productController.findProductByCatalogID
+
     }
 ]
 module.exports = routes;

@@ -1,21 +1,30 @@
 const { USER } = require('../config/db.config')
 const User = require('../models/user.model')
 const headers = require('../config/header.config')
-
+const abstractController = require('./abstract.controller')
+    /**
+     * Lấy toàn bộ user
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} param 
+     */
 exports.findAll = (req, res, param) => {
-    User.getAll((err, data) => {
-        if (err)
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving customers."
-            })
-        else {
-            res.writeHead(200, headers)
-            res.write(JSON.stringify(data))
-            res.end()
-        }
-    })
-}
-
+        User.getAll((err, data) => {
+            if (err)
+                res.status(500).send({
+                    message: err.message || "Some error occurred while retrieving customers."
+                })
+            else {
+                abstractController.sendData(res, data)
+            }
+        })
+    }
+    /**
+     * Tim user theo id
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} param 
+     */
 exports.findOne = (req, res, param) => {
     User.findById(param, (err, data) => {
         if (err) {
@@ -25,9 +34,7 @@ exports.findOne = (req, res, param) => {
 
             }
         } else {
-            res.writeHead(200, headers)
-            res.write(JSON.stringify(data))
-            res.end()
+            abstractController.sendData(res, data);
         }
     })
 }
