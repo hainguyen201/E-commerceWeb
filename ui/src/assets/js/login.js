@@ -39,7 +39,7 @@ function changeContent() {
 
 function openLoginSignupModal() {
     modalLoginSignup.style.visibility = "visible";
-    root.style.opacity = 0.2;
+    root.style.opacity = 0;
 }
 
 var listCheckbox = [checkboxMale, checkboxFemale];
@@ -75,8 +75,8 @@ function checkValidation() {
 }
 //lấy id của người dùng
 btnLogin.onclick = function(event) {
-    if (checkValidation()) {
-        base.redirect('/list_product/index.html', '')
+        if (checkValidation()) {
+            base.redirect('/list_product/index.html', '')
+        }
     }
-}
-userService.getUser('', '')
+    //userService.getUser('', '')

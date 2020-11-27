@@ -13,8 +13,8 @@ class UserService {
             console.log(request.responseText)
         }
         var body = {
-            UserName = "",
-            PassWord = ""
+            UserName: "",
+            PassWord: ""
         }
         request.onreadystatechange = function() {
             if (http.readyState == 4 && http.status == 200) {
@@ -24,6 +24,5 @@ class UserService {
         request.setRequestHeader('Content-type', 'application/json')
         request.open('POST', "http://localhost:3000/users/login")
         request.send(body);
-
     }
 }

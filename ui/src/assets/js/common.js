@@ -33,4 +33,15 @@ class Base {
         var results = regex.exec(url);
         return results == null ? null : results[1];
     }
+    addDom(scope, htmlName) {
+        var url = htmlName;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                scope.innerHTML = this.responseText;
+            }
+        };
+        xhttp.open('GET', url, true);
+        xhttp.send();
+    }
 }
