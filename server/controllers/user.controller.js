@@ -51,15 +51,23 @@ exports.updateUser = async(req) => {
     })
 }
 exports.findByUserName = (req, res) => {
+    console.log(req.headers.cookie)
     User.findByUserName(req.body, (err, data) => {
         if (err) {
             console.log(err)
         } else {
-            console.log(length(data))
-            if (length(data) > 0)
+            console.log(data.length)
+            if (data.length > 0) {
+                data = {
+                    data: data,
+                    message: "login success"
+                }
                 abstractController.sendData(res, data);
-            else {
-                abstractController.sendData(res, "that bai");
+            } else {
+                data = {
+                    message: "username or password was incorrected"
+                }
+                abstractController.sendData(res, data);
             }
         }
     })

@@ -46,14 +46,6 @@ var list_product = [{
     },
 ];
 
-// var tooltipSpan = document.getElementsByClassName('tooltip-product')[0];
-
-// window.onmousemove = function (e) {
-//     var x = e.clientX,
-//         y = e.clientY;
-//     tooltipSpan.style.top = (y + 20) + 'px';
-//     tooltipSpan.style.left = (x + 20) + 'px';
-// };
 
 function createProductElement(product) {
     var template = document.createElement('template');
@@ -97,5 +89,3 @@ function addListProduct(listProduct) {
 }
 
 addListProduct(list_product);
-
-console.log(base.getQueryParam('param1', window.location.href.toString()))
