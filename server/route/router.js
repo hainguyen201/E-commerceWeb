@@ -23,11 +23,15 @@ module.exports = async(req, res, routes) => {
     if (route && typeof route.path === 'object') {
         param = req.url.match(route.path)[1];
     }
-    console.log(param)
     if (route) {
         let body = null
         if (req.method === 'POST' || req.method === 'PUT') {
             body = await getPostData(req)
+                // console.log("inbody", body.Name)
+                // console.log("type: ", typeof body)
+                // var obj = JSON.parse(body);
+                // console.log('json parse: ', JSON.parse(body))
+                // console.log('name: ', obj.Name)
         }
 
         return route.handler(req, res, param)
@@ -47,6 +51,7 @@ function getPostData(req) {
 
             req.on('end', () => {
                 //resolve(parse(body));
+                req.body = JSON.parse(body)
                 resolve(body);
             });
         } catch (e) {
