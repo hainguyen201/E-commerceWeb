@@ -39,20 +39,31 @@ exports.findOne = (req, res, param) => {
         }
     })
 }
-exports.updateUser = (req, res, param) => {
-    let body = '';
-    req.on('data', chunk => {
-        console.log(chunk)
-    });
-    req.on('end', () => {
-        console.log(body)
-            // User.updateUser(param, body, (err, data) => {
-            //     if (err) {
-
-        //     } else {
-        //         abstractController.sendData(res, data)
-        //     }
-        // })
+exports.updateUser = async(req) => {
+    // console.log(req.body.id)
+    // console.log(req.body)
+    User.updateUser(req.body.id, req.body, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            abstractController.sendData(res, data)
+        }
     })
-
+}
+exports.findByUserName = (req, res) => {
+    User.findByUserName(req.body, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(length(data))
+            if (length(data) > 0)
+                abstractController.sendData(res, data);
+            else {
+                abstractController.sendData(res, "that bai");
+            }
+        }
+    })
+}
+exports.loginAction = async(req, res, param) => {
+    this.findOne(req, res, req.body.UserName)
 }

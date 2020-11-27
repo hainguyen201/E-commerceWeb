@@ -16,6 +16,11 @@ const routes = [{
         handler: userController.updateUser
     },
     {
+        method: 'POST',
+        path: '/users/login',
+        handler: userController.findByUserName
+    },
+    {
         method: 'GET',
         path: '/products',
         handler: productController.findAll
