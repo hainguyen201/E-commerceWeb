@@ -27,32 +27,41 @@ exports.findAll = (req, res, param) => {
      * @param {*} param 
      */
 exports.findOne = (req, res, param) => {
-    User.findById(param, (err, data) => {
-        if (err) {
-            if (err.kind === "not_found") {
+        User.findById(param, (err, data) => {
+            if (err) {
+                if (err.kind === "not_found") {
 
+                } else {
+
+                }
             } else {
-
+                abstractController.sendData(res, data);
             }
-        } else {
-            abstractController.sendData(res, data);
-        }
-    })
-}
+        })
+    }
+    /**
+     * Cập nhật User
+     * @param {*} req 
+     */
 exports.updateUser = async(req) => {
-    // console.log(req.body.id)
-    // console.log(req.body)
-    User.updateUser(req.body.id, req.body, (err, data) => {
-        if (err) {
-            console.log(err);
-        } else {
-            abstractController.sendData(res, data)
-        }
-    })
-}
-exports.findByUserName = (req, res) => {
+        // console.log(req.body.id)
+        // console.log(req.body)
+        User.updateUser(req.body.id, req.body, (err, data) => {
+            if (err) {
+                console.log(err);
+            } else {
+                abstractController.sendData(res, data)
+            }
+        })
+    }
+    /**
+     * Tìm kiếm User theo username
+     * @param {*} req 
+     * @param {*} res 
+     */
+exports.findByUserName = async(req, res) => {
     console.log(req.headers.cookie)
-    User.findByUserName(req.body, (err, data) => {
+    await User.findByUserName(req.body, (err, data) => {
         if (err) {
             console.log(err)
         } else {
@@ -60,12 +69,15 @@ exports.findByUserName = (req, res) => {
             if (data.length > 0) {
                 data = {
                     data: data,
-                    message: "login success"
+                    message: "login success",
+                    status: true
                 }
                 abstractController.sendData(res, data);
             } else {
                 data = {
-                    message: "username or password was incorrected"
+                    data: [],
+                    message: "username or password was incorrected",
+                    status: false
                 }
                 abstractController.sendData(res, data);
             }
@@ -73,5 +85,31 @@ exports.findByUserName = (req, res) => {
     })
 }
 exports.loginAction = async(req, res, param) => {
-    this.findOne(req, res, req.body.UserName)
+        this.findOne(req, res, req.body.UserName)
+    }
+    /**
+     * Thêm User
+     * @param {*} req 
+     * @param {*} res 
+     */
+exports.addUser = async(req, res) => {
+    User.addUser(req.body, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log(data)
+            if (data) {
+                data = {
+                    data: data,
+                    message: "add success"
+                }
+                abstractController.sendData(res, data);
+            } else {
+                data = {
+                    message: "error to add user, please contact to admin"
+                }
+                abstractController.sendData(res, data);
+            }
+        }
+    })
 }

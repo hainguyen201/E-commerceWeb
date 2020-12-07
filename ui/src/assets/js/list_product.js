@@ -1,5 +1,7 @@
 var containerListProduct = document.getElementById("list_product");
 var base = new Base();
+var userService = new UserService();
+var btnLogin = document.getElementById('btn-login')
 var list_product = [{
         "productID": "1",
         "name": "Ghế xoay hòa phát A",
@@ -87,5 +89,11 @@ function addListProduct(listProduct) {
     containerListProduct.appendChild(listElement[2]);
     containerListProduct.appendChild(listElement[3]);
 }
-
+btnLogin.onclick = async function(event) {
+    if (true) {
+        // userService.getUser('', '');
+        await userService.loginService('hainguyen27', '1246')
+            // base.redirect('/list_product/index.html', '')
+    }
+}
 addListProduct(list_product);

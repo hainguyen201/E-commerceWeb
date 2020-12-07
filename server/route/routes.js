@@ -17,6 +17,11 @@ const routes = [{
     },
     {
         method: 'POST',
+        path: '/users',
+        handler: userController.addUser
+    },
+    {
+        method: 'POST',
         path: '/users/login',
         handler: userController.findByUserName
     },

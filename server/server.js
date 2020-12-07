@@ -7,12 +7,19 @@ const routes = require('./route/routes');
 const router = require('./route/router');
 
 const server = http.createServer(async(req, res) => {
-    const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
-        'Access-Control-Max-Age': 2592000, // 30 days
-        /** add other headers as per requirement */
-    };
+    // const header = {
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, DELETE, PUT',
+    //     'Access-Control-Allow-Headers': '*'
+    // }
+    console.log(req.method)
+    res.setHeader('Access-Control-Allow-Origin', "*");
+    res.setHeader('Access-Control-Allow-Methods', "*");
+    res.setHeader('Access-Control-Allow-Headers', "*");
+    if (req.method == "OPTIONS") {
+        res.statusCode = 204;
+        res.end();
+    }
     await router(req, res, routes);
 })
 
