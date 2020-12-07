@@ -1,5 +1,5 @@
 # E-commerceWeb
-Chạy server:
++ Chạy server:
 - Vào thư mục server/: npm run dev
-Chạy client: 
++ Chạy client: 
 - Vào thư mục ui/src/: npm start
