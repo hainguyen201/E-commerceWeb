@@ -1,3 +1,7 @@
+/**
+ *Các cấu hình và hàm chung cho controller
+ */
+
 const headers = require('../config/header.config')
     /**
      * Gửi dữ liệu cho client
@@ -5,7 +9,10 @@ const headers = require('../config/header.config')
      * @param {*} data 
      */
 exports.sendData = (res, data) => {
-    res.writeHead(200, headers)
+    console.log(data)
+        // res.statusCode = 200;
+    res.statusCode = 200;
     res.write(JSON.stringify(data))
+        //console.log(res)
     res.end()
 }

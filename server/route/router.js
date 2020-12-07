@@ -1,7 +1,14 @@
 const helpers = require('../utils/helper')
 const { parse } = require('querystring');
+const { get } = require('http');
 
 module.exports = async(req, res, routes) => {
+    // if (req.method) {
+    //     if (req.method == "OPTIONS") {
+    //         req.method = "POST"
+    //     }
+    // }
+    // var body = await getPostData(req)
     const route = routes.find((route) => {
         const methodMatch = route.method === req.method;
         let pathMatch = false;
@@ -27,11 +34,6 @@ module.exports = async(req, res, routes) => {
         let body = null
         if (req.method === 'POST' || req.method === 'PUT') {
             body = await getPostData(req)
-                // console.log("inbody", body.Name)
-                // console.log("type: ", typeof body)
-                // var obj = JSON.parse(body);
-                // console.log('json parse: ', JSON.parse(body))
-                // console.log('name: ', obj.Name)
         }
 
         return route.handler(req, res, param)
@@ -46,7 +48,7 @@ function getPostData(req) {
             let body = '';
             req.on('data', chunk => {
                 body += chunk.toString(); // convert Buffer to string
-                //console.log("body", body)
+                console.log("body", body)
             });
 
             req.on('end', () => {

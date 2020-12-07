@@ -8,7 +8,7 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node_modules/.bin/live-server --port=3000 --entry-file=login_signup/index.html"
+        "start": "node_modules/.bin/live-server --port=5000 --entry-file=list_product/index.html"
     },
     "keywords": [],
     "author": "",
