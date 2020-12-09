@@ -14,13 +14,17 @@ const server = http.createServer(async(req, res) => {
     // }
     console.log(req.method)
     res.setHeader('Access-Control-Allow-Origin', "*");
-    res.setHeader('Access-Control-Allow-Methods', "*");
-    res.setHeader('Access-Control-Allow-Headers', "*");
+    res.setHeader('Content-Type', "application/json")
     if (req.method == "OPTIONS") {
-        res.statusCode = 204;
+
+        res.setHeader('Access-Control-Allow-Methods', "*");
+        res.setHeader('Access-Control-Allow-Headers', "*");
+        res.statusCode = 200;
         res.end();
+    } else {
+        await router(req, res, routes);
     }
-    await router(req, res, routes);
+
 })
 
 server.listen(3000, () => {

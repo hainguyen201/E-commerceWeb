@@ -1,6 +1,6 @@
 class Base {
     /**
-     * 
+     * Điều hướng đến trang html và truyền param
      * @param {url muốn điều hướng đến} path 
      * @param {tham số muốn truyền vào url} param 
      */

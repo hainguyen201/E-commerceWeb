@@ -6,11 +6,6 @@ const routes = [{
         handler: userController.findAll
     },
     {
-        method: 'GET',
-        path: /\/users\/([0-9a-z]+)/,
-        handler: userController.findOne
-    },
-    {
         method: 'PUT',
         path: /\/users\/([0-9a-z]+)/,
         handler: userController.updateUser
@@ -21,20 +16,35 @@ const routes = [{
         handler: userController.addUser
     },
     {
+        method: 'DELETE',
+        path: /\/users\/([0-9a-z]+)/,
+        handler: userController.deleteUser
+    },
+    {
         method: 'POST',
-        path: '/users/login',
+        path: "/users/login",
         handler: userController.findByUserName
     },
     {
         method: 'GET',
         path: '/products',
-        handler: productController.findAll
+        handler: productController.findAllProducts
     },
     {
         method: 'GET',
         path: /\/products\/([0-9a-z]+)/,
-        handler: productController.findProductByCatalogID
+        handler: productController.findProductByID
 
-    }
+    },
+    {
+        method: 'GET',
+        path: /\/products\/catalogs\/([0-9a-z]+)/,
+        handler: productController.findProductByCatalogID
+    },
+    {
+        method: 'POST',
+        path: '/products',
+        handler: productController.addProduct
+    },
 ]
 module.exports = routes;
