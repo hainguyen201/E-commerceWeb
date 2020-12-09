@@ -1,0 +1,130 @@
+@import url("../css/common.css");
+body {
+    background-color: bisque;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+html {
+    margin: 0;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+* {
+    font-family: Roboto, Helvetica, sans-serif;
+}
+
+#name-product{
+    font-size: 13px;
+    font-weight: 400;
+    color: rgb(36, 36, 36);
+}
+
+#price{
+    font-size: 15px;
+    font-weight: 1000;
+    color: rgb(36, 36, 36);
+}
+
+#discount{
+    font-size: 12px;
+}
+
+/* *{
+    box-sizing: border-box;
+} */
+
+.container-list-product {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product {
+    transition: 0.3s;
+    box-sizing: border-box;
+    padding: 12px 16px 12px 16px;
+    border: 1px solid transparent;
+    /* max-height: auto; */
+    cursor: pointer;
+    width: 25%;
+    background-color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.product:hover {
+    z-index: 1;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container-img {
+    width: 100%;
+    height: 246px;
+    position: relative;
+}
+
+/* img {
+    vertical-align: middle;
+    display:block;
+    margin:auto;
+    max-width: 100%;
+    max-height: 100%;
+} */
+
+.img-product {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+#title-product {
+    width: 100%;
+    word-wrap: break-word;
+    /* IE 5.5-7 */
+    white-space: -moz-pre-wrap;
+    /* Firefox 1.0-2.0 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 75px;
+}
+
+.tooltip-product {
+    display: none;
+    width: auto;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+}
+
+.product:hover .tooltip-product {
+    display: block;
+    position: fixed;
+    overflow: hidden;
+}
+
+.btn-addtocart {
+    background-color: #fdd835;
+    width: 150px;
+    height: 41px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    cursor: pointer;
+}
