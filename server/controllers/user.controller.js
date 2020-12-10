@@ -11,13 +11,11 @@ const helper = require('../utils/helper')
      */
 exports.findAll = (req, res, param) => {
         User.getAll((err, data) => {
-            if (err)
-                res.status(500).send({
-                    message: err.message || "Some error occurred while retrieving customers."
-                })
-            else {
-                abstractController.sendData(res, data)
+            var message = {
+                success: "Thêm user thành công",
+                fail: "Thêm thất bại, liên hệ admin"
             }
+            this.resultHandler(err, data, req, res, message)
         })
     }
     /**
@@ -28,30 +26,24 @@ exports.findAll = (req, res, param) => {
      */
 exports.findOne = (req, res, param) => {
         User.findById(param, (err, data) => {
-            if (err) {
-                if (err.kind === "not_found") {
-
-                } else {
-
-                }
-            } else {
-                abstractController.sendData(res, data);
+            var message = {
+                success: "Thêm user thành công",
+                fail: "Thêm thất bại, liên hệ admin"
             }
+            this.resultHandler(err, data, req, res, message)
         })
     }
     /**
      * Cập nhật User
      * @param {*} req 
      */
-exports.updateUser = async(req) => {
-        // console.log(req.body.id)
-        // console.log(req.body)
-        User.updateUser(req.body.id, req.body, (err, data) => {
-            if (err) {
-                console.log(err);
-            } else {
-                abstractController.sendData(res, data)
+exports.updateUser = async(req, res, param) => {
+        await User.updateUser(param, req.body, (err, data) => {
+            var message = {
+                success: "Cập nhật user user thành công",
+                fail: "cập nhật user thất bại, liên hệ admin"
             }
+            this.resultHandler(err, data, req, res, message)
         })
     }
     /**
@@ -59,33 +51,14 @@ exports.updateUser = async(req) => {
      * @param {*} req 
      * @param {*} res 
      */
-exports.findByUserName = async(req, res) => {
-    console.log(req.headers.cookie)
-    await User.findByUserName(req.body, (err, data) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log(data.length)
-            if (data.length > 0) {
-                data = {
-                    data: data,
-                    message: "login success",
-                    status: true
-                }
-                abstractController.sendData(res, data);
-            } else {
-                data = {
-                    data: [],
-                    message: "username or password was incorrected",
-                    status: false
-                }
-                abstractController.sendData(res, data);
+exports.findByUserName = async(req, res, param) => {
+        await User.findByUserName(req.body, (err, data) => {
+            var message = {
+                success: "Lấy thông tin user thành công",
+                fail: "Lấy thông tin user thất bại, liên hệ admin"
             }
-        }
-    })
-}
-exports.loginAction = async(req, res, param) => {
-        this.findOne(req, res, req.body.UserName)
+            this.resultHandler(err, data, req, res, message)
+        })
     }
     /**
      * Thêm User
@@ -94,22 +67,37 @@ exports.loginAction = async(req, res, param) => {
      */
 exports.addUser = async(req, res) => {
     User.addUser(req.body, (err, data) => {
-        if (err) {
-            console.log(err);
-        } else {
-            //console.log(data)
-            if (data) {
-                data = {
-                    data: data,
-                    message: "add success"
-                }
-                abstractController.sendData(res, data);
-            } else {
-                data = {
-                    message: "error to add user, please contact to admin"
-                }
-                abstractController.sendData(res, data);
-            }
+        var message = {
+            success: "Thêm user thành công",
+            fail: "Thêm thất bại, liên hệ admin"
         }
+        this.resultHandler(err, data, req, res, message)
     })
+}
+exports.deleteUser = async(req, res, param) => {
+    User.deleteUser(param, (err, data) => {
+        var message = {
+            success: "Xóa user thành công",
+            fail: "Xóa thất bại, liên hệ admin"
+        }
+        this.resultHandler(err, data, req, res, message)
+    })
+}
+exports.resultHandler = (err, data, req, res, message) => {
+    if (err)
+        abstractController.sendErr(res, err)
+    else {
+        var dt = {
+            data: data,
+            success: false
+        }
+        if (data) {
+            dt.success = true
+            dt.message = message.success
+        } else {
+            dt.message = message.fail
+
+        }
+        abstractController.sendData(res, dt);
+    }
 }

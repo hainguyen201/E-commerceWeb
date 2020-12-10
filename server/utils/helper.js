@@ -59,3 +59,10 @@ module.exports.getPostData = (req) => {
         }
     });
 }
+module.exports.getDateNow = function() {
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() != 12 ? date.getMonth() + 1 : 1;
+    var year = date.getFullYear();
+    return year + '-' + month + '-' + day;
+}

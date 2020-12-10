@@ -32,7 +32,7 @@ module.exports = async(req, res, routes) => {
     }
     if (route) {
         let body = null
-        if (req.method === 'POST' || req.method === 'PUT') {
+        if (req.method === 'POST' || req.method === 'PUT' && req.method != 'OPTIONS') {
             body = await getPostData(req)
         }
 
@@ -48,7 +48,7 @@ function getPostData(req) {
             let body = '';
             req.on('data', chunk => {
                 body += chunk.toString(); // convert Buffer to string
-                console.log("body", body)
+                req.body = body
             });
 
             req.on('end', () => {

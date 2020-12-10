@@ -16,14 +16,15 @@ class UserService {
          * @param {*} userName 
          * @param {*} password 
          */
-    async loginService(userName, password) {
+    async loginService(username, password) {
         var request = new XMLHttpRequest();
         var body = {
-            UserName: userName,
-            PassWord: password
+            UserName: username,
+            Password: password
         }
         request.onreadystatechange = function() {
-            console.log(request.responseText);
+            // console.log(request.responseText);
+            return request.responseText;
         }
 
         request.open('POST', "http://localhost:3000/users/login", true);
