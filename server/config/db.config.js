@@ -1,6 +1,6 @@
 module.exports = {
     HOST: "localhost",
     USER: "root",
-    PASSWORD: "123456",
+    PASSWORD: "@Quan.999",
     DB: "webcommerce",
 }
