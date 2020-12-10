@@ -27,8 +27,8 @@ exports.findAll = (req, res, param) => {
 exports.findOne = (req, res, param) => {
         User.findById(param, (err, data) => {
             var message = {
-                success: "Thêm user thành công",
-                fail: "Thêm thất bại, liên hệ admin"
+                success: "lấy thông tin user thành công",
+                fail: "Lấy thông tin user thất bại, liên hệ admin"
             }
             this.resultHandler(err, data, req, res, message)
         })
@@ -96,7 +96,6 @@ exports.resultHandler = (err, data, req, res, message) => {
             dt.message = message.success
         } else {
             dt.message = message.fail
-
         }
         abstractController.sendData(res, dt);
     }

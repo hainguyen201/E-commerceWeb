@@ -7,11 +7,11 @@ const helper = require('../utils/helper')
      */
 const Product = function(product) {
         // this.ProductID = product.ProductID ? product.ProductID : " ";
-        this.Name = product.Name ? product.Name : " ";
+        this.Name = product.Name ? product.Name : "";
         this.Price = product.Price ? product.Price : 0;
-        this.Content = product.Content ? product.Content : " ";
-        this.Image = product.Image ? product.Image : " ";
-        this.ImageList = product.ImageList ? product.ImageList : " ";
+        this.Content = product.Content ? product.Content : "";
+        this.Image = product.Image ? product.Image : "";
+        this.ImageList = product.ImageList ? product.ImageList : "";
         this.CatalogID = product.CatalogID ? product.CatalogID : 0;
         this.Discount = product.Discount ? product.Discount : 0;
         this.Remain = product.Remain ? product.Remain : 0;

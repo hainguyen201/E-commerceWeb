@@ -27,7 +27,7 @@ CREATE TABLE `products` (
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Tên sản phẩm',
   `Price` decimal(10,0) DEFAULT NULL COMMENT 'G',
   `Content` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Nội dung sản phẩm\n',
-  `ImageLink` varchar(255) DEFAULT NULL COMMENT 'Ảnh sản phẩm',
+  `Image` varchar(255) DEFAULT NULL COMMENT 'Ảnh sản phẩm',
   `ImageList` varchar(255) DEFAULT NULL COMMENT 'Danh sách ảnh',
   `CatalogID` int DEFAULT NULL COMMENT 'Mã danh mục',
   `Discount` int DEFAULT NULL COMMENT 'Giảm giá : từ 0->100',
@@ -37,7 +37,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`ProductID`),
   KEY `fk_Product_1_idx` (`CatalogID`),
   CONSTRAINT `fk_Product_1` FOREIGN KEY (`CatalogID`) REFERENCES `catalogs` (`CatalogID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +46,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'iphone 13',30000000,NULL,'1.jpg','',1,NULL,NULL,NULL,NULL),(2,'iphone 12',40000000,NULL,'2.jpg',NULL,1,NULL,NULL,NULL,NULL),(5,'ipad 4 ',20000000,NULL,'3.jpg',NULL,2,NULL,NULL,NULL,NULL),(7,'redmi 1',0,'','','',1,0,0,'2020-12-09','2020-12-09'),(8,'redmi 1',0,'','','',1,0,0,'2020-12-09','2020-12-09'),(9,'redmi 3',0,'','','',1,0,0,'2020-12-09','2020-12-09');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-18 16:29:19
+-- Dump completed on 2020-12-10 15:30:40
