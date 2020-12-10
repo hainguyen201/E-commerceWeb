@@ -38,10 +38,14 @@ exports.findProductByID = (req, res, param) => {
             abstractController.sendErr(res, err)
         else {
             var dt = abstractController.dataForGet;
-            if (data) {
+            if (data.length > 0) {
                 dt.data = this.productsFormatToClient(data)
                 dt.success = true;
                 dt.message = "Lấy dữ liệu thành công"
+            } else {
+                dt.data = data
+                dt.success = true;
+                dt.message = "Không tồn tại sản phẩm"
             }
             abstractController.sendData(res, dt)
         }
@@ -65,7 +69,8 @@ exports.addProduct = async(req, res, param) => {
 exports.productsFormatToClient = function(data) {
     if (data.length > 0)
         data.forEach(element => {
-            element.ImageLink = helper.base64_encode(element.ImageLink);
+            if (element.Image)
+                element.Image = helper.base64_encode(element.Image);
         });
     return data;
 }
