@@ -1,67 +1,92 @@
+var list_product = [];
 var containerListProduct = document.getElementById("list_product");
 var base = new Base();
-var userService = new UserService();
 var btnLogin = document.getElementById('btn-login')
-var list_product = [{
-        "productID": "1",
-        "name": "Ghế xoay hòa phát A",
-        "price": 400000,
-        "content": "ghe xoay hoa phat dep",
-        "imageLink": "../assets/img/list_product//3.jpg",
-        "imageList": "list string base64",
-        "catalogId": "1",
-        "discount": "20",
-        "remain": "199"
-    },
-    {
-        "productID": "2",
-        "name": "Ghế xoay hòa phát B",
-        "price": 400000,
-        "content": "ghe xoay hoa phat dep",
-        "imageLink": "../assets/img/list_product//3.jpg",
-        "imageList": "list string base64",
-        "catalogId": "1",
-        "discount": "20",
-        "remain": "199"
-    },
-    {
-        "productID": "3",
-        "name": "Ghế xoay hòa phát C",
-        "price": 400000,
-        "content": "ghe xoay hoa phat dep",
-        "imageLink": "../assets/img/list_product//3.jpg",
-        "imageList": "list string base64",
-        "catalogId": "1",
-        "discount": "20",
-        "remain": "199"
-    },
-    {
-        "productID": "4",
-        "name": "Ghế xoay hòa phát D",
-        "price": 400000,
-        "content": "ghe xoay hoa phat dep",
-        "imageLink": "../assets/img/list_product//3.jpg",
-        "imageList": "list string base64",
-        "catalogId": "1",
-        "discount": "20",
-        "remain": "199"
-    },
-];
+var userService, api;
+userService = new UserService();
+api = new Api();
+// document.onload = function () {
+// }
+api.get("/products")
+    .then((result) => {
+        list_product = result.data;
+        if (!!list_product && list_product.length > 0) {
+            addListProduct(list_product);
+        }
+        console.log(result);
+    })
+    .catch((err) => {
+        console.log(err);
+        debugger
+    });
+// const getData = async () => {
+//     debugger
+//     d = await api.get('/products');
+//     debugger
+//     console.log('d', d);
+// }
+// getData();
+
+//  list_product = [{
+//     "productID": "1",
+//     "name": "Ghế xoay hòa phát A",
+//     "price": 400000,
+//     "content": "ghe xoay hoa phat dep",
+//     "imageLink": "../assets/img/list_product//3.jpg",
+//     "imageList": "list string base64",
+//     "catalogId": "1",
+//     "discount": "20",
+//     "remain": "199"
+// },
+// {
+//     "productID": "2",
+//     "name": "Ghế xoay hòa phát B",
+//     "price": 400000,
+//     "content": "ghe xoay hoa phat dep",
+//     "imageLink": "../assets/img/list_product//3.jpg",
+//     "imageList": "list string base64",
+//     "catalogId": "1",
+//     "discount": "20",
+//     "remain": "199"
+// },
+// {
+//     "productID": "3",
+//     "name": "Ghế xoay hòa phát C",
+//     "price": 400000,
+//     "content": "ghe xoay hoa phat dep",
+//     "imageLink": "../assets/img/list_product//3.jpg",
+//     "imageList": "list string base64",
+//     "catalogId": "1",
+//     "discount": "20",
+//     "remain": "199"
+// },
+// {
+//     "productID": "4",
+//     "name": "Ghế xoay hòa phát D",
+//     "price": 400000,
+//     "content": "ghe xoay hoa phat dep",
+//     "imageLink": "../assets/img/list_product//3.jpg",
+//     "imageList": "list string base64",
+//     "catalogId": "1",
+//     "discount": "20",
+//     "remain": "199"
+// },
+// ];
 
 
 function createProductElement(product) {
     var template = document.createElement('template');
     html = '<div class="product">' +
-        '<a id="' + product.productID + '" href="">' +
+        '<a id="' + product.ProductID + '" href="">' +
         '<div class="container-img">' +
-        '<img class="img-product" src="' + product.imageLink + '" alt="">' +
+        '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
         '</div>' +
         '<p id="name-product">' +
-        product.name +
+        product.Name +
         '</p>' +
-        '<span class="tooltip-product" id="tooltip-product-' + product.productID + '">' + product.name + '</span>' +
-        '<span id="price">' + product.price.formatMoney() + ' &#8363&nbsp;&nbsp;</span>' +
-        '<span id="discount">' + product.discount + '%</span>' +
+        '<span class="tooltip-product" id="tooltip-product-' + product.ProductID + '">' + product.Name + '</span>' +
+        '<span id="price">' + product.Price.formatMoney() + ' &#8363&nbsp;&nbsp;</span>' +
+        '<span id="discount">' + product.Discount + '%</span>' +
         '<div style="margin-top: 20px;">' +
         '<button class="btn-addtocart">Thêm vào giỏ</button>' +
         '</div>' +
@@ -74,8 +99,8 @@ function createProductElement(product) {
     elementProduct.onmousemove = function(e) {
         var x = e.clientX,
             y = e.clientY;
-        document.getElementById(`tooltip-product-${product.productID}`).style.top = (y + 20) + 'px';
-        document.getElementById(`tooltip-product-${product.productID}`).style.left = (x + 20) + 'px';
+        document.getElementById(`tooltip-product-${product.ProductID}`).style.top = (y + 20) + 'px';
+        document.getElementById(`tooltip-product-${product.ProductID}`).style.left = (x + 20) + 'px';
     }
     return elementProduct;
 }
@@ -91,15 +116,12 @@ function addListProduct(listProduct) {
 }
 btnLogin.onclick = async function(event) {
     if (true) {
-        // userService.getUser('', '');
-        var user = await userService.loginService('hainguyen25', '1234', loginDataHandler)
-        console.log(user)
-            // /base.redirect('/list_product/index.html', '')
+        api.post('/users/login', { Username: 'quan', Password: '12345' }).then((result) => {
+            debugger
+        }).catch((err) => {
+            debugger
+        });
+
+        // /base.redirect('/list_product/index.html', '')
     }
 }
-
-function loginDataHandler(req) {
-    //data handler
-    console.log(req.responseText)
-}
-addListProduct(list_product);
