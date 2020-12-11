@@ -53,6 +53,11 @@ exports.findProductByID = (req, res, param) => {
 }
 exports.findAllProducts = async(req, res, param) => {
     await Products.getAllProducts((err, data) => {
+        if (data.length > 0) {
+            data.forEach(d => {
+
+            })
+        }
         this.resultHandler(err, data, res, req)
     })
 }
@@ -66,6 +71,11 @@ exports.addProduct = async(req, res, param) => {
         this.resultHandler(err, data, res, req);
     })
 }
+exports.updateProduct = async(req, res, param) => {
+    await Products.updateProduct(param, req.body, (err, data) => {
+        this.resultHandler(err, data, res, req)
+    })
+}
 exports.productsFormatToClient = function(data) {
     if (data.length > 0)
         data.forEach(element => {
@@ -73,6 +83,14 @@ exports.productsFormatToClient = function(data) {
                 element.Image = helper.base64_encode(element.Image);
         });
     return data;
+}
+exports.productsFormatToServer = function(data) {
+    if (data.length > 0) {
+        data.forEach(element => {
+            if (element.Image)
+                element.Image = data.ProductID + '.jpg'
+        });
+    }
 }
 exports.resultHandler = (err, data, res, req) => {
     if (err) {
@@ -82,7 +100,7 @@ exports.resultHandler = (err, data, res, req) => {
         if (data) {
             dt.data = this.productsFormatToClient(data)
             dt.success = true;
-            dt.message = "Lấy dữ liệu thành công"
+            dt.message = "Thành công"
         }
         abstractController.sendData(res, dt)
     }

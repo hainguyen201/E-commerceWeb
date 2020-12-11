@@ -59,8 +59,8 @@ Product.addProduct = async(product, result) => {
     await AbstractModel.addDataQuery('products', newProduct, result);
     //Thêm hình ảnh và cập nhật sản phẩm đã thêm
 }
-Product.updateProduct = async(product, result) => {
+Product.updateProduct = async(productid, product, result) => {
     var newProduct = new Product(product);
-
+    await AbstractModel.updateDataQuery('products', newProduct, result, 'ProductID', productid)
 }
 module.exports = Product;

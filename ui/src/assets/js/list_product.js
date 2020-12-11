@@ -92,8 +92,14 @@ function addListProduct(listProduct) {
 btnLogin.onclick = async function(event) {
     if (true) {
         // userService.getUser('', '');
-        var user = await userService.loginService('hainguyen25', '1246')
+        var user = await userService.loginService('hainguyen25', '1234', loginDataHandler)
+        console.log(user)
             // /base.redirect('/list_product/index.html', '')
     }
+}
+
+function loginDataHandler(req) {
+    //data handler
+    console.log(req.responseText)
 }
 addListProduct(list_product);

@@ -12,19 +12,20 @@ class UserService {
             await request.send();
         }
         /**
-         * Đăng nhập bằng username và password
-         * @param {*} userName 
+         * Đăng nhập 
+         * @param {*} username 
          * @param {*} password 
+         * @param {*} callback hàm để xử lý response
          */
-    async loginService(username, password) {
+    async loginService(username, password, callback) {
         var request = new XMLHttpRequest();
         var body = {
             UserName: username,
             Password: password
         }
         request.onreadystatechange = function() {
-            // console.log(request.responseText);
-            return request.responseText;
+            if (request.readyState == 4 && request.status == 200)
+                callback(request);
         }
 
         request.open('POST', "http://localhost:3000/users/login", true);
