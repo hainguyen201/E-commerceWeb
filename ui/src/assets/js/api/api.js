@@ -1,16 +1,3 @@
-class CustomError extends Error {
-    constructor(statusCode, message, info) {
-        super(message);
-        if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, CustomError);
-        }
-        this.type = 'customError';
-        this.statusCode = statusCode;
-        this.info = info;
-    }
-};
-
-const PREFIX = "http://localhost:3000";
 class Api {
     constructor() {
         this.xhrGet = new XMLHttpRequest();
@@ -44,7 +31,7 @@ class Api {
                 //loi mang hoac may chu
                 reject(new CustomError(500, "Unknow error!"));
             }
-            xhr.open('GET', PREFIX + path, true);
+            xhr.open('GET', PREFIX_URL + path, true);
             xhr.send();
         });
     }
@@ -60,19 +47,17 @@ class Api {
                 }
                 else {
                     //statuscode khong phai 2xx
-                    debugger
                     reject(new CustomError(xhr.status, "hello"));
                 }
             };
             xhr.onerror = () => {
-                debugger
                 //loi mang hoac may chu
                 reject(new CustomError(500, "Unknow error!"));
             };
             xhr.onabort = () => {
                 debugger
             }
-            xhr.open('POST', PREFIX + path, true);
+            xhr.open('POST', PREFIX_URL + path, true);
             this.defaultHeaderConfig();
             xhr.send(JSON.stringify(data));
         });
