@@ -58,7 +58,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -74,11 +74,14 @@ function checkValidation() {
     return true;
 }
 
-btnLogin.onclick = function(event) {
-        if (checkValidation()) {
-            debugger
-            userService.loginService('hainguyen27', '1246')
-                // base.redirect('/list_product/index.html', '')
+btnLogin.onclick = async function (event) {
+    debugger
+    if (true) {
+        try {
+            await userService.loginService('quanlh', '1234561');
+        } catch (error) {
+            alert(error.toString());
         }
+        // /base.redirect('/list_product/index.html', '')
     }
-    // userService.getUser('', '')
+}

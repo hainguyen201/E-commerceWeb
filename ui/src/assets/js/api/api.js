@@ -18,13 +18,14 @@ class Api {
             let xhr = this.xhrGet;
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
+                const response = JSON.parse(xhr.responseText);
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
-                    resolve(JSON.parse(xhr.responseText));
+                    resolve(response);
                 }
                 else {
                     //statuscode khong phai 2xx
-                    reject(new CustomError(xhr.status, "hello"));
+                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
             };
             xhr.onerror = () => {
@@ -41,13 +42,14 @@ class Api {
             let xhr = this.xhrPost;
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
+                const response = JSON.parse(xhr.responseText);
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
-                    resolve(JSON.parse(xhr.responseText));
+                    resolve(response);
                 }
                 else {
                     //statuscode khong phai 2xx
-                    reject(new CustomError(xhr.status, "hello"));
+                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
             };
             xhr.onerror = () => {
