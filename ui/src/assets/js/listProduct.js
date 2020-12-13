@@ -1,7 +1,6 @@
 var list_product = [];
 var containerListProduct = document.getElementById("list_product");
 var base = new Base();
-var btnLogin = document.getElementById('btn-login')
 var userService = new UserService();
 // document.onload = function () {
 // }
@@ -112,14 +111,4 @@ function addListProduct(listProduct) {
     containerListProduct.appendChild(listElement[2]);
     containerListProduct.appendChild(listElement[3]);
 }
-btnLogin.onclick = async function (event) {
-    if (true) {
-        try {
-            userService.loginService('quanlh','123456');
-        } catch (error) {
-            debugger
-            alert(error.toString());
-        }
-        // /base.redirect('/list_product/index.html', '')
-    }
-}
+

@@ -16,17 +16,21 @@ class UserService {
      * @param {*} userName 
      * @param {*} password 
      */
-    loginService(username, password) {
-        var body = {
-            UserName: username,
-            Password: password
+    async loginService(username, password) {
+        try {
+            let body = {
+                UserName: username,
+                Password: password
+            }
+            await api.post('/users/login', body);
+        } catch (error) {
+            throw error;
         }
-        api.post('/users/login', body).then((result) => {
-            debugger
-            return true;
-        }).catch((err) => {
-            debugger
-            throw CustomError(402, 'Unauthorized');
-        });
+        // await api.post('/users/login', body).then((result) => {
+        //     return true;
+        // }).catch((err) => {
+        //     debugger
+        //     //throw new Error();
+        // });
     }
 }
