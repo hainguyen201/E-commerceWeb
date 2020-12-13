@@ -2,9 +2,7 @@ var list_product = [];
 var containerListProduct = document.getElementById("list_product");
 var base = new Base();
 var btnLogin = document.getElementById('btn-login')
-var userService, api;
-userService = new UserService();
-api = new Api();
+var userService = new UserService();
 // document.onload = function () {
 // }
 api.get("/products")
@@ -116,12 +114,12 @@ function addListProduct(listProduct) {
 }
 btnLogin.onclick = async function (event) {
     if (true) {
-        api.post('/users/login', { Username: 'quan', Password: '12345' }).then((result) => {
+        try {
+            userService.loginService('quanlh','123456');
+        } catch (error) {
             debugger
-        }).catch((err) => {
-            debugger
-        });
-
+            alert(error.toString());
+        }
         // /base.redirect('/list_product/index.html', '')
     }
 }

@@ -4,36 +4,29 @@ class UserService {
         return req;
     }
     async getUser(userName, passWord) {
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function() {
-                console.log(request.responseText)
-            }
-            request.open('GET', "http://localhost:3000/users")
-            await request.send();
-        }
-        /**
-         * Đăng nhập bằng username và password
-         * @param {*} userName 
-         * @param {*} password 
-         */
-    async loginService(username, password) {
         var request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            console.log(request.responseText)
+        }
+        request.open('GET', "http://localhost:3000/users")
+        await request.send();
+    }
+    /**
+     * Đăng nhập bằng username và password
+     * @param {*} userName 
+     * @param {*} password 
+     */
+    loginService(username, password) {
         var body = {
             UserName: username,
             Password: password
         }
-        request.onreadystatechange = function() {
-            // console.log(request.responseText);
-            return request.responseText;
-        }
-
-        request.open('POST', "http://localhost:3000/users/login", true);
-        request.setRequestHeader('Access-Control-Allow-Origin', '*')
-        request.setRequestHeader('Content-Type', 'application/json');
-
-
-        // request.setRequestHeader("Access-Control-Request-Method", "POST")
-        // request.send(JSON.stringify(body));
-        await request.send(JSON.stringify(body))
+        api.post('/users/login', body).then((result) => {
+            debugger
+            return true;
+        }).catch((err) => {
+            debugger
+            throw CustomError(402, 'Unauthorized');
+        });
     }
 }
