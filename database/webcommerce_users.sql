@@ -34,7 +34,7 @@ CREATE TABLE `users` (
   `ModifiedDate` date DEFAULT NULL,
   `Role` int DEFAULT '0',
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'','','','HUST','1234','hainguyen',NULL,NULL,1),(2,'','','','','124','hainguyen22',NULL,NULL,0),(3,'','','090345667','','1234','hainguyen23',NULL,'2020-12-08',0),(5,'','','090345667','','1234','hainguyen25',NULL,'2020-12-08',0),(12,'','','090345667','','1234','hainguyen24','2020-12-09',NULL,0),(13,'','','090345667','','1234','hainguyen27','2020-12-09',NULL,0),(14,'','','090345667','','1234','hainguyen28','2020-12-09',NULL,0),(15,'','','090345667','','1234','hainguyen29','2020-12-09',NULL,0),(16,'','','','','12346','duongnguyen1','2020-12-09','2020-12-09',0);
+INSERT INTO `users` VALUES (1,'','','','HUST','1234','hainguyen',NULL,NULL,1),(2,'','','','','','haiupdate','2020-12-10','2020-12-10',0),(3,'','','090345667','','1234','hainguyen23',NULL,'2020-12-08',0),(5,'','','090345667','','1234','hainguyen25',NULL,'2020-12-08',0),(12,'','','090345667','','1234','hainguyen24','2020-12-09',NULL,0),(13,'','','090345667','','1234','hainguyen27','2020-12-09',NULL,0),(14,'','','090345667','','1234','hainguyen28','2020-12-09',NULL,0),(15,'','','090345667','','1234','hainguyen29','2020-12-09',NULL,0),(16,'','','','','12346','duongnguyen1','2020-12-09','2020-12-09',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-10 15:50:19
+-- Dump completed on 2020-12-14 22:30:04
