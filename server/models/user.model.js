@@ -40,18 +40,7 @@ User.findById = async(userId, result) => {
      */
 User.updateUser = async(userId, user, result) => {
         var userUpdate = new User(user)
-        var keys = Object.keys(userUpdate);
-        sqlString = "UPDATE users SET ";
-        keys.forEach(key => {
-            sqlString += key + '=?,'
-        })
-        sqlString = sqlString.slice(0, -1)
-        sqlString += ` WHERE UserId = ${userId}`;
-        var userU = [];
-        keys.forEach(key => {
-            userU.push(userUpdate[key])
-        })
-        await AbstractModel.queryExc(result, sqlString, userU);
+        await AbstractModel.updateDataQuery('users', userUpdate, result, 'UserId', userId)
     }
     /**
      * Tìm kiếm User theo Username
@@ -59,9 +48,8 @@ User.updateUser = async(userId, user, result) => {
      * @param {*} result 
      */
 User.findByUserName = async(body, result) => {
-        sqlString = `select * from users where username = "${body.UserName}" and password="${body.Password}"`
-        console.log(sqlString)
-        await AbstractModel.queryExc(result, sqlString);
+        sqlString = `select * from users where username = ? and password=?`
+        await AbstractModel.queryExc(result, sqlString, [body.UserName, body.Password]);
     }
     /**
      * Thêm User
@@ -70,18 +58,7 @@ User.findByUserName = async(body, result) => {
      */
 User.addUser = async(user, result) => {
     var userAdd = new User(user)
-    var usera = [];
-    var keys = Object.keys(userAdd);
-    sqlString = "insert into Users(";
-    keys.forEach(key => {
-        sqlString += key + ',';
-    })
-    sqlString = sqlString.slice(0, -1);
-    sqlString += ') values (?,?,?,?,?,?,?,?,?)'
-    keys.forEach(key => {
-        usera.push(userAdd[key])
-    })
-    await AbstractModel.queryExc(result, sqlString, usera);
+    await AbstractModel.addDataQuery('users', userAdd, result);
 }
 User.deleteUser = async(userId, result) => {
     var sqlString = `delete from users where UserID=${userId}`

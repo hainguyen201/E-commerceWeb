@@ -46,5 +46,11 @@ const routes = [{
         path: '/products',
         handler: productController.addProduct
     },
+    {
+        method: 'PUT',
+        path: /\/products\/([0-9a-z]+)/,
+        handler: productController.updateProduct
+    },
+
 ]
 module.exports = routes;

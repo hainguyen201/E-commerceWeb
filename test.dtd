@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE KQHT[
+    <!ELEMENT KQHT(SinhVien, BangDiem)>
+     
+    <!ELEMENT SinhVien(MSSV, HoTen, Lop, TrangThai, NgaySinh)>
+    <!ELEMENT BangDiem(HocPhan+)>
+     
+    <!ELEMENT MSSV(#PCDATA)>
+    <!ELEMENT HoTen(#PCDATA)>
+    <!ELEMENT Lop(#PCDATA)>
+    <!ELEMENT TrangThai(#PCDATA)>
+    <!ELEMENT NgaySinh(#PCDATA)>
+     
+    <!ELEMENT HocPhan(HocKy, MaHP, TenHP, TinChi, MaLop, DiemQT, DiemThi)>
+    <!ELEMENT HocKy(#PCDATA)>
+    <!ELEMENT MaHP(#PCDATA)>
+    <!ELEMENT TenHP(#PCDATA)>
+    <!ELEMENT TinChi(#PCDATA)>
+    <!ELEMENT MaLop(#PCDATA)>
+    <!ELEMENT DiemQT(#PCDATA)>
+    <!ELEMENT DiemThi(#PCDATA)>
+]>

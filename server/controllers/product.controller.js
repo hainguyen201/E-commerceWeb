@@ -5,6 +5,8 @@ const helper = require('../utils/helper')
 const path = require('path')
 const abstractController = require('./abstract.controller')
 const fs = require('fs')
+const Product = require("../models/product.model.js")
+const Session = require("../models/session.model.js")
     /**
      * Tìm kiếm sản phẩm theo danh mục
      * @param {*} req 
@@ -57,32 +59,90 @@ exports.findAllProducts = async(req, res, param) => {
     })
 }
 exports.addProduct = async(req, res, param) => {
-    // var base64Data = req.body.ImageLink.replace(/^data:image\/png;base64,/, "");
-    // fs.writeFile("out.png", base64Data, 'base64', function(err) {
-    //     console.log(err);
-    // });
-
-    await Products.addProduct(req.body, (err, data) => {
-        this.resultHandler(err, data, res, req);
-    })
+    var product = new Product(req.body)
+    var image = product.Image
+        //nếu có ảnh
+    if (image.length > 0) {
+        // thêm sản phẩm và k thêm ảnh
+        product.Image = "";
+        console.log(product)
+        await Product.addProduct(product, async(err, dataadd) => {
+            // console.log(dataadd)
+            if (dataadd.insertId) {
+                product.Image = dataadd.insertId + ".jpg"
+                delete product.ProductID
+                helper.save_base64(image, product.Image)
+                await Product.updateProduct(dataadd.insertId, product, (err, data) => {
+                    if (err) {
+                        abstractController.sendErr(res, err)
+                    } else {
+                        if (data) {
+                            abstractController.sendData(res, dataadd)
+                        }
+                    }
+                });
+            }
+        })
+    } else
+        await Product.addProduct(product, (err, data) => {
+            this.resultHandler(err, data, res, req)
+        })
+}
+exports.updateProduct = async(req, res, param) => {
+    //cập nhật ảnh mới
+    var product = new Product(req.body)
+    var image = product.Image
+    console.log(image.length)
+    if (image.length > 0) {
+        //cập nhật lại thông tin và không có ảnh
+        product.Image = param + ".jpg";
+        await Product.updateProduct(param, product, (err, data) => {
+            if (err) {
+                this.resultHandler(err, data, res, req)
+            } else {
+                //cập nhật lại ảnh
+                helper.save_base64(image, product.Image)
+                this.resultHandler(err, data, res, req);
+            }
+        })
+    } else
+        await Products.updateProduct(param, product, (err, data) => {
+            this.resultHandler(err, data, res, req)
+        })
 }
 exports.productsFormatToClient = function(data) {
-    if (data.length > 0)
+    if (data)
         data.forEach(element => {
-            if (element.Image)
+            if (element.Image.length > 0)
                 element.Image = helper.base64_encode(element.Image);
+            if (element.CreatedDate)
+                element.CreatedDate = helper.formatDate(element.CreatedDate)
+            if (element.ModifiedDate)
+                element.ModifiedDate = helper.formatDate(element.ModifiedDate)
         });
     return data;
+}
+exports.productsFormatToServer = function(data) {
+    if (data.length > 0) {
+        data.forEach(element => {
+            if (element.Image)
+                element.Image = data.ProductID + '.jpg'
+        });
+    }
 }
 exports.resultHandler = (err, data, res, req) => {
     if (err) {
         abstractController.sendErr(res, err)
     } else {
         var dt = abstractController.dataForGet;
-        if (data) {
+        if (data.length > 0) {
             dt.data = this.productsFormatToClient(data)
             dt.success = true;
-            dt.message = "Lấy dữ liệu thành công"
+            dt.message = "Thành công"
+        } else {
+            dt.data = data
+            dt.success = true;
+            dt.message = "Thành công"
         }
         abstractController.sendData(res, dt)
     }
