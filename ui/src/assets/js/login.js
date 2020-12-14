@@ -58,7 +58,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -74,11 +74,11 @@ function checkValidation() {
     return true;
 }
 
-btnLogin.onclick = async function (event) {
-    debugger
+btnLogin.onclick = async function(event) {
+    // debugger
     if (true) {
         try {
-            await userService.loginService('quanlh', '1234561');
+            await userService.loginService('hainguyen', '1234');
         } catch (error) {
             alert(error.toString());
         }
