@@ -8,7 +8,7 @@ class UserService {
             request.onreadystatechange = function() {
                 console.log(request.responseText)
             }
-            request.open('GET', "http://localhost:3000/users")
+            request.open('GET', "https://localhost:3000/users")
             await request.send();
         }
         /**
