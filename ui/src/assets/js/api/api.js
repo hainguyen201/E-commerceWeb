@@ -2,6 +2,7 @@ class Api {
     constructor() {
         this.xhrGet = new XMLHttpRequest();
         this.xhrPost = new XMLHttpRequest();
+
     }
 
     defaultHeaderConfig() {
@@ -32,6 +33,7 @@ class Api {
                 reject(new CustomError(500, "Unknow error!"));
             }
             xhr.open('GET', PREFIX_URL + path, true);
+            xhr.withCredentials = true;
             xhr.send();
         });
     }
@@ -59,6 +61,7 @@ class Api {
             }
             xhr.open('POST', PREFIX_URL + path, true);
             this.defaultHeaderConfig();
+            xhr.withCredentials = true;
             xhr.send(JSON.stringify(data));
         });
     }
