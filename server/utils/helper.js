@@ -38,9 +38,19 @@ const addHeaders = (res) => {
 }
 const basepath = path.normalize(__dirname + '/../storage/image/');
 module.exports.base64_encode = (filepath) => {
-    var imageAsBase64 = fs.readFileSync(path.normalize(basepath + filepath), 'base64');
+    var imageAsBase64 = fs.readFileSync(path.normalize(basepath + filepath), 'base64', (err) => {
+        return "";
+    });
     return imageAsBase64;
 }
+module.exports.save_base64 = (image, name) => {
+    // var imsave = image.replace((/^data:image\/jpg;base64,/, ""));
+    console.log("imsave", image)
+    fs.writeFileSync(path.normalize(basepath + name), image, 'base64', (err) => {
+        console.log('k luu dc file')
+    })
+}
+
 module.exports.getPostData = (req) => {
     return new Promise((resolve, reject) => {
         try {
@@ -61,6 +71,13 @@ module.exports.getPostData = (req) => {
 }
 module.exports.getDateNow = function() {
     var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() != 12 ? date.getMonth() + 1 : 1;
+    var year = date.getFullYear();
+    return year + '-' + month + '-' + day;
+}
+module.exports.formatDate = function(date) {
+    var datef = new Date(date)
     var day = date.getDate();
     var month = date.getMonth() != 12 ? date.getMonth() + 1 : 1;
     var year = date.getFullYear();

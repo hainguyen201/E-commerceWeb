@@ -48,9 +48,8 @@ User.updateUser = async(userId, user, result) => {
      * @param {*} result 
      */
 User.findByUserName = async(body, result) => {
-        sqlString = `select * from users where username = "${body.UserName}" and password="${body.Password}"`
-        console.log(sqlString)
-        await AbstractModel.queryExc(result, sqlString);
+        sqlString = `select * from users where username = ? and password=?`
+        await AbstractModel.queryExc(result, sqlString, [body.UserName, body.Password]);
     }
     /**
      * Thêm User

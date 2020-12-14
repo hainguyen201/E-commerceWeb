@@ -4,7 +4,7 @@ var base = new Base();
 var btnLogin = document.getElementById('btn-login')
 var userService, api;
 userService = new UserService();
-api = new Api();
+
 // document.onload = function () {
 // }
 api.get("/products")
@@ -17,61 +17,7 @@ api.get("/products")
     })
     .catch((err) => {
         console.log(err);
-        debugger
     });
-// const getData = async () => {
-//     debugger
-//     d = await api.get('/products');
-//     debugger
-//     console.log('d', d);
-// }
-// getData();
-
-//  list_product = [{
-//     "productID": "1",
-//     "name": "Ghế xoay hòa phát A",
-//     "price": 400000,
-//     "content": "ghe xoay hoa phat dep",
-//     "imageLink": "../assets/img/list_product//3.jpg",
-//     "imageList": "list string base64",
-//     "catalogId": "1",
-//     "discount": "20",
-//     "remain": "199"
-// },
-// {
-//     "productID": "2",
-//     "name": "Ghế xoay hòa phát B",
-//     "price": 400000,
-//     "content": "ghe xoay hoa phat dep",
-//     "imageLink": "../assets/img/list_product//3.jpg",
-//     "imageList": "list string base64",
-//     "catalogId": "1",
-//     "discount": "20",
-//     "remain": "199"
-// },
-// {
-//     "productID": "3",
-//     "name": "Ghế xoay hòa phát C",
-//     "price": 400000,
-//     "content": "ghe xoay hoa phat dep",
-//     "imageLink": "../assets/img/list_product//3.jpg",
-//     "imageList": "list string base64",
-//     "catalogId": "1",
-//     "discount": "20",
-//     "remain": "199"
-// },
-// {
-//     "productID": "4",
-//     "name": "Ghế xoay hòa phát D",
-//     "price": 400000,
-//     "content": "ghe xoay hoa phat dep",
-//     "imageLink": "../assets/img/list_product//3.jpg",
-//     "imageList": "list string base64",
-//     "catalogId": "1",
-//     "discount": "20",
-//     "remain": "199"
-// },
-// ];
 
 
 function createProductElement(product) {
@@ -86,7 +32,7 @@ function createProductElement(product) {
         '</p>' +
         '<span class="tooltip-product" id="tooltip-product-' + product.ProductID + '">' + product.Name + '</span>' +
         '<span id="price">' + product.Price.formatMoney() + ' &#8363&nbsp;&nbsp;</span>' +
-        '<span id="discount">' + product.Discount + '%</span>' +
+        '<span id="discount">-' + product.Discount + '%</span>' +
         '<div style="margin-top: 20px;">' +
         '<button class="btn-addtocart">Thêm vào giỏ</button>' +
         '</div>' +
@@ -109,19 +55,19 @@ function addListProduct(listProduct) {
     var listElement = listProduct.map((item, index) => {
         return createProductElement(item);
     });
-    containerListProduct.appendChild(listElement[0]);
-    containerListProduct.appendChild(listElement[1]);
-    containerListProduct.appendChild(listElement[2]);
-    containerListProduct.appendChild(listElement[3]);
+    listElement.forEach(element => {
+        containerListProduct.appendChild(element)
+    })
 }
 btnLogin.onclick = async function(event) {
     if (true) {
-        api.post('/users/login', { Username: 'quan', Password: '12345' }).then((result) => {
-            debugger
+        api.post('/users/login', { UserName: 'hainguyen25', Password: '1234' }).then((result) => {
+            // debugger
+            console.log(result)
+                // debugger
+            console.log(document.cookie)
         }).catch((err) => {
-            debugger
+            // debugger
         });
-
-        // /base.redirect('/list_product/index.html', '')
     }
 }
