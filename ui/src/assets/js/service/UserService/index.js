@@ -12,29 +12,25 @@ class UserService {
             await request.send();
         }
         /**
-         * Đăng nhập 
-         * @param {*} username 
+         * Đăng nhập bằng username và password
+         * @param {*} userName 
          * @param {*} password 
-         * @param {*} callback hàm để xử lý response
          */
-    async loginService(username, password, callback) {
-        var request = new XMLHttpRequest();
-        var body = {
-            UserName: username,
-            Password: password
+    async loginService(username, password) {
+        try {
+            let body = {
+                UserName: username,
+                Password: password
+            }
+            await api.post('/users/login', body);
+        } catch (error) {
+            throw error;
         }
-        request.onreadystatechange = function() {
-            if (request.readyState == 4 && request.status == 200)
-                callback(request);
-        }
-
-        request.open('POST', "http://localhost:3000/users/login", true);
-        request.setRequestHeader('Access-Control-Allow-Origin', '*')
-        request.setRequestHeader('Content-Type', 'application/json');
-
-
-        // request.setRequestHeader("Access-Control-Request-Method", "POST")
-        // request.send(JSON.stringify(body));
-        await request.send(JSON.stringify(body))
+        // await api.post('/users/login', body).then((result) => {
+        //     return true;
+        // }).catch((err) => {
+        //     debugger
+        //     //throw new Error();
+        // });
     }
 }

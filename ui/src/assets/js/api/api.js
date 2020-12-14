@@ -1,16 +1,3 @@
-class CustomError extends Error {
-    constructor(statusCode, message, info) {
-        super(message);
-        if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, CustomError);
-        }
-        this.type = 'customError';
-        this.statusCode = statusCode;
-        this.info = info;
-    }
-};
-
-const PREFIX = "https://localhost:3000";
 class Api {
     constructor() {
         this.xhrGet = new XMLHttpRequest();
@@ -31,21 +18,20 @@ class Api {
             let xhr = this.xhrPost;
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
+                const response = JSON.parse(xhr.responseText);
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
-
-                    resolve(JSON.parse(xhr.responseText));
+                    resolve(response);
                 } else {
                     //statuscode khong phai 2xx
-                    reject(new CustomError(xhr.status, "hello"));
+                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
             };
             xhr.onerror = () => {
                 //loi mang hoac may chu
                 reject(new CustomError(500, "Unknow error!"));
             }
-            xhr.open('GET', PREFIX + path, true);
-            xhr.withCredentials = true
+            xhr.open('GET', PREFIX_URL + path, true);
             xhr.send();
         });
     }
@@ -55,25 +41,23 @@ class Api {
             let xhr = this.xhrPost;
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
+                const response = JSON.parse(xhr.responseText);
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
-                    resolve(JSON.parse(xhr.responseText));
+                    resolve(response);
                 } else {
                     //statuscode khong phai 2xx
-
-                    reject(new CustomError(xhr.status, "hello"));
+                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
             };
             xhr.onerror = () => {
-
                 //loi mang hoac may chu
                 reject(new CustomError(500, "Unknow error!"));
             };
             xhr.onabort = () => {
                 debugger
             }
-            xhr.open('POST', PREFIX + path, true);
-            xhr.withCredentials = true
+            xhr.open('POST', PREFIX_URL + path, true);
             this.defaultHeaderConfig();
             xhr.send(JSON.stringify(data));
         });
