@@ -29,8 +29,8 @@ CREATE TABLE `transactions` (
   `PaymentInfo` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Thông tin thanh toán cụ thể: thời gian, sản phẩm số lượng',
   `Message` varchar(255) DEFAULT NULL COMMENT 'Tin nhắn cho người bán',
   `Security` varchar(16) DEFAULT NULL COMMENT 'Khóa bảo mật\n',
-  `CreatedDate` date DEFAULT NULL COMMENT 'Ngày tạo',
-  `ModifiedDate` date DEFAULT NULL,
+  `TransactionCreatedDate` date DEFAULT NULL COMMENT 'Ngày tạo',
+  `TransactionModifiedDate` date DEFAULT NULL,
   PRIMARY KEY (`TransactionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-14 22:30:04
+-- Dump completed on 2020-12-15 14:12:26

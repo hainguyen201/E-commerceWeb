@@ -7,7 +7,7 @@ const helper = require('../utils/helper')
      */
 const Product = function(product) {
         // this.ProductID = product.ProductID ? product.ProductID : " ";
-        this.Name = product.Name ? product.Name : "";
+        this.ProductName = product.ProductName ? product.ProductName : "";
         this.Price = product.Price ? product.Price : 0;
         this.Content = product.Content ? product.Content : "";
         this.Image = product.Image ? product.Image : "";
@@ -15,8 +15,8 @@ const Product = function(product) {
         this.CatalogID = product.CatalogID ? product.CatalogID : 0;
         this.Discount = product.Discount ? product.Discount : 0;
         this.Remain = product.Remain ? product.Remain : 0;
-        this.CreatedDate = product.CreatedDate ? product.CreatedDate : helper.getDateNow();
-        this.ModifiedDate = product.ModifiedDate ? product.ModifiedDate : helper.getDateNow();
+        this.ProductCreatedDate = product.ProductCreatedDate ? product.ProductCreatedDate : helper.getDateNow();
+        this.ProductModifiedDate = product.ProductModifiedDate ? product.ProductModifiedDate : helper.getDateNow();
     }
     /**
      * Lấy danh sách sản phẩm
@@ -43,6 +43,11 @@ Product.getProductByID = async(productId, result) => {
     var sqlString = `select * from products where ProductID=?`;
     console.log(productId)
     await AbstractModel.queryExc(result, sqlString, [productId]);
+}
+Product.getProductByName = async(productName, result) => {
+    var name = "%" + productName + "%";
+    var sqlString = `select * from products where ProductName like ?`
+    AbstractModel.queryExc(result, sqlString, [name]);
 }
 Product.getAllProducts = async(result) => {
         sqlString = 'select * from products';
