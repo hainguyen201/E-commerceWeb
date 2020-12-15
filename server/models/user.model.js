@@ -12,8 +12,8 @@ const User = function(user) {
         this.Password = user.Password ? user.Password : "";
         this.UserName = user.UserName ? user.UserName : "";
         this.Role = user.Role ? user.Role : 0;
-        this.UserCreatedDate = user.UserCreatedDate ? user.UserCreatedDate : helper.getDateNow();
-        this.UserModifiedDate = user.UserModifiedDate ? user.UserModifiedDate : helper.getDateNow();
+        this.CreatedDate = user.CreatedDate ? user.CreatedDate : helper.getDateNow();
+        this.ModifiedDate = user.ModifiedDate ? user.ModifiedDate : helper.getDateNow();
     }
     /**
      * Lấy danh sách User
