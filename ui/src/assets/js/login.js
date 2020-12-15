@@ -73,10 +73,15 @@ function onCloseModal() {
 function checkValidation() {
     return true;
 }
-//lấy id của người dùng
-btnLogin.onclick = function(event) {
-        if (checkValidation()) {
-            base.redirect('/list_product/index.html', '')
+
+btnLogin.onclick = async function(event) {
+    // debugger
+    if (true) {
+        try {
+            await userService.loginService('hainguyen', '1234');
+        } catch (error) {
+            alert(error.toString());
         }
+        // /base.redirect('/list_product/index.html', '')
     }
-    //userService.getUser('', '')
+}

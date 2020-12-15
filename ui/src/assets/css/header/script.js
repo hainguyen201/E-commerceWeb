@@ -72,7 +72,6 @@ function onCloseModal() {
 const charactersList = document.getElementById('charactersList');
 const searchBar = document.getElementById('searchBar');
 let hpCharacters = [];
-var listProduct = document.getElementsByClassName("container-list-product")[0];
 
 
 searchBar.addEventListener('keyup', (e) => {
@@ -89,9 +88,7 @@ searchBar.addEventListener('keyup', (e) => {
 searchBar.addEventListener('keyup', function(){
     if (searchBar.value.length == 0){
         charactersList.innerHTML = "";
-        listProduct.style.visibility = "visible";
     }
-    else listProduct.style.visibility = "hidden";
 });
 
 const loadCharacters = async () => {
@@ -225,17 +222,20 @@ function updateCartTotal() {
 // cart
 var root2 = document.getElementById("root2");
 var modalCart = document.getElementsByClassName("content-section")[0];
-var listProduct = document.getElementsByClassName("container-list-product")[0];
 
 modalCart.style.visibility = "hidden";
 function openModalCart() {
     modalCart.style.visibility = "visible";
-    listProduct.style.visibility = "hidden";
     root2.style.opacity = 0.2;
 }
+// var closeCart = document.getElementsByClassName("btn-close")[0];
+// window.onclick = function (event) {
+//     if (event.target == modalCart) {
+//         onCloseCart();
+//     }
+// }
 
 function onCloseCart() {
     root2.style.opacity = 1;
     modalCart.style.visibility = "hidden";
-    listProduct.style.visibility = "visible";
 }

@@ -1,6 +1,5 @@
 ﻿/*
     Hàm thực hiện định dạng kiểu tiền khi người dùng nhập ngoài màn hình (100.111.222)
-    Người tạo VDThang 18/05/2019
 */
 formatCurrency = function(number) {
     var n = number.split('').reverse().join("");
@@ -10,7 +9,6 @@ formatCurrency = function(number) {
 
 /*
 Chuyển cộng chuỗi sang kiểu truyền parameter
-Người tạo VDThang 18/05/2019    
 */
 if (!String.prototype.format) {
     String.prototype.format = function() {
@@ -25,7 +23,6 @@ if (!String.prototype.format) {
 
 /*
 Thực hiện định dạng kiểu money format 100.111.222
-Người tạo VDThang 18/05/2019    
 */
 Number.prototype.formatMoney = function() {
     return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
@@ -33,7 +30,6 @@ Number.prototype.formatMoney = function() {
 
 /*
 Thực hiện định dạng dữ liệu kiểu thời gian theo định dạng dd/MM/yyyy
-Người tạo VDThang 18/05/2019    
 */
 Date.prototype.formatddMMyyyy = function() {
     var day = this.getDate() + "";
