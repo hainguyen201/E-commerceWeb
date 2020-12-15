@@ -16,7 +16,7 @@ exports.sendData = (res, data) => {
     res.end()
 }
 exports.sendErr = (res, err) => {
-    res.statusCode = err.statusCode || 500;
+    res.statusCode = err.statusCode|| 500;
     res.write(JSON.stringify(err))
     res.end()
 }

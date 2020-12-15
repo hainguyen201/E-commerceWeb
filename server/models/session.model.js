@@ -1,7 +1,6 @@
 const sql = require("../db.js");
 const AbstractModel = require('./abstract.model')
 const helper = require('../utils/helper')
-const uuid = require('uuid')
 const Session = function(session) {
     this.OrderID = session.OrderID ? session.OrderID : 0;
     this.UserID = session.UserID ? session.UserID : 0;
