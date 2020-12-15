@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `catalogs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `catalogs` (
   `CatalogID` int NOT NULL AUTO_INCREMENT COMMENT 'Mã danh m',
-  `CatalogName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Tên danh mục',
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Tên danh mục',
   `ParentID` int DEFAULT NULL COMMENT 'Danh mục có chứa danh mục con',
-  `CatalogCreatedDate` date DEFAULT NULL,
-  `CatalogModifiedDate` date DEFAULT NULL,
+  `CreatedDate` date DEFAULT NULL,
+  `ModifiedDate` date DEFAULT NULL,
   PRIMARY KEY (`CatalogID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-15 14:12:26
+-- Dump completed on 2020-12-14 22:30:04

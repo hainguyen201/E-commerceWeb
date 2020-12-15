@@ -23,13 +23,16 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `OrderID` int NOT NULL AUTO_INCREMENT,
-  `Status` int DEFAULT '0' COMMENT 'Trạng thái giao dịch:\\\\n0- đang trong giỏ hàng chưa thực hiện giao dịch\\\\n1- giao dịch đã thực h',
+  `OrderID` int NOT NULL,
+  `ProductID` int DEFAULT NULL,
   `TransactionID` int DEFAULT NULL,
-  `OrderCreatedDate` date DEFAULT NULL,
-  `OrderModifiedDate` date DEFAULT NULL,
-  PRIMARY KEY (`OrderID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Amount` decimal(10,0) DEFAULT '0',
+  `Status` int DEFAULT '0' COMMENT 'Trạng thái giao dịch:\\n0- đang trong giỏ hàng chưa thực hiện giao dịch\\n1- giao dịch đã thực h',
+  `CreatedDate` date DEFAULT NULL,
+  `ModifiedDate` date DEFAULT NULL,
+  PRIMARY KEY (`OrderID`),
+  KEY `fk_Order_1_idx` (`ProductID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +41,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (2,1,3,'2020-12-15','2020-12-15'),(3,1,3,'2020-12-15','2020-12-15'),(4,1,3,'2020-12-15','2020-12-15'),(5,1,3,'2020-12-15','2020-12-15');
+INSERT INTO `orders` VALUES (1,1,NULL,0,0,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-15 14:12:27
+-- Dump completed on 2020-12-14 22:30:05
