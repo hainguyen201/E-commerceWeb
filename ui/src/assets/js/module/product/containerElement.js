@@ -1,9 +1,7 @@
 const template = `
-<h1>Modern JS is awesome</h1>
-<p>You don't need a JS framework anymore</p>
+<h1>Product</h1>
 `;
-
-export default class ProductElement extends HTMLDivElement {
+class ProductElement extends HTMLDivElement {
 
   static get route() { return ""; }
   static get is() { return "product-element" }
@@ -19,3 +17,5 @@ export default class ProductElement extends HTMLDivElement {
   }
 
 }
+
+export default [ProductElement];

@@ -3,13 +3,14 @@ const template = `
 </div>
 `;
 
-export default class RootElement extends HTMLDivElement {
+ class RootElement extends HTMLDivElement {
 
     static get route() { return ""; }
     static get is() { return "root-r" }
 
     constructor() {
         super();
+        this.setAttribute("id","container-product")
         const templateEl = document.createElement("template");
         templateEl.innerHTML = template;
         this.appendChild(templateEl.content.cloneNode(true));
@@ -31,6 +32,7 @@ export default class RootElement extends HTMLDivElement {
                 console.log(result);
             })
             .catch((err) => {
+                // document.dispatchEvent(new CustomEvent('page-loading'));
                 console.log(err);
             });
 
@@ -38,14 +40,14 @@ export default class RootElement extends HTMLDivElement {
         function createProductElement(product) {
             var template = document.createElement('template');
             html = '<div class="product">' +
-                '<a id="' + product.ProductID + '" href="">' +
+                '<a is="router-link" id="' + product.ProductID + '" href="/product">' +
                 '<div class="container-img">' +
                 '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
                 '</div>' +
                 '<p id="name-product">' +
-                product.Name +
+                product.ProductName +
                 '</p>' +
-                '<span class="tooltip-product" id="tooltip-product-' + product.ProductID + '">' + product.Name + '</span>' +
+                '<span class="tooltip-product" id="tooltip-product-' + product.ProductID + '">' + product.ProductName + '</span>' +
                 '<span id="price">' + product.Price.formatMoney() + ' &#8363&nbsp;&nbsp;</span>' +
                 '<span id="discount">-' + product.Discount + '%</span>' +
                 '<div style="margin-top: 20px;">' +
@@ -77,3 +79,5 @@ export default class RootElement extends HTMLDivElement {
     }
 
 }
+
+export default [RootElement];

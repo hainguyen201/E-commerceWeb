@@ -1,28 +1,34 @@
-.header{
+.header {
     height: 120px;
-    background-image: linear-gradient(0,#fa6533,#f53e2e);
+    background-image: linear-gradient(0, #fa6533, #f53e2e);
 }
-.header__navbar{
+
+.header__navbar {
     display: flex;
     justify-content: space-between;
 }
-.header__navbar-list{
+
+.header__navbar-list {
     list-style: none;
     padding-left: 0px;
 }
-.header__navbar-item{
+
+.header__navbar-item {
     margin: 0 8px;
 }
-.header__navbar-item,.header__navbar-item-link{
+
+.header__navbar-item, .header__navbar-item-link {
     display: inline-block;
     font-size: 1.4rem;
     color: var(--black-color);
     text-decoration: none;
     font-weight: 300;
 }
-.header__navbar-item--strong{
+
+.header__navbar-item--strong {
     font-weight: 500;
 }
+
 /* .header__navbar-item--separate::after{
     content: "";
     display: block;
@@ -32,6 +38,7 @@
     right: 1180px;
     top: 11px;
 } */
+
 .modal-login-signup {
     /* display: none !important; */
 }
@@ -154,6 +161,7 @@ input:focus {
 button {
     cursor: pointer;
 }
+
 .header__container {
     padding: 40px;
     margin: 0 auto;
@@ -175,13 +183,11 @@ button {
     padding: 10px 10px;
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-areas:
-        'name image'
-        'house image';
+    grid-template-areas: 'name image' 'house image';
     text-align: left;
 }
 
-.character > h2 {
+.character>h2 {
     grid-area: name;
     margin-bottom: 0px;
 }
@@ -192,7 +198,7 @@ button {
     margin-top: 10px;
 } */
 
-.character > img {
+.character>img {
     max-height: 50px;
     grid-area: image;
 }
@@ -217,7 +223,9 @@ button {
     top: 7px;
     right: 15px;
 }
+
 /* section */
+
 .band-name {
     text-align: center;
     margin: 0;
@@ -235,11 +243,12 @@ button {
     margin: 1em;
 }
 
-.container {
+#container-product {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 1.5em;
 }
+
 .section-header {
     font-family: "Metal Mania";
     font-weight: normal;
@@ -497,16 +506,24 @@ button {
     margin: 40px auto 80px auto;
     font-size: 1.75em;
 }
-.btn-close{
+
+.btn-close {
     display: block;
     font-size: 1.75em;
     margin: auto;
 }
-.header__cart{
+
+.header__cart {
     width: 200px;
     margin: 0 auto;
     justify-content: space-around;
 }
-.fa-shopping-cart{
+
+.fa-shopping-cart {
     font-size: 3rem;
+}
+
+._center_everything {
+    display: grid!important;
+    place-items: center!important;
 }

@@ -1,44 +1,74 @@
 const routesMap = [];
-let container;
-
+let loadingElement = document.getElementById("loading-gif");
+let app = document.querySelector("#app");
 export class Router {
-  static addModule(prefix, mdl) {
+  /**
+   * hàm thêm các element với container tương ứng vào routesmap 
+   * @param {đường dẫn từ bắt đầu từ root VD /product hoặc /product/1} prefix 
+   * @param {mảng HtmlElement} mdl 
+   * @param {container sẽ chứa element khi open route tương ứng} container
+   */
+  static addModule(prefix, mdl, container) {
     mdl.forEach(page => {
-      routesMap.push({ route: `${prefix}${page.route}`, component: page });
+      routesMap.push({ route: `${prefix}${page.route}`, component: page, container: container });
+      //định nghĩa kiểu element custom cho thẻ div trong componentRegistry
       customElements.define(page.is, page, { extends: "div" });
     });
-    debugger
     console.log(routesMap);
   }
 
+  static addCustomModule(route, md, container) {
+    routesMap.push({ route: `${route}`, component: md, container: container });
+    //định nghĩa kiểu element custom cho thẻ div trong componentRegistry
+    customElements.define(md.is, md, { extends: "div" });
+    console.log(routesMap);
+  }
+
+  /**
+  * hàm lấy route và thay element trong container bằng element xác định bởi route
+  * @param {*Đường dẫn pathname /route} route 
+  */
   static open(route) {
-    debugger
     const page = routesMap.find(r => new RegExp(`^${r.route}\$`).test(route));
     if (!page) return this.onNotFound(route);
+    document.dispatchEvent(this.pageLoading(page.component));
     const newContent = document.createElement('div', { is: page.component.is });
     newContent.params = this.getPageParams(page.route, route);
-    container.parentNode.replaceChild(newContent, container);
-    this.setContainer(newContent);
+    let container = page.container;
+    //xóa hết các element con trong container để thay element mới 
+    while (!!container.lastElementChild) {
+      container.removeChild(container.lastElementChild);
+    }
+    container.appendChild(newContent);
     document.dispatchEvent(this.pageLoaded(page.component));
   }
 
   static pageLoaded(component) {
-    debugger
     return new CustomEvent("page-loaded", {
       detail: { component }
     });
   }
 
-  static setContainer(el) {
-    container = el;
+  static pageLoading(component) {
+    return new CustomEvent("page-loading", {
+      detail: { component }
+    });
   }
+
+  // static setContainer(el) {
+  //   container = el;
+  // }
 
   static onNotFound(route) {
     container.innerHTML = `Cannot find route ${route}`;
   }
 
+  /**
+   * 
+   * @param {*} pageRoute 
+   * @param {*} route 
+   */
   static getPageParams(pageRoute, route) {
-    debugger
     const regex = new RegExp(pageRoute);
     const matches = regex.exec(route);
     ["index", "input", "groups"].forEach(k => delete matches[k]);
@@ -47,17 +77,30 @@ export class Router {
   }
 }
 
-window.onpopstate = () => {
-  debugger
+window.addEventListener('popstate', event => {
+  //event fire when history.back(), forward(), go(); occur
+  // thông báo cho router biết việc navigate được thực hiện
   Router.open(window.location.pathname);
-}
+}, false);
 
+document.addEventListener('page-loaded', event => {
+  loadingElement.style.visibility = "hidden";
+  app.style.opacity = '1';
+}, false);
+
+document.addEventListener('page-loading', event => {
+  loadingElement.style.visibility = "visible";
+  app.style.opacity = '0.2';
+}, false);
+
+/**
+ * classElement ghi đè event xảy ra với thẻ a custom có dạng <a is="router-link" href=""></a>
+ */
 class RouterLink extends HTMLAnchorElement {
   constructor() {
     super();
     this.addEventListener("click", (e) => {
-      debugger
-      console.log('route'+e.toString());
+      console.log('route' + e.toString());
       const route = this.getAttribute("href")
       Router.open(route);
       window.history.pushState({}, route, `${window.location.origin}${route}`);
