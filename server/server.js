@@ -34,6 +34,7 @@ const server = http.createServer(options, async(req, res) => {
                 if (err) {
                     console.log("er: ", err)
                 } else {
+                    console.log(data)
                     res.setHeader('set-cookie', [`sessionid=${ss.SessionID};samesite=None; Secure`])
                     await router(req, res, routes);
                 }

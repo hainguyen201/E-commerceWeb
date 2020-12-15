@@ -53,6 +53,13 @@ exports.findProductByID = (req, res, param) => {
         }
     })
 }
+exports.findProductByName = async(req, res, param) => {
+    console.log(param)
+    await Product.getProductByName(param, (err, data) => {
+        this.resultHandler(err, data, res, req)
+
+    })
+}
 exports.findAllProducts = async(req, res, param) => {
     await Products.getAllProducts((err, data) => {
         this.resultHandler(err, data, res, req)
@@ -115,10 +122,10 @@ exports.productsFormatToClient = function(data) {
         data.forEach(element => {
             if (element.Image.length > 0)
                 element.Image = helper.base64_encode(element.Image);
-            if (element.CreatedDate)
-                element.CreatedDate = helper.formatDate(element.CreatedDate)
-            if (element.ModifiedDate)
-                element.ModifiedDate = helper.formatDate(element.ModifiedDate)
+            if (element.ProductCreatedDate)
+                element.ProductCreatedDate = helper.formatDate(element.ProductCreatedDate)
+            if (element.ProductModifiedDate)
+                element.ProductModifiedDate = helper.formatDate(element.ProductModifiedDate)
         });
     return data;
 }
@@ -130,6 +137,7 @@ exports.productsFormatToServer = function(data) {
         });
     }
 }
+
 exports.resultHandler = (err, data, res, req) => {
     if (err) {
         abstractController.sendErr(res, err)

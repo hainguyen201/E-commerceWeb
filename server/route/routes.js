@@ -1,5 +1,6 @@
 const userController = require('../controllers/user.controller')
 const productController = require('../controllers/product.controller')
+const orderController = require('../controllers/order.controller')
 const routes = [{
         method: 'GET',
         path: '/users',
@@ -27,6 +28,17 @@ const routes = [{
     },
     {
         method: 'GET',
+        path: /\/products\/names\/([a-zA-Z0-9_]+)/,
+        handler: productController.findProductByName
+
+    },
+    {
+        method: 'GET',
+        path: /\/products\/catalogs\/([0-9a-z]+)/,
+        handler: productController.findProductByCatalogID
+    },
+    {
+        method: 'GET',
         path: '/products',
         handler: productController.findAllProducts
     },
@@ -37,11 +49,6 @@ const routes = [{
 
     },
     {
-        method: 'GET',
-        path: /\/products\/catalogs\/([0-9a-z]+)/,
-        handler: productController.findProductByCatalogID
-    },
-    {
         method: 'POST',
         path: '/products',
         handler: productController.addProduct
@@ -50,6 +57,26 @@ const routes = [{
         method: 'PUT',
         path: /\/products\/([0-9a-z]+)/,
         handler: productController.updateProduct
+    },
+    {
+        method: 'GET',
+        path: /\/orders\/([0-9a-z]+)/,
+        handler: orderController.getOrderByID
+    },
+    {
+        method: 'PUT',
+        path: /\/orders\/([0-9a-z]+)/,
+        handler: orderController.updateOrder
+    },
+    {
+        method: 'POST',
+        path: '/orders',
+        handler: orderController.addOrder
+    },
+    {
+        method: 'DELETE',
+        path: /\/orders\/([0-9a-z]+)/,
+        handler: orderController.deleteOrder
     },
 
 ]
