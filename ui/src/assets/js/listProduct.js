@@ -25,15 +25,9 @@ function createProductElement(product) {
         '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
         '</div>' +
         '<p id="name-product">' +
-<<<<<<< HEAD
-        product.ProductName +
-        '</p>' +
-        '<span class="tooltip-product" id="tooltip-product-' + product.ProductID + '">' + product.ProductName + '</span>' +
-=======
         product.Name +
         '</p>' +
         '<span class="tooltip-product" id="tooltip-product-' + product.ProductID + '">' + product.Name + '</span>' +
->>>>>>> parent of d544d82... paoaoq
         '<span id="price">' + product.Price.formatMoney() + ' &#8363&nbsp;&nbsp;</span>' +
         '<span id="discount">-' + product.Discount + '%</span>' +
         '<div style="margin-top: 20px;">' +
