@@ -3,14 +3,14 @@ const template = `
 </div>
 `;
 
- class RootElement extends HTMLDivElement {
+class RootElement extends HTMLDivElement {
 
     static get route() { return ""; }
     static get is() { return "root-r" }
 
     constructor() {
         super();
-        this.setAttribute("id","container-product")
+        this.setAttribute("id", "container-product")
         const templateEl = document.createElement("template");
         templateEl.innerHTML = template;
         this.appendChild(templateEl.content.cloneNode(true));
@@ -39,7 +39,7 @@ const template = `
 
         function createProductElement(product) {
             var template = document.createElement('template');
-            html = '<div class="product">' +
+            var html = '<div class="product">' +
                 '<a is="router-link" id="' + product.ProductID + '" href="/product">' +
                 '<div class="container-img">' +
                 '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
@@ -59,7 +59,7 @@ const template = `
             template.innerHTML = html;
             let elementProduct = template.content.firstChild;
 
-            elementProduct.onmousemove = function (e) {
+            elementProduct.onmousemove = function(e) {
                 var x = e.clientX,
                     y = e.clientY;
                 document.getElementById(`tooltip-product-${product.ProductID}`).style.top = (y + 20) + 'px';

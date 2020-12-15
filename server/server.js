@@ -29,7 +29,6 @@ const server = http.createServer(options, async(req, res) => {
     } else {
         if (!req.headers.hasOwnProperty('cookie')) {
             var ss = { SessionID: uuid.v1() }
-            console.log(ss.SessionID)
             await session.addSession(ss, async(err, data) => {
                 if (err) {
                     console.log("er: ", err)
@@ -39,7 +38,6 @@ const server = http.createServer(options, async(req, res) => {
                 }
             })
         } else {
-            console.log("cookie", req.headers.cookie)
             await router(req, res, routes);
         }
 
