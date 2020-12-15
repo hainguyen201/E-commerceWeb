@@ -1,7 +1,7 @@
 const template = `
 <h1>Product</h1>
 `;
-class ProductElement extends HTMLDivElement {
+export default class ProductElement extends HTMLDivElement {
 
   static get route() { return ""; }
   static get is() { return "product-element" }
@@ -17,5 +17,3 @@ class ProductElement extends HTMLDivElement {
   }
 
 }
-
-export default [ProductElement];
