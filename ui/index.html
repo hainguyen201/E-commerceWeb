@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./src/assets/css/list_product/index.css">
+    <title>Website bán hàng</title>
+    <link rel="stylesheet" href="/src/assets/css/list_product/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="./src/assets/css/header/base.css">
-    <link rel="stylesheet" href="./src/assets/css/header/main.css">
+    <link rel="stylesheet" href="/src/assets/css/header/base.css">
+    <link rel="stylesheet" href="/src/assets/css/header/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
@@ -28,37 +28,43 @@
                         <li class="header__navbar-item">
                             <a href="" class="header__navbar-item-link">Trợ giúp</a>
                         </li>
-                        <li class="header__navbar-item
+                        <li class="header__navbar-item login
                         header__navbar-item--strong header__navbar-item--separate">
-                            <div id="root" class="">
+                            <div id="button-login" class="">
                                 <button onclick="openLoginSignupModal()">Đăng nhập</button>
                             </div>
 
-                            <div class="modal-login-signup" style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
+                            <div class="modal-login-signup"
+                                style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
                                 <div id="di-login-signup" class="dialog">
                                     <div id="notif">
                                         <h2>Đăng nhập</h2>
-                                        <p>Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn.</p>
-                                        <img src="./src/assets/img/header/graphic-map.png" />
+                                        <p>Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều
+                                            ưu đãi hấp dẫn.</p>
+                                        <img src="/src/assets/img/header/graphic-map.png" />
                                     </div>
                                     <div id="login-signup">
-                                        <div class="icon iconx">
-                                            <img class="icon icon-close" onclick="onCloseModal()" src="./src/assets/img/header/iconx.png" />
-                                        </div>
-                                        <div class="option" style="display: flex; height: 44px; border-bottom: 1px solid #f4f4f4;">
+                                        <div class="option"
+                                            style="display: flex; height: 44px; border-bottom: 1px solid #f4f4f4;">
+                                            <div class="icon iconx">
+                                                <img class="icon icon-close" onclick="onCloseModal()"
+                                                    src="/src/assets/img/header/iconx.png" />
+                                            </div>
                                             <div id="op-login" onclick="changeContent()">Đăng nhập</div>
                                             <div id="op-signup" onclick="changeContent()">Tạo tài khoản</div>
                                         </div>
                                         <div class="content login">
                                             <div class="element username">
                                                 <label>Email/SDT</label>
-                                                <input placeholder="Nhập email" type="email" name="email" class="email" />
+                                                <input placeholder="Nhập email" type="email" name="email"
+                                                    class="email" />
                                             </div>
                                             <div class="element password">
                                                 <label>Mật khẩu</label>
-                                                <input placeholder="Nhập mật khẩu" type="password" name="password" class="password" />
+                                                <input placeholder="Nhập mật khẩu" type="password" name="password"
+                                                    class="password" />
                                             </div>
-                                            <div class="element forgetpass">
+                                            <div class="element validate-login" style="font-size: smaller; color: red;">
                                             </div>
                                             <div class="element">
                                                 <label></label>
@@ -68,26 +74,32 @@
                                         <div class="content signup" style="display: none;">
                                             <div class="element name">
                                                 <label>Họ tên</label>
-                                                <input class="name " name="name" type="text" placeholder="Nhập họ tên" />
+                                                <input class="name " name="name" type="text"
+                                                    placeholder="Nhập họ tên" />
                                             </div>
                                             <div class="element phone">
                                                 <label>SĐT</label>
-                                                <input class="phone" name="phone" type="text" placeholder="Nhập số điện thoại" />
+                                                <input class="phone" name="phone" type="text"
+                                                    placeholder="Nhập số điện thoại" />
                                             </div>
 
                                             <div class="element email">
                                                 <label>Email</label>
-                                                <input class="email" name="email" type="email" placeholder="Nhập email" />
+                                                <input class="email" name="email" type="email"
+                                                    placeholder="Nhập email" />
                                             </div>
                                             <div class="element password">
                                                 <label>Mật khẩu</label>
-                                                <input type="password" name="password" class="password" placeholder="Nhập mật khẩu" />
+                                                <input type="password" name="password" class="password"
+                                                    placeholder="Nhập mật khẩu" />
                                             </div>
                                             <div class="element sex">
                                                 <label>Giới tính</label>
                                                 <div class="sexx">
-                                                    <input class="sex-male" name="male" type="radio" value="male" /><label style="margin-right: 190px;">Nam</label>
-                                                    <input class="sex-female" name="female" type="radio" value="female" /><label>Nữ</label>
+                                                    <input class="sex-male" name="male" type="radio"
+                                                        value="male" /><label style="margin-right: 190px;">Nam</label>
+                                                    <input class="sex-female" name="female" type="radio"
+                                                        value="female" /><label>Nữ</label>
                                                 </div>
                                             </div>
                                             <div class="element">
@@ -101,6 +113,17 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </li>
+                        <li class="header__navbar-item dropdown user" style="display: none;">
+                            <div class="person-info dropdown" id="icon-persion"
+                                style="background-color: #f4f4f4; border-radius: 100%;position: absolute; top: 5px;">
+                                <img src="/src/assets/img/icon-person.png" alt="icon-person"
+                                    style=" border-radius: 100%; height: 33px;width: 38px;">
+                            </div>
+                            <div class="dropdown-content">
+                                <div><a is="router-link" id="user-name" href="#">USER</a></div>
+                                <div id="button-logout">Đăng xuất</div>
                             </div>
                         </li>
                     </ul>
@@ -145,22 +168,23 @@
         <footer class="footer">
 
         </footer>
-        </div>
-        <div id="loading-gif" class="_center_everything" style="height: 100%;width: 100%; top:0px;position: absolute; visibility: hidden;">
-            <img src="./src/assets/img/4V0b.gif" alt="loading" width=80 />
-        </div>
-        <script type="module" src="/test2.js"></script>
-        <script src="/src/assets/js/util/constant.js"></script>
-        <script src="/src/assets/js/util/formatString.js"></script>
-        <script src="/src/assets/js/common.js"></script>
-        <script src="/src/assets/js/api/customError.js"></script>
-        <script src="/src/assets/js/api/api.js"></script>
-        <script src="/src/assets/js/service/index.js"></script>
-        <script src="/src/assets/js/service/UserService/index.js"></script>
-        <script src="/src/assets/css/header/script.js"></script>
-        <script src="/src/assets/js/listProduct.js"></script>
-        <script src="/src/assets/js/login.js"></script>
-        <script src="./src/assets/js/router/index.js" type="module"></script>
+    </div>
+    <div id="loading-gif" class="_center_everything"
+        style="height: 100%;width: 100%; top:0px;position: absolute; visibility: hidden;">
+        <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
+    </div>
+    <script src="/src/assets/js/util/util.js"></script>
+    <script src="/src/assets/js/util/constant.js"></script>
+    <script src="/src/assets/js/util/formatString.js"></script>
+    <script src="/src/assets/js/common.js"></script>
+    <script src="/src/assets/js/api/customError.js"></script>
+    <script src="/src/assets/js/api/api.js"></script>
+    <script src="/src/assets/js/service/index.js"></script>
+    <script src="/src/assets/js/service/UserService/index.js"></script>
+    <script src="/src/assets/css/header/script.js"></script>
+    <script src="/src/assets/js/listProduct.js"></script>
+    <script src="/src/assets/js/login.js"></script>
+    <script src="/src/assets/js/router/index.js" type="module"></script>
 </body>
 
 </html>

@@ -68,11 +68,9 @@
 }
 
 .iconx {
-    top: -24px;
-    left: 539px;
+    top: -20px;
     position: relative;
-    height: 20px;
-    width: 20px;
+    left: 512px;
 }
 
 .icon {
@@ -526,4 +524,40 @@ button {
 ._center_everything {
     display: grid!important;
     place-items: center!important;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 100px;
+    border-radius: 6px;
+    padding: 1px;
+    z-index: 1;
+    top: 42px;
+    right: 42px;
+}
+
+.dropdown-content div {
+    width: 100%;
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+}
+
+.dropdown-content div:hover {
+    background-color: #ddd;
+}
+
+.dropdown-content div:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
