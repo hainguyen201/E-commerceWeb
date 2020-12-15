@@ -1,12 +1,8 @@
 import { Router } from "./Router.js";
-import ProductElement from '../module/product/containerElement.js';
-import RootElement from '../module/root/index.js';
+import containerProductElement from '../module/product/containerElement.js';
+import containerRootElement from '../module/root/index.js';
 
-const modules = [ProductElement];
-const modules1 = [RootElement];
-
-Router.addModule("/product", modules);
-Router.addModule("/", modules1);
-const div = document.querySelector("#main-container");
-Router.setContainer(div);
+const mainContainer = document.querySelector("#main-container");
+Router.addModule("/product", containerProductElement, mainContainer);
+Router.addModule("/", containerRootElement, mainContainer);
 Router.open(window.location.pathname);
