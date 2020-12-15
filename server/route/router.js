@@ -35,7 +35,10 @@ module.exports = async(req, res, routes) => {
         if (req.method === 'POST' || req.method === 'PUT' && req.method != 'OPTIONS') {
             body = await getPostData(req)
         }
+        var sessionId = req.cookie;
+        if (sessionId) {
 
+        }
         return route.handler(req, res, param)
     } else {
         return helpers.error(res, 'Endpoint not found', 404)
