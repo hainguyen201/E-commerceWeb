@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `products`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
   `ProductID` int NOT NULL AUTO_INCREMENT COMMENT 'Mã sản phẩm',
-  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Tên sản phẩm',
+  `ProductName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Tên sản phẩm',
   `Price` decimal(10,0) DEFAULT NULL COMMENT 'G',
   `Content` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Nội dung sản phẩm\n',
   `Image` varchar(255) DEFAULT NULL COMMENT 'Ảnh sản phẩm',
@@ -32,8 +32,8 @@ CREATE TABLE `products` (
   `CatalogID` int DEFAULT NULL COMMENT 'Mã danh mục',
   `Discount` int DEFAULT NULL COMMENT 'Giảm giá : từ 0->100',
   `Remain` int DEFAULT NULL COMMENT 'Số lượng sản phẩm còn lại',
-  `CreatedDate` date DEFAULT NULL,
-  `ModifiedDate` date DEFAULT NULL,
+  `ProductCreatedDate` date DEFAULT NULL,
+  `ProductModifiedDate` date DEFAULT NULL,
   PRIMARY KEY (`ProductID`),
   KEY `fk_Product_1_idx` (`CatalogID`),
   CONSTRAINT `fk_Product_1` FOREIGN KEY (`CatalogID`) REFERENCES `catalogs` (`CatalogID`)
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-14 22:30:04
+-- Dump completed on 2020-12-15 16:20:19

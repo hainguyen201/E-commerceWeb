@@ -3,21 +3,25 @@ const user = require('../models/user.model')
 const USER_DEFAULT = 0
 exports.getRole = async(req, result) => {
 
-    var coookie = req.headers.cookie;
-    await session.getSessionByID(coookie, async(err, data) => {
+    var cookie = req.headers.cookie;
+    console.log(cookie)
+    await session.getSessionByID(cookie, async(err, data) => {
+        console.log(data)
         if (err) {
             //show err
+            result(err, data)
         } else {
-            if (data.UserID != 0) {
-                await user.findById(data.UserID, (err, data) => {
+            if (data.length > 0 && data[0].UserID != 0) {
+                await user.findById(data[0].UserID, (err, data) => {
                     if (err) {
                         //show er
                     } else {
-                        result = data.Role
+                        console.log(data)
+                        result(null, data[0].Role)
                     }
                 })
             } else {
-                result = USER_DEFAULT;
+                result(null, 0);
             }
         }
     })
