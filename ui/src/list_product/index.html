@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <base href=".">
     <link rel="stylesheet" href="../assets/css/list_product/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="../assets/css/header/base.css">
@@ -34,7 +33,6 @@
                             <div id="root" class="">
                                 <button onclick="openLoginSignupModal()">Đăng nhập</button>
                             </div>
-
                             <div class="modal-login-signup" style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
                                 <div id="di-login-signup" class="dialog">
                                     <div id="notif">
@@ -63,7 +61,7 @@
                                             </div>
                                             <div class="element">
                                                 <label></label>
-                                                <button class="btn-login" id="btn-login">Đăng nhập</button>
+                                                <button class="btn-login">Đăng nhập</button>
                                             </div>
                                         </div>
                                         <div class="content signup" style="display: none;">
@@ -104,36 +102,39 @@
                                 </div>
                             </div>
                         </li>
+
                     </ul>
 
                 </nav>
-                <div class="header__search-cart">
+                <!-- <div class="header__search-cart"> -->
                     <div class="header__container">
                         <div id="searchWrapper">
                             <input type="text" name="searchBar" id="searchBar" placeholder="Tìm kiếm sản phẩm" />
+                            <ul id="charactersList"></ul>
                         </div>
-                        <ul id="charactersList"></ul>
+                        <div id="root2" class="header__cart">
+                            <i onclick="openModalCart()" class="fas fa-shopping-cart">shopping cart</i>
+                        </div>
                     </div>
-                    <div id="root2" class="header__cart">
-                        <i onclick="openModalCart()" class="fas fa-shopping-cart">shopping cart</i>
+                    
+                   
+                <!-- </div> -->
+                <div class="container content-section">
+                    <h2 class="section-header">Giỏ hàng</h2>
+                    <div class="cart-row">
+                        <span class="cart-item cart-header cart-column">Sản phẩm</span>
+                        <span class="cart-price cart-header cart-column">Giá</span>
+                        <span class="cart-quantity cart-header cart-column">Số lượng</span>
                     </div>
-                    <div class="container content-section">
-                        <h2 class="section-header">Giỏ hàng</h2>
-                        <div class="cart-row">
-                            <span class="cart-item cart-header cart-column">Sản phẩm</span>
-                            <span class="cart-price cart-header cart-column">Giá</span>
-                            <span class="cart-quantity cart-header cart-column">Số lượng</span>
-                        </div>
-                        <div class="cart-items">
-                        </div>
-                        <div class="cart-total">
-                            <strong class="cart-total-title">Tổng</strong>
-                            <span class="cart-total-price">$0</span>
-                        </div>
-                        <div>
-                            <button class="btn btn-primary btn-purchase" type="button">Thanh toán</button>
-                            <button class="btn btn-close" onclick="onCloseCart()" type="button">Đóng</button>
-                        </div>
+                    <div class="cart-items">
+                    </div>
+                    <div class="cart-total">
+                        <strong class="cart-total-title">Tổng</strong>
+                        <span class="cart-total-price">$0</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-purchase" type="button">Thanh toán</button>
+                        <button class="btn btn-close" onclick="onCloseCart()" type="button">Đóng</button>
                     </div>
                 </div>
 
@@ -146,16 +147,12 @@
 
         </footer>
         </div>
-        <script src="../assets/js/util/constant.js"></script>
-        <script src="../assets/js/util/formatString.js"></script>
+
+        <script src="../assets/js/util.js"></script>
         <script src="../assets/js/common.js"></script>
-        <script src="../assets/js/api/customError.js"></script>
-        <script src="../assets/js/api/api.js"></script>
-        <script src="../assets/js/service/index.js"></script>
-        <script src="../assets//js//service/UserService/index.js"></script>
         <script src="../assets/css/header/script.js"></script>
-        <script src="../assets/js/listProduct.js"></script>
-        <script src="../assets/js/login.js"></script>
+        <script src="../assets/js/list_product.js"></script>
+        <script src="../assets/css/header/script.js"></script>
 </body>
 
 </html>

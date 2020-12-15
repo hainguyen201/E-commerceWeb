@@ -155,6 +155,7 @@ button {
     cursor: pointer;
 }
 .header__container {
+    display: inline-flex;
     padding: 40px;
     margin: 0 auto;
     max-width: 1000px;
@@ -198,7 +199,7 @@ button {
 }
 
 #searchBar {
-    width: 100%;
+    width: 400px;
     height: 32px;
     border-radius: 3px;
     border: 1px solid #eaeaea;
@@ -216,6 +217,9 @@ button {
     position: absolute;
     top: 7px;
     right: 15px;
+}
+.header__cart{
+    cursor: pointer;
 }
 /* section */
 .band-name {
@@ -510,3 +514,18 @@ button {
 .fa-shopping-cart{
     font-size: 3rem;
 }
+.btn {
+    background-color: Crimson;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .btn-purchase{
+      background-color: #1ba8ff;
+  }
