@@ -1,36 +1,28 @@
 class UserService {
-    reqHeaderConfig(req) {
-        req.setRequestHeader('Content-Type', 'application/json');
-        return req;
+    getUser(userName, passWord) {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            console.log(request.responseText)
+        }
+        request.open('GET', "http://localhost:3000/users")
+        request.send();
     }
-    async getUser(userName, passWord) {
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function() {
-                console.log(request.responseText)
-            }
-            request.open('GET', "https://localhost:3000/users")
-            await request.send();
+    loginService(userName, password) {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            console.log(request.responseText)
         }
-        /**
-         * Đăng nhập bằng username và password
-         * @param {*} userName 
-         * @param {*} password 
-         */
-    async loginService(username, password) {
-        try {
-            let body = {
-                UserName: username,
-                Password: password
-            }
-            await api.post('/users/login', body);
-        } catch (error) {
-            throw error;
+        var body = {
+            UserName: "",
+            PassWord: ""
         }
-        // await api.post('/users/login', body).then((result) => {
-        //     return true;
-        // }).catch((err) => {
-        //     debugger
-        //     //throw new Error();
-        // });
+        request.onreadystatechange = function() {
+            if (http.readyState == 4 && http.status == 200) {
+                alert(http.responseText);
+            }
+        }
+        request.setRequestHeader('Content-type', 'application/json')
+        request.open('POST', "http://localhost:3000/users/login")
+        request.send(body);
     }
 }
