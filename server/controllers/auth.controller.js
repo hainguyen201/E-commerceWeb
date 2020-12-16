@@ -3,8 +3,9 @@ const user = require('../models/user.model')
 const USER_DEFAULT = 0
 exports.getRole = async(req, result) => {
 
-    var cookie = req.headers.cookie;
-    console.log(cookie)
+    var cookie = req.headers.cookie.replace('sessionid=', "");
+    console.log("cookie: ", cookie)
+
     await session.getSessionByID(cookie, async(err, data) => {
         console.log(data)
         if (err) {

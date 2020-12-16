@@ -52,12 +52,12 @@ const routes = [{
     {
         method: 'POST',
         path: '/products',
-        handler: productController.addProduct
+        handler: productController.addProductWithAuth
     },
     {
         method: 'PUT',
         path: /\/products\/([0-9a-z]+)/,
-        handler: productController.updateProduct
+        handler: productController.updateProductWithAuth
     },
     {
         method: 'GET',

@@ -73,46 +73,62 @@ exports.findAllProducts = async(req, res, param) => {
         this.resultHandler(err, data, res, req)
     })
 }
-exports.addProduct = async(req, res, param) => {
+exports.addProductWithAuth = async(req, res, param) => {
     await auth.getRole(req, async(err, data) => {
         if (err) {
             abstractController.sendErr(res, err);
         } else {
             if (data == 1) {
-                var product = new Product(req.body)
-                var image = product.Image
-                    //nếu có ảnh
-                if (image.length > 0) {
-                    // thêm sản phẩm và k thêm ảnh
-                    product.Image = "";
-                    console.log(product)
-                    await Product.addProduct(product, async(err, dataadd) => {
-                        // console.log(dataadd)
-                        if (dataadd.insertId) {
-                            product.Image = dataadd.insertId + ".jpg"
-                            delete product.ProductID
-                            helper.save_base64(image, product.Image)
-                            await Product.updateProduct(dataadd.insertId, product, (err, data) => {
-                                if (err) {
-                                    abstractController.sendErr(res, err)
-                                } else {
-                                    if (data) {
-                                        abstractController.sendData(res, dataadd)
-                                    }
-                                }
-                            });
-                        }
-                    })
-                } else
-                    await Product.addProduct(product, (err, data) => {
-                        this.resultHandler(err, data, res, req)
-                    })
+                this.addProduct(req, res, param)
             } else {
                 abstractController.sendAuth(res);
             }
         }
     })
 
+}
+exports.addProduct = async(req, res, param) => {
+    var product = new Product(req.body)
+    var image = product.Image
+        //nếu có ảnh
+    if (image.length > 0) {
+        // thêm sản phẩm và k thêm ảnh
+        product.Image = "";
+        console.log(product)
+        await Product.addProduct(product, async(err, dataadd) => {
+            // console.log(dataadd)
+            if (dataadd.insertId) {
+                product.Image = dataadd.insertId + ".jpg"
+                delete product.ProductID
+                helper.save_base64(image, product.Image)
+                await Product.updateProduct(dataadd.insertId, product, (err, data) => {
+                    if (err) {
+                        abstractController.sendErr(res, err)
+                    } else {
+                        if (data) {
+                            abstractController.sendData(res, dataadd)
+                        }
+                    }
+                });
+            }
+        })
+    } else
+        await Product.addProduct(product, (err, data) => {
+            this.resultHandler(err, data, res, req)
+        })
+}
+exports.updateProductWithAuth = async(req, res, param) => {
+    await auth.getRole(req, async(err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err);
+        } else {
+            if (data == 1) {
+                this.updateProduct(req, res, param)
+            } else {
+                abstractController.sendAuth(res);
+            }
+        }
+    })
 }
 exports.updateProduct = async(req, res, param) => {
     //cập nhật ảnh mới
@@ -140,6 +156,8 @@ exports.updateProduct = async(req, res, param) => {
                     await Products.updateProduct(param, product, (err, data) => {
                         this.resultHandler(err, data, res, req)
                     })
+            } else {
+                abstractController.sendAuth(res)
             }
         }
     })

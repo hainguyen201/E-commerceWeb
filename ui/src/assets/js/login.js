@@ -78,7 +78,7 @@ btnLogin.onclick = async function(event) {
     // debugger
     if (true) {
         try {
-            await userService.loginService('hainguyen', '1234');
+            await userService.loginService('hainguyen24', '1234');
         } catch (error) {
             alert(error.toString());
         }
