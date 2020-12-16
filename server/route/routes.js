@@ -2,6 +2,7 @@ const userController = require('../controllers/user.controller')
 const productController = require('../controllers/product.controller')
 const orderController = require('../controllers/order.controller')
 const catalogController = require('../controllers/catalog.controller')
+const authController = require('../controllers/auth.controller')
 const routes = [{
         method: 'GET',
         path: '/users',
@@ -104,6 +105,11 @@ const routes = [{
         path: /\/catalogs\/([0-9a-z]+)/,
         handler: catalogController.deleteCatalog
     },
+    {
+        method: 'GET',
+        path: '/auth',
+        handler: authController.UserAuth
+    }
 
 ]
 module.exports = routes;
