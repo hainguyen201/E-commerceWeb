@@ -45,7 +45,6 @@ module.exports.base64_encode = (filepath) => {
 }
 module.exports.save_base64 = (image, name) => {
     // var imsave = image.replace((/^data:image\/jpg;base64,/, ""));
-    console.log("imsave", image)
     fs.writeFileSync(path.normalize(basepath + name), image, 'base64', (err) => {
         console.log('k luu dc file')
     })
@@ -82,4 +81,13 @@ module.exports.formatDate = function(date) {
     var month = date.getMonth() != 12 ? date.getMonth() + 1 : 1;
     var year = date.getFullYear();
     return year + '-' + month + '-' + day;
+}
+module.exports.cookieparser = (str) => {
+    str = str.split('; ');
+    var result = {};
+    for (var i = 0; i < str.length; i++) {
+        var cur = str[i].split('=');
+        result[cur[0]] = cur[1];
+    }
+    return result;
 }

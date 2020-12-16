@@ -21,7 +21,7 @@ exports.sendErr = (res, err) => {
     res.end()
 }
 exports.sendAuth = (res) => {
-    res.statusCode = 300;
+    res.statusCode = 401;
     res.end();
 }
 exports.dataForGet = {
