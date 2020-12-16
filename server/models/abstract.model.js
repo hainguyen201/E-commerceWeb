@@ -36,10 +36,11 @@ AbstractModel.updateDataQuery = async function(tablename, data, result, idname, 
         sqlString += key + '=?,';
     })
     sqlString = sqlString.slice(0, -1)
-    sqlString += ` WHERE ${idname} = ${id}`;
+    sqlString += ` WHERE ${idname} = ?`;
     keys.forEach(key => {
         dataUpdate.push(data[key])
     })
+    dataUpdate.push(id)
     await AbstractModel.queryExc(result, sqlString, dataUpdate);
 }
 module.exports = AbstractModel

@@ -58,7 +58,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -75,18 +75,16 @@ let validate = document.querySelector(".validate-login");
 validate.innerHTML = " ";
 let reEmail = /\S+@\S+\.\S+/;
 let rePass = /^\w{7,15}$/;
-email.onkeydown = function (e) {
+email.onkeydown = function(e) {
     if (!reEmail.exec(email.value)) {
         validate.innerHTML = "Email không hợp lệ";
-    }
-    else validate.innerHTML = "";
+    } else validate.innerHTML = "";
 }
 
 password.onkeydown = () => {
     if (!rePass.exec(password.value)) {
         validate.innerHTML = "Mật khẩu không bao gồm kí tự đặc biệt và từ 8 đến 15 kí tự"
-    }
-    else validate.innerHTML = "";
+    } else validate.innerHTML = "";
 }
 
 // var base = new Base();
@@ -94,8 +92,7 @@ password.onkeydown = () => {
 function checkValidation() {
     if (validate.textContent == "") {
         return true;
-    }
-    else validate.innerHTML = "Nhập thông tin đăng nhập"
+    } else validate.innerHTML = "Nhập thông tin đăng nhập"
     return false;
 }
 
@@ -110,7 +107,7 @@ let loginSuccessful = (user) => {
     a_user.innerHTML = user.UserName || "USER_DEFAULT";
 }
 
-btnLogin.onclick = async function (event) {
+btnLogin.onclick = async function(event) {
     // debugger
     if (true) {
         try {
@@ -125,4 +122,3 @@ btnLogin.onclick = async function (event) {
         // /base.redirect('/list_product/index.html', '')
     }
 }
-
