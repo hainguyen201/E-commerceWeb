@@ -22,7 +22,7 @@ class UserService {
                 UserName: username,
                 Password: password
             }
-            await api.post('/users/login', body);
+            return await api.post('/users/login', body);
         } catch (error) {
             throw error;
         }

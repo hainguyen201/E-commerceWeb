@@ -40,7 +40,7 @@ class RootElement extends HTMLDivElement {
         function createProductElement(product) {
             var template = document.createElement('template');
             var html = '<div class="product">' +
-                '<a is="router-link" id="' + product.ProductID + '" href="/product">' +
+                '<a is="router-link" id="' + product.ProductID + '" href="/product/' + product.ProductID + '">' +
                 '<div class="container-img">' +
                 '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
                 '</div>' +
@@ -59,7 +59,7 @@ class RootElement extends HTMLDivElement {
             template.innerHTML = html;
             let elementProduct = template.content.firstChild;
 
-            elementProduct.onmousemove = function(e) {
+            elementProduct.onmousemove = function (e) {
                 var x = e.clientX,
                     y = e.clientY;
                 document.getElementById(`tooltip-product-${product.ProductID}`).style.top = (y + 20) + 'px';
