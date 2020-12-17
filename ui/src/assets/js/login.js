@@ -6,7 +6,7 @@ var title = document.querySelector("#notif h2");
 var description = document.querySelector("#notif p");
 var checkboxMale = document.getElementsByClassName("sex-male")[0];
 var checkboxFemale = document.getElementsByClassName("sex-female")[0];
-var root = document.getElementById("root");
+var app = document.getElementById("app");
 var modalLoginSignup = document.getElementsByClassName("modal-login-signup")[0];
 var iconCloseModal = document.getElementsByClassName("icon-close")[0];
 var btnLogin = document.getElementById('btn-login');
@@ -39,7 +39,7 @@ function changeContent() {
 
 function openLoginSignupModal() {
     modalLoginSignup.style.visibility = "visible";
-    root.style.opacity = 0;
+    app.style.opacity = 0.3;
 }
 
 var listCheckbox = [checkboxMale, checkboxFemale];
@@ -65,7 +65,8 @@ window.onclick = function(event) {
 }
 
 function onCloseModal() {
-    root.style.opacity = 1;
+    debugger
+    app.style.opacity = 1;
     modalLoginSignup.style.visibility = "hidden";
 }
 
