@@ -75,15 +75,16 @@ validate.innerHTML = " ";
 let reEmail = /\S+@\S+\.\S+/;
 let rePass = /^\w{7,15}$/;
 email.onkeydown = function (e) {
-    if (!reEmail.exec(email.value)) {
-        validate.innerHTML = "Email không hợp lệ";
-    } else validate.innerHTML = "";
+    // if (!reEmail.exec(email.value)) {
+    //     validate.innerHTML = "Email không hợp lệ";
+    // } else validate.innerHTML = "";
 }
 
 password.onkeydown = () => {
-    if (!rePass.exec(password.value)) {
-        validate.innerHTML = "Mật khẩu không bao gồm kí tự đặc biệt và từ 8 đến 15 kí tự"
-    } else validate.innerHTML = "";
+    // if (!rePass.exec(password.value)) {
+    //     validate.innerHTML = "Mật khẩu không bao gồm kí tự đặc biệt và từ 8 đến 15 kí tự"
+    // } else 
+    validate.innerHTML = "";
 }
 
 // var base = new Base();
@@ -115,13 +116,14 @@ btnLogin.onclick = async function (event) {
     // debugger
     if (true) {
         try {
-            // if (checkValidation()) {
-            let data = await userService.loginService('hainguyen', '1234');
-            loginSuccessful(data.data[0]);
-            //await userService.loginService(email.value, password.value);
-            //}
+            if (checkValidation()) {
+                let data = await userService.loginService(email.value, password.value);
+                //let data = await userService.loginService('hainguyen', '1234');
+                notifSuccess("Đăng nhập thành công");
+                loginSuccessful(data.data[0]);
+            }
         } catch (error) {
-            alert(error.toString());
+            notifFailure("Đăng nhập thất bại");
         }
         // /base.redirect('/list_product/index.html', '')
     }

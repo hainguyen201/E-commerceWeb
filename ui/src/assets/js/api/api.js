@@ -18,7 +18,6 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                debugger
                 const response = JSON.parse(xhr.responseText);
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
