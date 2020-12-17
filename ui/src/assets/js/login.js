@@ -57,7 +57,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -74,7 +74,7 @@ let validate = document.querySelector(".validate-login");
 validate.innerHTML = " ";
 let reEmail = /\S+@\S+\.\S+/;
 let rePass = /^\w{7,15}$/;
-email.onkeydown = function(e) {
+email.onkeydown = function (e) {
     if (!reEmail.exec(email.value)) {
         validate.innerHTML = "Email không hợp lệ";
     } else validate.innerHTML = "";
@@ -100,19 +100,22 @@ let li_login = document.querySelector("li.login");
 let li_user = document.querySelector("li.user");
 let a_user = document.querySelector("a#user-name");
 
-let loginSuccessful = (user) => {
+var loginSuccessful = (user) => {
     li_login.style.display = "none";
     li_user.style.display = "inline-block";
     a_user.innerHTML = user.UserName || "USER_DEFAULT";
     onCloseModal();
 }
 
-btnLogin.onclick = async function(event) {
+var logoutSuccessful = () => {
+    li_login.style.display = "inline-block";
+    li_user.style.display = "none";
+}
+btnLogin.onclick = async function (event) {
     // debugger
     if (true) {
         try {
             // if (checkValidation()) {
-                debugger
             let data = await userService.loginService('hainguyen', '1234');
             loginSuccessful(data.data[0]);
             //await userService.loginService(email.value, password.value);

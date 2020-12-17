@@ -3,11 +3,11 @@ const user = require('../models/user.model')
 const helper = require('../utils/helper')
 const abstracontroller = require('./abstract.controller')
 const USER_DEFAULT = 0
-exports.getRole = async(req, result) => {
+exports.getRole = async (req, result) => {
     var cookie = req.headers.cookie.replace('sessionid=', "");
     console.log("cookie: ", cookie)
 
-    await session.getSessionByID(cookie, async(err, data) => {
+    await session.getSessionByID(cookie, async (err, data) => {
         console.log(data)
         if (err) {
             //show err
@@ -28,18 +28,15 @@ exports.getRole = async(req, result) => {
         }
     })
 }
-exports.UserAuth = async(req, res) => {
-    debugger
+exports.UserAuth = async (req, res) => {
     var cookie = helper.cookieparser(req.headers.cookie);
-    await session.getSessionByID(cookie.sessionid, async(err, data) => {
+    await session.getSessionByID(cookie.sessionid, async (err, data) => {
         if (err) {
-            debugger
         } else {
-            debugger
             var userid = data[0].UserID;
-            await user.findById(userid, (err2, data2) => {
+            console.log(userid);
+            await user.findById(userid, async (err2, data2) => {
                 if (err2) {
-
                 } else {
                     abstracontroller.sendData(res, data2);
                 }
