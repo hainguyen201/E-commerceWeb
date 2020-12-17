@@ -19,8 +19,6 @@ class RootElement extends HTMLDivElement {
     connectedCallback() {
         var list_product = [];
         var containerListProduct = document.getElementById("list_product");
-        var base = new Base();
-        var userService = new UserService();
         // document.onload = function () {
         // }
         api.get("/products")

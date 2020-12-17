@@ -29,11 +29,13 @@ exports.getRole = async(req, result) => {
     })
 }
 exports.UserAuth = async(req, res) => {
+    debugger
     var cookie = helper.cookieparser(req.headers.cookie);
     await session.getSessionByID(cookie.sessionid, async(err, data) => {
         if (err) {
-
+            debugger
         } else {
+            debugger
             var userid = data[0].UserID;
             await user.findById(userid, (err2, data2) => {
                 if (err2) {

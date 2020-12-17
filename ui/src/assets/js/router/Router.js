@@ -1,6 +1,7 @@
 const routesMap = [];
 let loadingElement = document.getElementById("loading-gif");
 let app = document.querySelector("#app");
+let container = document.querySelector("#main-container");
 export class Router {
   /**
    * hàm thêm các element với container tương ứng vào routesmap 

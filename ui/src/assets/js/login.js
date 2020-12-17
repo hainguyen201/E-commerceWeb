@@ -12,7 +12,6 @@ var iconCloseModal = document.getElementsByClassName("icon-close")[0];
 var btnLogin = document.getElementById('btn-login');
 modalLoginSignup.style.visibility = "hidden";
 var base = new Base();
-var userService = new UserService();
 
 function helloWorld() {
     console.log("Hello world!");
@@ -65,7 +64,6 @@ window.onclick = function(event) {
 }
 
 function onCloseModal() {
-    debugger
     app.style.opacity = 1;
     modalLoginSignup.style.visibility = "hidden";
 }
@@ -106,6 +104,7 @@ let loginSuccessful = (user) => {
     li_login.style.display = "none";
     li_user.style.display = "inline-block";
     a_user.innerHTML = user.UserName || "USER_DEFAULT";
+    onCloseModal();
 }
 
 btnLogin.onclick = async function(event) {
@@ -113,6 +112,7 @@ btnLogin.onclick = async function(event) {
     if (true) {
         try {
             // if (checkValidation()) {
+                debugger
             let data = await userService.loginService('hainguyen', '1234');
             loginSuccessful(data.data[0]);
             //await userService.loginService(email.value, password.value);
