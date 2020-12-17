@@ -1,8 +1,7 @@
 class Api {
     constructor() {
-        this.xhrGet = new XMLHttpRequest();
-        this.xhrPost = new XMLHttpRequest();
-
+        // this.xhrGet = new XMLHttpRequest();
+        // this.xhrPost = new XMLHttpRequest();
     }
 
     defaultHeaderConfig() {
@@ -16,7 +15,7 @@ class Api {
 
     get(path = '') {
         return new Promise((resolve, reject) => {
-            let xhr = this.xhrPost;
+            let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
                 const response = JSON.parse(xhr.responseText);
@@ -40,7 +39,7 @@ class Api {
 
     post(path = '', data) {
         return new Promise((resolve, reject) => {
-            let xhr = this.xhrPost;
+            let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
                 const response = JSON.parse(xhr.responseText);
@@ -60,14 +59,14 @@ class Api {
                 debugger
             }
             xhr.open('POST', PREFIX_URL + path, true);
-            this.defaultHeaderConfig();
+            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.withCredentials = true;
             xhr.send(JSON.stringify(data));
         });
     }
-    getAllResponseHeaders() {
-        return this.xhr.getAllResponseHeaders();
-    }
+    // getAllResponseHeaders() {
+    //     return this.xhr.getAllResponseHeaders();
+    // }
 
 }
 var api = new Api();

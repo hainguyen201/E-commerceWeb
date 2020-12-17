@@ -11,6 +11,29 @@
     <link rel="stylesheet" href="./src/assets/css/header/main.css">
     <link rel="stylesheet" href="./src/assets/css/product/productDetail.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        #notification {
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 60px;
+        }
+
+        #notif-content {
+            border-radius: 20px;
+            background-color: #f1f1f1;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            transition-duration: 2s;
+            height: 25px;
+        }
+
+        .icon20 {
+            height: 20px;
+            width: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -163,12 +186,13 @@
         <div id="main-container">
             <div id="product-detail" class="product-detail">
                 <div id="category-a">
+                    aaaaaaa
                     <a is="router-link" href="/"></a>
                     <a is="router-link" href="/product"></a>
                     <a is="router-link" href="/product/id"></a>
                 </div>
                 <div id="pr_detail">
-                    
+
                 </div>
             </div>
         </div>
@@ -180,6 +204,21 @@
         style="height: 100%;width: 100%; top:0px;position: absolute; visibility: hidden;">
         <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
     </div>
+    <div class="_center_everything" id="notification">
+    </div>
+
+    <button onclick="notifSuccess()">
+        aa
+    </button>
+    <script>
+        // notifSuccess = () => {
+        //     let notifContent = document.getElementById("notif-content");
+        //     notifContent.style.display = "inline";
+        //     setTimeout(() => {
+        //         notifContent.style.display = "none";
+        //     }, 2000);
+        // }
+    </script>
     <script src="./src/assets/js/util/util.js"></script>
     <script src="./src/assets/js/util/constant.js"></script>
     <script src="./src/assets/js/util/formatString.js"></script>

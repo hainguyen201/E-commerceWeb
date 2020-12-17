@@ -36,9 +36,7 @@ class UserService {
 
     async authService() {
         try {
-            debugger
-            await api.get('/auth');
-            debugger
+            return await api.get('/auth');
         } catch (error) {
             throw error;
         }

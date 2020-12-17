@@ -1,0 +1,21 @@
+#notification {
+    top: 10px;
+    position: absolute;
+    right: 50%;
+    left: 50%;
+}
+
+#notif-content {
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    transition-duration: 2s;
+    height: 25px;
+}
+
+.icon20 {
+    height: 20px;
+    width: 20px;
+}

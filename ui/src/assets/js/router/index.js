@@ -8,10 +8,19 @@ Router.addModule("/product", productList, mainContainer);
 Router.addModule("/", containerRootElement, mainContainer);
 
 try {
-    debugger
-    userService.authService();
+    (async () => {
+        const data = await userService.authService();
+        debugger
+        if (data[0]) {
+            debugger
+            loginSuccessful(data[0]);
+        }
+        else {
+            logoutSuccessful();
+        }
+    })();
 } catch (error) {
-    debugger
 }
-
 Router.open(window.location.pathname);
+//notifSuccess("test");
+
