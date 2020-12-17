@@ -1,4 +1,4 @@
-class Product {
+class ProductService {
     getAllProduct() {
 
     }
