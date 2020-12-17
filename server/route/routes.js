@@ -3,6 +3,7 @@ const productController = require('../controllers/product.controller')
 const orderController = require('../controllers/order.controller')
 const catalogController = require('../controllers/catalog.controller')
 const authController = require('../controllers/auth.controller')
+const productOrderController = require('../controllers/productorders.controller')
 const routes = [{
         method: 'GET',
         path: '/users',
@@ -109,7 +110,11 @@ const routes = [{
         method: 'GET',
         path: '/auth',
         handler: authController.UserAuth
-    }
-
+    },
+    {
+        method: 'GET',
+        path: /\/productorders\/([0-9a-z]+)/,
+        handler: productOrderController.getProductByOrderID
+    },
 ]
 module.exports = routes;

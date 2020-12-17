@@ -68,4 +68,8 @@ Product.updateProduct = async(productid, product, result) => {
     var newProduct = new Product(product);
     await AbstractModel.updateDataQuery('products', newProduct, result, 'ProductID', productid)
 }
+Product.DeleteProduct = async(productid, result) => {
+    var sqlString = `delete from products where ProductID=?`
+    await AbstractModel.queryExc(result, sqlString, [productid])
+}
 module.exports = Product;
