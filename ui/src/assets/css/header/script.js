@@ -140,7 +140,7 @@ function ready() {
         button.addEventListener('click', addToCartClicked)
     }
 
-    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+    // document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 }
 
 function purchaseClicked() {
@@ -222,7 +222,7 @@ function updateCartTotal() {
 var root2 = document.getElementById("root2");
 var modalCart = document.getElementsByClassName("content-section")[0];
 
-modalCart.style.visibility = "hidden";
+// modalCart.style.visibility = "hidden";
 // function openModalCart() {
 //     modalCart.style.visibility = "visible";
 //     root2.style.opacity = 0.2;

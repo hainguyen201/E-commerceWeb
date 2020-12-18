@@ -76,12 +76,13 @@ exports.findByUserName = async(req, res, param) => {
 }
 exports.logout = async(req, res, param) => {
         var sessionid = uuid.v1();
+        console.log("logout id: ", session)
         await session.addSession({ SessionID: sessionid }, async(err, data) => {
             if (err) {
 
             } else {
-                res.setHeader("set-cookie", [`sessionid=${uuid.v1()}; path=/; samesite=None; Secure `])
-                await abstractController.sendData(res, "")
+                res.setHeader("set-cookie", [`sessionid=${sessionid}; path=/; samesite=None; Secure `])
+                await abstractController.sendData(res, data)
             }
 
         })
