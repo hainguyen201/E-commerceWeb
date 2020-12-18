@@ -6,6 +6,13 @@
 .header__navbar {
     display: flex;
     justify-content: space-between;
+    height: 36%;
+}
+
+.header__search-cart {
+    height: 64%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .header__navbar-list {
@@ -17,7 +24,8 @@
     margin: 0 8px;
 }
 
-.header__navbar-item, .header__navbar-item-link {
+.header__navbar-item,
+.header__navbar-item-link {
     display: inline-block;
     font-size: 1.4rem;
     color: var(--black-color);
@@ -28,6 +36,7 @@
 .header__navbar-item--strong {
     font-weight: 500;
 }
+
 
 /* .header__navbar-item--separate::after{
     content: "";
@@ -111,7 +120,8 @@
     text-align: center;
 }
 
-#op-login, #op-signup {
+#op-login,
+#op-signup {
     cursor: pointer;
     padding: 15px;
     margin-left: 30px;
@@ -121,7 +131,8 @@
     border-bottom: 3px solid #1ba8ff;
 }
 
-.content.login, .content.signup {
+.content.login,
+.content.signup {
     padding: 35px 27px 35px 27px;
     height: 440px;
 }
@@ -134,7 +145,10 @@
     justify-content: space-between;
 }
 
-input.name, input.password, input.phone, input.email {
+input.name,
+input.password,
+input.phone,
+input.email {
     border-radius: 5px;
     height: 22px;
     width: 381px;
@@ -143,7 +157,8 @@ input.name, input.password, input.phone, input.email {
     padding: 6px 12px 6px 12px;
 }
 
-button.btn-login, button.btn-signup {
+button.btn-login,
+button.btn-signup {
     background-color: #fdd835;
     width: 381px;
     height: 41px;
@@ -161,10 +176,11 @@ button {
 }
 
 .header__container {
-    padding: 40px;
-    margin: 0 auto;
+    padding: 40px 0 40px 40px;
     max-width: 1000px;
-    text-align: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 #charactersList {
@@ -189,6 +205,7 @@ button {
     grid-area: name;
     margin-bottom: 0px;
 }
+
 
 /* .character > p {
     grid-area: house;
@@ -221,6 +238,7 @@ button {
     top: 7px;
     right: 15px;
 }
+
 
 /* section */
 
@@ -512,13 +530,18 @@ button {
 }
 
 .header__cart {
-    width: 200px;
-    margin: 0 auto;
+    width: 40px;
     justify-content: space-around;
+    align-items: center;
+    display: flex;
 }
 
 .fa-shopping-cart {
     font-size: 3rem;
+    background-image: url('../../img/shopping.png');
+    width: 32px;
+    height: 32px;
+    margin-left: 5px;
 }
 
 ._center_everything {
@@ -534,8 +557,8 @@ button {
     border-radius: 6px;
     padding: 1px;
     z-index: 1;
-    top: 42px;
-    right: 42px;
+    top: 2px;
+    right: 72px;
 }
 
 .dropdown-content div {

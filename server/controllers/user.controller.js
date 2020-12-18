@@ -3,6 +3,7 @@ const User = require('../models/user.model')
 const headers = require('../config/header.config')
 const abstractController = require('./abstract.controller')
 const helper = require('../utils/helper')
+const uuid = require('uuid')
 const session = require('../models/session.model')
     /**
      * Lấy toàn bộ user
@@ -55,23 +56,37 @@ exports.updateUser = async(req, res, param) => {
      */
 exports.findByUserName = async(req, res, param) => {
 
-        await User.findByUserName(req.body, async(err, data) => {
-            var message = {
-                success: "Lấy thông tin user thành công",
-                fail: "Lấy thông tin user thất bại, liên hệ admin"
+    await User.findByUserName(req.body, async(err, data) => {
+        var message = {
+            success: "Lấy thông tin user thành công",
+            fail: "Lấy thông tin user thất bại, liên hệ admin"
+        }
+        var cookie = helper.cookieparser(req.headers.cookie)
+        console.log("cookie: ", cookie.sessionid)
+        await session.updateSession(cookie.sessionid, { UserID: data[0].UserID }, (er, data2) => {
+            if (er) {
+                abstractController.sendErr(res, er)
+            } else {
+                console.log(data2)
+                this.resultHandler(err, data, req, res, message)
             }
-            var cookie = helper.cookieparser(req.headers.cookie)
-            console.log("cookie: ", cookie.sessionid)
-            await session.updateSession(cookie.sessionid, { UserID: data[0].UserID }, (er, data2) => {
-                if (er) {
-                    abstractController.sendErr(res, er)
-                } else {
-                    console.log(data2)
-                    this.resultHandler(err, data, req, res, message)
-                }
-            })
+        })
+
+    })
+}
+exports.logout = async(req, res, param) => {
+        var sessionid = uuid.v1();
+        console.log("logout id: ", session)
+        await session.addSession({ SessionID: sessionid }, async(err, data) => {
+            if (err) {
+
+            } else {
+                res.setHeader("set-cookie", [`sessionid=${sessionid}; path=/; samesite=None; Secure `])
+                await abstractController.sendData(res, data)
+            }
 
         })
+
     }
     /**
      * Thêm User

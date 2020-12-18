@@ -19,6 +19,7 @@ const routes = [{
         path: '/users',
         handler: userController.addUser
     },
+
     {
         method: 'DELETE',
         path: /\/users\/([0-9a-z]+)/,
@@ -30,6 +31,12 @@ const routes = [{
         handler: userController.findByUserName
     },
     {
+        method: 'POST',
+        path: "/users/logout",
+        handler: userController.logout
+    },
+    {
+
         method: 'GET',
         path: /\/products\/catalogs\/([0-9a-z]+)/,
         handler: productController.findProductByCatalogID

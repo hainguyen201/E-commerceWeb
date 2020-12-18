@@ -25,8 +25,7 @@ function changeContent() {
         opLogin.style.borderBottom = "3px solid #1ba8ff";
         title.innerHTML = "Đăng nhập"
         description.innerHTML = "Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn."
-    }
-    else {
+    } else {
         loginComponent.style.display = "none";
         signupComponent.style.display = "block";
         opLogin.style.borderBottom = "3px solid #fff";
@@ -58,7 +57,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -83,15 +82,15 @@ searchBar.addEventListener('keyup', (e) => {
         );
     });
     displayCharacters(filteredCharacters);
-    
+
 });
-searchBar.addEventListener('keyup', function(){
-    if (searchBar.value.length == 0){
+searchBar.addEventListener('keyup', function() {
+    if (searchBar.value.length == 0) {
         charactersList.innerHTML = "";
     }
 });
 
-const loadCharacters = async () => {
+const loadCharacters = async() => {
     try {
         const res = await fetch('https://hp-api.herokuapp.com/api/characters');
         hpCharacters = await res.json();
@@ -111,7 +110,7 @@ const displayCharacters = (characters) => {
         `;
         })
         .join('');
-    
+
     charactersList.innerHTML = htmlString;
 };
 loadCharacters();
@@ -141,7 +140,7 @@ function ready() {
         button.addEventListener('click', addToCartClicked)
     }
 
-    document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
+    // document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 }
 
 function purchaseClicked() {
@@ -223,11 +222,11 @@ function updateCartTotal() {
 var root2 = document.getElementById("root2");
 var modalCart = document.getElementsByClassName("content-section")[0];
 
-modalCart.style.visibility = "hidden";
-function openModalCart() {
-    modalCart.style.visibility = "visible";
-    root2.style.opacity = 0.2;
-}
+// modalCart.style.visibility = "hidden";
+// function openModalCart() {
+//     modalCart.style.visibility = "visible";
+//     root2.style.opacity = 0.2;
+// }
 // var closeCart = document.getElementsByClassName("btn-close")[0];
 // window.onclick = function (event) {
 //     if (event.target == modalCart) {

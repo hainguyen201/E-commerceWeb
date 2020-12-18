@@ -1,0 +1,13 @@
+.product-item {
+    background-color: #fff;
+    width: 60vw;
+    height: 100vh;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.product-item .product-detail {
+    display: flex;
+}
+
+.product-item .product-detail .product-image {}
