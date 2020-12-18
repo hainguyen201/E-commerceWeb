@@ -33,6 +33,90 @@
             height: 20px;
             width: 20px;
         }
+
+        #cart-header {
+            display: flex;
+            align-items: center;
+        }
+
+        #cart {
+            padding: 0 15px 0 15px;
+            margin: 0 40px 0 40px;
+            font-size: 14px;
+            background-color: #f4f4f4;
+        }
+
+        #cart-list-product {
+            border-radius: 5px;
+            float: left;
+            display: flex;
+            flex-wrap: wrap;
+            width: 910px;
+        }
+
+        h3#vendor {
+            height: 48px;
+        }
+
+        #cart-product-item {
+            border-radius: 5px;
+            margin-bottom: 16px;
+            background-color: #fff;
+        }
+
+        #product-item {
+            border-radius: 5px;
+            display: flex;
+            height: 179px;
+            width: 910px;
+            padding: 20px 20px 10px 20px;
+        }
+
+        .container-img-cart-pr {
+            width: 130px;
+            height: 130px;
+            position: relative;
+        }
+
+        .icon_adjust {
+            padding: 6px 12px 6px 12px;
+            border: 1px solid #c8c8c8;
+        }
+
+        #cart-total-price {
+            border-radius: 5px;
+            padding: 15px 15px 15px 15px;
+            margin-top: 10px;
+            width: 315px;
+            background-color: #fff;
+        }
+
+        #address-order {
+            border-radius: 5px;
+            padding: 15px 15px 15px 15px;
+            background-color: #fff;
+            width: 315px;
+        }
+
+        #on-order {
+            margin-top: 10px;
+            text-align: center;
+            line-height: 42px;
+            height: 42px;
+            background-color: #fe3834;
+            color: #fff;
+            width: 315px;
+            border-radius: 5px;
+        }
+
+        #address-order-input {
+            resize: none;
+            color: #787878;
+            border: none;
+            width: 285px;
+            overflow: hidden;
+            min-height: 50px;
+        }
     </style>
 </head>
 
@@ -184,33 +268,96 @@
                 </div>
         </header>
         <div id="main-container">
-            <div id="product-detail" class="product-detail">
-                <div id="category-a">
-                    aaaaaaa
-                    <a is="router-link" href="/"></a>
-                    <a is="router-link" href="/product"></a>
-                    <a is="router-link" href="/product/id"></a>
+            <div id="cart" class="cart" orderid="xxx">
+                <div id="cart-header">
+                    <h2>Giỏ hàng</h2>
+                    <span>(2 sản phẩm)</span>
                 </div>
-                <div id="pr_detail">
+                <div id="cart-list-product">
+                    <div id="cart-product-item">
+                        <h3 id="vendor" style="padding: 10px;"><a href="">Nha cung cap</a></h3>
+                        <div id="product-item">
+                            <div class="container-img-cart-pr">
+                                <img class="img-product" src="./src/assets/img/icon-person.png" alt="">
+                            </div>
+                            <div style="margin-left: 20px;">
+                                <p style="word-wrap: break-word; width: 450px;margin-top: 0px;">May dien thoai sam sung
+                                    May dien thoai sam sung</p>
+                                <span style="color: #0c5db6;; cursor: pointer;">Xóa</span>
+                            </div>
+                            <div style="font-weight: bold;font-size: 16px;width: 130px;">
+                                190.000đ
+                            </div>
+                            <div id="amount-product" productID="1">
+                                <span class="icon_adjust" id="minus-product" productID="1" style="cursor: pointer;"
+                                    onclick="onChangeAmountProduct()">-</span>
+                                <span class="icon_adjust" id="amount-product-show" style="margin-left: -4px;">1</span>
+                                <span class="icon_adjust" id="plus-product" productID="1"
+                                    style="margin-left: -5px;cursor: pointer;"
+                                    onclick="onChangeAmountProduct()">+</span>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div style="float: right; width: 315px;">
+                    <div id="address-order">
+                        <span>Địa chỉ nhận hàng</span>
+                        <span id="change-address" style="font-size: small;float: right;color: #0c5db6;cursor: pointer;"
+                            onclick="openInputAddress()">Thay đổi</span>
+                        <h4>Lê Hải Quân | 0987654321</h4>
+                        <textarea type="text" id="address-order-input"
+                            disabled>aaaaaaaaaaaaaaaaaaaavvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvaaa</textarea>
+                    </div>
+                    <div id="cart-total-price">
+                        <span style="color:#787878">Thành tiền</span>
+                        <span style="color: #fe3834;float: right;font-size: 22px;font-weight: bold;">100.000đ</span>
+                    </div>
+                    <div id="on-order" onclick="onOrder()">
+                        Đặt hàng
+                    </div>
                 </div>
             </div>
+            <footer class="footer">
+
+            </footer>
         </div>
-        <footer class="footer">
+        <div id="loading-gif" class="_center_everything"
+            style="height: 100%;width: 100%; top:0px;position: absolute; visibility: hidden;">
+            <img src="./src/assets/img/4V0b.gif" alt="loading" width=80 />
+        </div>
+        <!-- <div class="_center_everything" id="notification">
+    </div> -->
 
-        </footer>
-    </div>
-    <div id="loading-gif" class="_center_everything"
-        style="height: 100%;width: 100%; top:0px;position: absolute; visibility: hidden;">
-        <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
-    </div>
-    <div class="_center_everything" id="notification">
-    </div>
+        <!-- <button onclick="notifSuccess()">
+        test
+    </button> -->
+        <script>
+            var openInputAddress = (e) => {
+                let spanChange = document.getElementById("change-address");
+                let textAreaAddress = document.getElementById("address-order-input");
+                if (spanChange.textContent == "Thay đổi") {
+                    spanChange.innerHTML = "Lưu";
+                    textAreaAddress.removeAttribute("disabled");
+                    textAreaAddress.style.border = "1px solid #787878";
+                } else {
+                    //goi api thay doi
+                    spanChange.innerHTML = "Thay đổi";
+                    textAreaAddress.setAttribute("disabled", true);
+                    textAreaAddress.style.border = "none";
+                }
+            }
 
-    <button onclick="notifSuccess()">
-        aa
-    </button>
-    <script>
+            var onChangeAmountProduct = () => {
+                debugger
+                if (event.currentTarget.textContent == "-") {
+                    //api tru                    
+                }
+                else {
+
+                }
+
+            }
         // notifSuccess = () => {
         //     let notifContent = document.getElementById("notif-content");
         //     notifContent.style.display = "inline";
@@ -218,19 +365,19 @@
         //         notifContent.style.display = "none";
         //     }, 2000);
         // }
-    </script>
-    <script src="./src/assets/js/util/util.js"></script>
-    <script src="./src/assets/js/util/constant.js"></script>
-    <script src="./src/assets/js/util/formatString.js"></script>
-    <script src="./src/assets/js/common.js"></script>
-    <script src="./src/assets/js/api/customError.js"></script>
-    <script src="./src/assets/js/api/api.js"></script>
-    <script src="./src/assets/js/service/index.js"></script>
-    <script src="./src/assets/js/service/UserService/index.js"></script>
-    <script src="./src/assets/css/header/script.js"></script>
-    <script src="./src/assets/js/listProduct.js"></script>
-    <script src="./src/assets/js/login.js"></script>
-    <script src="./src/assets/js/router/index.js" type="module"></script>
+        </script>
+        <script src="./src/assets/js/util/util.js"></script>
+        <script src="./src/assets/js/util/constant.js"></script>
+        <script src="./src/assets/js/util/formatString.js"></script>
+        <script src="./src/assets/js/common.js"></script>
+        <script src="./src/assets/js/api/customError.js"></script>
+        <script src="./src/assets/js/api/api.js"></script>
+        <script src="./src/assets/js/service/index.js"></script>
+        <script src="./src/assets/js/service/UserService/index.js"></script>
+        <script src="./src/assets/css/header/script.js"></script>
+        <script src="./src/assets/js/listProduct.js"></script>
+        <script src="./src/assets/js/login.js"></script>
+        <script src="./src/assets/js/router/index.js" type="module"></script>
 </body>
 
 </html>
