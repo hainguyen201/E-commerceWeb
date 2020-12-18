@@ -1,6 +1,9 @@
 const userController = require('../controllers/user.controller')
 const productController = require('../controllers/product.controller')
 const orderController = require('../controllers/order.controller')
+const catalogController = require('../controllers/catalog.controller')
+const authController = require('../controllers/auth.controller')
+const productOrderController = require('../controllers/productorders.controller')
 const routes = [{
         method: 'GET',
         path: '/users',
@@ -28,14 +31,13 @@ const routes = [{
     },
     {
         method: 'GET',
-        path: /\/products\/names\/([a-zA-Z0-9_]+)/,
-        handler: productController.findProductByName
-
+        path: /\/products\/catalogs\/([0-9a-z]+)/,
+        handler: productController.findProductByCatalogID
     },
     {
         method: 'GET',
-        path: /\/products\/catalogs\/([0-9a-z]+)/,
-        handler: productController.findProductByCatalogID
+        path: /\/products\/names\/([0-9a-z_]+)/,
+        handler: productController.findProductByName
     },
     {
         method: 'GET',
@@ -48,15 +50,16 @@ const routes = [{
         handler: productController.findProductByID
 
     },
+
     {
         method: 'POST',
         path: '/products',
-        handler: productController.addProduct
+        handler: productController.addProductWithAuth
     },
     {
         method: 'PUT',
         path: /\/products\/([0-9a-z]+)/,
-        handler: productController.updateProduct
+        handler: productController.updateProductWithAuth
     },
     {
         method: 'GET',
@@ -78,6 +81,40 @@ const routes = [{
         path: /\/orders\/([0-9a-z]+)/,
         handler: orderController.deleteOrder
     },
-
+    {
+        method: 'GET',
+        path: /\/catalogs\/([0-9a-z]+)/,
+        handler: catalogController.getCatalogByID
+    },
+    {
+        method: 'GET',
+        path: '/catalogs',
+        handler: catalogController.getAllCatalog
+    },
+    {
+        method: 'PUT',
+        path: /\/catalogs\/([0-9a-z]+)/,
+        handler: catalogController.updateCatalog
+    },
+    {
+        method: 'POST',
+        path: '/catalogs',
+        handler: catalogController.addCatalog
+    },
+    {
+        method: 'DELETE',
+        path: /\/catalogs\/([0-9a-z]+)/,
+        handler: catalogController.deleteCatalog
+    },
+    {
+        method: 'GET',
+        path: '/auth',
+        handler: authController.UserAuth
+    },
+    {
+        method: 'GET',
+        path: /\/productorders\/([0-9a-z]+)/,
+        handler: productOrderController.getProductByOrderID
+    },
 ]
 module.exports = routes;

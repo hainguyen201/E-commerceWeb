@@ -20,6 +20,10 @@ exports.sendErr = (res, err) => {
     res.write(JSON.stringify(err))
     res.end()
 }
+exports.sendAuth = (res) => {
+    res.statusCode = 401;
+    res.end();
+}
 exports.dataForGet = {
     data: [],
     success: false,

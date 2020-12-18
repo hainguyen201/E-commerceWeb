@@ -44,10 +44,10 @@ Product.getProductByID = async(productId, result) => {
     console.log(productId)
     await AbstractModel.queryExc(result, sqlString, [productId]);
 }
-Product.getProductByName = async(productName, result) => {
-    var name = "%" + productName + "%";
+Product.findProductByName = async(productname, result) => {
+    var productname = "%" + productname + "%";
     var sqlString = `select * from products where ProductName like ?`
-    AbstractModel.queryExc(result, sqlString, [name]);
+    await AbstractModel.queryExc(result, sqlString, [productname])
 }
 Product.getAllProducts = async(result) => {
         sqlString = 'select * from products';
@@ -67,5 +67,9 @@ Product.addProduct = async(product, result) => {
 Product.updateProduct = async(productid, product, result) => {
     var newProduct = new Product(product);
     await AbstractModel.updateDataQuery('products', newProduct, result, 'ProductID', productid)
+}
+Product.DeleteProduct = async(productid, result) => {
+    var sqlString = `delete from products where ProductID=?`
+    await AbstractModel.queryExc(result, sqlString, [productid])
 }
 module.exports = Product;

@@ -11,7 +11,8 @@ Session.getSessionByID = async(sessionId, result) => {
     AbstractModel.queryExc(result, sqlString, [sessionId])
 }
 Session.addSession = async(session, result) => {
-    var add_ss = new Session(session)
+    var add_ss = new Session(session);
+    add_ss.SessionID = session.SessionID;
     if (session.UserId) {
         // không thêm orderID
         AbstractModel.addDataQuery('sessions', add_ss, result);
@@ -22,6 +23,6 @@ Session.addSession = async(session, result) => {
 }
 Session.updateSession = async(sessionId, session, result) => {
     var update_ss = new Session(session);
-    AbstractModel.updateDataQuery('sessions', session, result, 'SessionID', sessionId);
+    AbstractModel.updateDataQuery('sessions', update_ss, result, 'SessionID', sessionId);
 }
 module.exports = Session

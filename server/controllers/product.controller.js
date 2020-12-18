@@ -1,20 +1,19 @@
-const db = require("../db.js")
-const headers = require('../config/header.config')
 const Products = require('../models/product.model.js')
 const helper = require('../utils/helper')
-const path = require('path')
 const abstractController = require('./abstract.controller')
 const fs = require('fs')
 const Product = require("../models/product.model.js")
 const Session = require("../models/session.model.js")
+const auth = require('./auth.controller')
+const { isBuffer } = require("util")
     /**
      * Tìm kiếm sản phẩm theo danh mục
      * @param {*} req 
      * @param {*} res 
      * @param {*} param 
      */
-exports.findProductByCatalogID = (req, res, param) => {
-        Products.getProductByCatalogs(param, (err, data) => {
+exports.findProductByCatalogID = async(req, res, param) => {
+        await Products.getProductByCatalogs(param, (err, data) => {
             if (err) {
                 abstractController.sendErr(res, err)
             } else {
@@ -22,7 +21,6 @@ exports.findProductByCatalogID = (req, res, param) => {
                 if (data) {
                     dt.data = this.productsFormatToClient(data)
                     dt.success = true;
-                    dt.message = "Lấy dữ liệu thành công"
                 }
                 abstractController.sendData(res, dt)
             }
@@ -34,8 +32,8 @@ exports.findProductByCatalogID = (req, res, param) => {
      * @param {*} res 
      * @param {*} param 
      */
-exports.findProductByID = (req, res, param) => {
-    Products.getProductByID(param, (err, data) => {
+exports.findProductByID = async(req, res, param) => {
+    await Products.getProductByID(param, (err, data) => {
         if (err)
             abstractController.sendErr(res, err)
         else {
@@ -43,27 +41,48 @@ exports.findProductByID = (req, res, param) => {
             if (data.length > 0) {
                 dt.data = this.productsFormatToClient(data)
                 dt.success = true;
-                dt.message = "Lấy dữ liệu thành công"
+
             } else {
                 dt.data = data
                 dt.success = true;
-                dt.message = "Không tồn tại sản phẩm"
             }
             abstractController.sendData(res, dt)
         }
     })
 }
 exports.findProductByName = async(req, res, param) => {
-    console.log(param)
-    await Product.getProductByName(param, (err, data) => {
-        this.resultHandler(err, data, res, req)
-
+    await Product.findProductByName(param, (err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err)
+        } else {
+            var dt = abstractController.dataForGet;
+            if (data) {
+                dt.data = this.productsFormatToClient(data)
+                dt.success = true
+            }
+            abstractController.sendData(res, data)
+        }
     })
 }
+
 exports.findAllProducts = async(req, res, param) => {
     await Products.getAllProducts((err, data) => {
         this.resultHandler(err, data, res, req)
     })
+}
+exports.addProductWithAuth = async(req, res, param) => {
+    await auth.getRole(req, async(err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err);
+        } else {
+            if (data == 1) {
+                this.addProduct(req, res, param)
+            } else {
+                abstractController.sendAuth(res);
+            }
+        }
+    })
+
 }
 exports.addProduct = async(req, res, param) => {
     var product = new Product(req.body)
@@ -95,27 +114,51 @@ exports.addProduct = async(req, res, param) => {
             this.resultHandler(err, data, res, req)
         })
 }
+exports.updateProductWithAuth = async(req, res, param) => {
+    await auth.getRole(req, async(err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err);
+        } else {
+            if (data == 1) {
+                this.updateProduct(req, res, param)
+            } else {
+                abstractController.sendAuth(res);
+            }
+        }
+    })
+}
 exports.updateProduct = async(req, res, param) => {
     //cập nhật ảnh mới
-    var product = new Product(req.body)
-    var image = product.Image
-    console.log(image.length)
-    if (image.length > 0) {
-        //cập nhật lại thông tin và không có ảnh
-        product.Image = param + ".jpg";
-        await Product.updateProduct(param, product, (err, data) => {
-            if (err) {
-                this.resultHandler(err, data, res, req)
+    await auth.getRole(req, async(err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err);
+        } else {
+            if (data == 1) {
+                var product = new Product(req.body)
+                var image = product.Image
+                console.log(image.length)
+                if (image.length > 0) {
+                    //cập nhật lại thông tin và không có ảnh
+                    product.Image = param + ".jpg";
+                    await Product.updateProduct(param, product, (err, data) => {
+                        if (err) {
+                            this.resultHandler(err, data, res, req)
+                        } else {
+                            //cập nhật lại ảnh
+                            helper.save_base64(image, product.Image)
+                            this.resultHandler(err, data, res, req);
+                        }
+                    })
+                } else
+                    await Products.updateProduct(param, product, (err, data) => {
+                        this.resultHandler(err, data, res, req)
+                    })
             } else {
-                //cập nhật lại ảnh
-                helper.save_base64(image, product.Image)
-                this.resultHandler(err, data, res, req);
+                abstractController.sendAuth(res)
             }
-        })
-    } else
-        await Products.updateProduct(param, product, (err, data) => {
-            this.resultHandler(err, data, res, req)
-        })
+        }
+    })
+
 }
 exports.productsFormatToClient = function(data) {
     if (data)
@@ -137,7 +180,6 @@ exports.productsFormatToServer = function(data) {
         });
     }
 }
-
 exports.resultHandler = (err, data, res, req) => {
     if (err) {
         abstractController.sendErr(res, err)

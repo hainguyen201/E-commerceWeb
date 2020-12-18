@@ -36,7 +36,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('f595604a-3e8f-11eb-af58-6c2b594142dd',0,0);
+INSERT INTO `sessions` VALUES ('08497e95-3eaa-11eb-af58-6c2b594142dd',0,0),('f595604a-3e8f-11eb-af58-6c2b594142dd',0,0);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -66,4 +66,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-15 14:12:26
+-- Dump completed on 2020-12-15 16:20:19
