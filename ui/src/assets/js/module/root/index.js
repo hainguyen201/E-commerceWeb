@@ -17,22 +17,35 @@ class RootElement extends HTMLDivElement {
     }
 
     connectedCallback() {
+
         var list_product = [];
         var containerListProduct = document.getElementById("list_product");
+        try {
+            (async () => {
+                const data = await userService.authService();
+                api.get("/products")
+                    .then((result) => {
+                        list_product = result.data;
+                        if (!!list_product && list_product.length > 0) {
+                            addListProduct(list_product);
+                        }
+                        console.log(result);
+                    })
+                    .catch((err) => {
+                        // document.dispatchEvent(new CustomEvent('page-loading'));
+                        console.log(err);
+                    });
+
+                if (data[0]) {
+                    loginSuccessful(data[0]);
+                } else {
+                    logoutSuccessful();
+                }
+            })();
+        } catch (error) { }
+
         // document.onload = function () {
         // }
-        api.get("/products")
-            .then((result) => {
-                list_product = result.data;
-                if (!!list_product && list_product.length > 0) {
-                    addListProduct(list_product);
-                }
-                console.log(result);
-            })
-            .catch((err) => {
-                // document.dispatchEvent(new CustomEvent('page-loading'));
-                console.log(err);
-            });
 
 
         function createProductElement(product) {

@@ -6,6 +6,7 @@
 }
 
 #notif-content {
+    z-index: 2;
     border-radius: 20px;
     background-color: #f1f1f1;
     padding: 6px;

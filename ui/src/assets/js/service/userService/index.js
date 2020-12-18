@@ -4,18 +4,18 @@ class UserService {
         return req;
     }
     async getUser(userName, passWord) {
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function() {
-                console.log(request.responseText)
-            }
-            request.open('GET', "https://localhost:3000/users")
-            await request.send();
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            console.log(request.responseText)
         }
-        /**
-         * Đăng nhập bằng username và password
-         * @param {*} userName 
-         * @param {*} password 
-         */
+        request.open('GET', "https://localhost:3000/users")
+        await request.send();
+    }
+    /**
+     * Đăng nhập bằng username và password
+     * @param {*} userName 
+     * @param {*} password 
+     */
     async loginService(username, password) {
         try {
             let body = {
@@ -48,6 +48,10 @@ class UserService {
         // });
     }
     async logout() {
-        api.post('/users/logout', '', false)
+        try {
+            return await api.post('/users/logout', '', false);
+        } catch (error) {
+            throw error;
+        }
     }
 }

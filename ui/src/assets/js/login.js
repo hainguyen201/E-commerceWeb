@@ -57,7 +57,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener("change", this.onlyCheckOne);
 checkboxFemale.addEventListener("change", (e) => this.onlyCheckOne(e));
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -74,7 +74,7 @@ let validate = document.querySelector(".validate-login");
 validate.innerHTML = " ";
 let reEmail = /\S+@\S+\.\S+/;
 let rePass = /^\w{7,15}$/;
-email.onkeydown = function(e) {
+email.onkeydown = function (e) {
     // if (!reEmail.exec(email.value)) {
     //     validate.innerHTML = "Email không hợp lệ";
     // } else validate.innerHTML = "";
@@ -112,8 +112,7 @@ var logoutSuccessful = () => {
     li_login.style.display = "inline-block";
     li_user.style.display = "none";
 }
-btnLogin.onclick = async function(event) {
-    // debugger
+btnLogin.onclick = async function (event) {
     if (true) {
         try {
             if (checkValidation()) {
@@ -128,6 +127,15 @@ btnLogin.onclick = async function(event) {
         // /base.redirect('/list_product/index.html', '')
     }
 }
-document.getElementById('button-logout').onclick = async function() {
-    await userService.logout();
+
+let btnLogout = document.getElementById("button-logout");
+
+btnLogout.onclick = async function logout(event) {
+    try {
+        let data = await userService.logout();
+        logoutSuccessful();
+        notifSuccess("Đăng xuất thành công");        
+    } catch (error) {
+        notifFailure("Đăng xuất thất bại");
+    }
 }
