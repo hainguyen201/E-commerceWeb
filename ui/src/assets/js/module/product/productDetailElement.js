@@ -16,9 +16,30 @@ export default class ProductDetailElement extends HTMLDivElement {
 
     connectedCallback() {
         const productID = this.params[0];
-        this.setAttribute('id',`product-item-${productID}`);
+        console.log(this.params)
+        this.setAttribute('id', `product-item-${productID}`);
+        this.setAttribute('class', 'product-item')
         const h1 = this.getElementsByTagName('h1');
-        h1[0].innerHTML = productID;
+        var producthtml = ` <div class="product-detail">
+        <div class="product-image">
+            <image src='/assets/img/1.jpg'/>
+        </div>
+        <div class="product-info">
+            <div class="product-name">
+            </div>
+            <div class="product-price">
+                <div class="product-main-price"></div>
+                <div class="product-discount"></div>
+            </div>
+            <div class="product-amount"></div>
+            <div class="product-action">
+
+            </div>
+        </div>
+    </div>`
+        this.innerHTML = producthtml
+            // h1[0].innerHTML = productID;
+
         //this.innerText(productID);
         // const templateEl = document.createElement("template");
         // templateEl.innerHTML = template(store);

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website bán hàng</title>
     <link rel="stylesheet" href="/src/assets/css/list_product/index.css">
+    <link rel="stylesheet" href="/src/assets/css/product/productDetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="/src/assets/css/header/base.css">
     <link rel="stylesheet" href="/src/assets/css/header/main.css">
@@ -36,10 +37,8 @@
                             </div>
                         </li>
                         <li class="header__navbar-item dropdown user" style="display: none;">
-                            <div class="person-info dropdown" id="icon-persion"
-                                style="background-color: #f4f4f4; border-radius: 100%;position: absolute; top: 5px;">
-                                <img src="/src/assets/img/icon-person.png" alt="icon-person"
-                                    style=" border-radius: 100%; height: 33px;width: 38px;">
+                            <div class="person-info dropdown" id="icon-persion" style="background-color: #f4f4f4; border-radius: 100%;position: absolute; top: 5px;">
+                                <img src="/src/assets/img/icon-person.png" alt="icon-person" style=" border-radius: 100%; height: 33px;width: 38px;">
                             </div>
                             <div class="dropdown-content">
                                 <div><a is="router-link" id="user-name" href="#">USER</a></div>
@@ -57,9 +56,9 @@
                         <ul id="charactersList"></ul>
                     </div>
                     <div id="root2" class="header__cart">
-                        <i onclick="openModalCart()" class="fas fa-shopping-cart">shopping cart</i>
+                        <i onclick="openModalCart()" class="fas fa-shopping-cart"></i>
                     </div>
-                    <div class="container content-section">
+                    <!-- <div class="container content-section">
                         <h2 class="section-header">Giỏ hàng</h2>
                         <div class="cart-row">
                             <span class="cart-item cart-header cart-column">Sản phẩm</span>
@@ -76,40 +75,47 @@
                             <button class="btn btn-primary btn-purchase" type="button">Thanh toán</button>
                             <button class="btn btn-close" onclick="onCloseCart()" type="button">Đóng</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
         </header>
         <div class="_center_everything" id="notification">
             <!-- <div id="notif-content" class="notification-ok">
                 <img src="/src/assets/img/icon-ok.png" class="icon20" style="border-radius: 10px;" alt="icon-ok">
                 <p style="font-size: 14px;color: blue;">
-                    helloaaaaaaaaaaaaaaaaa
+                   
                 </p>
             </div> -->
         </div>
         <div id="main-container">
-            <!-- <div id="container-product">
-                <div style="width: 985px" class="container-list-product" id="list_product">
+            <div class="product-detail">
+                <div class="product-image"></div>
+                <div class="product-info">
+                    <div class="product-name"></div>
+                    <div class="product-price">
+                        <div class="product-main-price"></div>
+                        <div class="product-discount"></div>
+                    </div>
+                    <div class="product-amount"></div>
+                    <div class="product-action">
+
+                    </div>
                 </div>
-            </div> -->
+            </div>
         </div>
         <footer class="footer">
 
         </footer>
+        </div>
+        <div id="loading-gif" class="_center_everything" style="height: 100%;width: 100%; top:0px;position: absolute; display: none;">
+            <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
+        </div>
+
     </div>
-    <div id="loading-gif" class="_center_everything"
-        style="height: 100%;width: 100%; top:0px;position: absolute; visibility: hidden;">
-        <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
-    </div>
-    
-    </div>
-    <div class="modal-login-signup"
-        style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
+    <div class="modal-login-signup" style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
         <div id="di-login-signup" class="dialog">
             <div id="notif">
                 <h2>Đăng nhập</h2>
-                <p>Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều
-                    ưu đãi hấp dẫn.</p>
+                <p>Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn.</p>
                 <img src="/src/assets/img/header/graphic-map.png" />
             </div>
             <div id="login-signup">
@@ -157,8 +163,7 @@
                     <div class="element sex">
                         <label>Giới tính</label>
                         <div class="sexx">
-                            <input class="sex-male" name="male" type="radio" value="male" /><label
-                                style="margin-right: 190px;">Nam</label>
+                            <input class="sex-male" name="male" type="radio" value="male" /><label style="margin-right: 190px;">Nam</label>
                             <input class="sex-female" name="female" type="radio" value="female" /><label>Nữ</label>
                         </div>
                     </div>
