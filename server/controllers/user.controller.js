@@ -55,23 +55,27 @@ exports.updateUser = async(req, res, param) => {
      */
 exports.findByUserName = async(req, res, param) => {
 
-        await User.findByUserName(req.body, async(err, data) => {
-            var message = {
-                success: "Lấy thông tin user thành công",
-                fail: "Lấy thông tin user thất bại, liên hệ admin"
+    await User.findByUserName(req.body, async(err, data) => {
+        var message = {
+            success: "Lấy thông tin user thành công",
+            fail: "Lấy thông tin user thất bại, liên hệ admin"
+        }
+        var cookie = helper.cookieparser(req.headers.cookie)
+        console.log("cookie: ", cookie.sessionid)
+        await session.updateSession(cookie.sessionid, { UserID: data[0].UserID }, (er, data2) => {
+            if (er) {
+                abstractController.sendErr(res, er)
+            } else {
+                console.log(data2)
+                this.resultHandler(err, data, req, res, message)
             }
-            var cookie = helper.cookieparser(req.headers.cookie)
-            console.log("cookie: ", cookie.sessionid)
-            await session.updateSession(cookie.sessionid, { UserID: data[0].UserID }, (er, data2) => {
-                if (er) {
-                    abstractController.sendErr(res, er)
-                } else {
-                    console.log(data2)
-                    this.resultHandler(err, data, req, res, message)
-                }
-            })
-
         })
+
+    })
+}
+exports.logout = async(req, res, param) => {
+        res.setHeader("set-cookie", [`sessionid=deleted; path=/; expires=${new Date()}`])
+        await abstractController.sendData(res, "")
     }
     /**
      * Thêm User
