@@ -557,8 +557,8 @@ button {
     border-radius: 6px;
     padding: 1px;
     z-index: 1;
-    top: 42px;
-    right: 42px;
+    top: 2px;
+    right: 72px;
 }
 
 .dropdown-content div {
