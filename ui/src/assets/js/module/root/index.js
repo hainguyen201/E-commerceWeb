@@ -33,7 +33,7 @@ class RootElement extends HTMLDivElement {
                     })
                     .catch((err) => {
                         // document.dispatchEvent(new CustomEvent('page-loading'));
-                        console.log(err);
+                        notifFailure("Không thể lấy products")
                     });
 
                 if (data[0]) {
@@ -51,7 +51,7 @@ class RootElement extends HTMLDivElement {
         function createProductElement(product) {
             var template = document.createElement('template');
             var html = '<div class="product">' +
-                '<a is="router-link" id="' + product.ProductID + '" href="/product/' + product.ProductID + '">' +
+                '<a is="router-link" id="' + product.ProductID + '" href="/products/' + product.ProductID + '">' +
                 '<div class="container-img">' +
                 '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
                 '</div>' +
@@ -90,5 +90,7 @@ class RootElement extends HTMLDivElement {
     }
 
 }
+
+console.log("root import");
 
 export default [RootElement];
