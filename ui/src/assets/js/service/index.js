@@ -2,3 +2,4 @@
 
 var userService = new UserService();
 var productService = new ProductService();
+var catalogService = new CatalogService();

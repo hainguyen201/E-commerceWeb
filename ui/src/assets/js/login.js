@@ -134,8 +134,9 @@ btnLogout.onclick = async function logout(event) {
     try {
         let data = await userService.logout();
         logoutSuccessful();
-        notifSuccess("Đăng xuất thành công");        
+        notifSuccess("Đăng xuất thành công");
     } catch (error) {
         notifFailure("Đăng xuất thất bại");
     }
 }
+

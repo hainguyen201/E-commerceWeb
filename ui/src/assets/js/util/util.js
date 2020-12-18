@@ -30,3 +30,13 @@ var notifFailure = (mes = " Failure ") => {
         notification.innerHTML = '';
     }, 2500);
 }
+
+// var filterObj = (obj) => {
+//     for(property in obj){
+//         if (obj[property] == null || obj[property] == '' || obj[property] == undefined || obj[property] == 'null' ||obj[property] == 'undefined') {
+//             if (typeof obj[property] == '') {
+                
+//             }
+//         }
+//     }
+// }

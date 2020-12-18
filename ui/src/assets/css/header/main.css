@@ -260,7 +260,7 @@ button {
 }
 
 #container-product {
-    max-width: 900px;
+    display: flex;
     margin: 0 auto;
     padding: 0 1.5em;
 }

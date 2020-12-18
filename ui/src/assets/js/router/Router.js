@@ -33,6 +33,7 @@ export class Router {
     const page = routesMap.find(r => new RegExp(`^${r.route}\$`).test(route));
     if (!page) return this.onNotFound(route);
     document.dispatchEvent(this.pageLoading(page.component));
+    //Khởi tạo 1 instance element mới với define đã có là { is: page.component.is }
     const newContent = document.createElement('div', { is: page.component.is });
     newContent.params = this.getPageParams(page.route, route);
     let container = page.container;
@@ -111,4 +112,3 @@ class RouterLink extends HTMLAnchorElement {
 }
 
 customElements.define('router-link', RouterLink, { extends: "a" });
-export const P = 'P';
