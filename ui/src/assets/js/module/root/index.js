@@ -17,28 +17,41 @@ class RootElement extends HTMLDivElement {
     }
 
     connectedCallback() {
+
         var list_product = [];
         var containerListProduct = document.getElementById("list_product");
+        try {
+            (async () => {
+                const data = await userService.authService();
+                api.get("/products")
+                    .then((result) => {
+                        list_product = result.data;
+                        if (!!list_product && list_product.length > 0) {
+                            addListProduct(list_product);
+                        }
+                        console.log(result);
+                    })
+                    .catch((err) => {
+                        // document.dispatchEvent(new CustomEvent('page-loading'));
+                        notifFailure("Không thể lấy products")
+                    });
+
+                if (data[0]) {
+                    loginSuccessful(data[0]);
+                } else {
+                    logoutSuccessful();
+                }
+            })();
+        } catch (error) { }
+
         // document.onload = function () {
         // }
-        api.get("/products")
-            .then((result) => {
-                list_product = result.data;
-                if (!!list_product && list_product.length > 0) {
-                    addListProduct(list_product);
-                }
-                console.log(result);
-            })
-            .catch((err) => {
-                // document.dispatchEvent(new CustomEvent('page-loading'));
-                console.log(err);
-            });
 
 
         function createProductElement(product) {
             var template = document.createElement('template');
             var html = '<div class="product">' +
-                '<a is="router-link" id="' + product.ProductID + '" href="/product/' + product.ProductID + '">' +
+                '<a is="router-link" id="' + product.ProductID + '" href="/products/' + product.ProductID + '">' +
                 '<div class="container-img">' +
                 '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
                 '</div>' +
@@ -77,5 +90,7 @@ class RootElement extends HTMLDivElement {
     }
 
 }
+
+console.log("root import");
 
 export default [RootElement];

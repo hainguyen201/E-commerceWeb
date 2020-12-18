@@ -1,0 +1,83 @@
+#cart-header {
+    display: flex;
+    align-items: center;
+}
+
+#cart {
+    padding: 0 15px 0 15px;
+    margin: 0 40px 0 40px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+}
+
+#cart-list-product {
+    border-radius: 5px;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    width: 910px;
+}
+
+h3#vendor {
+    height: 48px;
+}
+
+#cart-product-item {
+    border-radius: 5px;
+    margin-bottom: 16px;
+    background-color: #fff;
+}
+
+#product-item {
+    border-radius: 5px;
+    display: flex;
+    height: 179px;
+    width: 910px;
+    padding: 20px 20px 10px 20px;
+}
+
+.container-img-cart-pr {
+    width: 130px;
+    height: 130px;
+    position: relative;
+}
+
+.icon_adjust {
+    padding: 6px 12px 6px 12px;
+    border: 1px solid #c8c8c8;
+}
+
+#cart-total-price {
+    border-radius: 5px;
+    padding: 15px 15px 15px 15px;
+    margin-top: 10px;
+    width: 315px;
+    background-color: #fff;
+}
+
+#address-order {
+    border-radius: 5px;
+    padding: 15px 15px 15px 15px;
+    background-color: #fff;
+    width: 315px;
+}
+
+#on-order {
+    margin-top: 10px;
+    text-align: center;
+    line-height: 42px;
+    height: 42px;
+    background-color: #fe3834;
+    color: #fff;
+    width: 315px;
+    border-radius: 5px;
+}
+
+#address-order-input {
+    resize: none;
+    color: #787878;
+    border: none;
+    width: 285px;
+    overflow: hidden;
+    min-height: 50px;
+}
