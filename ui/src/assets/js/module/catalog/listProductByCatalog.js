@@ -3,9 +3,9 @@ const template = `
 </div>
 `;
 
-class RootElement extends HTMLDivElement {
-    static get route() { return ""; }
-    static get is() { return "root-r" }
+export default class ListProductByCatalogElement extends HTMLDivElement {
+    static get route() { return "/(\\d+)"; }
+    static get is() { return "list-pr-by-catalog-element" }
 
     constructor() {
         super();
@@ -17,6 +17,7 @@ class RootElement extends HTMLDivElement {
 
     connectedCallback() {
         const catalogElement = document.createElement('div', { is: 'catalog-element' });
+        const catalogID = this.params[0];
         this.appendChild(catalogElement);
         const listProductElement = createElementByText(template);
         this.appendChild(listProductElement);
@@ -28,20 +29,17 @@ class RootElement extends HTMLDivElement {
             } else {
                 logoutSuccessful();
             }
-        }).then(() => {
-            api.get("/products")
-                .then((result) => {
-                    list_product = result.data;
-                    if (!!list_product && list_product.length > 0) {
-                        addListProduct(list_product);
-                    }
-                    console.log(result);
-                })
-                .catch((err) => {
-                    // document.dispatchEvent(new CustomEvent('page-loading'));
-                    notifFailure("Không thể lấy products")
-                });
-        }).catch((err) => {
+        }).then(
+            productService.getListProductByCatalogID(catalogID).then((data) => {
+                list_product = data.data;
+                if (list_product.length > 0) {
+                    addListProduct(list_product);
+                }
+                else notifSuccess("Danh mục trống");
+            }).catch((err) => {
+                notifFailure("Không thể lấy sản phẩm");
+            })
+        ).catch((err) => {
             notifFailure(err.toString());
         });
         // document.onload = function () {
@@ -88,7 +86,3 @@ class RootElement extends HTMLDivElement {
     }
 
 }
-
-console.log("root import");
-
-export default [RootElement];

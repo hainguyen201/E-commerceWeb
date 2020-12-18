@@ -5,16 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website bán hàng</title>
-    <link rel="stylesheet" href="/src/assets/css/list_product/index.css">
-    <link rel="stylesheet" href="/src/assets/css/product/productDetail.css">
+    <link rel="stylesheet" href="./src/assets/css/list_product/index.css">
+    <link rel="stylesheet" href="./src/assets/css/product/productDetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="/src/assets/css/header/base.css">
-    <link rel="stylesheet" href="/src/assets/css/header/main.css">
-    <link rel="stylesheet" href="/src/assets/css/notif.css">
-    <link rel="stylesheet" href="/src/assets/css/cart/cart.css">
-    <link rel="stylesheet" href="/src/assets/css/catalog/catalog.css">
-    <link rel="stylesheet" href="/src/assets/css/product/productDetail.css">
+    <link rel="stylesheet" href="./src/assets/css/header/base.css">
+    <link rel="stylesheet" href="./src/assets/css/header/main.css">
+    <link rel="stylesheet" href="./src/assets/css/notif.css">
+    <link rel="stylesheet" href="./src/assets/css/cart/cart.css">
+    <link rel="stylesheet" href="./src/assets/css/product/productDetail.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        #catalog-product {
+
+            padding: 15px;
+            float: left;
+            background-color: #fff;
+            width: 290px;
+        }
+
+        .catalog-item {
+            border: 1px solid #fff;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 3px;
+            font-size: large;
+            background-color: #c8c8c8;
+        }
+
+
+        .item-cc {
+            font-size: medium;
+            color: #787878;
+        }
+
+        #current-catalog {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,7 +69,7 @@
                         <li class="header__navbar-item dropdown user" style="display: none;">
                             <div class="person-info dropdown" id="icon-persion"
                                 style="background-color: #f4f4f4; border-radius: 100%;position: absolute; top: 5px;">
-                                <img src="/src/assets/img/icon-person.png" alt="icon-person"
+                                <img src="./src/assets/img/icon-person.png" alt="icon-person"
                                     style=" border-radius: 100%; height: 33px;width: 38px;">
                             </div>
                             <div class="dropdown-content">
@@ -84,36 +111,89 @@
         </header>
         <div class="_center_everything" id="notification">
             <!-- <div id="notif-content" class="notification-ok">
-                <img src="/src/assets/img/icon-ok.png" class="icon20" style="border-radius: 10px;" alt="icon-ok">
+                <img src="./src/assets/img/icon-ok.png" class="icon20" style="border-radius: 10px;" alt="icon-ok">
                 <p style="font-size: 14px;color: blue;">
                    
                 </p>
             </div> -->
         </div>
         <div id="main-container" style="padding: 25px;">
-            <!-- <div class="product-detail">
-                <div class="product-image"></div>
-                <div class="product-info">
-                    <div class="product-name"></div>
-                    <div class="product-price">
-                        <div class="product-main-price"></div>
-                        <div class="product-discount"></div>
+            <div id="container-product">
+                <div id="catalog-product">
+                    <div id="current-catalog">
+                        <a class="item-cc" href="">Trang chu ></a>
+                        <a class="item-cc" href="">Trang chu ></a>
+                        <a class="item-cc" href="">Trang chu</a>
                     </div>
-                    <div class="product-amount"></div>
-                    <div class="product-action">
+                    <a id="catalog-item" style="color: #fff;" href="">
+                        <div class="catalog-item">
+                            aa
+                        </div>
+                    </a>
 
-                    </div>
                 </div>
-            </div> -->
+                <div style="width:985px" class="container-list-product" id="list-product">
+                    <div class="product"><a is="router-link" id="1" href="/products/1">
+                            <div class="container-img"><img class="img-product" src="./src/assets/img/img-default.png"
+                                    alt=""></div>
+                            <p id="name-product">iphone 12</p><span class="tooltip-product" id="tooltip-product-1"
+                                style="top: 227px; left: 274px;">iphone 12</span><span id="price">35.990.000
+                                ₫&nbsp;&nbsp;</span><span id="discount">-0%</span>
+                            <div style="margin-top: 20px;"><button class="btn-addtocart">Thêm vào giỏ</button></div>
+                        </a>
+                    </div>
+                    <div class="product"><a is="router-link" id="1" href="/products/1">
+                            <div class="container-img"><img class="img-product" src="./src/assets/img/img-default.png"
+                                    alt=""></div>
+                            <p id="name-product">iphone 12</p><span class="tooltip-product" id="tooltip-product-1"
+                                style="top: 227px; left: 274px;">iphone 12</span><span id="price">35.990.000
+                                ₫&nbsp;&nbsp;</span><span id="discount">-0%</span>
+                            <div style="margin-top: 20px;"><button class="btn-addtocart">Thêm vào giỏ</button></div>
+                        </a></div>
+                    <div class="product"><a is="router-link" id="1" href="/products/1">
+                            <div class="container-img"><img class="img-product" src="./src/assets/img/img-default.png"
+                                    alt=""></div>
+                            <p id="name-product">iphone 12</p><span class="tooltip-product" id="tooltip-product-1"
+                                style="top: 227px; left: 274px;">iphone 12</span><span id="price">35.990.000
+                                ₫&nbsp;&nbsp;</span><span id="discount">-0%</span>
+                            <div style="margin-top: 20px;"><button class="btn-addtocart">Thêm vào giỏ</button></div>
+                        </a></div>
+                    <div class="product"><a is="router-link" id="1" href="/products/1">
+                            <div class="container-img"><img class="img-product" src="./src/assets/img/img-default.png"
+                                    alt=""></div>
+                            <p id="name-product">iphone 12</p><span class="tooltip-product" id="tooltip-product-1"
+                                style="top: 227px; left: 274px;">iphone 12</span><span id="price">35.990.000
+                                ₫&nbsp;&nbsp;</span><span id="discount">-0%</span>
+                            <div style="margin-top: 20px;"><button class="btn-addtocart">Thêm vào giỏ</button></div>
+                        </a></div>
+                    <div class="product"><a is="router-link" id="1" href="/products/1">
+                            <div class="container-img"><img class="img-product" src="./src/assets/img/img-default.png"
+                                    alt=""></div>
+                            <p id="name-product">iphone 12</p><span class="tooltip-product" id="tooltip-product-1"
+                                style="top: 227px; left: 274px;">iphone 12</span><span id="price">35.990.000
+                                ₫&nbsp;&nbsp;</span><span id="discount">-0%</span>
+                            <div style="margin-top: 20px;"><button class="btn-addtocart">Thêm vào giỏ</button></div>
+                        </a></div>
+                    <div class="product"><a is="router-link" id="1" href="/products/1">
+                            <div class="container-img"><img class="img-product" src="./src/assets/img/img-default.png"
+                                    alt=""></div>
+                            <p id="name-product">iphone 12</p><span class="tooltip-product" id="tooltip-product-1"
+                                style="top: 227px; left: 274px;">iphone 12</span><span id="price">35.990.000
+                                ₫&nbsp;&nbsp;</span><span id="discount">-0%</span>
+                            <div style="margin-top: 20px;"><button class="btn-addtocart">Thêm vào giỏ</button></div>
+                        </a></div>
+                </div>
+
+            </div>
         </div>
         <footer class="footer">
 
         </footer>
     </div>
-    <div id="loading-gif" class="_center_everything"
+    <!-- <div id="loading-gif" class="_center_everything"
         style="height: 100%;width: 100%; top:0px;position: absolute; display: none;">
-        <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
-    </div>
+        <img src="./src/assets/img/4V0b.gif" alt="loading" width=80 />
+    </div> -->
 
     </div>
     <div class="modal-login-signup"
@@ -122,12 +202,12 @@
             <div id="notif">
                 <h2>Đăng nhập</h2>
                 <p>Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn.</p>
-                <img src="/src/assets/img/header/graphic-map.png" />
+                <img src="./src/assets/img/header/graphic-map.png" />
             </div>
             <div id="login-signup">
                 <div class="option" style="display: flex; height: 44px; border-bottom: 1px solid #f4f4f4;">
                     <div class="icon iconx">
-                        <img class="icon icon-close" onclick="onCloseModal()" src="/src/assets/img/header/iconx.png" />
+                        <img class="icon icon-close" onclick="onCloseModal()" src="./src/assets/img/header/iconx.png" />
                     </div>
                     <div id="op-login" onclick="changeContent()">Đăng nhập</div>
                     <div id="op-signup" onclick="changeContent()">Tạo tài khoản</div>
@@ -186,20 +266,19 @@
             </div>
         </div>
     </div>
-    <script src="/src/assets/js/util/util.js"></script>
-    <script src="/src/assets/js/util/constant.js"></script>
-    <script src="/src/assets/js/util/formatString.js"></script>
-    <script src="/src/assets/js/common.js"></script>
-    <script src="/src/assets/js/api/customError.js"></script>
-    <script src="/src/assets/js/api/api.js"></script>
-    <script src="/src/assets/js/service/UserService/index.js"></script>
-    <script src="/src/assets/js/service/ProductService/index.js"></script>
-    <script src="/src/assets/js/service/CatalogService/index.js"></script>
-    <script src="/src/assets/js/service/index.js"></script>
-    <script src="/src/assets/css/header/script.js"></script>
-    <!-- <script src="/src/assets/js/listProduct.js"></script> -->
-    <script src="/src/assets/js/login.js"></script>
-    <script src="/src/assets/js/router/index.js" type="module"></script>
+    <script src="./src/assets/js/util/util.js"></script>
+    <script src="./src/assets/js/util/constant.js"></script>
+    <script src="./src/assets/js/util/formatString.js"></script>
+    <script src="./src/assets/js/common.js"></script>
+    <script src="./src/assets/js/api/customError.js"></script>
+    <script src="./src/assets/js/api/api.js"></script>
+    <script src="./src/assets/js/service/UserService/index.js"></script>
+    <script src="./src/assets/js/service/ProductService/index.js"></script>
+    <script src="./src/assets/js/service/index.js"></script>
+    <script src="./src/assets/css/header/script.js"></script>
+    <!-- <script src="./src/assets/js/listProduct.js"></script> -->
+    <script src="./src/assets/js/login.js"></script>
+    <script src="./src/assets/js/router/index.js" type="module"></script>
 </body>
 
 </html>
