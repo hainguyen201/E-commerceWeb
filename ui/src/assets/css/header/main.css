@@ -209,10 +209,17 @@ button {
     padding: 5px 10px;
     font-size: 12px;
 }
+.header__container{
+    display: inline-block;
+    width: 100%;
+}
 
 #searchWrapper {
     position: relative;
-    margin-top: -20px;
+    margin-top: -50px;
+    margin-left: 200px;
+    width: 60%;
+    float: left;;
 }
 
 #searchWrapper::after {
@@ -220,6 +227,15 @@ button {
     position: absolute;
     top: 7px;
     right: 15px;
+}
+.header__cart{
+        cursor: pointer;
+        float: right;
+        margin-top: 20px;
+}
+.header_cart-icon{
+    width: 30px;
+    height: 30px;
 }
 
 /* section */
@@ -503,13 +519,27 @@ button {
     display: block;
     margin: 40px auto 80px auto;
     font-size: 1.75em;
+    background-color: #1ba8ff;
 }
 
 .btn-close {
+    background-color: Crimson;
     display: block;
     font-size: 1.75em;
     margin: auto;
+    border-radius: 5px;
 }
+.btn {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
 
 .header__cart {
     width: 200px;
