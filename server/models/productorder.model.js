@@ -27,6 +27,7 @@ ProductOrder.addProductOrder = async(productorder, result) => {
     var product_order_add = new ProductOrder(productorder);
     product_order_add.ProductID = productorder.ProductID;
     product_order_add.OrderID = productorder.OrderID;
+    product_order_add.ProductOrderCreatedDate = helper.getDateNow();
     await AbstractModel.addDataQuery('productorders', product_order_add, result);
 }
 ProductOrder.updateProductOrder = async(productid, orderid, productorder, result) => {
