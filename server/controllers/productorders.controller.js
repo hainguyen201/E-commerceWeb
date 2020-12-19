@@ -8,6 +8,8 @@ const auth = require('./auth.controller')
 const productOrder = require('../models/productorder.model')
 const order = require('../models/order.model')
 const { isBuffer } = require('util')
+const Order = require('../models/order.model')
+const ProductOrder = require('../models/productorder.model')
 exports.getProductByOrderID = async(req, res, param) => {
     await productOrder.getProductByOrderID(param, (err, data) => {
         if (err) {
@@ -146,30 +148,80 @@ exports.getProductOrderByUserID = async(req, res, param) => {
     /**
      * Lấy thông tin giở hàng theo session
      */
-exports.getProductBySession = async(req, res, param) => {
-    var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
-    //kiếm tra session đã có order chưa
-    await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
-        if (err_ss) {
+exports.getProductOrderBySession = async(req, res, param) => {
+        var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+        //kiếm tra session đã có order chưa
+        await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
+            if (err_ss) {
 
-        } else {
-            if (data_ss.length > 0) {
-                var session = new Session(data_ss[0]);
-                //kiểm tra session đã có order chưa
-                if (session.OrderID != 0) {
-                    //kiểm tra order đã được giao dịch chưa
+            } else {
+                if (data_ss.length > 0) {
+                    var session = new Session(data_ss[0]);
+                    //kiểm tra session đã có order chưa
+                    if (session.OrderID != 0) {
+                        await productOrder.getProductByOrderID(session.OrderID, async(err_po, data_po) => {
+                            if (err_po) {
 
-                    await productOrder.getProductByOrderID(session.OrderID, async(err_po, data_po) => {
-                        if (err_po) {
+                            } else {
+                                abstractController.sendData(res, data_po);
+                            }
+                        })
+                    } else {
 
+                        abstractController.sendData(res, { message: 'k có dữ liệu' })
+                    }
+                }
+            }
+        })
+    }
+    /**
+     * Thêm sản phẩm vào giỏ hàng khi chưa đăng nhập ( sử dụng session)
+     */
+exports.addProductOrderWithSession = async(req, res, param) => {
+        var product_add = req.body;
+        var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+        await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
+            if (err_ss) {
+                abstractController.sendErr(res, err);
+            } else {
+                var orderid = data_ss[0].OrderID;
+                if (orderid == 0) {
+                    await Order.addOrder({}, async(err_o, data_o) => {
+                        if (err_o) {
+                            abstractController.sendErr(res, err_o)
                         } else {
-                            abstractController.sendData(data_po);
+                            var orderid_new = data_o.insertId;
+                            product_add.OrderID = orderid_new;
+                            await Session.updateSession(sessionid, { OrderID: orderid_new }, async(err_s, data_s) => {
+                                if (err_s) {
+                                    abstractController.sendErr(res, err_s);
+                                } else {
+                                    await productOrder.addProductOrder(product_add, async(err_po, data_po) => {
+                                        if (err_po) {
+                                            abstractController.sendErr(res, err_po);
+                                        } else {
+                                            abstractController.sendData(res, data_po)
+                                        }
+                                    })
+                                }
+                            })
+
                         }
                     })
                 } else {
-                    abstractController.sendData(res, [])
+                    product_add.OrderID = orderid;
+                    await productOrder.addProductOrder(product_add, async(err_po, data_po) => {
+                        if (err_po) {
+                            abstractController.sendErr(res, err_po);
+                        } else {
+                            abstractController.sendData(res, data_po)
+                        }
+                    })
                 }
+
             }
-        }
-    })
-}
+        })
+    }
+    /**
+     * 
+     */
