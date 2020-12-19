@@ -10,9 +10,8 @@ Router.addModule("/catalogs", catalogList, mainContainer);
 Router.addModule("/", containerRootElement, mainContainer);
 
 //Auth trước khi mở đường dẫn mới
-debugger
+console.log("reload resource");
 userService.authService().then((data) => {
-    debugger
     if (data[0]) {
         loginSuccessful(data[0]);
     }

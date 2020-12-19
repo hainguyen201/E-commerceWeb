@@ -50,7 +50,7 @@ class RootElement extends HTMLDivElement {
                 '<span id="price">' + product.Price.formatMoney() + ' &#8363&nbsp;&nbsp;</span>' +
                 '<span id="discount">-' + product.Discount + '%</span>' +
                 '<div style="margin-top: 20px;">' +
-                '<button class="btn-addtocart">Thêm vào giỏ</button>' +
+                '<button onclick="addToCart()" class="btn-addtocart">Thêm vào giỏ</button>' +
                 '</div>' +
                 '</a>' +
                 '</div>';

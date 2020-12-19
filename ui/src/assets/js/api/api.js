@@ -51,7 +51,6 @@ class Api {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
-                    debugger
                     unexpectedLogout();
                     resolve(response);
                 }
