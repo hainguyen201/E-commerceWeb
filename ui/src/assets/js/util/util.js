@@ -5,6 +5,27 @@ var createElementByText = (textHTML) => {
     return template.content.firstChild;
 }
 
+let animationNotif = (notification) => {
+    let a = 1;
+    let id = setInterval(() => {
+        a += 1;
+        if (notification.style.top == '20px') {
+            clearInterval(id);
+            let timeOut = setTimeout(() => {
+                let id1 = setInterval(() => {
+                    if (notification.style.top == '-40px') {
+                        clearInterval(id1);
+                        clearTimeout(timeOut);
+                    }
+                    a -= 1;
+                    notification.style.top = `${a}px`;
+                }, 10);
+            }, 3000);
+        }
+        notification.style.top = `${a}px`;
+    }, 5);
+}
+
 var notifSuccess = (mes = " Successfully ") => {
     const notification = document.getElementById("notification");
     notification.innerHTML = `<div id="notif-content" class="notification-ok">
@@ -13,10 +34,9 @@ var notifSuccess = (mes = " Successfully ") => {
         ${mes}
     </p>
 </div>`;
-    setTimeout(() => {
-        notification.innerHTML = '';
-    }, 2500);
+    animationNotif(notification);
 }
+
 
 var notifFailure = (mes = " Failure ") => {
     const notification = document.getElementById("notification");
@@ -26,9 +46,7 @@ var notifFailure = (mes = " Failure ") => {
     ${mes}
     </p>
 </div>`;
-    setTimeout(() => {
-        notification.innerHTML = '';
-    }, 2500);
+    animationNotif(notification);
 }
 
 var isJsonString = (str) => {

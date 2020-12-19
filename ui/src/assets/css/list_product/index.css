@@ -19,19 +19,19 @@ a {
     font-family: Roboto, Helvetica, sans-serif;
 }
 
-#name-product{
-    font-size: 13px;
+.name-pr {
+    font-size: 15px;
     font-weight: 400;
     color: rgb(36, 36, 36);
 }
 
-#price{
+#price {
     font-size: 15px;
     font-weight: 1000;
     color: rgb(36, 36, 36);
 }
 
-#discount{
+#discount {
     font-size: 12px;
 }
 

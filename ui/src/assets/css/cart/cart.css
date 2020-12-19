@@ -15,7 +15,7 @@
     float: left;
     display: flex;
     flex-wrap: wrap;
-    width: 910px;
+    width: 850px;
 }
 
 h3#vendor {
@@ -32,7 +32,7 @@ h3#vendor {
     border-radius: 5px;
     display: flex;
     height: 179px;
-    width: 910px;
+    width: 850px;
     padding: 20px 20px 10px 20px;
 }
 
@@ -81,4 +81,27 @@ h3#vendor {
     width: 285px;
     overflow: hidden;
     min-height: 50px;
+}
+
+.icon-amount-items {
+    font-size: 13px;
+    color: #fff;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-color: #007ff0;
+    position: absolute;
+    right: 6px;
+    top: 8px;
+}
+
+.cart-amount-items {
+    display: flex;
+    margin: 16px;
+    position: relative;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    width: 75px;
+    height: 40px;
+    padding: 2px;
 }

@@ -1,8 +1,9 @@
 #notification {
     top: 10px;
-    position: absolute;
+    position: fixed;
     right: 50%;
     left: 50%;
+    z-index: 5;
 }
 
 #notif-content {
