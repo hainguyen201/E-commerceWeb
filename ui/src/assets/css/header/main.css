@@ -37,7 +37,6 @@
     font-weight: 500;
 }
 
-
 /* .header__navbar-item--separate::after{
     content: "";
     display: block;
@@ -201,11 +200,10 @@ button {
     text-align: left;
 }
 
-.character>h2 {
+.character > h2 {
     grid-area: name;
     margin-bottom: 0px;
 }
-
 
 /* .character > p {
     grid-area: house;
@@ -213,7 +211,7 @@ button {
     margin-top: 10px;
 } */
 
-.character>img {
+.character > img {
     max-height: 50px;
     grid-area: image;
 }
@@ -239,14 +237,13 @@ button {
     right: 15px;
 }
 
-
 /* section */
 
 .band-name {
     text-align: center;
     margin: 0;
     font-size: 4em;
-    font-family: "Booter - Zero Zero";
+    font-family: 'Booter - Zero Zero';
     font-weight: normal;
     color: white;
 }
@@ -266,7 +263,7 @@ button {
 }
 
 .section-header {
-    font-family: "Metal Mania";
+    font-family: 'Metal Mania';
     font-weight: normal;
     color: #333;
     text-align: center;
@@ -282,9 +279,9 @@ button {
 }
 
 .main-footer {
-    background-color: #56CCF2;
+    background-color: #56ccf2;
     color: white;
-    padding: .25em 0;
+    padding: 0.25em 0;
 }
 
 .main-footer-container {
@@ -298,7 +295,7 @@ button {
 }
 
 .footer-nav li {
-    padding: 0 .5em;
+    padding: 0 0.5em;
 }
 
 .footer-nav img {
@@ -309,15 +306,15 @@ button {
 .btn {
     text-align: center;
     vertical-align: middle;
-    padding: .67em .67em;
+    padding: 0.67em 0.67em;
     cursor: pointer;
 }
 
 .btn-header {
-    margin: .5em 15% 2em 15%;
+    margin: 0.5em 15% 2em 15%;
     color: white;
-    border: 2px solid #2D9CDB;
-    background-color: rgba(255, 255, 255, .1);
+    border: 2px solid #2d9cdb;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 0;
     font-size: 1.5em;
     font-weight: lighter;
@@ -326,13 +323,13 @@ button {
 }
 
 .btn-header:hover {
-    background-color: rgba(255, 255, 255, .3);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .btn-play {
     display: block;
     margin: 0 auto;
-    color: #2D9CDB;
+    color: #2d9cdb;
     font-size: 4em;
     border-radius: 50%;
     width: 100px;
@@ -343,14 +340,14 @@ button {
 
 .btn-primary {
     color: white;
-    background-color: #56CCF2;
+    background-color: #56ccf2;
     border: none;
-    border-radius: .3em;
+    border-radius: 0.3em;
     font-weight: bold;
 }
 
 .btn-primary:hover {
-    background-color: #2D9CDB;
+    background-color: #2d9cdb;
 }
 
 .tour-row {
@@ -365,7 +362,7 @@ button {
 
 .tour-item {
     display: inline-block;
-    padding-right: .5em;
+    padding-right: 0.5em;
 }
 
 .tour-date {
@@ -456,7 +453,7 @@ button {
 
 .cart-item-title {
     color: #333;
-    margin-left: .5em;
+    margin-left: 0.5em;
     font-size: 1.2em;
 }
 
@@ -468,21 +465,21 @@ button {
 
 .btn-danger {
     color: white;
-    background-color: #EB5757;
+    background-color: #eb5757;
     border: none;
-    border-radius: .3em;
+    border-radius: 0.3em;
     font-weight: bold;
 }
 
 .btn-danger:hover {
-    background-color: #CC4C4C;
+    background-color: #cc4c4c;
 }
 
 .cart-quantity-input {
     height: 34px;
     width: 50px;
     border-radius: 5px;
-    border: 1px solid #56CCF2;
+    border: 1px solid #56ccf2;
     background-color: #eee;
     color: #333;
     padding: 0;
@@ -545,8 +542,8 @@ button {
 }
 
 ._center_everything {
-    display: grid!important;
-    place-items: center!important;
+    display: grid !important;
+    place-items: center !important;
 }
 
 .dropdown-content {

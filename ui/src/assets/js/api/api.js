@@ -18,37 +18,43 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
+                const response = isJsonString(xhr.responseText)
+                    ? JSON.parse(xhr.responseText)
+                    : {};
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
                     unexpectedLogout();
                     resolve(response);
-                }
-                else {
+                } else {
                     //statuscode khong phai 2xx
-                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
+                    reject(
+                        new CustomError(
+                            xhr.status,
+                            response.message || 'Unknow error on server!',
+                        ),
+                    );
                 }
             };
             xhr.onerror = () => {
                 //loi mang hoac may chu
-                console.log("get onerror");
-                reject(new CustomError(500, "Unknow error!"));
-            }
+                console.log('get onerror');
+                reject(new CustomError(500, 'Unknow error!'));
+            };
             xhr.onabort = () => {
-                console.log("get onabort");
-                debugger
-            }
+                console.log('get onabort');
+                debugger;
+            };
             xhr.onloadend = () => {
-                console.log("onloadend");
-            }
+                console.log('onloadend');
+            };
             xhr.ontimeout = () => {
-                console.log("ontimeout");
-            }
+                console.log('ontimeout');
+            };
             xhr.onprogress = () => {
-                console.log("onprogress");
-            }
+                console.log('onprogress');
+            };
             xhr.open('GET', PREFIX_URL + path, true);
             xhr.withCredentials = true;
             xhr.send();
@@ -60,38 +66,44 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
-                debugger
+                const response = isJsonString(xhr.responseText)
+                    ? JSON.parse(xhr.responseText)
+                    : {};
+                debugger;
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
                     unexpectedLogout();
                     resolve(response);
-                }
-                else {
+                } else {
                     //statuscode khong phai 2xx
-                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
+                    reject(
+                        new CustomError(
+                            xhr.status,
+                            response.message || 'Unknow error on server!',
+                        ),
+                    );
                 }
             };
             xhr.onerror = () => {
                 //loi mang hoac may chu
-                console.log("post onerror");
-                reject(new CustomError(500, "Unknow error!"));
+                console.log('post onerror');
+                reject(new CustomError(500, 'Unknow error!'));
             };
             xhr.onabort = () => {
-                console.log("post onabort");
-                debugger
-            }
+                console.log('post onabort');
+                debugger;
+            };
             xhr.onloadend = () => {
-                console.log("onloadend");
-            }
+                console.log('onloadend');
+            };
             xhr.ontimeout = () => {
-                console.log("ontimeout");
-            }
+                console.log('ontimeout');
+            };
             xhr.onprogress = () => {
-                console.log("onprogress");
-            }
+                console.log('onprogress');
+            };
             xhr.open('POST', PREFIX_URL + path, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.withCredentials = true;
@@ -104,37 +116,43 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
+                const response = isJsonString(xhr.responseText)
+                    ? JSON.parse(xhr.responseText)
+                    : {};
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
                     unexpectedLogout();
                     resolve(response);
-                }
-                else {
+                } else {
                     //statuscode khong phai 2xx
-                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
+                    reject(
+                        new CustomError(
+                            xhr.status,
+                            response.message || 'Unknow error on server!',
+                        ),
+                    );
                 }
             };
             xhr.onerror = () => {
                 //loi mang hoac may chu
-                console.log("put onerror");
-                reject(new CustomError(500, "Unknow error!"));
+                console.log('put onerror');
+                reject(new CustomError(500, 'Unknow error!'));
             };
             xhr.onabort = () => {
-                console.log("put onabort");
-                debugger
+                console.log('put onabort');
+                debugger;
             };
             xhr.onloadend = () => {
-                console.log("onloadend");
-            }
+                console.log('onloadend');
+            };
             xhr.ontimeout = () => {
-                console.log("ontimeout");
-            }
+                console.log('ontimeout');
+            };
             xhr.onprogress = () => {
-                console.log("onprogress");
-            }
+                console.log('onprogress');
+            };
             xhr.open('PUT', PREFIX_URL + path, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.withCredentials = true;
@@ -147,37 +165,43 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
+                const response = isJsonString(xhr.responseText)
+                    ? JSON.parse(xhr.responseText)
+                    : {};
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
                     unexpectedLogout();
                     resolve(response);
-                }
-                else {
+                } else {
                     //statuscode khong phai 2xx
-                    reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
+                    reject(
+                        new CustomError(
+                            xhr.status,
+                            response.message || 'Unknow error on server!',
+                        ),
+                    );
                 }
             };
             xhr.onerror = () => {
                 //loi mang hoac may chu
-                console.log("delete onerror");
-                reject(new CustomError(500, "Unknow error!"));
+                console.log('delete onerror');
+                reject(new CustomError(500, 'Unknow error!'));
             };
             xhr.onabort = () => {
-                console.log("delete onabort");
-                debugger
-            }
+                console.log('delete onabort');
+                debugger;
+            };
             xhr.onloadend = () => {
-                console.log("onloadend");
-            }
+                console.log('onloadend');
+            };
             xhr.ontimeout = () => {
-                console.log("ontimeout");
-            }
+                console.log('ontimeout');
+            };
             xhr.onprogress = () => {
-                console.log("onprogress");
-            }
+                console.log('onprogress');
+            };
             xhr.open('DELETE', PREFIX_URL + path, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.withCredentials = true;
@@ -187,7 +211,6 @@ class Api {
     // getAllResponseHeaders() {
     //     return this.xhr.getAllResponseHeaders();
     // }
-
 }
 var api = new Api();
 // export default new Api();

@@ -20,7 +20,7 @@ const routes = [
      */
     {
         method: 'GET',
-        path: /\/users\/([0-9a-z]+)/,
+        path: /^\/users\/([0-9a-z]+)/,
         handler: userController.findOne
     },
     /**
@@ -38,7 +38,7 @@ const routes = [
      */
     {
         method: 'PUT',
-        path: /\/users\/([0-9a-z]+)/,
+        path: /^\/users\/([0-9a-z]+)/,
         handler: userController.updateUser
     },
     /**
@@ -64,7 +64,7 @@ const routes = [
      */
     {
         method: 'DELETE',
-        path: /\/users\/([0-9a-z]+)/,
+        path: /^\/users\/([0-9a-z]+)/,
         handler: userController.deleteUser
     },
     /**
@@ -98,7 +98,7 @@ const routes = [
      */
     {
         method: 'GET',
-        path: /\/products\/catalogs\/([0-9a-z]+)/,
+        path: /^\/products\/catalogs\/([0-9a-z]+)/,
         handler: productController.findProductByCatalogID
     },
     /**
@@ -108,7 +108,7 @@ const routes = [
      */
     {
         method: 'GET',
-        path: /\/products\/names\/([0-9a-z_]+)/,
+        path: /^\/products\/names\/([0-9a-z_]+)/,
         handler: productController.findProductByName
     },
     /**
@@ -126,7 +126,7 @@ const routes = [
      */
     {
         method: 'GET',
-        path: /\/products\/([0-9a-z]+)/,
+        path: /^\/products\/([0-9a-z]+)/,
         handler: productController.findProductByID
 
     },
@@ -170,7 +170,7 @@ const routes = [
      */
     {
         method: 'PUT',
-        path: /\/products\/([0-9a-z]+)/,
+        path: /^\/products\/([0-9a-z]+)/,
         handler: productController.updateProductWithAuth
     },
     /**
@@ -179,7 +179,7 @@ const routes = [
      */
     {
         method: 'DELETE',
-        path: /\/products\/([0-9a-z]+)/,
+        path: /^\/products\/([0-9a-z]+)/,
         handler: productController.deleteProductWithAuth
     },
     /**
@@ -187,12 +187,12 @@ const routes = [
      */
     {
         method: 'GET',
-        path: /\/orders\/([0-9a-z]+)/,
+        path: /^\/orders\/([0-9a-z]+)/,
         handler: orderController.getOrderByID
     },
     {
         method: 'PUT',
-        path: /\/orders\/([0-9a-z]+)/,
+        path: /^\/orders\/([0-9a-z]+)/,
         handler: orderController.updateOrder
     },
     {
@@ -202,7 +202,7 @@ const routes = [
     },
     {
         method: 'DELETE',
-        path: /\/orders\/([0-9a-z]+)/,
+        path: /^\/orders\/([0-9a-z]+)/,
         handler: orderController.deleteOrder
     },
     /**
@@ -210,7 +210,7 @@ const routes = [
      */
     {
         method: 'GET',
-        path: /\/catalogs\/([0-9a-z]+)/,
+        path: /^\/catalogs\/([0-9a-z]+)/,
         handler: catalogController.getCatalogByID
     },
     /**
@@ -230,7 +230,7 @@ const routes = [
      */
     {
         method: 'PUT',
-        path: /\/catalogs\/([0-9a-z]+)/,
+        path: /^\/catalogs\/([0-9a-z]+)/,
         handler: catalogController.updateCatalog
     },
     /**
@@ -251,7 +251,7 @@ const routes = [
      */
     {
         method: 'DELETE',
-        path: /\/catalogs\/([0-9a-z]+)/,
+        path: /^\/catalogs\/([0-9a-z]+)/,
         handler: catalogController.deleteCatalog
     },
     /**
@@ -269,7 +269,7 @@ const routes = [
      */
     {
         method: 'GET',
-        path: /\/productorders\/users\/([0-9a-z]+)/,
+        path: /^\/productorders\/users\/([0-9a-z]+)/,
         handler: productOrderController.getProductOrderByUserID
     },
     /**
@@ -285,12 +285,12 @@ const routes = [
      * productorders/:userid   
     {
         "ProductID":4,
-	    "Amount": 3
+        "Amount": 3
      } 
      */
     {
         method: 'POST',
-        path: /\/productorders\/([0-9a-z]+)/,
+        path: /^\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.addProductOrderWithUserID
     },
     /**
@@ -298,12 +298,12 @@ const routes = [
      * productorders/:userid   
     {
         "ProductID":4,
-	    "Amount": 3
+        "Amount": 3
      } 
      */
     {
         method: 'PUT',
-        path: /\/productorders\/([0-9a-z]+)/,
+        path: /^\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.updateProductOrderWithUserID
     },
     /**
@@ -311,7 +311,7 @@ const routes = [
      * productorders/:userid    
      {
         "ProductID":4,
-	    "Amount": 3
+        "Amount": 3
      }
      */
     {
@@ -324,7 +324,7 @@ const routes = [
      * productorders/:userid    
      {
         "ProductID":4,
-	    "Amount": 3
+        "Amount": 3
      }
      */
     {
@@ -338,7 +338,7 @@ const routes = [
      */
     {
         method: 'DELETE',
-        path: /\/productorders\/([0-9a-z]+)\/([0-9a-z]+)/,
+        path: /^\/productorders\/([0-9a-z]+)\/([0-9a-z]+)/,
         handler: productOrderController.deleteProductOrderWithUserID
     },
     /**
@@ -347,7 +347,7 @@ const routes = [
      */
     {
         method: 'DELETE',
-        path: /\/productorders\/([0-9a-z]+)/,
+        path: /^\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.deleteProductOrderWithSession
     },
 

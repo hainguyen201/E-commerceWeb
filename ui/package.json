@@ -7,6 +7,7 @@
         "lib": "lib"
     },
     "scripts": {
+        "beauty": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json,scss,css}",
         "test": "node_modules/.bin/live-server --port=5111 --entry-file=test.html",
         "start": "node_modules/.bin/live-server --port=5000 --entry-file=index.html"
     },
@@ -14,6 +15,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "live-server": "^1.2.1"
+        "live-server": "^1.2.1",
+        "prettier": "^2.2.1"
     }
 }
