@@ -9,5 +9,17 @@ Router.addModule("/products", productList, mainContainer);
 Router.addModule("/catalogs", catalogList, mainContainer);
 Router.addModule("/", containerRootElement, mainContainer);
 
-Router.open(window.location.pathname);
+//Auth trước khi mở đường dẫn mới
+userService.authService().then((data) => {
+    if (data[0]) {
+        loginSuccessful(data[0]);
+    }
+    else {
+        notifSuccess("Bạn chưa đăng nhập tài khoản");
+    }
+    Router.open(window.location.pathname);
+}).catch((err) => {
+    notifFailure(err.toString());
+});
+
 //notifSuccess("test");

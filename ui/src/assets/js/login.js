@@ -102,6 +102,8 @@ let li_user = document.querySelector("li.user");
 let a_user = document.querySelector("a#user-name");
 
 var loginSuccessful = (user) => {
+    debugger
+    //localStorage.setItem("USER_ID",)
     li_login.style.display = "none";
     li_user.style.display = "inline-block";
     a_user.innerHTML = user.UserName || "USER_DEFAULT";
@@ -109,6 +111,12 @@ var loginSuccessful = (user) => {
 }
 
 var logoutSuccessful = () => {
+    li_login.style.display = "inline-block";
+    li_user.style.display = "none";
+}
+
+var unexpectedLogout = () => {
+    notifFailure("Phiên đã hết! Hãy đăng nhập để có trải nghiệm tốt hơn");
     li_login.style.display = "inline-block";
     li_user.style.display = "none";
 }
@@ -134,7 +142,7 @@ btnLogout.onclick = async function logout(event) {
     try {
         let data = await userService.logout();
         logoutSuccessful();
-        notifSuccess("Đăng xuất thành công");
+        notifSuccess("Đăng xuất thành công")
     } catch (error) {
         notifFailure("Đăng xuất thất bại");
     }

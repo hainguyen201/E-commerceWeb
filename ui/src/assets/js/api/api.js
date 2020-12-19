@@ -18,11 +18,15 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = JSON.parse(xhr.responseText);
+                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
-                } else {
+                } else if (parseInt(xhr.status) == 401) {
+                    unexpectedLogout();
+                    resolve(response);
+                }
+                else {
                     //statuscode khong phai 2xx
                     reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
@@ -42,11 +46,16 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = JSON.parse(xhr.responseText);
+                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
-                } else {
+                } else if (parseInt(xhr.status) == 401) {
+                    debugger
+                    unexpectedLogout();
+                    resolve(response);
+                }
+                else {
                     //statuscode khong phai 2xx
                     reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
@@ -70,11 +79,15 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = JSON.parse(xhr.responseText);
+                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
-                } else {
+                } else if (parseInt(xhr.status) == 401) {
+                    unexpectedLogout();
+                    resolve(response);
+                }
+                else {
                     //statuscode khong phai 2xx
                     reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
@@ -98,11 +111,15 @@ class Api {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
             xhr.onload = () => {
-                const response = JSON.parse(xhr.responseText);
+                const response = isJsonString(xhr.responseText) ? JSON.parse(xhr.responseText) : {};
                 if (parseInt(xhr.status / 100) == 2) {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
-                } else {
+                } else if (parseInt(xhr.status) == 401) {
+                    unexpectedLogout();
+                    resolve(response);
+                }
+                else {
                     //statuscode khong phai 2xx
                     reject(new CustomError(xhr.status, response.message || "Unknow error on server!"));
                 }
