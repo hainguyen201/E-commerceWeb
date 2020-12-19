@@ -172,6 +172,8 @@ exports.getProductOrderBySession = async(req, res, param) => {
 
                         abstractController.sendData(res, { message: 'k có dữ liệu' })
                     }
+                } else {
+                    abstractController.sendData(res, [])
                 }
             }
         })
