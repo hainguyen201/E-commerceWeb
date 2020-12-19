@@ -322,6 +322,24 @@ const routes = [
         path: '/productorders',
         handler: productOrderController.updateProductOrderWithSession
     },
+    /**
+     * Xóa sản phẩm khỏi giỏ hàng với khách hàng đã đăng nhập
+     * /productorders/:userid/:productid
+     */
+    {
+        method: 'DELETE',
+        path: /\/productorders\/([0-9a-z]+)\/([0-9a-z]+)/,
+        handler: productOrderController.deleteProductOrderWithUserID
+    },
+    /**
+     * Xóa sản phẩm khỏi giỏ hàng với khách hàng chưa đăng nhập (sử dụng session)
+     * /productorders/:productid
+     */
+    {
+        method: 'DELETE',
+        path: /\/productorders\/([0-9a-z]+)/,
+        handler: productOrderController.deleteProductOrderWithSession
+    },
 
 ]
 module.exports = routes;

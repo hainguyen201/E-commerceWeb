@@ -37,9 +37,7 @@ exports.productsFormatToClient = function(data) {
     return data;
 }
 exports.updateProductOrderByOrderIDProductID = async(req, res, param) => {
-        console.log(param)
         var param = param.split(" ");
-        console.log(param);
         var productid = parseInt(param[0]);
         var orderid = parseInt(param[1]);
         await productOrder.updateProductOrder(productid, orderid, req.body, async(err, data) => {
@@ -255,36 +253,8 @@ exports.updateProductOrderWithUserID = async(req, res, param) => {
                             abstractController.sendData(res, data)
                         }
                     })
-                }
-                //nếu chưa có orderid hoặc transaction=1 (đơn hàng đã được mua)
-                else {
-                    // tạo một order mới
-                    await order.addOrder({}, async(err, data) => {
-                        if (err) {
-
-                        } else {
-                            //lấu order đã tạo và cập nhật lại session
-                            var orderid_new = data.insertId;
-                            var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
-                            await Session.updateSession(sessionid, { OrderID: orderid_new, UserID: userid }, async(err, data) => {
-                                if (err) {
-
-                                } else {
-                                    // thêm product vào order mới
-                                    var productorder = {
-                                        Amount: product.Amount
-                                    }
-                                    await productOrder.updateProductOrder(product.ProductID, orderid, productorder, (err, data) => {
-                                        if (err) {
-                                            abstractController.sendErr(res, err);
-                                        } else {
-                                            abstractController.sendData(res, data)
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    })
+                } else {
+                    abstractController.sendErr(res, { message: 'không tồn tại giỏ hàng' })
                 }
 
             }
@@ -295,39 +265,14 @@ exports.updateProductOrderWithUserID = async(req, res, param) => {
      * 
      */
 exports.updateProductOrderWithSession = async(req, res, param) => {
-    var product = req.body;
-    var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
-    await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
-        if (err_ss) {
-            abstractController.sendErr(res, err);
-        } else {
-            var orderid = data_ss[0].OrderID;
-            if (orderid == 0) {
-                await Order.addOrder({}, async(err_o, data_o) => {
-                    if (err_o) {
-                        abstractController.sendErr(res, err_o)
-                    } else {
-                        var orderid_new = data_o.insertId;
-                        product.OrderID = orderid_new;
-                        await Session.updateSession(sessionid, { OrderID: orderid_new }, async(err_s, data_s) => {
-                            if (err_s) {
-                                abstractController.sendErr(res, err_s);
-                            } else {
-                                await productOrder.updateProductOrder(product.ProductID, orderid, { Amount: product.Amount }, async(err_po, data_po) => {
-                                    if (err_po) {
-                                        abstractController.sendErr(res, err_po);
-                                    } else {
-                                        abstractController.sendData(res, data_po)
-                                    }
-                                })
-                            }
-                        })
-
-                    }
-                })
+        var product = req.body;
+        var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+        await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
+            if (err_ss) {
+                abstractController.sendErr(res, err);
             } else {
-                product.OrderID = orderid;
-                await productOrder.addProductOrder(product, async(err_po, data_po) => {
+                var orderid = data_ss[0].OrderID;
+                await productOrder.updateProductOrder(product.ProductID, orderid, { Amount: product.Amount }, async(err_po, data_po) => {
                     if (err_po) {
                         abstractController.sendErr(res, err_po);
                     } else {
@@ -336,6 +281,60 @@ exports.updateProductOrderWithSession = async(req, res, param) => {
                 })
             }
 
+        })
+    }
+    /**
+     * Xóa sản phẩm trong giỏ hàng với user đã đăng ký
+     */
+exports.deleteProductOrderWithUserID = async(req, res, param) => {
+    param = param.split(" ");
+    var userid = param[1];
+    var productid = param[0];
+    console.log(param)
+        // để xóa được thì trc đó phải có sản phẩm
+        //lấy thông tin orderid từ session thông qua userid
+    await Session.getOrderByUserID(userid, async(err_ss, data_ss) => {
+        if (err_ss) {
+            abstractController.sendData(res, err_ss)
+        } else {
+            //nếu có order và transaction=0 (chưa mua hàng)
+            if (data_ss.length > 0) {
+                var orderid = data_ss[0].OrderID
+                await productOrder.deleteProductOrder(orderid, productid, (err, data) => {
+                    if (err) {
+                        abstractController.sendErr(res, err);
+                    } else {
+                        abstractController.sendData(res, data)
+                    }
+                })
+            } else {
+                abstractController.sendErr(res, { message: 'không tồn tại' })
+            }
+
         }
+    })
+}
+exports.deleteProductOrderWithSession = async(req, res, param) => {
+    var productid = param
+    var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+    await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
+        if (err_ss) {
+            abstractController.sendErr(res, err);
+        } else {
+            if (data_ss.length > 0) {
+                var orderid = data_ss[0].OrderID;
+                await productOrder.deleteProductOrder(orderid, productid, async(err_po, data_po) => {
+                    if (err_po) {
+                        abstractController.sendErr(res, err_po);
+                    } else {
+                        abstractController.sendData(res, data_po)
+                    }
+                })
+            } else {
+                abstractController.sendErr(res, { message: 'Không tồn tại' })
+            }
+
+        }
+
     })
 }
