@@ -100,3 +100,15 @@ module.exports.cookieparser = (str) => {
     }
     return cookie;
 }
+module.exports.productsFormatToClient = function(data) {
+    if (data)
+        data.forEach(element => {
+            if (element.Image.length > 0)
+                element.Image = helper.base64_encode(element.Image);
+            if (element.ProductCreatedDate)
+                element.ProductCreatedDate = helper.formatDate(element.ProductCreatedDate)
+            if (element.ProductModifiedDate)
+                element.ProductModifiedDate = helper.formatDate(element.ProductModifiedDate)
+        });
+    return data;
+}

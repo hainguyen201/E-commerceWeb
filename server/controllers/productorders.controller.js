@@ -136,6 +136,7 @@ exports.getProductOrderByUserID = async(req, res, param) => {
                             abstractController.sendErr(res, err)
                         } else {
                             console.log(data)
+                            data = this.productsFormatToClient(data)
                             abstractController.sendData(res, data);
                         }
                     })
@@ -163,6 +164,7 @@ exports.getProductOrderBySession = async(req, res, param) => {
                             if (err_po) {
 
                             } else {
+                                data_po = this.productsFormatToClient(data_po);
                                 abstractController.sendData(res, data_po);
                             }
                         })
