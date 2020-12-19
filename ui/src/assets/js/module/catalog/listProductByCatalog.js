@@ -16,32 +16,25 @@ export default class ListProductByCatalogElement extends HTMLDivElement {
     }
 
     connectedCallback() {
-        const catalogElement = document.createElement('div', { is: 'catalog-element' });
+        let catalogElement = document.createElement('div', { is: 'catalog-element' });
         const catalogID = this.params[0];
+        catalogElement.currentCatalogID = catalogID;
         this.appendChild(catalogElement);
+        //catalogElement.querySelector("#current-catalog");
         const listProductElement = createElementByText(template);
         this.appendChild(listProductElement);
         let list_product = [];
         let containerListProduct = document.getElementById("list_product");
-        userService.authService().then((data) => {
-            if (data[0]) {
-                loginSuccessful(data[0]);
-            } else {
-                logoutSuccessful();
+        productService.getListProductByCatalogID(catalogID).then((data) => {
+            list_product = data.data;
+            if (list_product.length > 0) {
+                addListProduct(list_product);
             }
-        }).then(
-            productService.getListProductByCatalogID(catalogID).then((data) => {
-                list_product = data.data;
-                if (list_product.length > 0) {
-                    addListProduct(list_product);
-                }
-                else notifSuccess("Danh mục trống");
-            }).catch((err) => {
-                notifFailure("Không thể lấy sản phẩm");
-            })
-        ).catch((err) => {
-            notifFailure(err.toString());
+            else notifSuccess("Danh mục trống");
+        }).catch((err) => {
+            notifFailure("Không thể lấy sản phẩm");
         });
+
         // document.onload = function () {
         // }
         function createProductElement(product) {

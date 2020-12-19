@@ -22,28 +22,18 @@ class RootElement extends HTMLDivElement {
         this.appendChild(listProductElement);
         let list_product = [];
         let containerListProduct = document.getElementById("list_product");
-        userService.authService().then((data) => {
-            if (data[0]) {
-                loginSuccessful(data[0]);
-            } else {
-                logoutSuccessful();
-            }
-        }).then(() => {
-            api.get("/products")
-                .then((result) => {
-                    list_product = result.data;
-                    if (!!list_product && list_product.length > 0) {
-                        addListProduct(list_product);
-                    }
-                    console.log(result);
-                })
-                .catch((err) => {
-                    // document.dispatchEvent(new CustomEvent('page-loading'));
-                    notifFailure("Không thể lấy products")
-                });
-        }).catch((err) => {
-            notifFailure(err.toString());
-        });
+        api.get("/products")
+            .then((result) => {
+                list_product = result.data;
+                if (!!list_product && list_product.length > 0) {
+                    addListProduct(list_product);
+                }
+                console.log(result);
+            })
+            .catch((err) => {
+                // document.dispatchEvent(new CustomEvent('page-loading'));
+                notifFailure("Không thể lấy products")
+            });
         // document.onload = function () {
         // }
         function createProductElement(product) {
