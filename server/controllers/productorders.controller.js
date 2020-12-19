@@ -129,19 +129,21 @@ exports.getProductOrderByUserID = async(req, res, param) => {
         debugger
         await Session.getOrderByUserID(userid, async(err, data) => {
             if (err) {
-                console.log(err);
+                abstractController.sendErr(res, err)
             } else {
                 if (data.length > 0) {
                     var orderid = data[0].OrderID;
                     console.log(orderid)
                     await productOrder.getProductByOrderID(orderid, async(err, data) => {
                         if (err) {
-                            console.log(err);
+                            abstractController.sendErr(res, err)
                         } else {
                             console.log(data)
                             abstractController.sendData(res, data);
                         }
                     })
+                } else {
+                    abstractController.sendData(res, [])
                 }
             }
         })
@@ -171,6 +173,8 @@ exports.getProductOrderBySession = async(req, res, param) => {
 
                         abstractController.sendData(res, { message: 'k có dữ liệu' })
                     }
+                } else {
+                    abstractController.sendData(res, [])
                 }
             }
         })
@@ -224,5 +228,115 @@ exports.addProductOrderWithSession = async(req, res, param) => {
         })
     }
     /**
+     * Cập nhật giỏ hàng đối với user đã đăng nhập
+     */
+exports.updateProductOrderWithUserID = async(req, res, param) => {
+        var product = req.body;
+        var userid = param;
+        var orderid = 0;
+        // console.log(product)
+        // console.log(userid)
+        // kiểm tra userid này có orderid chưa
+        await Session.getOrderByUserID(userid, async(err_ss, data_ss) => {
+            if (err_ss) {
+                abstractController.sendData(res, err_ss)
+            } else {
+                // console.log(data)
+
+                //nếu có order và transaction=0 (chưa mua hàng)
+                if (data_ss.length > 0) {
+                    var orderid = data_ss[0].OrderID
+                    var productorder = {
+                        Amount: product.Amount
+                    }
+                    await productOrder.updateProductOrder(product.ProductID, orderid, productorder, (err, data) => {
+                        if (err) {
+                            abstractController.sendErr(res, err);
+                        } else {
+                            abstractController.sendData(res, data)
+                        }
+                    })
+                }
+                //nếu chưa có orderid hoặc transaction=1 (đơn hàng đã được mua)
+                else {
+                    // tạo một order mới
+                    await order.addOrder({}, async(err, data) => {
+                        if (err) {
+
+                        } else {
+                            //lấu order đã tạo và cập nhật lại session
+                            var orderid_new = data.insertId;
+                            var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+                            await Session.updateSession(sessionid, { OrderID: orderid_new, UserID: userid }, async(err, data) => {
+                                if (err) {
+
+                                } else {
+                                    // thêm product vào order mới
+                                    var productorder = {
+                                        Amount: product.Amount
+                                    }
+                                    await productOrder.updateProductOrder(product.ProductID, orderid, productorder, (err, data) => {
+                                        if (err) {
+                                            abstractController.sendErr(res, err);
+                                        } else {
+                                            abstractController.sendData(res, data)
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+
+            }
+        })
+    }
+    /**
+     * Cập nhật giỏ hàng đối với user chưa đăng nhập (sử dụng session)
      * 
      */
+exports.updateProductOrderWithSession = async(req, res, param) => {
+    var product = req.body;
+    var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+    await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
+        if (err_ss) {
+            abstractController.sendErr(res, err);
+        } else {
+            var orderid = data_ss[0].OrderID;
+            if (orderid == 0) {
+                await Order.addOrder({}, async(err_o, data_o) => {
+                    if (err_o) {
+                        abstractController.sendErr(res, err_o)
+                    } else {
+                        var orderid_new = data_o.insertId;
+                        product.OrderID = orderid_new;
+                        await Session.updateSession(sessionid, { OrderID: orderid_new }, async(err_s, data_s) => {
+                            if (err_s) {
+                                abstractController.sendErr(res, err_s);
+                            } else {
+                                await productOrder.updateProductOrder(product.ProductID, orderid, { Amount: product.Amount }, async(err_po, data_po) => {
+                                    if (err_po) {
+                                        abstractController.sendErr(res, err_po);
+                                    } else {
+                                        abstractController.sendData(res, data_po)
+                                    }
+                                })
+                            }
+                        })
+
+                    }
+                })
+            } else {
+                product.OrderID = orderid;
+                await productOrder.addProductOrder(product, async(err_po, data_po) => {
+                    if (err_po) {
+                        abstractController.sendErr(res, err_po);
+                    } else {
+                        abstractController.sendData(res, data_po)
+                    }
+                })
+            }
+
+        }
+    })
+}

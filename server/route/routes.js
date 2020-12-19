@@ -163,6 +163,10 @@ const routes = [
         path: /\/products\/([0-9a-z]+)/,
         handler: productController.updateProductWithAuth
     },
+    /**
+     * Xóa sản phẩm theo id
+     * 
+     */
     {
         method: 'DELETE',
         path: /\/products\/([0-9a-z]+)/,
@@ -208,8 +212,11 @@ const routes = [
         handler: catalogController.getAllCatalog
     },
     /**
-     * Cập nhật danh mục theo id
-     * 
+     * Cập nhật danh mục theo id,
+     * /catalogs/:catalogid
+     {
+         "CatalogName": "dien thoai"
+     }
      */
     {
         method: 'PUT',
@@ -256,14 +263,6 @@ const routes = [
         handler: productOrderController.getProductOrderByUserID
     },
     /**
-     * Lấy thống tin giỏ hàng theo id của giỏ hàng
-     */
-    {
-        method: 'GET',
-        path: /\/productorders\/([0-9a-z]+)/,
-        handler: productOrderController.getProductByOrderID
-    },
-    /**
      * Lấy thống tin giỏ hàng bằng session
      */
     {
@@ -272,17 +271,12 @@ const routes = [
         handler: productOrderController.getProductOrderBySession
     },
     /**
-     * Cập nhật số lượng sản phẩm của đơn hàng
-     * productorders/:orderid/:productid
-     */
-    {
-        method: 'PUT',
-        path: /\/productorders\/([0-9a-z]+)\/([0-9a-z]+)/,
-        handler: productOrderController.updateProductOrderByOrderIDProductID
-    },
-    /**
      * Thêm sản phẩm vào giỏ hàng với khách hàng đã đăng ký
-     * productorders/:userid    
+     * productorders/:userid   
+    {
+        "ProductID":4,
+	    "Amount": 3
+     } 
      */
     {
         method: 'POST',
@@ -290,13 +284,44 @@ const routes = [
         handler: productOrderController.addProductOrderWithUserID
     },
     /**
+     * Sửa số lượng sản phẩm trong giỏ hàng với khách hàng đã đăng ký
+     * productorders/:userid   
+    {
+        "ProductID":4,
+	    "Amount": 3
+     } 
+     */
+    {
+        method: 'PUT',
+        path: /\/productorders\/([0-9a-z]+)/,
+        handler: productOrderController.updateProductOrderWithUserID
+    },
+    /**
      * Thêm sản phẩm vào giỏ hàng với khách hàng chưa đăng nhập (sử dụng session)
      * productorders/:userid    
+     {
+        "ProductID":4,
+	    "Amount": 3
+     }
      */
     {
         method: 'POST',
         path: '/productorders',
         handler: productOrderController.addProductOrderWithSession
     },
+    /**
+     * Sửa số lượng sản phẩm trong giỏ hàng với khách hàng chưa đăng nhập (sử dụng session)
+     * productorders/:userid    
+     {
+        "ProductID":4,
+	    "Amount": 3
+     }
+     */
+    {
+        method: 'PUT',
+        path: '/productorders',
+        handler: productOrderController.updateProductOrderWithSession
+    },
+
 ]
 module.exports = routes;
