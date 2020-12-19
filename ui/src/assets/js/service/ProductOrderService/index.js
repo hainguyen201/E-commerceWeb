@@ -41,7 +41,7 @@ class ProductOrderService {
  */
     static async editAmountProductByUserID(userID, data) {
         try {
-            return api.put(`/productorders/${userID}`, data)
+            return api.put(`/productorders/${userID}`, data);
         } catch (error) {
             throw error;
         }

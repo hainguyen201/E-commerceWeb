@@ -3,7 +3,7 @@ var createElementByText = (textHTML) => {
     textHTML = textHTML.trim(); // Never return a text node of whitespace as the result
     template.innerHTML = textHTML;
     return template.content.firstChild;
-}
+};
 
 let animationNotif = (notification) => {
     let a = 1;
@@ -24,10 +24,10 @@ let animationNotif = (notification) => {
         }
         notification.style.top = `${a}px`;
     }, 5);
-}
+};
 
-var notifSuccess = (mes = " Successfully ") => {
-    const notification = document.getElementById("notification");
+var notifSuccess = (mes = ' Successfully ') => {
+    const notification = document.getElementById('notification');
     notification.innerHTML = `<div id="notif-content" class="notification-ok">
     <img src="/src/assets/img/icon-ok.png" class="icon20" style=" border-radius: 10px;" alt="icon-ok">
     <p style="white-space: nowrap; font-size: 14px;color: blue;">
@@ -35,11 +35,10 @@ var notifSuccess = (mes = " Successfully ") => {
     </p>
 </div>`;
     animationNotif(notification);
-}
+};
 
-
-var notifFailure = (mes = " Failure ") => {
-    const notification = document.getElementById("notification");
+var notifFailure = (mes = ' Failure ') => {
+    const notification = document.getElementById('notification');
     notification.innerHTML = `<div id="notif-content" class="notification-ok">
     <img src="/src/assets/img/icon-failure.png" class="icon20" style="border-radius: 10px;" alt="icon-ok">
     <p style="white-space: nowrap; font-size: 14px;color: red;">
@@ -47,7 +46,7 @@ var notifFailure = (mes = " Failure ") => {
     </p>
 </div>`;
     animationNotif(notification);
-}
+};
 
 var isJsonString = (str) => {
     try {
@@ -56,7 +55,7 @@ var isJsonString = (str) => {
         return false;
     }
     return true;
-}
+};
 // var filterObj = (obj) => {
 //     for(property in obj){
 //         if (obj[property] == null || obj[property] == '' || obj[property] == undefined || obj[property] == 'null' ||obj[property] == 'undefined') {

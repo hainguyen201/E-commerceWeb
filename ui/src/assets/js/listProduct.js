@@ -16,7 +16,6 @@
 //         console.log(err);
 //     });
 
-
 // function createProductElement(product) {
 //     var template = document.createElement('template');
 //     html = '<div class="product">' +

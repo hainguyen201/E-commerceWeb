@@ -79,7 +79,8 @@ body {
     text-align: center;
 }
 
-#op-login, #op-signup {
+#op-login,
+#op-signup {
     cursor: pointer;
     padding: 15px;
     margin-left: 30px;
@@ -89,7 +90,8 @@ body {
     border-bottom: 3px solid #1ba8ff;
 }
 
-.content.login, .content.signup {
+.content.login,
+.content.signup {
     padding: 35px 27px 35px 27px;
     height: 440px;
 }
@@ -102,7 +104,10 @@ body {
     justify-content: space-between;
 }
 
-input.name, input.password, input.phone, input.email {
+input.name,
+input.password,
+input.phone,
+input.email {
     border-radius: 5px;
     height: 22px;
     width: 381px;
@@ -111,7 +116,8 @@ input.name, input.password, input.phone, input.email {
     padding: 6px 12px 6px 12px;
 }
 
-button.btn-login, button.btn-signup {
+button.btn-login,
+button.btn-signup {
     background-color: #fdd835;
     width: 381px;
     height: 41px;

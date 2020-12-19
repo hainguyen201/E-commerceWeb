@@ -47,8 +47,12 @@ const template = `<div style="background-color: #c8c8c8; padding: 10px; border-r
 </div>`;
 
 export default class ProductDetailElement extends HTMLDivElement {
-    static get route() { return "/(\\d+)"; }
-    static get is() { return "product-detail"; }
+    static get route() {
+        return '/(\\d+)';
+    }
+    static get is() {
+        return 'product-detail';
+    }
 
     // querySelector("#minus-product").addEventListener('onclick',()=>{
 
@@ -62,12 +66,14 @@ export default class ProductDetailElement extends HTMLDivElement {
 
     onChangeAmountPrDetail() {
         let maxAmount = this.productItem.Remain || 0;
-        let amount = document.getElementById("amount-product-detail-show");
+        let amount = document.getElementById('amount-product-detail-show');
         var valueAmount = parseInt(amount.textContent) || 1;
-        if (event.currentTarget.textContent == "-" && valueAmount > 1) {
+        if (event.currentTarget.textContent == '-' && valueAmount > 1) {
             valueAmount -= 1;
-        }
-        else if (event.currentTarget.textContent == "+" && valueAmount < maxAmount) {
+        } else if (
+            event.currentTarget.textContent == '+' &&
+            valueAmount < maxAmount
+        ) {
             valueAmount += 1;
         }
         amount.innerText = `${valueAmount}`;
@@ -78,7 +84,7 @@ export default class ProductDetailElement extends HTMLDivElement {
     }
 
     onChangeShowImg() {
-        let currentImage = document.querySelector("#img-pr-detail");
+        let currentImage = document.querySelector('#img-pr-detail');
         let changeImage = event.currentTarget.childNodes[0].nextSibling;
         let temp = IMG_DEFAULT_BASE64;
         temp = currentImage.src;
@@ -102,37 +108,65 @@ export default class ProductDetailElement extends HTMLDivElement {
     }
 
     disconnectedCallback() {
-        console.log("disconnectedCallback");
+        console.log('disconnectedCallback');
     }
 
     adoptedCallback() {
-        console.log("adoptedCallback");
+        console.log('adoptedCallback');
     }
 
     attributeChangedCallback() {
-        console.log("attributeChangedCallback");
+        console.log('attributeChangedCallback');
     }
 
     connectedCallback() {
-        const dafaultProduct = { CatalogID: '', ProductID: '', ProductName: '', Discount: '', Price: '', Content: '', Image: '', ImageList: '', ProductCreatedDate: '', ProductModifiedDate: '', Remain: 0 };
+        const dafaultProduct = {
+            CatalogID: '',
+            ProductID: '',
+            ProductName: '',
+            Discount: '',
+            Price: '',
+            Content: '',
+            Image: '',
+            ImageList: '',
+            ProductCreatedDate: '',
+            ProductModifiedDate: '',
+            Remain: 0,
+        };
         const productID = this.params[0];
-        console.log('product-id', this.params)
+        console.log('product-id', this.params);
         this.setAttribute('product-id', `${productID}`);
         this.id = 'pr_detail';
         this.setAttribute('class', 'product-item-container');
-        productService.getProductById(productID).then((data) => {
-            let t = data.data[0];
-            for (const p in t) {
-                if (t[p] == null || t[p] == 'null' || t[p] == '') {
-                    t[p] = undefined;
+        productService
+            .getProductById(productID)
+            .then((data) => {
+                let t = data.data[0];
+                for (const p in t) {
+                    if (t[p] == null || t[p] == 'null' || t[p] == '') {
+                        t[p] = undefined;
+                    }
                 }
-            }
-            this.productItem = t;
-            append(t);
-        }).catch(() => {
-            notifFailure();
-        });
-        const append = async ({ CatalogName = 'Danh mục', CatalogID = '', ProductID = '', ProductName = '', Discount = 0, Price = 0, Content = 'Không có mô tả nào', Image = IMG_DEFAULT_BASE64_CODE, ImageList = '', ProductCreatedDate = '', ProductModifiedDate = '', Remain = 0 }) => {
+                this.productItem = t;
+                append(t);
+            })
+            .catch(() => {
+                notifFailure();
+            });
+        const append = async ({
+            CatalogName = 'Danh mục',
+            CatalogID = '',
+            ProductID = '',
+            ProductName = '',
+            Discount = 0,
+            Price = 0,
+            Content = 'Không có mô tả nào',
+            Image = IMG_DEFAULT_BASE64_CODE,
+            ImageList = '',
+            ProductCreatedDate = '',
+            ProductModifiedDate = '',
+            Remain = 0,
+        }) => {
             let producthtml = `<div style="background-color: #c8c8c8; padding: 10px; border-radius: 5px;">
         <a href="/" is="router-link" class="link-relation">Trang chủ ></a>
         <a href="/catalogs/${CatalogID}" is="router-link" class="link-relation">${CatalogName} ></a>
@@ -144,7 +178,9 @@ export default class ProductDetailElement extends HTMLDivElement {
                 <img class="img-product" style="width:390px;height:390px;" id="img-pr-detail" src="data:image/png;base64,${Image}" alt="">
             </div>
             <div id="list-image-product" style="display: flex;">
-                <div class="container-img-product-detail-list" onclick="${this.id}.onChangeShowImg()">
+                <div class="container-img-product-detail-list" onclick="${
+                    this.id
+                }.onChangeShowImg()">
                     <img class="img-product" src="data:image/png;base64,${IMG_DEFAULT_BASE64_CODE}" alt="">
                 </div>
                 <div class="container-img-product-detail-list">
@@ -169,23 +205,25 @@ export default class ProductDetailElement extends HTMLDivElement {
                     lại ${Remain}</p>
             </div>
             <div id="amount-product">
-                <span class="icon_adjust" id="minus-product" onclick="${this.id}.onChangeAmountPrDetail()" style="cursor: pointer;">-</span>
+                <span class="icon_adjust" id="minus-product" onclick="${
+                    this.id
+                }.onChangeAmountPrDetail()" style="cursor: pointer;">-</span>
                 <span class="icon_adjust" id="amount-product-detail-show"
                     style="margin-left: -2px;">1</span>
                 <span class="icon_adjust" id="plus-product" style="margin-left: -3px;cursor: pointer;"
                 onclick="${this.id}.onChangeAmountPrDetail()">+</span>
             </div>
-            <div id="on-order" onclick="${this.id}.onAddToCart()" style="font-size: 17px;margin-top: 70px;">
+            <div id="on-order" onclick="${
+                this.id
+            }.onAddToCart()" style="font-size: 17px;margin-top: 70px;">
                 Chọn mua
             </div>
         </div>
-    </div>`
+    </div>`;
             this.innerHTML = producthtml;
-        }
+        };
     }
 }
-
-
 
 // document.querySelector("#minus-product").addEventListener("onclick", () => {
 
@@ -208,4 +246,3 @@ export default class ProductDetailElement extends HTMLDivElement {
 // var onAddToCart = () => {
 
 // }
-

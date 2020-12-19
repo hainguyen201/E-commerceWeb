@@ -1,7 +1,5 @@
 class ProductService {
-    getAllProduct() {
-
-    }
+    getAllProduct() {}
 
     async getProductById(id) {
         try {
@@ -13,7 +11,7 @@ class ProductService {
 
     async getListProductByCatalogID(id) {
         try {
-            return await api.get(`/products/catalogs/${id}`)
+            return await api.get(`/products/catalogs/${id}`);
         } catch (error) {
             throw error;
         }
@@ -21,9 +19,6 @@ class ProductService {
 
     async addProductToCart() {
         try {
-
-        } catch (error) {
-
-        }
+        } catch (error) {}
     }
 }
