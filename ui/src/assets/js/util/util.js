@@ -31,11 +31,19 @@ var notifFailure = (mes = " Failure ") => {
     }, 2500);
 }
 
+var isJsonString = (str) => {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 // var filterObj = (obj) => {
 //     for(property in obj){
 //         if (obj[property] == null || obj[property] == '' || obj[property] == undefined || obj[property] == 'null' ||obj[property] == 'undefined') {
 //             if (typeof obj[property] == '') {
-                
+
 //             }
 //         }
 //     }

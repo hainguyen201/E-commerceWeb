@@ -1,16 +1,13 @@
 const template = `
 <div id="catalog-product">
 <div id="current-catalog">
-    <a class="item-cc" href="">Trang chu ></a>
-    <a class="item-cc" href="">Trang chu ></a>
-    <a class="item-cc" href="">Trang chu</a>
+    <a is="router-link" class="item-cc" href="">Trang chu ></a>
 </div>
-<a id="catalog-item" style="color: #fff;" href="">
+<a is="router-link" id="catalog-item" style="color: #fff;" href="">
     <div class="catalog-item">
         aa
     </div>
 </a>
-
 </div>
 `;
 export default class CatalogElement extends HTMLDivElement {
@@ -49,6 +46,7 @@ export default class CatalogElement extends HTMLDivElement {
     connectedCallback() {
         //{ CatalogID = '0', CatalogName = 'DANH MỤC CHƯA CÓ TÊN', ParentID = '', CatalogCreatedDate = '', CatalogModifiedDate = '' }
         let listCatalog = [];
+        const currentCatalogID = this.currentCatalogID;
         catalogService.getListCatalog().then((data) => {
             if (data.length > 0) {
                 appendHTML(data);
@@ -59,10 +57,22 @@ export default class CatalogElement extends HTMLDivElement {
 
         let appendHTML = (data) => {
             let html = `<div id="current-catalog">
-            <a class="item-cc" href="/">Trang chủ</a>
-        </div>`
+            <a is="router-link" class="item-cc" href="/">Trang chủ</a>`;
+            if (currentCatalogID) {
+                let currentCatalogName = data.find((item) => item.CatalogID == currentCatalogID).CatalogName;
+                html += `<a is="router-link" class="item-cc" href="/catalogs/${currentCatalogID}"> > ${currentCatalogName}</a>`;
+            }
+            html += ` </div>`;
             data.forEach(item => {
-                html += `<a id="catalog-item" style="color: #fff;" href="/catalogs/${item.CatalogID}">
+                if (item.CatalogID == currentCatalogID) {
+                    html += `<a is="router-link" id="catalog-item" style="color: #fff;" href="/catalogs/${item.CatalogID}">
+                    <div style="background-color: cornflowerblue !important;" class="catalog-item">
+                        ${item.CatalogName}
+                    </div>
+                </a>`;
+                }
+                else
+                    html += `<a is="router-link" id="catalog-item" style="color: #fff;" href="/catalogs/${item.CatalogID}">
                 <div class="catalog-item">
                     ${item.CatalogName}
                 </div>
