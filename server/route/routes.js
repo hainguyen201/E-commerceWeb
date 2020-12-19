@@ -4,70 +4,173 @@ const orderController = require('../controllers/order.controller')
 const catalogController = require('../controllers/catalog.controller')
 const authController = require('../controllers/auth.controller')
 const productOrderController = require('../controllers/productorders.controller')
-const routes = [{
+const routes = [
+    /**
+     * Lấy danh sách toàn bộ user
+     */
+    {
         method: 'GET',
         path: '/users',
         handler: userController.findAll
     },
+    /**
+     * Cập nhật user
+     * user/:userid
+     {
+        "FullName": "",
+        "Email": "",
+        "Phone": "",
+        "Address": "HUST",
+        "Password": "1234",
+        "UserName": "hainguyen",
+        "Role": 1
+    }
+     */
     {
         method: 'PUT',
         path: /\/users\/([0-9a-z]+)/,
         handler: userController.updateUser
     },
+    /**
+     * Thêm mới user
+    {
+    "FullName": "",
+    "Email": "",
+    "Phone": "",
+    "Address": "HUST",
+    "Password": "1234",
+    "UserName": "hainguyen",
+    "Role": 1
+    }
+     */
     {
         method: 'POST',
         path: '/users',
         handler: userController.addUser
     },
-
+    /**
+     * Xóa user
+     * /users/:userid
+     */
     {
         method: 'DELETE',
         path: /\/users\/([0-9a-z]+)/,
         handler: userController.deleteUser
     },
+    /**
+     * Đăng nhập
+     * /users
+    {
+        UserName: hainguyen,
+        Password:1234
+    }
+     */
     {
         method: 'POST',
         path: "/users/login",
         handler: userController.findByUserName
     },
+    /**
+     * Đăng xuất
+     * /users/logout
+    {}
+     */
     {
         method: 'POST',
         path: "/users/logout",
         handler: userController.logout
     },
+    /**
+     * Lấy sản phẩm theo danh mục
+     {
+         /producs/catalogs/:catalogid
+     }
+     */
     {
-
         method: 'GET',
         path: /\/products\/catalogs\/([0-9a-z]+)/,
         handler: productController.findProductByCatalogID
     },
+    /**
+     * Tìm kiếm sản phẩm theo tên
+     * Lưu ý về tên: sử dụng dấu _ thay cho dấu cách
+     * /products/names/iphone_12_64GB
+     */
     {
         method: 'GET',
         path: /\/products\/names\/([0-9a-z_]+)/,
         handler: productController.findProductByName
     },
+    /**
+     * Lấy toàn bộ sản phẩm
+     * /products
+     */
     {
         method: 'GET',
         path: '/products',
         handler: productController.findAllProducts
     },
+    /**
+     * Tìm kiếm sản phẩm theo id
+     * /products/:productid
+     */
     {
         method: 'GET',
         path: /\/products\/([0-9a-z]+)/,
         handler: productController.findProductByID
 
     },
-
+    /**
+     * Thêm sản phẩm (cần đăng nhập với quyền admin (Trường role của user=1))
+     * /products
+     {
+        "ProductID": 42,
+        "ProductName": "mi note 10",
+        "Price": 0,
+        "Content": "",
+        "Image": [chuyển đổi ảnh về base 64, có thể sử dụng api get product để xem mẫu của kiểu dữ liệu],
+        "ImageList": "",
+        "CatalogID": 1,
+        "Discount": 0,
+        "Remain": 0,
+        "ProductCreatedDate": "2020-12-11",
+        "ProductModifiedDate": "2020-12-11"
+    }
+     */
     {
         method: 'POST',
         path: '/products',
         handler: productController.addProductWithAuth
     },
+    /**
+     * Cập nhật sản phẩm với id
+     {
+        "ProductID": 42,
+        "ProductName": "mi note 10",
+        "Price": 0,
+        "Content": "",
+        "Image":[chuyển đổi ảnh về base 64, có thể sử dụng api get product để xem mẫu của kiểu dữ liệu] ,
+        "ImageList": "",
+        "CatalogID": 1,
+        "Discount": 0,
+        "Remain": 0,
+        "ProductCreatedDate": "2020-12-11",
+        "ProductModifiedDate": "2020-12-11"
+    }
+     */
     {
         method: 'PUT',
         path: /\/products\/([0-9a-z]+)/,
         handler: productController.updateProductWithAuth
     },
+    {
+        method: 'DELETE',
+        path: /\/products\/([0-9a-z]+)/,
+        handler: productController.deleteProductWithAuth
+    },
+    /**
+     * Lấy giỏ hàng theo id
+     */
     {
         method: 'GET',
         path: /\/orders\/([0-9a-z]+)/,
@@ -88,31 +191,56 @@ const routes = [{
         path: /\/orders\/([0-9a-z]+)/,
         handler: orderController.deleteOrder
     },
+    /**
+     * Lấy danh mục sản phẩm theo id
+     */
     {
         method: 'GET',
         path: /\/catalogs\/([0-9a-z]+)/,
         handler: catalogController.getCatalogByID
     },
+    /**
+     * Lấy toàn bộ danh mục sản phẩm
+     */
     {
         method: 'GET',
         path: '/catalogs',
         handler: catalogController.getAllCatalog
     },
+    /**
+     * Cập nhật danh mục theo id
+     * 
+     */
     {
         method: 'PUT',
         path: /\/catalogs\/([0-9a-z]+)/,
         handler: catalogController.updateCatalog
     },
+    /**
+     * Thêm danh mục  
+     * /catalogs
+     {
+         "CatalogName": "dien thoai"
+     }
+     */
     {
         method: 'POST',
         path: '/catalogs',
         handler: catalogController.addCatalog
     },
+    /**
+     * Xóa danh mục theo id
+     * /catalogs/:catalogid
+     */
     {
         method: 'DELETE',
         path: /\/catalogs\/([0-9a-z]+)/,
         handler: catalogController.deleteCatalog
     },
+    /**
+     * Lấy thông tin xác thực người dùng theo session
+     * /auth
+     */
     {
         method: 'GET',
         path: '/auth',

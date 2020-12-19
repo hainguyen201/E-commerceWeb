@@ -160,6 +160,32 @@ exports.updateProduct = async(req, res, param) => {
     })
 
 }
+exports.deleteProduct = async(req, res, param) => {
+    var productid = param;
+    await Product.DeleteProduct(productid, async(err_p, data_p) => {
+        if (err_p) {
+            abstractController.sendErr(res, err);
+        } else {
+            //xóa ảnh trong storage
+            var imagepath = productid + '.jpg'
+            helper.deleteImage(imagepath)
+            abstractController.sendData(res, data_p);
+        }
+    })
+}
+exports.deleteProductWithAuth = async(req, res, param) => {
+    await auth.getRole(req, async(err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err);
+        } else {
+            if (data == 1) {
+                this.deleteProduct(req, res, param)
+            } else {
+                abstractController.sendAuth(res);
+            }
+        }
+    })
+}
 exports.productsFormatToClient = function(data) {
     if (data)
         data.forEach(element => {

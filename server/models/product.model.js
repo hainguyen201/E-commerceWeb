@@ -40,7 +40,7 @@ Product.getProductByCatalogs = async(catalogId, result) => {
 
 }
 Product.getProductByID = async(productId, result) => {
-    var sqlString = `select * from products where ProductID=?`;
+    var sqlString = `SELECT p.ProductName, p.ProductID, p.Price, p.Content, p.Image, p.ImageList, p.CatalogID, c.CatalogName, p.Discount, p.Remain, p.ProductCreatedDate, p.ProductModifiedDate FROM products as p, catalogs as c where p.CatalogID=c.CatalogID and ProductID=?`;
     console.log(productId)
     await AbstractModel.queryExc(result, sqlString, [productId]);
 }
