@@ -124,6 +124,7 @@ exports.addProductOrderWithUserID = async(req, res, param) => {
 }
 exports.getProductOrderByUserID = async(req, res, param) => {
         var userid = param;
+        debugger
         await Session.getOrderByUserID(userid, async(err, data) => {
             if (err) {
                 abstractController.sendErr(res, err)

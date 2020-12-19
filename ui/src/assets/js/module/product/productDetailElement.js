@@ -116,7 +116,7 @@ export default class ProductDetailElement extends HTMLDivElement {
     connectedCallback() {
         const dafaultProduct = { CatalogID: '', ProductID: '', ProductName: '', Discount: '', Price: '', Content: '', Image: '', ImageList: '', ProductCreatedDate: '', ProductModifiedDate: '', Remain: 0 };
         const productID = this.params[0];
-        console.log('product-id',this.params)
+        console.log('product-id', this.params)
         this.setAttribute('product-id', `${productID}`);
         this.id = 'pr_detail';
         this.setAttribute('class', 'product-item-container');
@@ -132,10 +132,10 @@ export default class ProductDetailElement extends HTMLDivElement {
         }).catch(() => {
             notifFailure();
         });
-        const append = async ({ CatalogID = '', ProductID = '', ProductName = '', Discount = 0, Price = 0, Content = 'Không có mô tả nào', Image = IMG_DEFAULT_BASE64_CODE, ImageList = '', ProductCreatedDate = '', ProductModifiedDate = '', Remain = 0 }) => {
+        const append = async ({ CatalogName = 'Danh mục', CatalogID = '', ProductID = '', ProductName = '', Discount = 0, Price = 0, Content = 'Không có mô tả nào', Image = IMG_DEFAULT_BASE64_CODE, ImageList = '', ProductCreatedDate = '', ProductModifiedDate = '', Remain = 0 }) => {
             let producthtml = `<div style="background-color: #c8c8c8; padding: 10px; border-radius: 5px;">
         <a href="/" is="router-link" class="link-relation">Trang chủ ></a>
-        <a href="/catalogs/${CatalogID}" is="router-link" class="link-relation">Danh mục ></a>
+        <a href="/catalogs/${CatalogID}" is="router-link" class="link-relation">${CatalogName} ></a>
         <a href="/products/${productID}" is="router-link" class="link-relation">${ProductName}</a>
     </div>
     <div id="product-item-show">

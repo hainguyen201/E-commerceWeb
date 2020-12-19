@@ -59,9 +59,16 @@
                             <input type="text" name="searchBar" id="searchBar" placeholder="Tìm kiếm sản phẩm" />
                         </div>
                     </div>
-                    <div id="root2" class="header__cart">
-                        <i onclick="openModalCart()" class="fas fa-shopping-cart"></i>
+                    <div class="cart-amount-items">
+                        <a is="router-link" href="/cart">
+                            <div class="fa-shopping-cart">
+                            </div>
+                            <div class="_center_everything icon-amount-items">
+                                0
+                            </div>
+                        </a>
                     </div>
+
                     <!-- <div class="container content-section">
                         <h2 class="section-header">Giỏ hàng</h2>
                         <div class="cart-row">

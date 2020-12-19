@@ -43,7 +43,7 @@ class RootElement extends HTMLDivElement {
                 '<div class="container-img">' +
                 '<img class="img-product" src="' + 'data:image/png;base64,' + product.Image + '" alt="">' +
                 '</div>' +
-                '<p id="name-product">' +
+                '<p class="name-pr" id="name-product'+product.ProductID+'">' +
                 product.ProductName +
                 '</p>' +
                 '<span class="tooltip-product" id="tooltip-product-' + product.ProductID + '">' + product.ProductName + '</span>' +
