@@ -47,28 +47,31 @@ const server = http.createServer(options, async(req, res) => {
             //nếu có cookie
             var cookie = helper.cookieparser(req.headers.cookie);
             // tim cookie trong db
-            await session.getSessionByID(cookie.sessionid, async(err, data) => {
-                if (err) {
+            if (cookie.sessionid)
+                await session.getSessionByID(cookie.sessionid, async(err, data) => {
+                    if (err) {
 
-                } else {
-                    //nếu cookie đó có trong db
-                    if (data.length > 0) {
-                        await router(req, res, routes);
                     } else {
-                        //nếu cookie không có trong db
-                        //thì thêm cookie vào db
-                        var ss = new Session({ SessionID: cookie.sessionid })
-                        await session.addSession(ss, async(err2, data2) => {
-                            if (err2) {
+                        //nếu cookie đó có trong db
+                        if (data.length > 0) {
+                            await router(req, res, routes);
+                        } else {
+                            //nếu cookie không có trong db
+                            //thì thêm cookie vào db
+                            var ss = new Session({ SessionID: cookie.sessionid })
+                            await session.addSession(ss, async(err2, data2) => {
+                                if (err2) {
 
-                            } else {
-                                await router(req, res, routes)
-                            }
-                        })
+                                } else {
+                                    await router(req, res, routes)
+                                }
+                            })
+                        }
                     }
-                }
 
-            })
+                })
+            else
+                await router(req, res, routes);
 
         }
 
