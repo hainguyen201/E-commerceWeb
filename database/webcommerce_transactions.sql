@@ -31,6 +31,7 @@ CREATE TABLE `transactions` (
   `Security` varchar(16) DEFAULT NULL COMMENT 'Khóa bảo mật\n',
   `TransactionCreatedDate` date DEFAULT NULL COMMENT 'Ngày tạo',
   `TransactionModifiedDate` date DEFAULT NULL,
+  `SessionID` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`TransactionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-15 16:20:19
+-- Dump completed on 2020-12-19 14:42:27

@@ -127,10 +127,21 @@ const routes = [{
         path: /\/productorders\/users\/([0-9a-z]+)/,
         handler: productOrderController.getProductOrderByUserID
     },
+    /**
+     * Lấy thống tin giỏ hàng theo id của giỏ hàng
+     */
     {
         method: 'GET',
         path: /\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.getProductByOrderID
+    },
+    /**
+     * Lấy thống tin giỏ hàng bằng session
+     */
+    {
+        method: 'GET',
+        path: '/productorders',
+        handler: productOrderController.getProductOrderBySession
     },
     /**
      * Cập nhật số lượng sản phẩm của đơn hàng
@@ -149,6 +160,15 @@ const routes = [{
         method: 'POST',
         path: /\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.addProductOrderWithUserID
-    }
+    },
+    /**
+     * Thêm sản phẩm vào giỏ hàng với khách hàng chưa đăng nhập (sử dụng session)
+     * productorders/:userid    
+     */
+    {
+        method: 'POST',
+        path: '/productorders',
+        handler: productOrderController.addProductOrderWithSession
+    },
 ]
 module.exports = routes;
