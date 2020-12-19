@@ -89,5 +89,8 @@ module.exports.cookieparser = (str) => {
         var cur = str[i].split('=');
         result[cur[0]] = cur[1];
     }
-    return result;
+    var cookie = {
+        sessionid: result.sessionid ? result.sessionid : null
+    }
+    return cookie;
 }

@@ -28,7 +28,18 @@ module.exports = async(req, res, routes) => {
     let param = null;
 
     if (route && typeof route.path === 'object') {
-        param = req.url.match(route.path)[1];
+        var length = req.url.match(route.path).length;
+        var params = req.url.match(route.path);
+        if (length > 1) {
+            param = params[length - 1] + ' '
+            length -= 1
+        }
+        while (length > 1) {
+            param += params[length - 1] + ' ';
+            length -= 1;
+        }
+        param = param.slice(0, -1)
+
     }
     if (route) {
         let body = null

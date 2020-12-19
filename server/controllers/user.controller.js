@@ -82,7 +82,7 @@ exports.logout = async(req, res, param) => {
 
             } else {
                 res.setHeader("set-cookie", [`sessionid=${sessionid}; path=/; samesite=None; Secure `])
-                await abstractController.sendData(res, data)
+                await abstractController.sendAuth(res)
             }
 
         })

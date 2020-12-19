@@ -43,4 +43,30 @@ AbstractModel.updateDataQuery = async function(tablename, data, result, idname, 
     dataUpdate.push(id)
     await AbstractModel.queryExc(result, sqlString, dataUpdate);
 }
+AbstractModel.updateDataQuerys = async function(tablename, data, result, idnames, ids) {
+    var dataUpdate = [];
+    var keys = Object.keys(data)
+    var sqlString = `update ${tablename} set `;
+    keys.forEach(key => {
+        sqlString += key + '=?,';
+    })
+    sqlString = sqlString.slice(0, -1)
+    keys.forEach(key => {
+        dataUpdate.push(data[key])
+    })
+
+
+    sqlString += ` WHERE `;
+    var i = 0;
+    idnames.forEach(idname => {
+        sqlString += `${idname}=? and `;
+        dataUpdate.push(ids[i]);
+        i = i + 1;
+
+    })
+    sqlString = sqlString.slice(0, -5)
+    console.log(sqlString)
+    console.log(dataUpdate)
+    await AbstractModel.queryExc(result, sqlString, dataUpdate);
+}
 module.exports = AbstractModel
