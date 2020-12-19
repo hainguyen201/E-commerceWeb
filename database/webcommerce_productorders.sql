@@ -31,16 +31,6 @@ CREATE TABLE `productorders` (
   PRIMARY KEY (`ProductID`,`OrderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `productorders`
---
-
-LOCK TABLES `productorders` WRITE;
-/*!40000 ALTER TABLE `productorders` DISABLE KEYS */;
-INSERT INTO `productorders` VALUES (1,1,NULL,NULL,1),(2,3,NULL,'2020-12-18',1),(4,3,NULL,'2020-12-19',6),(7,3,NULL,'2020-12-19',7),(42,1,NULL,NULL,7),(44,3,NULL,'2020-12-19',1),(45,2,NULL,'2020-12-19',9),(45,2,NULL,'2020-12-19',10),(46,5,NULL,'2020-12-19',10);
-/*!40000 ALTER TABLE `productorders` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -51,4 +41,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-19 14:42:27
+-- Dump completed on 2020-12-19 20:24:06
