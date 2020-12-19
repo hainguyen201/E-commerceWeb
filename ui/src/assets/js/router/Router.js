@@ -92,6 +92,8 @@ document.addEventListener('page-loaded', event => {
 
 document.addEventListener('page-loading', event => {
   loadingElement.style.visibility = "visible";
+  loadingElement.style.display = "grid !important";
+  loadingElement.style.placeItems = "center !important";
   app.style.opacity = '0.2';
 }, false);
 

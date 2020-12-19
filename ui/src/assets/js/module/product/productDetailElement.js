@@ -122,6 +122,7 @@ export default class ProductDetailElement extends HTMLDivElement {
         this.setAttribute('class', 'product-item-container');
         productService.getProductById(productID).then((data) => {
             let t = data.data[0];
+            debugger
             for (const p in t) {
                 if (t[p] == null || t[p] == 'null' || t[p] == '') {
                     t[p] = undefined;
