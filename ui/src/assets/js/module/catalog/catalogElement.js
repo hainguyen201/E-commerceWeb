@@ -3,7 +3,7 @@ const template = `
 <div id="current-catalog">
     <a is="router-link" class="item-cc" href="">Trang chu ></a>
 </div>
-<a is="router-link" id="catalog-item" style="color: #fff;" href="">
+<a is="router-link" id="catalog-item" style="color: #000;" href="">
     <div class="catalog-item">
         aa
     </div>
@@ -65,14 +65,13 @@ export default class CatalogElement extends HTMLDivElement {
             html += ` </div>`;
             data.forEach(item => {
                 if (item.CatalogID == currentCatalogID) {
-                    html += `<a is="router-link" id="catalog-item" style="color: #fff;" href="/catalogs/${item.CatalogID}">
-                    <div style="background-color: cornflowerblue !important;" class="catalog-item">
+                    html += `<a is="router-link" id="catalog-item" style="color: #000;" href="/catalogs/${item.CatalogID}">
+                    <div style="background-color: #9bbffe !important;" class="catalog-item">
                         ${item.CatalogName}
                     </div>
                 </a>`;
-                }
-                else
-                    html += `<a is="router-link" id="catalog-item" style="color: #fff;" href="/catalogs/${item.CatalogID}">
+                } else
+                    html += `<a is="router-link" id="catalog-item" style="color: #000;" href="/catalogs/${item.CatalogID}">
                 <div class="catalog-item">
                     ${item.CatalogName}
                 </div>

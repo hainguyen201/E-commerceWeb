@@ -6,17 +6,21 @@
 }
 
 .catalog-item {
-    border: 1px solid #fff;
+    border-bottom: 1px solid #bababa;
     cursor: pointer;
     padding: 12px;
     border-radius: 3px;
     font-size: large;
-    background-color: #c8c8c8;
+}
+
+.catalog-item:hover {
+    background-color: #ebebeb;
 }
 
 .item-cc {
-    font-size: medium;
-    color: #787878;
+    font-size: large;
+    color: #ff3824;
+    font-weight: bold;
 }
 
 #current-catalog {
