@@ -14,6 +14,16 @@ const routes = [
         handler: userController.findAll
     },
     /**
+     * Lấy thông tin user theo id
+     * /user/:userid
+     * 
+     */
+    {
+        method: 'GET',
+        path: /\/users\/([0-9a-z]+)/,
+        handler: userController.findOne
+    },
+    /**
      * Cập nhật user
      * user/:userid
      {
