@@ -31,16 +31,6 @@ CREATE TABLE `catalogs` (
   PRIMARY KEY (`CatalogID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `catalogs`
---
-
-LOCK TABLES `catalogs` WRITE;
-/*!40000 ALTER TABLE `catalogs` DISABLE KEYS */;
-INSERT INTO `catalogs` VALUES (1,'dien thoai',NULL,NULL,NULL),(2,'máy tính bảng',NULL,NULL,NULL),(3,'laptop macbook',0,'2020-12-15','2020-12-15'),(4,'laptop dell',0,'2020-12-15','2020-12-15'),(5,'laptop dell',0,'2020-12-15','2020-12-15'),(6,'laptop asus',0,'2020-12-15','2020-12-15');
-/*!40000 ALTER TABLE `catalogs` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -51,4 +41,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-19 14:42:27
+-- Dump completed on 2020-12-19 20:24:05
