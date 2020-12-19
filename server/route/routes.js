@@ -123,5 +123,23 @@ const routes = [{
         path: /\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.getProductByOrderID
     },
+    /**
+     * Cập nhật số lượng sản phẩm của đơn hàng
+     * productorders/:orderid/:productid
+     */
+    {
+        method: 'PUT',
+        path: /\/productorders\/([0-9a-z]+)\/([0-9a-z]+)/,
+        handler: productOrderController.updateProductOrderByOrderIDProductID
+    },
+    /**
+     * Thêm sản phẩm vào giỏ hàng với khách hàng đã đăng ký
+     * productorders/:userid
+     */
+    {
+        method: 'POST',
+        path: /\/productorders\/([0-9a-z]+)/,
+        handler: productController.addProductOrder
+    }
 ]
 module.exports = routes;
