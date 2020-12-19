@@ -1,4 +1,4 @@
-class CatalogService {
+class OrderService {
     async getListCatalog() {
         try {
             return await api.get('/catalogs');

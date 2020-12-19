@@ -102,8 +102,7 @@ let li_user = document.querySelector("li.user");
 let a_user = document.querySelector("a#user-name");
 
 var loginSuccessful = (user) => {
-    debugger
-    //localStorage.setItem("USER_ID",)
+    localStorage.setItem("USER_ID", user.UserID);
     li_login.style.display = "none";
     li_user.style.display = "inline-block";
     a_user.innerHTML = user.UserName || "USER_DEFAULT";
@@ -111,11 +110,17 @@ var loginSuccessful = (user) => {
 }
 
 var logoutSuccessful = () => {
+    if (localStorage.getItem("USER_ID")) {
+        localStorage.removeItem("USER_ID");
+    }
     li_login.style.display = "inline-block";
     li_user.style.display = "none";
 }
 
 var unexpectedLogout = () => {
+    if (localStorage.getItem("USER_ID")) {
+        localStorage.removeItem("USER_ID");
+    }
     notifFailure("Phiên đã hết! Hãy đăng nhập để có trải nghiệm tốt hơn");
     li_login.style.display = "inline-block";
     li_user.style.display = "none";

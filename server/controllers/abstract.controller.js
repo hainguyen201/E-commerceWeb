@@ -10,7 +10,7 @@ const headers = require('../config/header.config')
      */
 exports.sendData = (res, data) => {
     // res.statusCode = 200;
-    console.log(data)
+    //console.log(data)
     res.statusCode = 200;
     res.write(JSON.stringify(data))
         //console.log(res)
