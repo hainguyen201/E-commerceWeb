@@ -39,16 +39,6 @@ CREATE TABLE `products` (
   CONSTRAINT `fk_Product_1` FOREIGN KEY (`CatalogID`) REFERENCES `catalogs` (`CatalogID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `products`
---
-
-LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'iphone 12',35990000,'Sử dụng công nghệ mạnh nhất trong thiết kế chip, 3 camere cho ra những tấm hình sắc nét  Ram lên tới 6GB cho cảm giác sử dụng mượt mà','1.jpg','',1,0,20,'2020-12-18','2020-12-18'),(2,'iphone 11',26990000,NULL,'2.jpg',NULL,1,0,30,NULL,NULL),(5,'ipad 4 ',15390000,NULL,'5.jpg',NULL,2,0,40,NULL,NULL),(7,'mi note 11',0,'','7.jpg','',1,20,25,'2020-12-09','2020-12-09'),(42,'mi note 10',0,'','42.jpg','',1,0,0,'2020-12-11','2020-12-11'),(43,'mi note 9',0,'','43.jpg','',1,0,0,'2020-12-11','2020-12-11'),(44,'mi note 8',0,'','44.jpg','',1,0,0,'2020-12-11','2020-12-11'),(45,'mi note 7',0,'','45.jpg','',1,0,0,'2020-12-11','2020-12-11'),(46,'mi note 6',0,'','46.jpg','',1,0,0,'2020-12-11','2020-12-11'),(47,'mi note 5',0,'','47.jpg','',1,0,0,'2020-12-11','2020-12-11'),(48,'mi note 4',0,'','48.jpg','',1,0,0,'2020-12-11','2020-12-11'),(49,'mi note 11',0,'','49.jpg','',1,20,0,'2020-12-15','2020-12-15'),(50,'mi note 54',0,'','50.jpg','',1,20,0,'2020-12-15','2020-12-15');
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -59,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-19 14:42:27
+-- Dump completed on 2020-12-19 20:24:05
