@@ -11,8 +11,8 @@ Session.getSessionByID = async(sessionId, result) => {
     AbstractModel.queryExc(result, sqlString, [sessionId])
 }
 Session.getOrderByUserID = async(userid, result) => {
-    var sqlString = `select OrderID from sessions as s orders as o where UserId=? and s.OrderID=orders.OrderID`;
-    await AbstractModel.queryExc(result, sqlString, [userid]);
+    var sqlString = `select distinct o.OrderID from sessions as s, orders as o where UserId=${userid} and s.OrderID=o.OrderID and TransactionID=0`;
+    await AbstractModel.queryExc(result, sqlString);
 }
 Session.addSession = async(session, result) => {
     var add_ss = new Session(session);

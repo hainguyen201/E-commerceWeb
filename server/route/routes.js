@@ -118,6 +118,15 @@ const routes = [{
         path: '/auth',
         handler: authController.UserAuth
     },
+    /**
+     * Lấy thông tin sản phẩm trong giỏ hàng của user
+     * /productorders/users/:userid
+     */
+    {
+        method: 'GET',
+        path: /\/productorders\/users\/([0-9a-z]+)/,
+        handler: productOrderController.getProductOrderByUserID
+    },
     {
         method: 'GET',
         path: /\/productorders\/([0-9a-z]+)/,
@@ -134,12 +143,12 @@ const routes = [{
     },
     /**
      * Thêm sản phẩm vào giỏ hàng với khách hàng đã đăng ký
-     * productorders/:userid
+     * productorders/:userid    
      */
     {
         method: 'POST',
         path: /\/productorders\/([0-9a-z]+)/,
-        handler: productController.addProductOrder
+        handler: productOrderController.addProductOrderWithUserID
     }
 ]
 module.exports = routes;
