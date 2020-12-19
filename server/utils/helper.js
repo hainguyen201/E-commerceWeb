@@ -1,5 +1,6 @@
 var fs = require('fs')
-var path = require('path')
+var path = require('path');
+const { ppid } = require('process');
 module.exports.validationError = (res, error = 'Data provided is not valid') => {
     addHeaders(res);
 
@@ -49,7 +50,12 @@ module.exports.save_base64 = (image, name) => {
         console.log('k luu dc file')
     })
 }
-
+module.exports.deleteImage = (name) => {
+    var deletepath = path.normalize(basepath + name)
+    fs.unlinkSync(deletepath, (err) => {
+        console.log(err)
+    })
+}
 module.exports.getPostData = (req) => {
     return new Promise((resolve, reject) => {
         try {
