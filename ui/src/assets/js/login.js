@@ -145,7 +145,7 @@ btnLogin.onclick = async function (event) {
                 loginSuccessful(data.data[0]);
             }
         } catch (error) {
-            notifFailure('Đăng nhập thất bại');
+            notifFailure('Tên tài khoản hoặc mật khẩu không chính xác');
         }
         // /base.redirect('/list_product/index.html', '')
     }

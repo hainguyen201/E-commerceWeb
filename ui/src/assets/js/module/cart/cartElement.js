@@ -1,4 +1,6 @@
 const template = `
+<span id="change-address" style="font-size: small;float: right;color: #0c5db6;cursor: pointer;"
+onclick="openInputAddress()">Thay đổi</span>
 
 <div id="cart-header">
     <h2>Giỏ hàng</h2>
@@ -151,7 +153,6 @@ export default class CartElement extends HTMLDivElement {
         const productID = parseInt(parentNode.parentNode.parentNode.id);
         let maxAmount = parseInt(parentNode.getAttribute('remain')) || 0;
         let valueAmount = parseInt(parentNode.childNodes[3].textContent) || 1;
-        debugger;
         if (event.currentTarget.textContent == '-' && valueAmount > 1) {
             valueAmount -= 1;
             update();
@@ -171,7 +172,7 @@ export default class CartElement extends HTMLDivElement {
         //Router.open('/cart');
     }
 
-    onOrder() {
+    onOrderToTransaction() {
         //Đặt hàng
     }
 
@@ -272,15 +273,10 @@ export default class CartElement extends HTMLDivElement {
                 addressHTML = `<div style="float: right; width: 315px;">
                 <div id="address-order">
                     <span>Địa chỉ nhận hàng</span>
-                    <span id="change-address" style="font-size: small;float: right;color: #0c5db6;cursor: pointer;"
-                        onclick="${this.id}.openInputAddress()">Thay đổi</span>
-                    <h4>${user.FullName || 'KHÔNG CÓ TÊN'} | ${
-                    user.Phone || 'Không có SDT'
-                }</h4>
-                    <textarea type="text" id="address-order-input"
-                        disabled>${
-                            user.Address || 'Không có Địa chỉ'
-                        }</textarea>
+                 
+                    <input value="${user.FullName}" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
+                     <input value="${user.Phone}" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
+                    <textarea style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"/>${user.Address}</textarea>
                 </div>
                 <div id="cart-total-price">
                     <span style="color:#787878">Thành tiền</span>
@@ -291,6 +287,22 @@ export default class CartElement extends HTMLDivElement {
                 </div>
                 </div>`;
             } else {
+                addressHTML = `<div style="float: right; width: 315px;">
+                <div id="address-order">
+                    <span>Địa chỉ nhận hàng</span>
+    
+                    <input style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
+                     <input style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
+                    <textarea style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"></textarea>
+                </div>
+                <div id="cart-total-price">
+                    <span style="color:#787878">Thành tiền</span>
+                    <span style="color: #fe3834;float: right;font-size: 22px;font-weight: bold;">${totalMoney.formatMoney()}đ</span>
+                </div>
+                <div id="on-order" onclick="${this.id}.onOrderToTransaction()">
+                    Đặt hàng
+                </div>
+                </div>`;
             }
 
             if (data.length == 0) {

@@ -14,6 +14,7 @@ Router.addModule('/', containerRootElement, mainContainer);
 Router.addModule('/cart', cartList, mainContainer);
 //Auth trước khi mở đường dẫn mới
 console.log('reload resource');
+
 userService
     .authService()
     .then((data) => {
@@ -26,6 +27,7 @@ userService
         Router.open(window.location.pathname);
     })
     .catch((err) => {
+        Router.open(window.location.pathname);
         notifFailure(err.toString());
     });
 
