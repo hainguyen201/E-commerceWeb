@@ -100,7 +100,7 @@ export default class CartElement extends HTMLDivElement {
         </div>`;
             let listItemsHTML = `<div id="cart-list-product">`;
             data.forEach((item) => {
-                debugger;
+
                 totalMoney += item.Amount * item.Price;
                 listItemsHTML += `<div id="cart-product-item">
                 <h3 id="vendor" style="padding: 10px;"><a is="router-link" href="/products/${

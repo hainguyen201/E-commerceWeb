@@ -18,13 +18,14 @@ const server = http.createServer(options, async(req, res) => {
     res.setHeader('Access-Control-Allow-Origin', "http://127.0.0.1:5000");
     res.setHeader('Access-Control-Allow-Credentials', 'true')
     res.setHeader('Content-Type', "application/json")
-        // res.setHeader('Access-Control-Allow-Methods', "*");
-        // res.setHeader('Access-Control-Allow-Headers', "*");
-        // console.log(req.headers)
-        // res.setHeader('Cookie', "sessionid: 1234")
+    res.setHeader('Access-Control-Allow-Methods', "OPTIONS, GET, PUT, POST, DELETE");
+    // res.setHeader('Access-Control-Allow-Headers', "*");
+    // console.log(req.headers)
+    // res.setHeader('Cookie', "sessionid: 1234")
 
     if (req.method == "OPTIONS") {
-        res.setHeader('Access-Control-Allow-Methods', "*");
+        // res.setHeader('Access-Control-Allow-Methods', "*");
+        res.setHeader('Access-Control-Allow-Methods', "OPTIONS, GET, PUT, POST, DELETE");
         res.setHeader('Access-Control-Allow-Headers', "Credentials,Access-Control-Allow-Origin, Content-Type");
         res.statusCode = 200;
         res.end();
