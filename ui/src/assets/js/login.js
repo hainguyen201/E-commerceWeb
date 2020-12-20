@@ -40,7 +40,7 @@ function changeContent() {
 
 function openLoginSignupModal() {
     modalLoginSignup.style.visibility = 'visible';
-    app.style.opacity = 0.3;
+    app.style.opacity = 0.1;
 }
 
 var listCheckbox = [checkboxMale, checkboxFemale];
@@ -59,7 +59,7 @@ onlyCheckOne = (e) => {
 checkboxMale.addEventListener('change', this.onlyCheckOne);
 checkboxFemale.addEventListener('change', (e) => this.onlyCheckOne(e));
 
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -76,7 +76,7 @@ let validate = document.querySelector('.validate-login');
 validate.innerHTML = ' ';
 let reEmail = /\S+@\S+\.\S+/;
 let rePass = /^\w{7,15}$/;
-email.onkeydown = function(e) {
+email.onkeydown = function (e) {
     // if (!reEmail.exec(email.value)) {
     //     validate.innerHTML = "Email không hợp lệ";
     // } else validate.innerHTML = "";
@@ -126,7 +126,7 @@ var unexpectedLogout = () => {
     li_login.style.display = 'inline-block';
     li_user.style.display = 'none';
 };
-btnLogin.onclick = async function(event) {
+btnLogin.onclick = async function (event) {
     if (true) {
         try {
             if (checkValidation()) {
@@ -156,21 +156,8 @@ btnLogout.onclick = async function logout(event) {
         notifFailure('Đăng xuất thất bại');
     }
 };
-// document.getElementById('test-cor').onclick = function() {
-//     // api.delete('/productorders/1/1').then((result) => {
 
-//     //         console.log(result);
-//     //     })
-//     //     .catch((err) => {
-//     //         // document.dispatchEvent(new CustomEvent('page-loading'));
-
-//     //     })
-//     api.put('/productorders/1', { ProductID: 2, Amount: 8 }).then((result) => {
-
-//             console.log(result);
-//         })
-//         .catch((err) => {
-//             // document.dispatchEvent(new CustomEvent('page-loading'));
-
-//         })
-// };
+document.querySelector('.btn-signup').onclick = async function signup(e) {
+    try {
+    } catch (error) {}
+};

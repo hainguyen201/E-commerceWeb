@@ -21,6 +21,7 @@ userService
         } else {
             notifSuccess('Bạn chưa đăng nhập tài khoản');
         }
+        updateShowTotalProductOfCart();
         Router.open(window.location.pathname);
     })
     .catch((err) => {
