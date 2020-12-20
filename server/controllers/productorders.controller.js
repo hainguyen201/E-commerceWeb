@@ -10,6 +10,14 @@ const order = require('../models/order.model')
 const { isBuffer } = require('util')
 const Order = require('../models/order.model')
 const ProductOrder = require('../models/productorder.model')
+
+/**
+ * Lấy sản phẩm bởi orderID
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.getProductByOrderID = async(req, res, param) => {
     await productOrder.getProductByOrderID(param, (err, data) => {
         if (err) {
@@ -24,6 +32,12 @@ exports.getProductByOrderID = async(req, res, param) => {
         }
     })
 }
+
+/**
+ * Format data product
+ * @param {*} data 
+ */
+
 exports.productsFormatToClient = function(data) {
     if (data)
         data.forEach(element => {
@@ -36,6 +50,13 @@ exports.productsFormatToClient = function(data) {
         });
     return data;
 }
+
+/**
+ * Cập nhật product order
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.updateProductOrderByOrderIDProductID = async(req, res, param) => {
         var param = param.split(" ");
         var productid = parseInt(param[0]);
@@ -122,6 +143,13 @@ exports.addProductOrderWithUserID = async(req, res, param) => {
 
     //nếu có rồi thì lấy orderid với TransactionID=0 và cập nhật vào 
 }
+
+/**
+ * Lấy product order qua id user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.getProductOrderByUserID = async(req, res, param) => {
         var userid = param;
         debugger
@@ -311,15 +339,23 @@ exports.deleteProductOrderWithUserID = async(req, res, param) => {
                     }
                 })
             } else {
-                abstractController.sendErr(res, { message: 'không tồn tại' })
+                abstractController.sendErr(res, { message: 'Không tồn tại' })
             }
 
         }
     })
 }
+
+/**
+ * Xóa giỏ hàng
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.deleteProductOrderWithSession = async(req, res, param) => {
     var productid = param
     var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+
     await Session.getSessionByID(sessionid, async(err_ss, data_ss) => {
         if (err_ss) {
             abstractController.sendErr(res, err);
