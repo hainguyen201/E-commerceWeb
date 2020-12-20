@@ -78,4 +78,28 @@ class ProductOrderService {
             throw error;
         }
     }
+
+    /**
+     * Xóa sản phẩm khỏi giỏ hàng với khách hàng đã đăng nhập
+     * /productorders/:userid/:productid
+     */
+    static async deteleProductInCartByUserID(userID, productID) {
+        try {
+            return await api.delete(`/productorders/${userID}/${productID}`);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
+     * Xóa sản phẩm khỏi giỏ hàng với khách hàng chưa đăng nhập (sử dụng session)
+     * /productorders/:productid
+     */
+    static async deleteProductInCartBySession(productID) {
+        try {
+            return await api.delete(`/productorders/${productID}`);
+        } catch (error) {
+            throw error;
+        }
+    }
 }

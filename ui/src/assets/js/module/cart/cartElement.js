@@ -5,7 +5,7 @@ const template = `
     <span>(2 sản phẩm)</span>
 </div>
 <div id="cart-list-product">
-    <div id="cart-product-item">
+    <div id="" class="cart-product-item">
         <h3 id="vendor" style="padding: 10px;"><a href="">Nha cung cap</a></h3>
         <div id="product-item">
             <div class="container-img-cart-pr">
@@ -59,19 +59,128 @@ export default class CartElement extends HTMLDivElement {
 
     constructor() {
         super();
-        this.id = 'cart-container';
+        this.classList.add('cart-container');
+        this.id = '_cart';
         // const templateEl = document.createElement("template");
         // templateEl.innerHTML = template;
         // this.appendChild(templateEl.content.cloneNode(true));
     }
 
+    removeProductInCart() {
+        const productID =
+            event.currentTarget.parentNode.parentNode.parentNode.id;
+        if (this.userID) {
+            ProductOrderService.deteleProductInCartByUserID(
+                this.userID,
+                productID,
+            )
+                .then((result) => {
+                    this.connectedCallback();
+                    notifSuccess('Xóa thành công');
+                })
+                .catch((err) => {
+                    debugger;
+                });
+        } else {
+            ProductOrderService.deleteProductInCartBySession(productID)
+                .then((result) => {
+                    this.connectedCallback();
+                    notifSuccess('Xóa thành công');
+                })
+                .catch((err) => {});
+        }
+    }
+
+    openInputAddress() {
+        let spanChange = document.getElementById('change-address');
+        let textAreaAddress = document.getElementById('address-order-input');
+        if (spanChange.textContent == 'Thay đổi') {
+            spanChange.innerHTML = 'Lưu';
+            textAreaAddress.removeAttribute('disabled');
+            textAreaAddress.style.border = '1px solid #787878';
+        } else {
+            debugger;
+            if (this.userID) {
+                UserService.updateUserByID(this.userID, {
+                    Address: textAreaAddress.textContent,
+                })
+                    .then((result) => {
+                        debugger;
+                    })
+                    .catch((err) => {
+                        debugger;
+                    });
+            }
+            spanChange.innerHTML = 'Thay đổi';
+            textAreaAddress.setAttribute('disabled', true);
+            textAreaAddress.style.border = 'none';
+        }
+    }
+
+    onChangeAmountProduct() {
+        const parentNode = event.currentTarget.parentNode;
+        const productID = parseInt(parentNode.parentNode.parentNode.id);
+        let maxAmount = parseInt(parentNode.getAttribute('remain')) || 0;
+        let valueAmount = parseInt(parentNode.childNodes[3].textContent) || 1;
+        debugger;
+        if (event.currentTarget.textContent == '-' && valueAmount > 1) {
+            valueAmount -= 1;
+        } else if (
+            event.currentTarget.textContent == '+' &&
+            valueAmount < maxAmount
+        ) {
+            valueAmount += 1;
+        }
+        if (this.userID) {
+            ProductOrderService.editAmountProductByUserID(this.userID, {
+                ProductID: productID,
+                Amount: valueAmount,
+            })
+                .then((result) => {
+                    this.connectedCallback();
+                    notifSuccess('Thao tác thành công');
+                })
+                .catch((err) => {
+                    notifFailure('Thao tác thất bại');
+                });
+        } else {
+            ProductOrderService.editAmountProductBySession({
+                ProductID: productID,
+                Amount: valueAmount,
+            })
+                .then((result) => {
+                    this.connectedCallback();
+                    notifSuccess('Thao tác thành công');
+                })
+                .catch((err) => {
+                    notifFailure('Thao tác thất bại');
+                });
+        }
+
+        //Router.open('/cart');
+    }
+
+    onOrder() {
+        //Đặt hàng
+    }
+
     connectedCallback() {
+        debugger;
         let UserID = localStorage.getItem('USER_ID');
         if (UserID) {
+            this.userID = UserID;
             ProductOrderService.getCartByUserID(UserID)
                 .then((data) => {
                     if (data.length > 0) {
-                        appendHTML(data);
+                        let user = {};
+                        UserService.getUserById(UserID)
+                            .then((u) => {
+                                user = u.data[0];
+                                appendHTML(data, user);
+                            })
+                            .catch(() => {
+                                notifFailure();
+                            });
                     } else appendHTML(null);
                 })
                 .catch((error) => {
@@ -81,7 +190,7 @@ export default class CartElement extends HTMLDivElement {
             ProductOrderService.getCartBySessionID()
                 .then((data) => {
                     if (data.length > 0) {
-                        appendHTML(data);
+                        appendHTML(data, null);
                     } else appendHTML(null);
                 })
                 .catch((error) => {
@@ -89,20 +198,25 @@ export default class CartElement extends HTMLDivElement {
                 });
         }
 
-        const appendHTML = (data) => {
-            let totalMoney = 0;
+        let totalMoney = 0;
+        let html = '';
+        let headerHTML;
+        let listItemsHTML;
+        let addressHTML = ``;
+
+        const appendHTML = (data, user) => {
             let showAmountItems = document.querySelector('.icon-amount-items');
             showAmountItems.innerHTML = data == null ? 0 : data.length;
-            let html = '';
-            let headerHTML = `<div id="cart-header">
+            headerHTML = `<div id="cart-header">
             <h2>Giỏ hàng</h2>
             <span>(${data.length} sản phẩm)</span>
         </div>`;
-            let listItemsHTML = `<div id="cart-list-product">`;
+            listItemsHTML = `<div id="cart-list-product">`;
             data.forEach((item) => {
-
                 totalMoney += item.Amount * item.Price;
-                listItemsHTML += `<div id="cart-product-item">
+                listItemsHTML += `<div id="${
+                    item.ProductID
+                }" class="cart-product-item">
                 <h3 id="vendor" style="padding: 10px;"><a is="router-link" href="/products/${
                     item.ProductID
                 }">${item.ProductName}</a></h3>
@@ -116,48 +230,56 @@ export default class CartElement extends HTMLDivElement {
                         <p style="word-wrap: break-word; width: 410px;margin-top: 0px;">${
                             item.Content || 'Không có mô tả sản phẩm'
                         }</p>
-                        <span style="color: #0c5db6;; cursor: pointer;">Xóa</span>
+                        <span onclick="${
+                            this.id
+                        }.removeProductInCart()" style="color: #0c5db6;; cursor: pointer;">Xóa</span>
                     </div>
                     <div style="font-weight: bold;font-size: 16px;width: 130px;">
                         ${item.Price.formatMoney()} đ
                     </div>
-                    <div id="amount-product" productID="1">
+                    <div id="amount-product" remain="${
+                        item.Remain || 0
+                    }" productID="1">
                         <span class="icon_adjust" id="minus-product" productID="1" style="cursor: pointer;"
-                            onclick="onChangeAmountProduct()">-</span>
+                            onclick="${
+                                this.id
+                            }.onChangeAmountProduct()">-</span>
                         <span class="icon_adjust" id="amount-product-show" style="margin-left: -4px;">${
                             item.Amount
                         }</span>
                         <span class="icon_adjust" id="plus-product" productID="1"
                             style="margin-left: -5px;cursor: pointer;"
-                            onclick="onChangeAmountProduct()">+</span>
+                            onclick="${
+                                this.id
+                            }.onChangeAmountProduct()">+</span>
                     </div>
                 </div>
             </div>`;
             });
             listItemsHTML += `</div>`;
-
-            let addressHTML;
-            if (UserID) {
-                UserService.getUserById(UserID)
-                    .then((data) => {})
-                    .catch(() => {});
+            if (user) {
                 addressHTML = `<div style="float: right; width: 315px;">
                 <div id="address-order">
                     <span>Địa chỉ nhận hàng</span>
                     <span id="change-address" style="font-size: small;float: right;color: #0c5db6;cursor: pointer;"
-                        onclick="openInputAddress()">Thay đổi</span>
-                    <h4>Lê Hải Quân | 0987654321</h4>
+                        onclick="${this.id}.openInputAddress()">Thay đổi</span>
+                    <h4>${user.FullName || 'KHÔNG CÓ TÊN'} | ${
+                    user.Phone || 'Không có SDT'
+                }</h4>
                     <textarea type="text" id="address-order-input"
-                        disabled>aaaaaaaaaaaaaaaaaaaavvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvaaa</textarea>
+                        disabled>${
+                            user.Address || 'Không có Địa chỉ'
+                        }</textarea>
                 </div>
                 <div id="cart-total-price">
                     <span style="color:#787878">Thành tiền</span>
                     <span style="color: #fe3834;float: right;font-size: 22px;font-weight: bold;">${totalMoney.formatMoney()}đ</span>
                 </div>
-                <div id="on-order" onclick="onOrder()">
+                <div id="on-order" onclick="${this.id}.onOrder()">
                     Đặt hàng
                 </div>
                 </div>`;
+            } else {
             }
 
             if (data == null) {
@@ -165,5 +287,7 @@ export default class CartElement extends HTMLDivElement {
             } else html = headerHTML + listItemsHTML + addressHTML;
             this.innerHTML = html;
         };
+
+        const appendAddressHTML = () => {};
     }
 }
