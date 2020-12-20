@@ -204,7 +204,6 @@ class Api {
                 console.log('onprogress');
             };
             xhr.open('DELETE', PREFIX_URL + path, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
             xhr.withCredentials = true;
             xhr.send();

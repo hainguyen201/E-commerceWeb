@@ -107,7 +107,9 @@ var loginSuccessful = (user) => {
     li_login.style.display = 'none';
     li_user.style.display = 'inline-block';
     a_user.innerHTML = user.UserName || 'USER_DEFAULT';
+    a_user.setAttribute('href', `/users`);
     onCloseModal();
+    updateShowTotalProductOfCart();
 };
 
 var logoutSuccessful = () => {
@@ -116,6 +118,8 @@ var logoutSuccessful = () => {
     }
     li_login.style.display = 'inline-block';
     li_user.style.display = 'none';
+    document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));
+    updateShowTotalProductOfCart();
 };
 
 var unexpectedLogout = () => {
@@ -125,6 +129,8 @@ var unexpectedLogout = () => {
     notifFailure('Phiên đã hết! Hãy đăng nhập để có trải nghiệm tốt hơn');
     li_login.style.display = 'inline-block';
     li_user.style.display = 'none';
+    document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));
+    updateShowTotalProductOfCart();
 };
 btnLogin.onclick = async function (event) {
     if (true) {
@@ -132,7 +138,7 @@ btnLogin.onclick = async function (event) {
             if (checkValidation()) {
                 let data = await userService.loginService(
                     email.value,
-                    password.value,
+                    password.value
                 );
                 //let data = await userService.loginService('hainguyen', '1234');
                 notifSuccess('Đăng nhập thành công');

@@ -39,7 +39,7 @@ export class Router {
      */
     static open(route) {
         const page = routesMap.find((r) =>
-            new RegExp(`^${r.route}\$`).test(route),
+            new RegExp(`^${r.route}\$`).test(route)
         );
         if (!page) return this.onNotFound(route);
         document.dispatchEvent(this.pageLoading(page.component));
@@ -74,7 +74,7 @@ export class Router {
     // }
 
     static onNotFound(route) {
-        container.innerHTML = `Cannot find route ${route}`;
+        container.innerHTML = `<h1>Cannot find route ${route}</h1>`;
     }
 
     /**
@@ -98,7 +98,7 @@ window.addEventListener(
         // thông báo cho router biết việc navigate được thực hiện
         Router.open(window.location.pathname);
     },
-    false,
+    false
 );
 
 document.addEventListener(
@@ -107,7 +107,7 @@ document.addEventListener(
         loadingElement.style.visibility = 'hidden';
         app.style.opacity = '1';
     },
-    false,
+    false
 );
 
 document.addEventListener(
@@ -118,9 +118,17 @@ document.addEventListener(
         loadingElement.style.placeItems = 'center !important';
         app.style.opacity = '0.2';
     },
-    false,
+    false
 );
 
+document.addEventListener('page-load-route', (event) => {
+    Router.open(event.detail);
+    window.history.pushState(
+        {},
+        event.detail,
+        `${window.location.origin}${event.detail}`
+    );
+});
 /**
  * classElement ghi đè event xảy ra với thẻ a custom có dạng <a is="router-link" href=""></a>
  */
@@ -134,7 +142,7 @@ class RouterLink extends HTMLAnchorElement {
             window.history.pushState(
                 {},
                 route,
-                `${window.location.origin}${route}`,
+                `${window.location.origin}${route}`
             );
             e.preventDefault();
         });
