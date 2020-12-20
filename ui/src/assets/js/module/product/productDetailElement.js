@@ -81,6 +81,37 @@ export default class ProductDetailElement extends HTMLDivElement {
 
     onAddToCart() {
         //api
+        const am = parseInt(
+            document.querySelector('#amount-product-detail-show').textContent
+        );
+        const data = {
+            ProductID: this.productItem.ProductID,
+            Amount: am,
+        };
+        let userID = localStorage.getItem('USER_ID');
+        if (userID) {
+            ProductOrderService.addToCartByUserID(userID, data)
+                .then((data) => {
+                    notifSuccess(
+                        `Thêm thành công ${am} sản phẩm ${this.productItem.ProductName} vào giỏ hàng`
+                    );
+                    updateShowTotalProductOfCart();
+                })
+                .catch((err) => {
+                    notifFailure('Sản phẩm đã được thêm trong giỏ hàng');
+                });
+        } else {
+            ProductOrderService.addToCartBySession(data)
+                .then((data) => {
+                    notifSuccess(
+                        `Thêm thành công ${am} sản phẩm ${this.productItem.ProductName} vào giỏ hàng`
+                    );
+                    updateShowTotalProductOfCart();
+                })
+                .catch((err) => {
+                    notifFailure('Sản phẩm đã được thêm trong giỏ hàng');
+                });
+        }
     }
 
     onChangeShowImg() {
