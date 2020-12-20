@@ -6,6 +6,8 @@ const Transaction = function(transaction) {
     this.Message = transaction.Message ? transaction.Message : 0;
     this.UserID = transaction.UserID ? transaction.UserID : 0;
     this.SessionID = transaction.SessionID ? transaction.SessionID : 0;
+    this.TransactionStatus = transaction.TransactionStatus ? transaction.TransactionStatus : 0;
+    this.PhoneReceiver = transaction.PhoneReceiver ? transaction.PhoneReceiver : '';
 }
 Transaction.getTransactionByUserID = async(userid, result) => {
     userid = parseInt(userid)
@@ -26,3 +28,4 @@ Transaction.updateTransactionByID = async(transactionid, transaction, result) =>
     transaction = new Transaction(transaction);
     transaction.TransactionModifiedDate = helper.getDateNow();
 }
+module.exports = Transaction
