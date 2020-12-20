@@ -61,6 +61,11 @@
                             <input type="text" name="searchBar" id="searchBar" placeholder="Tìm kiếm sản phẩm" />
                         </div>
                     </div>
+                    <div id="icon-trans" class="_center_everything">
+                        <a href="/transactions">
+                            <img style="height: 30px;width: 30px;" class="icon20" src="/src/assets/img/icon-trans.png" alt="">
+                        </a>
+                    </div>
                     <div class="cart-amount-items">
                         <a is="router-link" href="/cart">
                             <div class="fa-shopping-cart">
@@ -97,7 +102,8 @@
                                 <!-- <span class="close">&times;</span> -->
                                 <div class="form-catalog">
                                     <div class="catalog-input">
-                                        <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
+                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
+                                            class='catalog-value type-input'>
 
                                     </div>
                                     <br>
@@ -130,7 +136,8 @@
                                     <td name="CatalogModifiedDate">2020-12-12</td>
                                     <td style="text-align:center">
                                         <button id="delete-catalog" class="btn">Xóa</button>
-                                        <button id="edit-catalog" class="btn" onclick="openEditCatalogModal(event)">Sửa</button>
+                                        <button id="edit-catalog" class="btn"
+                                            onclick="openEditCatalogModal(event)">Sửa</button>
                                         <div id="edit-catalog-modal" class="modal">
 
                                             <!-- Modal content -->
@@ -138,12 +145,14 @@
                                                 <!-- <span class="close">&times;</span> -->
                                                 <div class="form-catalog">
                                                     <div class="catalog-input">
-                                                        <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
+                                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
+                                                            class='catalog-value type-input'>
 
                                                     </div>
                                                     <br>
                                                     <div>
-                                                        <button class="btn btn-cancel" onclick="closeEditCatalogModal()">Hủy</button>
+                                                        <button class="btn btn-cancel"
+                                                            onclick="closeEditCatalogModal()">Hủy</button>
                                                         <button class="btn" onclick="submitCatalog(event)">Gửi</button>
 
                                                     </div>

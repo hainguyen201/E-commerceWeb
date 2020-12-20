@@ -70,3 +70,16 @@ var isJsonString = (str) => {
 //         }
 //     }
 // }
+
+var isEmptyValue = (value) => {
+    if (
+        value == '' ||
+        value == null ||
+        value == undefined ||
+        value == {} ||
+        value == []
+    ) {
+        return true;
+    }
+    return false;
+};

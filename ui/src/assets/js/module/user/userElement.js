@@ -46,23 +46,26 @@ export default class UserElement extends HTMLDivElement {
         const addressE = document.querySelector('#Address');
         const phoneE = document.querySelector('#Phone');
         const passwordE = document.querySelector('#Password');
-        // userNameE.disabled = true;
-        // fullNameE.disabled = true;
-        // emailE.disabled = true;
-        // addressE.disabled = true;
-        // phoneE.disabled = true;
-        // passwordE.parentNode.style.display = 'none';
-        // submElement.style.display = 'none';
-        // editElement.style.display = 'block';
-        const data = {
+        let data = {
             UserID: this.userID,
             FullName: fullNameE.value,
             Email: emailE.value,
             Phone: phoneE.value,
             Address: addressE.value,
-            Password: passwordE.value,
             UserName: userNameE.value,
         };
+
+        if (
+            passwordE.value != '' &&
+            passwordE.value != null &&
+            passwordE.value != undefined
+        ) {
+            data.Password = passwordE.value;
+        } else {
+            notifFailure('Vui lòng nhập lại mật khẩu');
+            return;
+        }
+
         UserService.updateUserByID(this.userID, data)
             .then((result) => {
                 notifSuccess('Cập nhật thành công');
