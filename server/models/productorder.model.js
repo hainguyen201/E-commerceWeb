@@ -38,4 +38,8 @@ ProductOrder.deleteProductOrder = async(orderID, productID, result) => {
     var sqlString = `delete from productorders where ProductID=? and OrderID= ?`;
     await AbstractModel.queryExc(result, sqlString, [productID, orderID]);
 }
+ProductOrder.getPriceByOrderID = async(orderid, result) => {
+    var sqlString = `select sum(Price*Amount) as Payment from productorders as po, products as p where OrderId=${parseInt(orderid)} and po.ProductID=p.ProductID`
+
+}
 module.exports = ProductOrder

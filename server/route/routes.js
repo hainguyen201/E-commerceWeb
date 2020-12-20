@@ -4,6 +4,7 @@ const orderController = require('../controllers/order.controller')
 const catalogController = require('../controllers/catalog.controller')
 const authController = require('../controllers/auth.controller')
 const productOrderController = require('../controllers/productorders.controller')
+const transactionController = require('../controllers/transaction.controller')
 const routes = [
     /**
      * Lấy danh sách toàn bộ user
@@ -350,6 +351,32 @@ const routes = [
         path: /^\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.deleteProductOrderWithSession
     },
-
+    /**
+     * Lấy giao dịch đã thực hiện của user đã đăng nhập
+     * /transactions/:userid
+     */
+    {
+        method: 'GET',
+        path: /^\/transactions\/([0-9a-z]+)/,
+        handler: transactionController.getTransactionByUserID
+    },
+    /**
+     * Lấy giao dịch đã thực hiện của user chưa đăng nhập (sử dụng session)
+     * /transactions
+     */
+    {
+        method: 'GET',
+        path: "/transactions",
+        handler: transactionController.getTransactionBySession
+    },
+    /**
+     * Xác nhận giao dịch với user đã đăng nhập
+     * /transactions
+     */
+    {
+        method: 'POST',
+        path: /^\/transactions\/([0-9a-z]+)/,
+        handler: transactionController.confirmTransactionByUserID
+    }
 ]
 module.exports = routes;
