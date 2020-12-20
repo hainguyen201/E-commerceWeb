@@ -58,3 +58,36 @@ var updateShowTotalProductOfCart = () => {
             });
     }
 };
+
+function openEditCatalogModal(event) {
+    var catalogEdit = document.querySelector('#edit-catalog-modal input[name="CatalogName"]');
+    var catalogName = event.target.parentElement.parentElement.querySelector('td[name="CatalogName"]').innerText
+    catalogEdit.value = catalogName;
+    document.getElementById('edit-catalog-modal').style.display = 'block';
+
+}
+
+function openAddCatalogModal() {
+
+    document.getElementById('add-catalog-modal').style.display = 'block';
+
+}
+
+function closeEditCatalogModal() {
+    document.getElementById('edit-catalog-modal').style.display = 'none'
+}
+
+function closeAddCatalogModal() {
+    document.getElementById('add-catalog-modal').style.display = 'none'
+}
+
+function editCatalog(event) {
+    var catalog = {};
+    var parent = event.target.parentElement.parentElement
+    catalog.CatalogName = parent.querySelector('input[name="CatalogName"]').value;
+    //id cần cập nhật
+    catalogID = parent.querySelector('input[name="CatalogName"]')
+    console.log(catalogID);
+    console.log(catalog);
+    // api submit here
+}
