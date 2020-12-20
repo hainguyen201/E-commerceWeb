@@ -99,16 +99,16 @@ export default class CartElement extends HTMLDivElement {
             textAreaAddress.removeAttribute('disabled');
             textAreaAddress.style.border = '1px solid #787878';
         } else {
-            debugger;
             if (this.userID) {
                 UserService.updateUserByID(this.userID, {
+                    ...this.user,
                     Address: textAreaAddress.textContent,
                 })
                     .then((result) => {
-                        debugger;
+                        notifSuccess("Thay đổi địa chỉ thành công")
                     })
                     .catch((err) => {
-                        debugger;
+                        notifFailure("Thay đổi địa chỉ thất bại")
                     });
             }
             spanChange.innerHTML = 'Thay đổi';
@@ -165,7 +165,6 @@ export default class CartElement extends HTMLDivElement {
     }
 
     connectedCallback() {
-        debugger;
         let UserID = localStorage.getItem('USER_ID');
         if (UserID) {
             this.userID = UserID;
@@ -176,6 +175,7 @@ export default class CartElement extends HTMLDivElement {
                         UserService.getUserById(UserID)
                             .then((u) => {
                                 user = u.data[0];
+                                this.user = user;
                                 appendHTML(data, user);
                             })
                             .catch(() => {
