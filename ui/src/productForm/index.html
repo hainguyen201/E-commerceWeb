@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="../style.css">
+
+<body>
+    <div class="form-product" id="form-product">
+        <div class="product">
+            <div class="product__form">
+                <div class="product__form-left">
+
+                    <!-- Mã sản phẩm:<br>
+                    <input type="text" name="ProductID" placeholder="mã sản phẩm" class="type-input product-value"> -->
+                    <br> Tên:
+                    <br>
+                    <input type="text" name="ProductName" placeholder="tên sản phẩm" class="type-input product-value">
+                    <br> Giá:
+                    <br>
+                    <input type="number" name="Price" placeholder="0" class="type-input">
+                    <br> Mô tả:<br>
+                    <input type="text" name="Content" placeholder="mô tả sản phẩm" class="type-input product-value">
+                    <br> Ảnh: <br>
+                    <input type="file" id="avatar" name="Image" accept="image/png, image/jpeg" onchange="previewImage()" class="product-value">
+                    <br>
+                    <img src="" alt="" id="product-image-preview">
+
+                </div>
+                <div class="product__form-right">
+                    <!-- Mã danh mục:<br>
+                    <input type="text" name="CategoryID" placeholder="mã danh mục" class="type-input  product-value"> -->
+
+                    <br> Giảm giá:<br>
+                    <input type="number" name="Discount" placeholder="0" class="type-input  product-value">
+                    <br> Số lượng sản phẩm:<br>
+                    <input type="number" name="Remain" placeholder="0" class="type-input  product-value">
+                    <br> Tên danh mục: <br>
+                    <select name="CategoryID" id="CategoryName" class="type-input  product-value">
+                      <option placeholder="category1" value='1'>Đồ điện tử</option>
+                      <option placeholder="category2" value="2">Thời trang</option>
+                      <option placeholder="category3" value="3">Tiện dụng</option>
+                      <option placeholder="category4" value="4">Sức khỏe</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sumit__form">
+                <br>
+                <button class="btn btn-cancel">Hủy</button>
+                <input class="submit btn" id="submit-product" type="submit" placeholder="Submit" onclick="submitProduct()">
+                <br>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/api/api.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
