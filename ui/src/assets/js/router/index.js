@@ -15,22 +15,20 @@ Router.addModule('/', containerRootElement, mainContainer);
 Router.addModule('/cart', cartList, mainContainer);
 Router.addModule('/transactions', transactionList, mainContainer);
 //Auth trước khi mở đường dẫn mới
-console.log('reload resource');
-
-userService
-    .authService()
-    .then((data) => {
-        if (data[0]) {
-            loginSuccessful(data[0]);
-        } else {
-            notifSuccess('Bạn chưa đăng nhập tài khoản');
-        }
-        updateShowTotalProductOfCart();
-        Router.open(window.location.pathname);
-    })
-    .catch((err) => {
-        Router.open(window.location.pathname);
-        notifFailure(err.toString());
-    });
+// console.log('reload resource');
+// userService
+//     .authService()
+//     .then((data) => {
+//         if (data[0]) {
+//             loginSuccessful(data[0]);
+//         } else {
+//             notifSuccess('Bạn chưa đăng nhập tài khoản');
+//         }
+//         updateShowTotalProductOfCart();
+//         Router.open(window.location.pathname);
+//     })
+//     .catch((err) => {
+//         notifFailure(err.toString());
+//     });
 
 //notifSuccess("test");
