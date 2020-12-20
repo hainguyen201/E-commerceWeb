@@ -1,0 +1,149 @@
+.form-product {
+    width: 100vw;
+    height: 500px;
+    display: flex;
+}
+
+.product {
+    margin: 0 auto;
+}
+
+.product__form {
+    display: flex;
+}
+
+.product__form-left {
+    float: left;
+}
+
+.product__form-right {
+    float: right;
+}
+
+.btn {
+    border: none;
+    padding: 8px 32px 8px 32px;
+    border-radius: 5px;
+    outline: none;
+    background-color: rgb(151, 144, 255);
+}
+
+.btn:focus {
+    background-color: rgb(66, 141, 252);
+}
+
+.btn-cancel {
+    border: 1px solid rgb(123, 154, 255);
+    background-color: #fff;
+}
+
+.type-input {
+    text-indent: 4px;
+    border-radius: 5px;
+    height: 32px;
+    border: 1px solid rgb(46, 142, 252);
+    outline: none;
+    width: 250px;
+    margin-right: 8px;
+}
+
+.dashboard {
+    font-size: 16px;
+    display: flex;
+}
+
+.menu {
+    width: 500px;
+    height: 600px;
+    margin-right: 16px;
+}
+
+.menu .content {
+    width: 100%;
+    padding: 8px
+}
+
+.menu .menu-title {
+    margin-bottom: 16px;
+    background-color: #93eb97;
+}
+
+.menu .menu-item {
+    border-bottom: 1px solid rgb(131, 131, 131);
+    cursor: pointer;
+}
+
+.menu .menu-item:hover {
+    background-color: rgb(211, 211, 211);
+}
+
+.list-catalog .catalog-table-content {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 80vw;
+}
+
+.list-catalog .catalog-table-content th {
+    background-color: #93eb97;
+}
+
+.list-catalog .catalog-table-content td,
+.list-catalog .catalog-table-content th {
+    border: 1px solid;
+    padding: 8px
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.catalog-modal-content {
+    width: 20%;
+}

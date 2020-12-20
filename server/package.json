@@ -5,12 +5,13 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon --inspect server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "uuid": "^8.3.2"
   }
 }

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website bán hàng</title>
+    <link rel="stylesheet" href="/src/assets/css/list_product/index.css">
+    <link rel="stylesheet" href="/src/assets/css/product/productDetail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/src/assets/css/header/base.css">
+    <link rel="stylesheet" href="/src/assets/css/header/main.css">
+    <link rel="stylesheet" href="/src/assets/css/notif.css">
+    <link rel="stylesheet" href="/src/assets/css/cart/cart.css">
+    <link rel="stylesheet" href="/src/assets/css/catalog/catalog.css">
+    <link rel="stylesheet" href="/src/assets/css/product/productDetail.css">
+    <link rel="stylesheet" href="/src/assets/css/common.css">
+    <link rel="stylesheet" href="/src/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app" id="app">
+        <header class="header">
+            <div class="grid">
+                <nav class="header__navbar">
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item header__navbar-item--separate">Vào cửa hàng trên ứng dụng</li>
+                        <li class="header__navbar-item">Kết nối</li>
+                    </ul>
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item">
+                            <a href="" class="header__navbar-item-link">Thông báo</a>
+                        </li>
+                        <li class="header__navbar-item">
+                            <a href="" class="header__navbar-item-link">Trợ giúp</a>
+                        </li>
+                        <li class="header__navbar-item login
+                        header__navbar-item--strong header__navbar-item--separate">
+                            <div id="button-login" class="">
+                                <button onclick="openLoginSignupModal()">Đăng nhập</button>
+                            </div>
+                        </li>
+                        <li class="header__navbar-item dropdown user" style="display: none;">
+                            <div class="person-info dropdown" id="icon-persion"
+                                style="background-color: #f4f4f4; border-radius: 100%;position: absolute; top: 5px;">
+                                <img src="/src/assets/img/icon-person.png" alt="icon-person"
+                                    style=" border-radius: 100%; height: 33px;width: 38px;">
+                            </div>
+                            <div class="dropdown-content">
+                                <div><a is="router-link" id="user-name" href="#">USER</a></div>
+                                <div id="button-logout">Đăng xuất</div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="header__search-cart">
+                    <div class="header__container">
+                        <div id="searchWrapper">
+                            <input type="text" name="searchBar" id="searchBar" placeholder="Tìm kiếm sản phẩm" />
+                        </div>
+                    </div>
+                    <div id="icon-trans" class="_center_everything">
+                        <a href="/transactions">
+                            <img style="height: 30px;width: 30px;" class="icon20" src="/src/assets/img/icon-trans.png" alt="">
+                        </a>
+                    </div>
+                    <div class="cart-amount-items">
+                        <a is="router-link" href="/cart">
+                            <div class="fa-shopping-cart">
+                            </div>
+                            <div class="_center_everything icon-amount-items">
+                                0
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </header>
+        <div class="_center_everything" id="notification">
+        </div>
+        <div id="main-container" style="padding: 25px;">
+            <div class="dashboard">
+                <div class="menu">
+                    <div class="menu-title content">Quản lý</div>
+                    <div class="menu-content">
+                        <div class="menu-item content">Danh mục</div>
+                        <div class="menu-item content">Sản phẩm</div>
+                        <div class="menu-item content">Giao dịch</div>
+
+                    </div>
+                </div>
+                <div class="list-catalog">
+
+                    <br>
+                    <div class="add-catalog">
+                        <button class="btn" onclick="openAddCatalogModal('post')">Thêm danh mục</button>
+                        <div id="add-catalog-modal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content catalog-modal-content">
+                                <!-- <span class="close">&times;</span> -->
+                                <div class="form-catalog">
+                                    <div class="catalog-input">
+                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
+                                            class='catalog-value type-input'>
+
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <button class="btn btn-cancel" onclick="closeAddCatalogModal()">Hủy</button>
+                                        <button class="btn" onclick="addCatalog(event)">Gửi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="main-table">
+                        <table class="catalog-table-content">
+                            <thead>
+                                <tr>
+                                    <th>Mã danh mục</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Ngày sửa</th>
+                                    <th>Hoạt động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td name="CatalogID">1</td>
+                                    <td name="CatalogName">Diện thoại</td>
+                                    <td name="CatalogCreatedDate">2020-12-12</td>
+                                    <td name="CatalogModifiedDate">2020-12-12</td>
+                                    <td style="text-align:center">
+                                        <button id="delete-catalog" class="btn">Xóa</button>
+                                        <button id="edit-catalog" class="btn"
+                                            onclick="openEditCatalogModal(event)">Sửa</button>
+                                        <div id="edit-catalog-modal" class="modal">
+
+                                            <!-- Modal content -->
+                                            <div class="modal-content catalog-modal-content">
+                                                <!-- <span class="close">&times;</span> -->
+                                                <div class="form-catalog">
+                                                    <div class="catalog-input">
+                                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
+                                                            class='catalog-value type-input'>
+
+                                                    </div>
+                                                    <br>
+                                                    <div>
+                                                        <button class="btn btn-cancel"
+                                                            onclick="closeEditCatalogModal()">Hủy</button>
+                                                        <button class="btn" onclick="submitCatalog(event)">Gửi</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <footer class="footer">
+            <!-- <button id="test-cor">test-cors</button> -->
+        </footer>
+    </div>
+    <div id="loading-gif" style="height: 100%;width: 100%; top:0px;position: absolute; display: none;">
+        <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
+    </div>
+
+    </div>
+    <div class="modal-login-signup"
+        style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
+        <div id="di-login-signup" class="dialog">
+            <div id="notif">
+                <h2>Đăng nhập</h2>
+                <p>Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn.</p>
+                <img src="/src/assets/img/header/graphic-map.png" />
+            </div>
+            <div id="login-signup">
+                <div class="option" style="display: flex; height: 44px; border-bottom: 1px solid #f4f4f4;">
+                    <div class="icon iconx">
+                        <img class="icon icon-close" onclick="onCloseModal()" src="/src/assets/img/header/iconx.png" />
+                    </div>
+                    <div id="op-login" onclick="changeContent()">Đăng nhập</div>
+                    <div id="op-signup" onclick="changeContent()">Tạo tài khoản</div>
+                </div>
+                <div class="content login">
+                    <div class="element username">
+                        <label>Tên tài khoản</label>
+                        <input placeholder="Nhập email" type="email" name="email" class="email" />
+                    </div>
+                    <div class="element password">
+                        <label>Mật khẩu</label>
+                        <input placeholder="Nhập mật khẩu" type="password" name="password" class="password" />
+                    </div>
+                    <div class="element validate-login" style="font-size: smaller; color: red;">
+                    </div>
+                    <div class="element">
+                        <label></label>
+                        <button class="btn-login" id="btn-login">Đăng nhập</button>
+                    </div>
+                </div>
+                <div class="content signup" style="display: none;">
+                    <div class="element name">
+                        <label>Họ tên</label>
+                        <input class="name " name="s_name" type="text" placeholder="Nhập họ tên" />
+                    </div>
+                    <div class="element phone">
+                        <label>SĐT</label>
+                        <input class="phone" name="s_phone" type="text" placeholder="Nhập số điện thoại" />
+                    </div>
+
+                    <div class="element email">
+                        <label>Email</label>
+                        <input class="email" name="s_email" type="email" placeholder="Nhập email" />
+                    </div>
+                    <div class="element password">
+                        <label>Mật khẩu</label>
+                        <input type="password" name="s_password" class="password" placeholder="Nhập mật khẩu" />
+                    </div>
+                    <div class="element sex">
+                        <label>Giới tính</label>
+                        <div class="sexx">
+                            <input class="sex-male" name="male" type="radio" value="male" /><label
+                                style="margin-right: 190px;">Nam</label>
+                            <input class="sex-female" name="female" type="radio" value="female" /><label>Nữ</label>
+                        </div>
+                    </div>
+                    <div class="element">
+                        <label>Ngày sinh</label>
+                        <input class="birthday date" name="s_birthday" type="date" />
+                    </div>
+                    <div class="element">
+                        <label></label>
+                        <button class="btn-signup">Tạo tài khoản</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/src/assets/js/util/util.js"></script>
+    <script src="/src/assets/js/util/constant.js"></script>
+    <script src="/src/assets/js/util/formatString.js"></script>
+    <script src="/src/assets/js/common.js"></script>
+    <script src="/src/assets/js/api/customError.js"></script>
+    <script src="/src/assets/js/api/api.js"></script>
+    <script src="/src/assets/js/service/UserService/index.js"></script>
+    <script src="/src/assets/js/service/ProductService/index.js"></script>
+    <script src="/src/assets/js/service/CatalogService/index.js"></script>
+    <script src="/src/assets/js/service/OrderService/index.js"></script>
+    <script src="/src/assets/js/service/ProductOrderService/index.js"></script>
+    <script src="/src/assets/js/service/TransactionService/index.js"></script>
+    <script src="/src/assets/js/service/index.js"></script>
+    <!-- <script src="/src/assets/css/header/script.js"></script> -->
+    <script src="/src/assets/js/event/index.js"></script>
+    <!-- <script src="/src/assets/js/listProduct.js"></script> -->
+    <script src="/src/assets/js/login.js"></script>
+    <script src="/src/assets/js/router/index.js" type="module"></script>
+</body>
+
+</html>

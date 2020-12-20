@@ -1,0 +1,5 @@
+clone repos về máy
+tạo và làm việc trên nhánh của riêng mình (vd: nvhai)
+mỗi lần bắt đầu code thì pull code về từ nhánh develop: git pull origin develop
+sau khi code push lên nhánh của mình (vd nvhai): git push origin nvhai
+lên git tạo pull request tử nhánh của mình sang nhánh develop

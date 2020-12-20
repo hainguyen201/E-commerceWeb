@@ -1,0 +1,28 @@
+#catalog-product {
+    padding: 15px;
+    float: left;
+    background-color: #fff;
+    width: 290px;
+}
+
+.catalog-item {
+    border-bottom: 1px solid #bababa;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 3px;
+    font-size: large;
+}
+
+.catalog-item:hover {
+    background-color: #ebebeb;
+}
+
+.item-cc {
+    font-size: large;
+    color: #ff3824;
+    font-weight: bold;
+}
+
+#current-catalog {
+    margin-bottom: 20px;
+}

@@ -1,0 +1,23 @@
+#notification {
+    top: 10px;
+    position: fixed;
+    right: 50%;
+    left: 50%;
+    z-index: 5;
+}
+
+#notif-content {
+    z-index: 2;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    transition-duration: 2s;
+    height: 25px;
+}
+
+.icon20 {
+    height: 20px;
+    width: 20px;
+}
