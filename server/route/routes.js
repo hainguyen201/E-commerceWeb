@@ -232,7 +232,7 @@ const routes = [
     {
         method: 'PUT',
         path: /^\/catalogs\/([0-9a-z]+)/,
-        handler: catalogController.updateCatalog
+        handler: catalogController.updateCatalogWithAuth
     },
     /**
      * Thêm danh mục  
@@ -244,7 +244,7 @@ const routes = [
     {
         method: 'POST',
         path: '/catalogs',
-        handler: catalogController.addCatalog
+        handler: catalogController.addCatalogWithAuth
     },
     /**
      * Xóa danh mục theo id
@@ -253,7 +253,7 @@ const routes = [
     {
         method: 'DELETE',
         path: /^\/catalogs\/([0-9a-z]+)/,
-        handler: catalogController.deleteCatalog
+        handler: catalogController.deleteCatalogWithAuth
     },
     /**
      * Lấy thông tin xác thực người dùng theo session

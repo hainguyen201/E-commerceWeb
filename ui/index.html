@@ -75,6 +75,7 @@
         <div class="_center_everything" id="notification">
         </div>
         <div id="main-container" style="padding: 25px;">
+            <!-- Danh sách các phần quản lý -->
             <div class="dashboard">
                 <div class="menu">
                     <div class="menu-title content">Quản lý</div>
@@ -87,74 +88,6 @@
                 </div>
                 <div class="list-catalog">
 
-                    <br>
-                    <div class="add-catalog">
-                        <button class="btn" onclick="openAddCatalogModal('post')">Thêm danh mục</button>
-                        <div id="add-catalog-modal" class="modal">
-
-                            <!-- Modal content -->
-                            <div class="modal-content catalog-modal-content">
-                                <!-- <span class="close">&times;</span> -->
-                                <div class="form-catalog">
-                                    <div class="catalog-input">
-                                        <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
-
-                                    </div>
-                                    <br>
-                                    <div>
-                                        <button class="btn btn-cancel" onclick="closeAddCatalogModal()">Hủy</button>
-                                        <button class="btn" onclick="addCatalog(event)">Gửi</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <br>
-                    <div class="main-table">
-                        <table class="catalog-table-content">
-                            <thead>
-                                <tr>
-                                    <th>Mã danh mục</th>
-                                    <th>Tên danh mục</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Ngày sửa</th>
-                                    <th>Hoạt động</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td name="CatalogID">1</td>
-                                    <td name="CatalogName">Diện thoại</td>
-                                    <td name="CatalogCreatedDate">2020-12-12</td>
-                                    <td name="CatalogModifiedDate">2020-12-12</td>
-                                    <td style="text-align:center">
-                                        <button id="delete-catalog" class="btn">Xóa</button>
-                                        <button id="edit-catalog" class="btn" onclick="openEditCatalogModal(event)">Sửa</button>
-                                        <div id="edit-catalog-modal" class="modal">
-
-                                            <!-- Modal content -->
-                                            <div class="modal-content catalog-modal-content">
-                                                <!-- <span class="close">&times;</span> -->
-                                                <div class="form-catalog">
-                                                    <div class="catalog-input">
-                                                        <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
-
-                                                    </div>
-                                                    <br>
-                                                    <div>
-                                                        <button class="btn btn-cancel" onclick="closeEditCatalogModal()">Hủy</button>
-                                                        <button class="btn" onclick="submitCatalog(event)">Gửi</button>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
 

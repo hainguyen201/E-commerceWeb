@@ -40,7 +40,9 @@ exports.addCatalogWithAuth = async(req, res, param) => {
         if (err) {
             abstractController.sendErr(res, err);
         } else {
+            console.log(data)
             if (data == 1) {
+
                 this.addCatalog(req, res, param)
             } else {
                 abstractController.sendAuth(res);
