@@ -3,7 +3,6 @@ const AbstractModel = require('./abstract.model')
 const helper = require('../utils/helper')
 const Order = function(order) {
     this.TransactionID = order.TransactionID ? order.TransactionID : 0;
-    this.Status = order.Status ? order.Status : 0;
     this.OrderCreatedDate = order.OrderCreatedDate ? order.OrderCreatedDate : helper.getDateNow();
     this.OrderModifiedDate = order.OrderModifiedDate ? order.OrderModifiedDate : helper.getDateNow();
 }
