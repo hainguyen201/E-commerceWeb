@@ -156,13 +156,21 @@ btnLogout.onclick = async function logout(event) {
         notifFailure('Đăng xuất thất bại');
     }
 };
-document.getElementById('test-cor').onclick = function() {
-    api.delete('/productorders/1/1').then((result) => {
+// document.getElementById('test-cor').onclick = function() {
+//     // api.delete('/productorders/1/1').then((result) => {
 
-            console.log(result);
-        })
-        .catch((err) => {
-            // document.dispatchEvent(new CustomEvent('page-loading'));
+//     //         console.log(result);
+//     //     })
+//     //     .catch((err) => {
+//     //         // document.dispatchEvent(new CustomEvent('page-loading'));
 
-        })
-};
+//     //     })
+//     api.put('/productorders/1', { ProductID: 2, Amount: 8 }).then((result) => {
+
+//             console.log(result);
+//         })
+//         .catch((err) => {
+//             // document.dispatchEvent(new CustomEvent('page-loading'));
+
+//         })
+// };
