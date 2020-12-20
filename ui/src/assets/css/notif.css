@@ -14,7 +14,8 @@
     display: flex;
     align-items: center;
     transition-duration: 2s;
-    height: 25px;
+    height: 29px;
+    border: 1px solid #1d71ab;
 }
 
 .icon20 {
