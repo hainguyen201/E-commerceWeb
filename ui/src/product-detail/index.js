@@ -11,3 +11,13 @@ function increaseAmount(maxAmount) {
 
     if (cur < maxAmount) amountValue.value = cur + 1;
 }
+document.getElementsByClassName('btn-addorder')[0].onclick = function() {
+    console.log('ok')
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        console.log(xhr.responseText)
+    }
+    xhr.open('DELETE', "https://127.0.0.1:3000/productorders/1/1")
+    xhr.withCredentials = true
+    xhr.send();
+}
