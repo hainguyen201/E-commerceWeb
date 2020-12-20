@@ -16,7 +16,7 @@ var addToCart = () => {
         ProductOrderService.addToCartByUserID(userID, data)
             .then((data) => {
                 notifSuccess(
-                    `Thêm thành công 1 sản phẩm ${productName} vào giỏ hàng`,
+                    `Thêm thành công 1 sản phẩm ${productName} vào giỏ hàng`
                 );
                 updateShowTotalProductOfCart();
             })
@@ -27,7 +27,7 @@ var addToCart = () => {
         ProductOrderService.addToCartBySession(data)
             .then((data) => {
                 notifSuccess(
-                    `Thêm thành công 1 sản phẩm ${productName} vào giỏ hàng`,
+                    `Thêm thành công 1 sản phẩm ${productName} vào giỏ hàng`
                 );
                 updateShowTotalProductOfCart();
             })
@@ -59,13 +59,18 @@ var updateShowTotalProductOfCart = () => {
     }
 };
 //
-var catalogService = new CatalogService()
+var catalogService = new CatalogService();
 
 function openEditCatalogModal(event, id) {
-    var catalogEdit = document.querySelector(`#catalog-${id} .edit-catalog-modal input[name="CatalogName"]`);
-    var catalogName = event.target.parentElement.parentElement.querySelector('td[name="CatalogName"]').innerText
+    var catalogEdit = document.querySelector(
+        `#catalog-${id} .edit-catalog-modal input[name="CatalogName"]`
+    );
+    var catalogName = event.target.parentElement.parentElement.querySelector(
+        'td[name="CatalogName"]'
+    ).innerText;
     catalogEdit.value = catalogName;
-    document.querySelector(`#catalog-${id} .edit-catalog-modal`).style.display = 'block';
+    document.querySelector(`#catalog-${id} .edit-catalog-modal`).style.display =
+        'block';
 }
 
 function openAddCatalogModal() {
@@ -73,50 +78,64 @@ function openAddCatalogModal() {
 }
 
 function openDeleteCatalogModal(id) {
-    document.querySelector(`#catalog-${id} .delete-catalog-modal`).style.display = 'block'
+    document.querySelector(
+        `#catalog-${id} .delete-catalog-modal`
+    ).style.display = 'block';
 }
 
 function closeEditCatalogModal(id) {
-    document.querySelector(`#catalog-${id} .edit-catalog-modal`).style.display = 'none'
+    document.querySelector(`#catalog-${id} .edit-catalog-modal`).style.display =
+        'none';
 }
 
 function closeAddCatalogModal() {
-    document.getElementById('add-catalog-modal').style.display = 'none'
+    document.getElementById('add-catalog-modal').style.display = 'none';
 }
 
 function closeDeleteCatalogModal(id) {
-    document.querySelector(`#catalog-${id} .delete-catalog-modal`).style.display = 'none'
+    document.querySelector(
+        `#catalog-${id} .delete-catalog-modal`
+    ).style.display = 'none';
 }
 
 function deleteCatalog(id) {
-    catalogService.deleteCatalog(id).then((result) => {
-        loadCatalogData()
-    })
+    catalogService
+        .deleteCatalog(id)
+        .then((result) => {
+            notifSuccess('Xóa thành công');
+            loadCatalogData();
+        })
+        .catch((err) => {
+            notifFailure('Không thể xóa danh mục đang có sản phẩm');
+        });
 }
 
 function editCatalog(event, catalogid) {
     var catalog = {};
-    var parent = event.target.parentElement.parentElement
-    catalog.CatalogName = parent.querySelector('input[name="CatalogName"]').value;
+    var parent = event.target.parentElement.parentElement;
+    catalog.CatalogName = parent.querySelector(
+        'input[name="CatalogName"]'
+    ).value;
     //id cần cập nhật
-    catalogID = catalogid
+    catalogID = catalogid;
     console.log(catalogID);
     console.log(catalog);
     // api submit here
     catalogService.updateCatalog(catalogid, catalog).then((result) => {
         console.log(result);
-        closeEditCatalogModal(catalogid)
-        loadCatalogData()
-
-    })
+        closeEditCatalogModal(catalogid);
+        loadCatalogData();
+    });
 }
 
 function addCatalog(event) {
-    var catalogName = document.querySelector('#add-catalog-modal input[name="CatalogName"]').value;
+    var catalogName = document.querySelector(
+        '#add-catalog-modal input[name="CatalogName"]'
+    ).value;
     catalogService.addCatalog({ CatalogName: catalogName }).then((result) => {
-        closeAddCatalogModal()
-        loadCatalogData()
-    })
+        closeAddCatalogModal();
+        loadCatalogData();
+    });
 }
 
 function addCatalogTable(catalogs) {
@@ -154,14 +173,14 @@ function addCatalogTable(catalogs) {
                     <th>Hoạt động</th>
                 </tr>
             </thead>
-            <tbody>`
-    catalogs.forEach(element => {
-        var _catalog = element
+            <tbody>`;
+    catalogs.forEach((element) => {
+        var _catalog = element;
         catalog += `<tr id="catalog-${_catalog.CatalogID}">
 <td name="CatalogID">${_catalog.CatalogID}</td>
 <td name="CatalogName">${_catalog.CatalogName}</td>
 <td name="CatalogCreatedDate">${_catalog.CatalogCreatedDate}</td>
-<td name="CatalogModifiedDate">${_catalog.CatalogModifiedDate}</td>`
+<td name="CatalogModifiedDate">${_catalog.CatalogModifiedDate}</td>`;
         catalog += `<td style="text-align:center">
         <button id="delete-catalog" class="btn" onclick="openDeleteCatalogModal(${_catalog.CatalogID})">Xóa</button>
         <div class="delete-catalog-modal modal">
@@ -200,20 +219,33 @@ function addCatalogTable(catalogs) {
         </div>
     </div>
 </td>
-</tr>`
+</tr>`;
     });
     catalog += `</tbody>
     </table>
-</div>`
+</div>`;
 
     var list_catalog = document.getElementsByClassName('list-catalog')[0];
-    list_catalog.innerHTML = catalog
+    list_catalog.innerHTML = catalog;
 }
 
 function loadCatalogData() {
     catalogService.getListCatalog().then((result) => {
-        console.log(result)
+        console.log(result);
         addCatalogTable(result);
-    })
+    });
 }
-loadCatalogData()
+loadCatalogData();
+
+//search product theo tên
+const inputSearch = document.querySelector('#searchBar');
+inputSearch.onkeypress = function search(params) {
+    const searchCode = encodeURI(inputSearch.value);
+    if (params.code == 'Enter') {
+        document.dispatchEvent(
+            new CustomEvent('page-load-route', {
+                detail: `/search/${searchCode}`,
+            })
+        );
+    }
+};

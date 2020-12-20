@@ -4,8 +4,8 @@ var opLogin = document.getElementById('op-login');
 var opSignup = document.getElementById('op-signup');
 var title = document.querySelector('#notif h2');
 var description = document.querySelector('#notif p');
-var checkboxMale = document.getElementsByClassName('sex-male')[0];
-var checkboxFemale = document.getElementsByClassName('sex-female')[0];
+// var checkboxMale = document.getElementsByClassName('sex-male')[0];
+// var checkboxFemale = document.getElementsByClassName('sex-female')[0];
 var app = document.getElementById('app');
 var modalLoginSignup = document.getElementsByClassName('modal-login-signup')[0];
 var iconCloseModal = document.getElementsByClassName('icon-close')[0];
@@ -43,21 +43,21 @@ function openLoginSignupModal() {
     app.style.opacity = 0.1;
 }
 
-var listCheckbox = [checkboxMale, checkboxFemale];
+// var listCheckbox = [checkboxMale, checkboxFemale];
 
-onlyCheckOne = (e) => {
-    let element = e.target;
-    if (element.checked) {
-        listCheckbox.forEach((item) => {
-            if (item != element) {
-                item.checked = false;
-            }
-        });
-    }
-};
+// onlyCheckOne = (e) => {
+//     let element = e.target;
+//     if (element.checked) {
+//         listCheckbox.forEach((item) => {
+//             if (item != element) {
+//                 item.checked = false;
+//             }
+//         });
+//     }
+// };
 
-checkboxMale.addEventListener('change', this.onlyCheckOne);
-checkboxFemale.addEventListener('change', (e) => this.onlyCheckOne(e));
+// checkboxMale.addEventListener('change', this.onlyCheckOne);
+// checkboxFemale.addEventListener('change', (e) => this.onlyCheckOne(e));
 
 window.onclick = function (event) {
     if (event.target == modalLoginSignup) {
@@ -101,8 +101,22 @@ function checkValidation() {
 let li_login = document.querySelector('li.login');
 let li_user = document.querySelector('li.user');
 let a_user = document.querySelector('a#user-name');
+let adminE;
+var containerIcon = document.querySelector('.header__search-cart');
+const addIconAdmin = () => {
+    const text = `<div id="icon-admin" class="_center_everything">
+    <a style="border:1px solid #fff;border-radius:5px;padding:2px;" is="router-link" href="/admin/catalog">
+        <img style="height: 30px;width: 30px;" src="/src/assets/img/icon-ad9.jpg" alt="">
+    </a>
+</div>`;
+    adminE = createElementByText(text);
+    containerIcon.appendChild(adminE);
+};
 
 var loginSuccessful = (user) => {
+    if (user.Role == 1) {
+        addIconAdmin();
+    }
     localStorage.setItem('USER_ID', user.UserID);
     li_login.style.display = 'none';
     li_user.style.display = 'inline-block';
@@ -116,22 +130,30 @@ var logoutSuccessful = () => {
     if (localStorage.getItem('USER_ID')) {
         localStorage.removeItem('USER_ID');
     }
+    if (isElement(adminE)) {
+        containerIcon.removeChild(adminE);
+    }
     li_login.style.display = 'inline-block';
     li_user.style.display = 'none';
-    document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));
+    // document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));
+    window.location.href = '/';
     updateShowTotalProductOfCart();
 };
 
-var unexpectedLogout = () => {
-    if (localStorage.getItem('USER_ID')) {
-        localStorage.removeItem('USER_ID');
-    }
-    notifFailure('Phiên đã hết! Hãy đăng nhập để có trải nghiệm tốt hơn');
-    li_login.style.display = 'inline-block';
-    li_user.style.display = 'none';
-    document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));
-    updateShowTotalProductOfCart();
-};
+// var unexpectedLogout = () => {
+//     debugger
+//     if (localStorage.getItem('USER_ID')) {
+//         localStorage.removeItem('USER_ID');
+//     }
+//     if (isElement(adminE)) {
+//         containerIcon.removeChild(adminE);
+//     }
+//     notifFailure('Phiên đã hết! Hãy đăng nhập để có trải nghiệm tốt hơn');
+//     li_login.style.display = 'inline-block';
+//     li_user.style.display = 'none';
+//     document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));
+//     updateShowTotalProductOfCart();
+// };
 btnLogin.onclick = async function (event) {
     if (true) {
         try {
@@ -156,7 +178,6 @@ let btnLogout = document.getElementById('button-logout');
 btnLogout.onclick = async function logout(event) {
     try {
         let data = await userService.logout();
-        logoutSuccessful();
         notifSuccess('Đăng xuất thành công');
     } catch (error) {
         notifFailure('Đăng xuất thất bại');
@@ -164,6 +185,45 @@ btnLogout.onclick = async function logout(event) {
 };
 
 document.querySelector('.btn-signup').onclick = async function signup(e) {
+    let nameE = document.querySelector('#s_name');
+    let usernameE = document.querySelector('#s_username');
+    let addressE = document.querySelector('#s_address');
+    let phoneE = document.querySelector('#s_phone');
+    let emailE = document.querySelector('#s_email');
+    let passwordE = document.querySelector('#s_password');
+    let vvv = document.querySelector('#vvv');
+
+    if (isEmptyValue(usernameE.value) || isEmptyValue(passwordE.value)) {
+        vvv.innerHTML =
+            'Bạn cần nhập ít nhất username và mật khẩu để tạo tài khoản';
+        return;
+    }
+    if (/ /g.test(usernameE.value)) {
+        vvv.innerHTML = 'UserName không được chứa khoảng trống';
+        return;
+    }
+
+    if (/ /g.test(passwordE.value) || passwordE.value.length < 8) {
+        vvv.innerHTML = 'Mật khẩu không được chứa khoảng trống và trên 8 kí tự';
+        return
+    }
+    const data = {
+        UserName: usernameE.value,
+        Password: passwordE.value,
+        FullName: nameE.value,
+        Email: emailE.value,
+        Address: addressE.value,
+        Phone: phoneE.value,
+    };
     try {
+        UserService.addUser(data)
+            .then((result) => {
+                vvv.style.color = 'green';
+                vvv.innerHTML =
+                    'Tạo tài khoản thành công, đăng nhập để mua hàng';
+            })
+            .catch((err) => {
+                notifFailure('Tạo tài khoản thất bại');
+            });
     } catch (error) {}
 };

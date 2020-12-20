@@ -61,250 +61,124 @@ export default class TransactionElement extends HTMLDivElement {
 
     constructor() {
         super();
-        this.classList.add('cart-container');
         this.id = '_trans';
+        this.style.display = 'flex';
+        this.style.flexWrap = 'wrap';
+        this.style.width = '1300px';
         // const templateEl = document.createElement("template");
         // templateEl.innerHTML = template;
         // this.appendChild(templateEl.content.cloneNode(true));
     }
 
-    openInputAddress() {
-        let spanChange = document.getElementById('change-address');
-        let textAreaAddress = document.getElementById('address-order-input');
+    openChange(transID) {
+        let spanChange = document.getElementById(`change-address${transID}`);
+        const nameE = document.querySelector(`#i-name${transID}`);
+        const phoneE = document.querySelector(`#i-phone${transID}`);
+        const noteE = document.querySelector(`#i-note${transID}`);
+        const addressE = document.querySelector(`#i-address${transID}`);
         if (spanChange.textContent == 'Thay đổi') {
             spanChange.innerHTML = 'Lưu';
-            textAreaAddress.removeAttribute('disabled');
-            textAreaAddress.style.border = '1px solid #787878';
+            addressE.removeAttribute('disabled');
+            nameE.removeAttribute('disabled');
+            phoneE.removeAttribute('disabled');
+            noteE.removeAttribute('disabled');
         } else {
-            if (this.userID) {
-                UserService.updateUserByID(this.userID, {
-                    ...this.user,
-                    Address: textAreaAddress.textContent,
+            const data = {
+                DeliveryAddress: addressE.value,
+                Receiver: nameE.value,
+                PhoneReceiver: phoneE.value,
+                Message: noteE.value,
+            };
+            TransactionService.updateTransactionByTransactionID(transID, data)
+                .then((result) => {
+                    notifSuccess(`Cập nhật giao dịch số ${transID} thành công`)
+                    this.connectedCallback();
                 })
-                    .then((result) => {
-                        notifSuccess('Thay đổi địa chỉ thành công');
-                    })
-                    .catch((err) => {
-                        notifFailure('Thay đổi địa chỉ thất bại');
-                    });
-            }
+                .catch((err) => {
+                    notifFailure('Cập nhật giao dịch thất bại');
+                });
             spanChange.innerHTML = 'Thay đổi';
-            textAreaAddress.setAttribute('disabled', true);
-            textAreaAddress.style.border = 'none';
+            addressE.disabled = true;
+            nameE.disabled = true;
+            phoneE.disabled = true;
+            noteE.disabled = true;
         }
-    }
-
-    onChangeAmountProduct() {
-        const update = () => {
-            if (this.userID) {
-                ProductOrderService.editAmountProductByUserID(this.userID, {
-                    ProductID: productID,
-                    Amount: valueAmount,
-                })
-                    .then((result) => {
-                        this.connectedCallback();
-                        notifSuccess('Thao tác thành công');
-                    })
-                    .catch((err) => {
-                        notifFailure('Thao tác thất bại');
-                    });
-            } else {
-                ProductOrderService.editAmountProductBySession({
-                    ProductID: productID,
-                    Amount: valueAmount,
-                })
-                    .then((result) => {
-                        this.connectedCallback();
-                        notifSuccess('Thao tác thành công');
-                    })
-                    .catch((err) => {
-                        notifFailure('Thao tác thất bại');
-                    });
-            }
-        };
-        const parentNode = event.currentTarget.parentNode;
-        const productID = parseInt(parentNode.parentNode.parentNode.id);
-        let maxAmount = parseInt(parentNode.getAttribute('remain')) || 0;
-        let valueAmount = parseInt(parentNode.childNodes[3].textContent) || 1;
-        if (event.currentTarget.textContent == '-' && valueAmount > 1) {
-            valueAmount -= 1;
-            update();
-        } else if (
-            event.currentTarget.textContent == '+' &&
-            valueAmount < maxAmount
-        ) {
-            valueAmount += 1;
-            update();
-        } else if (
-            event.currentTarget.textContent == '+' &&
-            valueAmount == maxAmount
-        ) {
-            notifFailure('Không thể thêm quá số lượng sản phẩm');
-        }
-
-        //Router.open('/cart');
-    }
-
-    /**
-     * Xác nhận giao dịch với user đã đăng nhập
-     * /transactions/:userid
-     {
-        "PhoneReceiver": "09034542789",
-        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
-        "Message": "Giao buổi chiều"
-     }
-     */
-    onOrderToTransaction() {
-        //Đặt hàng
-        const nameE = document.querySelector('#i-name');
-        const phoneE = document.querySelector('#i-phone');
-        const noteE = document.querySelector('#i-note');
-        const addressE = document.querySelector('#address-order-input');
-        if (
-            isEmptyValue(nameE.value) ||
-            isEmptyValue(phoneE.value) ||
-            isEmptyValue(addressE.value)
-        ) {
-            notifFailure(
-                'Bạn cần nhập Họ tên,số điện thoại, địa chỉ để đặt hàng'
-            );
-            return;
-        }
-        // const data = {
-        //     PhoneReceiver:phoneE.value,
-        //     DeliveryAddress:addressE.value,
-
-        // }
-        //  TransactionService.confirmTransactionByUserID(this.userID,)
     }
 
     connectedCallback() {
         let UserID = localStorage.getItem('USER_ID');
-        if (UserID) {
-            this.userID = UserID;
-            ProductOrderService.getCartByUserID(UserID)
-                .then((data) => {
-                    if (data.length > 0) {
-                        let user = {};
-                        UserService.getUserById(UserID)
-                            .then((u) => {
-                                user = u.data[0];
-                                this.user = user;
-                                appendHTML(data, user);
-                            })
-                            .catch(() => {
-                                notifFailure();
-                            });
-                    } else appendHTML([], null);
-                })
-                .catch((error) => {
-                    notifFailure('Không thể lấy thông tin giỏ hàng');
-                });
-        } else {
-            ProductOrderService.getCartBySessionID()
-                .then((data) => {
-                    if (data.length > 0) {
-                        appendHTML(data, null);
-                    } else appendHTML([], null);
-                })
-                .catch((error) => {
-                    notifFailure('Không thể lấy thông tin giỏ hàng');
-                });
-        }
-
-        let totalMoney = 0;
+        let data = [];
+        this.userID = UserID;
         let html = '';
-        let headerHTML;
-        let listItemsHTML;
-        let addressHTML = ``;
-
-        const appendHTML = (data, user) => {
-            let showAmountItems = document.querySelector('.icon-amount-items');
-            showAmountItems.innerHTML = data.length;
-            headerHTML = `<div id="cart-header">
-            <h2>Giao dịch</h2>
-            <span>(${data.length} sản phẩm)</span>
-        </div>`;
-            listItemsHTML = `<div id="cart-list-product">`;
-            data.forEach((item) => {
-                totalMoney += item.Amount * item.Price;
-                listItemsHTML += `<div id="${
-                    item.ProductID
-                }" class="cart-product-item">
-                <h3 id="vendor" style="padding: 10px;"><a is="router-link" href="/products/${
-                    item.ProductID
-                }">${item.ProductName}</a></h3>
-                <div id="product-item">
-                    <div class="container-img-cart-pr">
-                        <img class="img-product" src="data:image/png;base64,${
-                            item.Image
-                        }" alt="">
-                    </div>
-                    <div style="margin-left: 20px;">
-                        <p style="word-wrap: break-word; width: 410px;margin-top: 0px;">${
-                            item.Content || 'Không có mô tả sản phẩm'
-                        }</p>
-                    </div>
-                    <div style="font-weight: bold;font-size: 16px;width: 130px;">
-                        ${item.Price.formatMoney()}
-                    </div>
-                    <div id="amount-product" remain="${
-                        item.Remain || 0
-                    }" productID="1">
-                        <span class="icon_adjust" id="amount-product-show" style="margin-left: -4px;">x ${
-                            item.Amount
-                        } = ${(item.Amount * item.Price).formatMoney()} đ</span>
-                    </div>
-                </div>
-            </div>`;
-            });
-            listItemsHTML += `</div>`;
-            if (user) {
-                addressHTML = `<div style="float: right; width: 315px;">
-                <div id="address-order">
-                    <span>Địa chỉ nhận hàng</span>
-                    <span id="change-address" style="font-size: small;float: right;color: #0c5db6;cursor: pointer;"
-                    onclick="${this.id}.openInputAddress()">Thay đổi</span>
-                    <input disabled value="${
-                        user.FullName
-                    }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
-                     <input disabled type="number" value="${
-                         user.Phone
-                     }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
-                     <input disabled type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
-                    <textarea disabled style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"/>${
-                        user.Address
-                    }</textarea>
-                </div>
-                <div id="cart-total-price">
-                    <span style="color:#787878">Tổng số tiền</span>
-                    <span style="color: #fe3834;float: right;font-size: 22px;font-weight: bold;">${totalMoney.formatMoney()}đ</span>
-                </div>
-                </div>`;
-            } else {
-                addressHTML = `<div style="float: right; width: 315px;">
-                <div id="address-order">
-                    <span>Địa chỉ nhận hàng</span>
-                    <span id="change-address" style="font-size: small;float: right;color: #0c5db6;cursor: pointer;"
-                    onclick="${this.id}.openInputAddress()">Thay đổi</span>
-                    <input disabled style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
-                     <input disabled type="number" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
-                     <input disabled type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
-                    <textarea disabled style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"></textarea>
-                </div>
-                <div id="cart-total-price">
-                    <span style="color:#787878">Tổng số tiền</span>
-                    <span style="color: #fe3834;float: right;font-size: 22px;font-weight: bold;">${totalMoney.formatMoney()}đ</span>
-                </div>
-                </div>`;
-            }
-
-            if (data.length == 0) {
-                html = '<h2>Không có giao dịch nào</h2>';
-            } else html = headerHTML + listItemsHTML + addressHTML;
+        const appendHTML = (data) => {
+            if (data != null && data.length > 0) {
+                data.forEach((item) => {
+                    let date = 'KHÔNG CÓ';
+                    if (!isEmptyValue(item.TransactionCreatedDate)) {
+                        date = new Date(
+                            item.TransactionCreatedDate
+                        ).formatddMMyyyy();
+                    }
+                    let status = 'Đã được giao';
+                    let color = 'red';
+                    let changeE = '';
+                    if (item.TransactionStatus == 0) {
+                        changeE = `<span id="change-address${item.TransactionID}" style="font-size: small;float: right;color: #0c5db6;cursor: pointer;"
+                        onclick="${this.id}.openChange(${item.TransactionID})">Thay đổi</span>`;
+                        status = 'Đang được giao';
+                        color = 'blue';
+                    }
+                    html += `<div style="float: right; width: 315px;font-size:14px;margin:3px;">
+                 <div id="address-order">
+                     <span>Giao dịch số ${item.TransactionID} ngày ${date}</span>
+                    ${changeE}
+                     <input disabled value="${
+                         item.Receiver || ''
+                     }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name${
+                        item.TransactionID
+                    }" placeholder="Họ tên người nhận"/>
+                      <input disabled type="number" value="${
+                          item.PhoneReceiver
+                      }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone${
+                        item.TransactionID
+                    }" placeholder="Số điện thọai"/>
+                      <input value="${
+                          item.Message
+                      }" disabled type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note${
+                        item.TransactionID
+                    }" placeholder="Ghi chú"/>
+                     <textarea disabled style="border: 1px solid #787878;margin-top: 8px;resize: none;border: none;width: 285px; overflow: hidden;
+                     min-height: 50px;" placeholder="Địa chỉ" type="text" id="i-address${
+                         item.TransactionID
+                     }"/>${item.DeliveryAddress}</textarea>
+                     <span style="color:${color};font-size:12px;">${status}</span>
+                 </div>
+                 <div id="cart-total-price" style="margin:0px !important;">
+                     <span style="color:#787878">Tổng số tiền</span>
+                     <span style="color: #fe3834;float: right;font-size: 22px;font-weight: bold;">${item.Payment.formatMoney()}đ</span>
+                 </div>
+                 </div>`;
+                });
+            } else html = '<h1>Không có giao dịch nào</h1>';
             this.innerHTML = html;
         };
 
-        const appendAddressHTML = () => {};
+        if (UserID) {
+            TransactionService.getTransactionByUserID(UserID)
+                .then((result) => {
+                    appendHTML(result);
+                })
+                .catch((err) => {
+                    notifFailure('Không thể lấy giao dịch');
+                });
+        } else {
+            TransactionService.getTransactionBySession()
+                .then((result) => {
+                    appendHTML(result);
+                })
+                .catch((err) => {
+                    notifFailure('Không thể lấy giao dịch');
+                });
+        }
     }
 }

@@ -32,6 +32,26 @@ class UserService {
             throw error;
         }
     }
+
+    /**
+     * Thêm mới user
+    {
+    "FullName": "",
+    "Email": "",
+    "Phone": "",
+    "Address": "HUST",
+    "Password": "1234",
+    "UserName": "hainguyen",
+    "Role": 1
+    }
+     */
+    static async addUser(data) {
+        try {
+            return await api.post('/users', data);
+        } catch (error) {
+            throw error;
+        }
+    }
     /**
      * Đăng nhập bằng username và password
      * @param {*} userName

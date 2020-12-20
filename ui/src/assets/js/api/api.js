@@ -25,7 +25,7 @@ class Api {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
-                    unexpectedLogout();
+                    logoutSuccessful();
                     resolve(response);
                 } else {
                     //statuscode khong phai 2xx
@@ -74,7 +74,7 @@ class Api {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
-                    unexpectedLogout();
+                    logoutSuccessful();
                     resolve(response);
                 } else {
                     //statuscode khong phai 2xx
@@ -123,7 +123,7 @@ class Api {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
-                    unexpectedLogout();
+                    logoutSuccessful();
                     resolve(response);
                 } else {
                     //statuscode khong phai 2xx
@@ -173,7 +173,7 @@ class Api {
                     //resolve({ statusCode: xhr.status, data: JSON.parse(xhr.responseText) });
                     resolve(response);
                 } else if (parseInt(xhr.status) == 401) {
-                    unexpectedLogout();
+                    logoutSuccessful();
                     resolve(response);
                 } else {
                     //statuscode khong phai 2xx

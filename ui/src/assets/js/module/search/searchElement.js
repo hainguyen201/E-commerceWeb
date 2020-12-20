@@ -3,12 +3,12 @@ const template = `
 </div>
 `;
 
-export default class ListProductByCatalogElement extends HTMLDivElement {
+class SearchElement extends HTMLDivElement {
     static get route() {
-        return '/(\\d+)';
+        return '/(\\S+)';
     }
     static get is() {
-        return 'list-pr-by-catalog-element';
+        return 'search-element';
     }
 
     constructor() {
@@ -20,29 +20,43 @@ export default class ListProductByCatalogElement extends HTMLDivElement {
     }
 
     connectedCallback() {
-        let catalogElement = document.createElement('div', {
+        const keywordCode = this.params[0];
+        const keyword = decodeURI(keywordCode);
+        const catalogElement = document.createElement('div', {
             is: 'catalog-element',
         });
-        const catalogID = this.params[0];
-        catalogElement.currentCatalogID = catalogID;
         this.appendChild(catalogElement);
-        //catalogElement.querySelector("#current-catalog");
         const listProductElement = createElementByText(template);
         this.appendChild(listProductElement);
         let list_product = [];
         let containerListProduct = document.getElementById('list_product');
-        productService
-            .getListProductByCatalogID(catalogID)
-            .then((data) => {
-                list_product = data.data;
-                if (list_product.length > 0) {
+
+        ProductService.searchProductByName(keyword.spaceTo_())
+            .then((result) => {
+                list_product = result;
+                if (!!list_product && list_product.length > 0) {
                     addListProduct(list_product);
-                } else notifSuccess('Danh mục trống');
+                }
+                else{
+                    notifSuccess('Không tìm thấy sản phẩm phù hợp');
+                }
             })
             .catch((err) => {
-                notifFailure('Không thể lấy sản phẩm');
+                notifSuccess('Không tìm thấy sản phẩm phù hợp');
             });
 
+        // api.get('/products')
+        //     .then((result) => {
+        //         list_product = result.data;
+        //         if (!!list_product && list_product.length > 0) {
+        //             addListProduct(list_product);
+        //         }
+        //         console.log(result);
+        //     })
+        //     .catch((err) => {
+        //         // document.dispatchEvent(new CustomEvent('page-loading'));
+        //         notifFailure('Không thể lấy products');
+        //     });
         // document.onload = function () {
         // }
         function createProductElement(product) {
@@ -89,10 +103,10 @@ export default class ListProductByCatalogElement extends HTMLDivElement {
                 let x = e.clientX,
                     y = e.clientY;
                 document.getElementById(
-                    `tooltip-product-${product.ProductID}`,
+                    `tooltip-product-${product.ProductID}`
                 ).style.top = y + 20 + 'px';
                 document.getElementById(
-                    `tooltip-product-${product.ProductID}`,
+                    `tooltip-product-${product.ProductID}`
                 ).style.left = x + 20 + 'px';
             };
             return elementProduct;
@@ -108,3 +122,5 @@ export default class ListProductByCatalogElement extends HTMLDivElement {
         }
     }
 }
+
+export default [SearchElement];
