@@ -73,6 +73,8 @@
     margin-bottom: auto; */
     width: 900px;
     height: 630px;
+    font-size: 14px;
+    border: 1px solid #c8c8c8;
 }
 
 .iconx {
@@ -149,7 +151,7 @@ input.password,
 input.phone,
 input.email {
     border-radius: 5px;
-    height: 22px;
+    height: 35px;
     width: 381px;
     border: 1px solid #cccccc;
     background-color: #e8f0fe;
@@ -554,8 +556,8 @@ button {
     border-radius: 6px;
     padding: 1px;
     z-index: 1;
-    top: 2px;
-    right: 72px;
+    top: 38px;
+    right: 10px;
 }
 
 .dropdown-content div {

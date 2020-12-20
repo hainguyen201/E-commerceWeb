@@ -3,7 +3,7 @@
     align-items: center;
 }
 
-#cart-container {
+.cart-container {
     padding: 0 15px 0 15px;
     margin: 0 40px 0 40px;
     font-size: 14px;
@@ -22,7 +22,7 @@ h3#vendor {
     height: 48px;
 }
 
-#cart-product-item {
+.cart-product-item {
     border-radius: 5px;
     margin-bottom: 16px;
     background-color: #fff;

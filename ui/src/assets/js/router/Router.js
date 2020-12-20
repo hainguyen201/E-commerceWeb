@@ -35,7 +35,7 @@ export class Router {
 
     /**
      * hàm lấy route và thay element trong container bằng element xác định bởi route
-     * @param {*Đường dẫn pathname /route} route
+     * @param {*route Đường dẫn pathname /route}
      */
     static open(route) {
         const page = routesMap.find((r) =>
@@ -128,8 +128,8 @@ class RouterLink extends HTMLAnchorElement {
     constructor() {
         super();
         this.addEventListener('click', (e) => {
-            console.log('route' + e.toString());
             const route = this.getAttribute('href');
+            console.log('route=>' + route);
             Router.open(route);
             window.history.pushState(
                 {},

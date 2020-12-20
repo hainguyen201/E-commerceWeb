@@ -155,12 +155,13 @@ class Api {
             };
             xhr.open('PUT', PREFIX_URL + path, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
             xhr.withCredentials = true;
             xhr.send(JSON.stringify(data));
         });
     }
 
-    delete(path = '', data) {
+    delete(path = '') {
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
@@ -204,6 +205,7 @@ class Api {
             };
             xhr.open('DELETE', PREFIX_URL + path, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
             xhr.withCredentials = true;
             xhr.send();
         });

@@ -6,6 +6,7 @@ var createElementByText = (textHTML) => {
 };
 
 let animationNotif = (notification) => {
+    notification.style.top == '-40px';
     let a = 1;
     let id = setInterval(() => {
         a += 1;
@@ -27,7 +28,9 @@ let animationNotif = (notification) => {
 };
 
 var notifSuccess = (mes = ' Successfully ') => {
-    const notification = document.getElementById('notification');
+    const oldNotification = document.getElementById('notification');
+    const notification = oldNotification.cloneNode();
+    oldNotification.parentNode.replaceChild(notification, oldNotification);
     notification.innerHTML = `<div id="notif-content" class="notification-ok">
     <img src="/src/assets/img/icon-ok.png" class="icon20" style=" border-radius: 10px;" alt="icon-ok">
     <p style="white-space: nowrap; font-size: 14px;color: blue;">
@@ -38,7 +41,9 @@ var notifSuccess = (mes = ' Successfully ') => {
 };
 
 var notifFailure = (mes = ' Failure ') => {
-    const notification = document.getElementById('notification');
+    const oldNotification = document.getElementById('notification');
+    const notification = oldNotification.cloneNode();
+    oldNotification.parentNode.replaceChild(notification, oldNotification);
     notification.innerHTML = `<div id="notif-content" class="notification-ok">
     <img src="/src/assets/img/icon-failure.png" class="icon20" style="border-radius: 10px;" alt="icon-ok">
     <p style="white-space: nowrap; font-size: 14px;color: red;">

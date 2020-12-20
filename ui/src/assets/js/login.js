@@ -40,7 +40,7 @@ function changeContent() {
 
 function openLoginSignupModal() {
     modalLoginSignup.style.visibility = 'visible';
-    app.style.opacity = 0.3;
+    app.style.opacity = 0.1;
 }
 
 var listCheckbox = [checkboxMale, checkboxFemale];
@@ -155,4 +155,9 @@ btnLogout.onclick = async function logout(event) {
     } catch (error) {
         notifFailure('Đăng xuất thất bại');
     }
+};
+
+document.querySelector('.btn-signup').onclick = async function signup(e) {
+    try {
+    } catch (error) {}
 };
