@@ -37,6 +37,7 @@
     font-weight: 500;
 }
 
+
 /* .header__navbar-item--separate::after{
     content: "";
     display: block;
@@ -202,10 +203,11 @@ button {
     text-align: left;
 }
 
-.character > h2 {
+.character>h2 {
     grid-area: name;
     margin-bottom: 0px;
 }
+
 
 /* .character > p {
     grid-area: house;
@@ -213,7 +215,7 @@ button {
     margin-top: 10px;
 } */
 
-.character > img {
+.character>img {
     max-height: 50px;
     grid-area: image;
 }
@@ -238,6 +240,7 @@ button {
     top: 7px;
     right: 15px;
 }
+
 
 /* section */
 
@@ -557,7 +560,6 @@ button {
     padding: 1px;
     z-index: 1;
     top: 38px;
-    right: 10px;
 }
 
 .dropdown-content div {

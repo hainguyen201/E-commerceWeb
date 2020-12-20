@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/src/assets/css/cart/cart.css">
     <link rel="stylesheet" href="/src/assets/css/catalog/catalog.css">
     <link rel="stylesheet" href="/src/assets/css/product/productDetail.css">
+    <link rel="stylesheet" href="/src/assets/css/common.css">
     <link rel="stylesheet" href="/src/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -45,7 +46,7 @@
                                 <img src="/src/assets/img/icon-person.png" alt="icon-person" style=" border-radius: 100%; height: 33px;width: 38px;">
                             </div>
                             <div class="dropdown-content">
-                                <div><a is="router-link" id="user-name" href="/">USER</a></div>
+                                <div><a is="router-link" id="user-name" href="#">USER</a></div>
                                 <div id="button-logout">Đăng xuất</div>
                             </div>
                         </li>
@@ -97,20 +98,50 @@
             </div> -->
         </div>
         <div id="main-container" style="padding: 25px;">
-            <!-- <div class="product-detail">
-                <div class="product-image"></div>
-                <div class="product-info">
-                    <div class="product-name"></div>
-                    <div class="product-price">
-                        <div class="product-main-price"></div>
-                        <div class="product-discount"></div>
-                    </div>
-                    <div class="product-amount"></div>
-                    <div class="product-action">
+            <div class="dashboard">
+                <div class="menu">
+                    <div class="menu-title content">Quản lý</div>
+                    <div class="menu-content">
+                        <div class="menu-item content">Danh mục</div>
+                        <div class="menu-item content">Sản phẩm</div>
+                        <div class="menu-item content">Giao dịch</div>
 
                     </div>
                 </div>
-            </div> -->
+                <div class="list-catalog">
+
+                    <br>
+
+                    <br>
+                    <div class="main-table">
+                        <table class="catalog-table-content">
+                            <thead>
+                                <tr>
+                                    <th>Mã danh mục</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Ngày sửa</th>
+                                    <th>Hoạt động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Diện thoại</td>
+                                    <td>2020-12-12</td>
+                                    <td>2020-12-12</td>
+                                    <td style="text-align:center">
+                                        <button>Xóa</button>
+                                        <button>Sửa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <footer class="footer">
             <!-- <button id="test-cor">test-cors</button> -->

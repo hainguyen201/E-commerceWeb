@@ -7,6 +7,8 @@ const uuid = require('uuid')
 const session = require('../models/session.model')
 const Order = require('../models/order.model')
 const Transaction = require('../models/transaction.model')
+const ProductOrder = require('../models/productorder.model')
+const auth = require('./auth.controller')
 exports.getTransactionByUserID = async(req, res, param) => {
     var userid = param;
     await transaction.getTransactionByUserID(userid, async(err, data) => {
@@ -40,31 +42,121 @@ exports.confirmTransactionByUserID = async(req, res, param) => {
             if (data.length > 0) {
                 var orderID = data[0].OrderID;
                 //thêm một transaction mới
-                await Transaction.addTransaction(transaction_add, async(err, data) => {
+                await ProductOrder.getPriceByOrderID(orderID, async(err, data) => {
                     if (err) {
                         abstractController.sendErr(res, err);
                     } else {
-                        //cập nhật trạng thái giỏ hàng
-                        var transactionid = data.insertId;
-                        await Order.updateOrder(orderID, { TransactionID: transactionid }, async(err, data) => {
+                        transaction_add.Payment = data[0].Payment;
+                        console.log(transaction_add.Payment);
+                        await Transaction.addTransaction(transaction_add, async(err, data) => {
                             if (err) {
-                                abstractController.sendErr(res, err)
+                                abstractController.sendErr(res, err);
                             } else {
-                                //cập nhật id của giỏ hàng trong session
-                                await session.updateSessionWithUserID(userid, {}, async(err, data) => {
+                                //cập nhật trạng thái giỏ hàng
+                                var transactionid = data.insertId;
+                                await Order.updateOrder(orderID, { TransactionID: transactionid }, async(err, data) => {
                                     if (err) {
-                                        abstractController.sendErr(res, err);
+                                        abstractController.sendErr(res, err)
                                     } else {
-                                        abstractController.sendData(res, { message: 'cập nhật thành công' })
+                                        //cập nhật id của giỏ hàng trong session
+                                        await session.updateSessionWithUserID(userid, {}, async(err, data) => {
+                                            if (err) {
+                                                abstractController.sendErr(res, err);
+                                            } else {
+                                                abstractController.sendData(res, { message: 'cập nhật thành công' })
+                                            }
+                                        })
                                     }
                                 })
                             }
                         })
                     }
                 })
+
+
             } else {
                 abstractController.sendErr(res, { message: 'Không tìm thấy giỏ hàng' })
             }
         }
     })
+}
+exports.confirmTransactionBySession = async(req, res, paran) => {
+    var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
+    var transaction_add = req.body;
+    await session.getSessionByID(sessionid, async(err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err)
+        } else {
+            if (data.length > 0) {
+                var orderID = data[0].OrderID;
+                await ProductOrder.getPriceByOrderID(orderID, async(err, data) => {
+                    if (err) {
+                        abstractController.sendErr(res, err);
+                    } else {
+                        transaction_add.Payment = data[0].Payment;
+                        console.log(transaction_add.Payment);
+                        await Transaction.addTransaction(transaction_add, async(err, data) => {
+                            if (err) {
+                                abstractController.sendErr(res, err);
+                            } else {
+                                //cập nhật trạng thái giỏ hàng
+                                var transactionid = data.insertId;
+                                await Order.updateOrder(orderID, { TransactionID: transactionid }, async(err, data) => {
+                                    if (err) {
+                                        abstractController.sendErr(res, err)
+                                    } else {
+                                        //cập nhật id của giỏ hàng trong session
+                                        await session.updateSession(sessionid, {}, async(err, data) => {
+                                            if (err) {
+                                                abstractController.sendErr(res, err);
+                                            } else {
+                                                abstractController.sendData(res, { message: 'cập nhật thành công' })
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+
+            } else {
+                abstractController.sendData(res, data)
+            }
+        }
+    })
+}
+exports.updateTransactionByTransactionID = async(req, res, param) => {
+    var transactionid = param;
+    var transaction_update = req.body;
+    //nếu có cập nhật trường trạng thái thì kiểm tra role trước
+    if (transaction_update.TransactionStatus) {
+        await auth.getRole(req, async(err, data) => {
+            if (err) {
+                abstractController.sendErr(res, err);
+            } else {
+                console.log(data)
+                if (data == 1) {
+                    await Transaction.updateTransactionByID(transactionid, transaction_update, async(err, data) => {
+                        if (err) {
+                            abstractController.sendErr(res, err)
+                        } else {
+                            abstractController.sendData(res, data)
+                        }
+                    })
+                } else {
+                    abstractController.sendAuth(res);
+                }
+            }
+        })
+    } else {
+        await Transaction.updateTransactionByID(transactionid, transaction_update, async(err, data) => {
+            if (err) {
+                abstractController.sendErr(res, err)
+            } else {
+                abstractController.sendData(res, data)
+            }
+        })
+    }
+
 }

@@ -9,6 +9,9 @@ const Transaction = function(transaction) {
     this.TransactionStatus = transaction.TransactionStatus ? transaction.TransactionStatus : 0;
     this.PhoneReceiver = transaction.PhoneReceiver ? transaction.PhoneReceiver : '';
 }
+Transaction.getTransactionByID = async(transactionid, result) => {
+    var sqlString = 'select * from transaction'
+}
 Transaction.getTransactionByUserID = async(userid, result) => {
     userid = parseInt(userid)
     var sqlString = `select * from transactions where UserID=?`;
@@ -25,7 +28,11 @@ Transaction.addTransaction = async(transaction, result) => {
 
 }
 Transaction.updateTransactionByID = async(transactionid, transaction, result) => {
-    transaction = new Transaction(transaction);
-    transaction.TransactionModifiedDate = helper.getDateNow();
+    var transaction_update = new Transaction(transaction);
+    transaction_update.TransactionModifiedDate = helper.getDateNow();
+    delete transaction_update.SessionID;
+    delete transaction_update.UserID;
+    delete transaction_update.Payment;
+    await AbstractModel.updateDataQuery('transactions', transaction_update, result, 'TransactionID', parseInt(transactionid));
 }
 module.exports = Transaction

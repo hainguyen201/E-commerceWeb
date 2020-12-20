@@ -16,10 +16,12 @@ exports.getRole = async(req, result) => {
             if (data.length > 0 && data[0].UserID != 0) {
                 await user.findById(data[0].UserID, (err, data) => {
                     if (err) {
-                        //show er
+                        abstracontroller.sendErr(res, err);
                     } else {
-                        console.log(data)
-                        result(null, data[0].Role)
+                        if (data.length > 0)
+                            result(null, data[0].Role)
+                        else
+                            result(null, 0);
                     }
                 })
             } else {

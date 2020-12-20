@@ -371,12 +371,31 @@ const routes = [
     },
     /**
      * Xác nhận giao dịch với user đã đăng nhập
-     * /transactions
+     * /transactions/:userid
      */
     {
         method: 'POST',
         path: /^\/transactions\/([0-9a-z]+)/,
         handler: transactionController.confirmTransactionByUserID
+    },
+
+    /**
+     * Xác nhận giao dịch với user chưa đăng nhập (sử dụng session)
+     * /transactions
+     */
+    {
+        method: 'POST',
+        path: '/transactions',
+        handler: transactionController.confirmTransactionBySession
+    },
+    /**
+     * Cập nhật giao dịch ( áp dụng cho cả khách hàng đăng nhập và chưa đăng nhập)
+     * /transactions/:transactionID
+     */
+    {
+        method: 'PUT',
+        path: /^\/transactions\/([0-9a-z]+)/,
+        handler: transactionController.updateTransactionByTransactionID
     }
 ]
 module.exports = routes;
