@@ -372,6 +372,11 @@ const routes = [
     /**
      * Xác nhận giao dịch với user đã đăng nhập
      * /transactions/:userid
+     {
+        "PhoneReceiver": "09034542789",
+        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
+        "Message": "Giao buổi chiều"
+     }
      */
     {
         method: 'POST',
@@ -382,6 +387,11 @@ const routes = [
     /**
      * Xác nhận giao dịch với user chưa đăng nhập (sử dụng session)
      * /transactions
+      {
+        "PhoneReceiver": "09034542789",
+        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
+        "Message": "Giao buổi chiều"
+        }
      */
     {
         method: 'POST',
@@ -390,7 +400,12 @@ const routes = [
     },
     /**
      * Cập nhật giao dịch ( áp dụng cho cả khách hàng đăng nhập và chưa đăng nhập)
-     * /transactions/:transactionID
+     {
+        "PhoneReceiver": "09034542789",
+        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
+        "Message": "Giao buổi chiều",
+        "TransactionStatus": 1
+     }
      */
     {
         method: 'PUT',
