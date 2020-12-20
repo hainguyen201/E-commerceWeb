@@ -5,7 +5,7 @@ const helper = require('../utils/helper')
 
 const User = function(user) {
         // this.UserID = user.UserID ? user.UserID : " ";
-        this.Name = user.Name ? user.Name : "";
+        this.FullName = user.FullName ? user.FullName : "";
         this.Email = user.Email ? user.Email : "";
         this.Phone = user.Phone ? user.Phone : "";
         this.Address = user.Address ? user.Address : "";

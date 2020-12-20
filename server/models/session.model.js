@@ -29,4 +29,10 @@ Session.updateSession = async(sessionId, session, result) => {
     var update_ss = new Session(session);
     AbstractModel.updateDataQuery('sessions', update_ss, result, 'SessionID', sessionId);
 }
+Session.updateSessionWithUserID = async(userid, session, result) => {
+    var session_update = new Session(session);
+    console.log(session_update)
+    delete session_update.UserID
+    await AbstractModel.updateDataQuery('sessions', session_update, result, 'UserID', parseInt(userid));
+}
 module.exports = Session
