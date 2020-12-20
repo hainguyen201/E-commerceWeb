@@ -10,3 +10,4 @@ var productService = new ProductService();
 var catalogService = new CatalogService();
 var orderService = new OrderService();
 var productOrderService = new ProductOrderService();
+var transactionService = new TransactionService();

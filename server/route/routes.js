@@ -232,7 +232,7 @@ const routes = [
     {
         method: 'PUT',
         path: /^\/catalogs\/([0-9a-z]+)/,
-        handler: catalogController.updateCatalog
+        handler: catalogController.updateCatalogWithAuth
     },
     /**
      * Thêm danh mục  
@@ -244,7 +244,7 @@ const routes = [
     {
         method: 'POST',
         path: '/catalogs',
-        handler: catalogController.addCatalog
+        handler: catalogController.addCatalogWithAuth
     },
     /**
      * Xóa danh mục theo id
@@ -253,7 +253,7 @@ const routes = [
     {
         method: 'DELETE',
         path: /^\/catalogs\/([0-9a-z]+)/,
-        handler: catalogController.deleteCatalog
+        handler: catalogController.deleteCatalogWithAuth
     },
     /**
      * Lấy thông tin xác thực người dùng theo session
@@ -372,6 +372,11 @@ const routes = [
     /**
      * Xác nhận giao dịch với user đã đăng nhập
      * /transactions/:userid
+     {
+        "PhoneReceiver": "09034542789",
+        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
+        "Message": "Giao buổi chiều"
+     }
      */
     {
         method: 'POST',
@@ -382,6 +387,11 @@ const routes = [
     /**
      * Xác nhận giao dịch với user chưa đăng nhập (sử dụng session)
      * /transactions
+      {
+        "PhoneReceiver": "09034542789",
+        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
+        "Message": "Giao buổi chiều"
+        }
      */
     {
         method: 'POST',
@@ -390,7 +400,12 @@ const routes = [
     },
     /**
      * Cập nhật giao dịch ( áp dụng cho cả khách hàng đăng nhập và chưa đăng nhập)
-     * /transactions/:transactionID
+     {
+        "PhoneReceiver": "09034542789",
+        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
+        "Message": "Giao buổi chiều",
+        "TransactionStatus": 1
+     }
      */
     {
         method: 'PUT',

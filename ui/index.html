@@ -61,6 +61,11 @@
                             <input type="text" name="searchBar" id="searchBar" placeholder="Tìm kiếm sản phẩm" />
                         </div>
                     </div>
+                    <div id="icon-trans" class="_center_everything">
+                        <a href="/transactions">
+                            <img style="height: 30px;width: 30px;" class="icon20" src="/src/assets/img/icon-trans.png" alt="">
+                        </a>
+                    </div>
                     <div class="cart-amount-items">
                         <a is="router-link" href="/cart">
                             <div class="fa-shopping-cart">
@@ -70,34 +75,9 @@
                             </div>
                         </a>
                     </div>
-
-                    <!-- <div class="container content-section">
-                        <h2 class="section-header">Giỏ hàng</h2>
-                        <div class="cart-row">
-                            <span class="cart-item cart-header cart-column">Sản phẩm</span>
-                            <span class="cart-price cart-header cart-column">Giá</span>
-                            <span class="cart-quantity cart-header cart-column">Số lượng</span>
-                        </div>
-                        <div class="cart-items">
-                        </div>
-                        <div class="cart-total">
-                            <strong class="cart-total-title">Tổng</strong>
-                            <span class="cart-total-price">$0</span>
-                        </div>
-                        <div>
-                            <button class="btn btn-primary btn-purchase" type="button">Thanh toán</button>
-                            <button class="btn btn-close" onclick="onCloseCart()" type="button">Đóng</button>
-                        </div>
-                    </div> -->
                 </div>
         </header>
         <div class="_center_everything" id="notification">
-            <!-- <div id="notif-content" class="notification-ok">
-                <img src="/src/assets/img/icon-ok.png" class="icon20" style="border-radius: 10px;" alt="icon-ok">
-                <p style="font-size: 14px;color: blue;">
-                   
-                </p>
-            </div> -->
         </div>
         <div id="main-container" style="padding: 25px;">
             <div class="dashboard">
@@ -113,6 +93,28 @@
                 <div class="list-catalog">
 
                     <br>
+                    <div class="add-catalog">
+                        <button class="btn" onclick="openAddCatalogModal('post')">Thêm danh mục</button>
+                        <div id="add-catalog-modal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content catalog-modal-content">
+                                <!-- <span class="close">&times;</span> -->
+                                <div class="form-catalog">
+                                    <div class="catalog-input">
+                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
+                                            class='catalog-value type-input'>
+
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <button class="btn btn-cancel" onclick="closeAddCatalogModal()">Hủy</button>
+                                        <button class="btn" onclick="addCatalog(event)">Gửi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <br>
                     <div class="main-table">
@@ -128,13 +130,35 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Diện thoại</td>
-                                    <td>2020-12-12</td>
-                                    <td>2020-12-12</td>
+                                    <td name="CatalogID">1</td>
+                                    <td name="CatalogName">Diện thoại</td>
+                                    <td name="CatalogCreatedDate">2020-12-12</td>
+                                    <td name="CatalogModifiedDate">2020-12-12</td>
                                     <td style="text-align:center">
-                                        <button>Xóa</button>
-                                        <button>Sửa</button>
+                                        <button id="delete-catalog" class="btn">Xóa</button>
+                                        <button id="edit-catalog" class="btn"
+                                            onclick="openEditCatalogModal(event)">Sửa</button>
+                                        <div id="edit-catalog-modal" class="modal">
+
+                                            <!-- Modal content -->
+                                            <div class="modal-content catalog-modal-content">
+                                                <!-- <span class="close">&times;</span> -->
+                                                <div class="form-catalog">
+                                                    <div class="catalog-input">
+                                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
+                                                            class='catalog-value type-input'>
+
+                                                    </div>
+                                                    <br>
+                                                    <div>
+                                                        <button class="btn btn-cancel"
+                                                            onclick="closeEditCatalogModal()">Hủy</button>
+                                                        <button class="btn" onclick="submitCatalog(event)">Gửi</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
