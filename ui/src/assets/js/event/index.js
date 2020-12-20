@@ -58,7 +58,7 @@ var updateShowTotalProductOfCart = () => {
             });
     }
 };
-
+//
 var catalogService = new CatalogService()
 
 function openEditCatalogModal(event, id) {

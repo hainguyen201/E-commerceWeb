@@ -173,6 +173,12 @@ input:focus {
     border: 1px solid #66afe9 !important;
 }
 
+textarea:focus {
+    outline: 1px;
+    border: 1px solid #66afe9 !important;
+}
+
+
 button {
     cursor: pointer;
 }
