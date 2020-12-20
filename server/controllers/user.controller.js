@@ -110,6 +110,7 @@ exports.addUser = async(req, res) => {
         this.resultHandler(err, data, req, res, message)
     })
 }
+
 exports.deleteUser = async(req, res, param) => {
     User.deleteUser(param, (err, data) => {
         var message = {
@@ -136,4 +137,3 @@ exports.resultHandler = (err, data, req, res, message) => {
         abstractController.sendData(res, dt);
     }
 }
->>>>>>> 47f93aeb05d2b50b9906cbeae1a44b0e249baed7
