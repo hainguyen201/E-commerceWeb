@@ -4,13 +4,14 @@ import containerRootElement from '../module/root/index.js';
 import productList from '../module/product/index.js';
 import catalogList from '../module/catalog/index.js';
 import cartList from '../module/cart/index.js';
+import userList from '../module/user/index.js';
 
 const mainContainer = document.querySelector('#main-container');
 Router.addModule('/products', productList, mainContainer);
 Router.addModule('/catalogs', catalogList, mainContainer);
+Router.addModule('/users', userList, mainContainer);
 Router.addModule('/', containerRootElement, mainContainer);
 Router.addModule('/cart', cartList, mainContainer);
-
 //Auth trước khi mở đường dẫn mới
 console.log('reload resource');
 userService

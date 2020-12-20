@@ -72,22 +72,24 @@ export default class CartElement extends HTMLDivElement {
         if (this.userID) {
             ProductOrderService.deteleProductInCartByUserID(
                 this.userID,
-                productID,
+                productID
             )
                 .then((result) => {
-                    this.connectedCallback();
                     notifSuccess('Xóa thành công');
+                    this.connectedCallback();
                 })
                 .catch((err) => {
-                    debugger;
+                    notifFailure('Xóa thất bại');
                 });
         } else {
             ProductOrderService.deleteProductInCartBySession(productID)
                 .then((result) => {
-                    this.connectedCallback();
                     notifSuccess('Xóa thành công');
+                    this.connectedCallback();
                 })
-                .catch((err) => {});
+                .catch((err) => {
+                    notifFailure('Xóa thất bại');
+                });
         }
     }
 
@@ -105,10 +107,10 @@ export default class CartElement extends HTMLDivElement {
                     Address: textAreaAddress.textContent,
                 })
                     .then((result) => {
-                        notifSuccess("Thay đổi địa chỉ thành công")
+                        notifSuccess('Thay đổi địa chỉ thành công');
                     })
                     .catch((err) => {
-                        notifFailure("Thay đổi địa chỉ thất bại")
+                        notifFailure('Thay đổi địa chỉ thất bại');
                     });
             }
             spanChange.innerHTML = 'Thay đổi';
@@ -118,6 +120,33 @@ export default class CartElement extends HTMLDivElement {
     }
 
     onChangeAmountProduct() {
+        const update = () => {
+            if (this.userID) {
+                ProductOrderService.editAmountProductByUserID(this.userID, {
+                    ProductID: productID,
+                    Amount: valueAmount,
+                })
+                    .then((result) => {
+                        this.connectedCallback();
+                        notifSuccess('Thao tác thành công');
+                    })
+                    .catch((err) => {
+                        notifFailure('Thao tác thất bại');
+                    });
+            } else {
+                ProductOrderService.editAmountProductBySession({
+                    ProductID: productID,
+                    Amount: valueAmount,
+                })
+                    .then((result) => {
+                        this.connectedCallback();
+                        notifSuccess('Thao tác thành công');
+                    })
+                    .catch((err) => {
+                        notifFailure('Thao tác thất bại');
+                    });
+            }
+        };
         const parentNode = event.currentTarget.parentNode;
         const productID = parseInt(parentNode.parentNode.parentNode.id);
         let maxAmount = parseInt(parentNode.getAttribute('remain')) || 0;
@@ -125,36 +154,18 @@ export default class CartElement extends HTMLDivElement {
         debugger;
         if (event.currentTarget.textContent == '-' && valueAmount > 1) {
             valueAmount -= 1;
+            update();
         } else if (
             event.currentTarget.textContent == '+' &&
             valueAmount < maxAmount
         ) {
             valueAmount += 1;
-        }
-        if (this.userID) {
-            ProductOrderService.editAmountProductByUserID(this.userID, {
-                ProductID: productID,
-                Amount: valueAmount,
-            })
-                .then((result) => {
-                    this.connectedCallback();
-                    notifSuccess('Thao tác thành công');
-                })
-                .catch((err) => {
-                    notifFailure('Thao tác thất bại');
-                });
-        } else {
-            ProductOrderService.editAmountProductBySession({
-                ProductID: productID,
-                Amount: valueAmount,
-            })
-                .then((result) => {
-                    this.connectedCallback();
-                    notifSuccess('Thao tác thành công');
-                })
-                .catch((err) => {
-                    notifFailure('Thao tác thất bại');
-                });
+            update();
+        } else if (
+            event.currentTarget.textContent == '+' &&
+            valueAmount == maxAmount
+        ) {
+            notifFailure('Không thể thêm quá số lượng sản phẩm');
         }
 
         //Router.open('/cart');
@@ -181,7 +192,7 @@ export default class CartElement extends HTMLDivElement {
                             .catch(() => {
                                 notifFailure();
                             });
-                    } else appendHTML(null);
+                    } else appendHTML([], null);
                 })
                 .catch((error) => {
                     notifFailure('Không thể lấy thông tin giỏ hàng');
@@ -191,7 +202,7 @@ export default class CartElement extends HTMLDivElement {
                 .then((data) => {
                     if (data.length > 0) {
                         appendHTML(data, null);
-                    } else appendHTML(null);
+                    } else appendHTML([], null);
                 })
                 .catch((error) => {
                     notifFailure('Không thể lấy thông tin giỏ hàng');
@@ -206,7 +217,7 @@ export default class CartElement extends HTMLDivElement {
 
         const appendHTML = (data, user) => {
             let showAmountItems = document.querySelector('.icon-amount-items');
-            showAmountItems.innerHTML = data == null ? 0 : data.length;
+            showAmountItems.innerHTML = data.length;
             headerHTML = `<div id="cart-header">
             <h2>Giỏ hàng</h2>
             <span>(${data.length} sản phẩm)</span>
@@ -282,7 +293,7 @@ export default class CartElement extends HTMLDivElement {
             } else {
             }
 
-            if (data == null) {
+            if (data.length == 0) {
                 html = '<h2>Giỏ hàng trống</h2>';
             } else html = headerHTML + listItemsHTML + addressHTML;
             this.innerHTML = html;
