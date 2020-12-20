@@ -2,6 +2,14 @@ const Order = require('../models/order.model')
 const headers = require('../config/header.config')
 const abstractController = require('./abstract.controller')
 const helper = require('../utils/helper')
+
+
+/**
+ * Lấy đơn hàng qua ID
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.getOrderByID = async(req, res, param) => {
     await Order.getOrderByID(param, (err, data) => {
         if (err) {
@@ -15,6 +23,13 @@ exports.getOrderByID = async(req, res, param) => {
         }
     })
 }
+
+/**
+ * Cập nhật đơn hàng
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.updateOrder = async(req, res, param) => {
     await Order.updateOrder(param, req.body, (err, data) => {
         if (err) {
@@ -28,6 +43,13 @@ exports.updateOrder = async(req, res, param) => {
         }
     })
 }
+
+/**
+ * Thêm đơn hàng
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.addOrder = async(req, res, param) => {
     await Order.addOrder(req.body, (err, data) => {
         if (err) {
@@ -41,6 +63,13 @@ exports.addOrder = async(req, res, param) => {
         }
     })
 }
+
+/**
+ * Xóa đơn hàng
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.deleteOrder = async(req, res, param) => {
     await Order.deleteOrder(param, (err, data) => {
         if (err) {
