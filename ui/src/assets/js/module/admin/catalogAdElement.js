@@ -31,7 +31,7 @@ class CatalogAdElement extends HTMLDivElement {
         const addCatalogTable = (catalogs) => {
             let catalog = `<div class="list-catalog"><br>
     <div class="add-catalog">   
-        <button class="btn" onclick="openAddCatalogModal('post')">Thêm danh mục</button>
+        <button class="btn" onclick="openAddCatalogModal()">Thêm danh mục</button>
         <div id="add-catalog-modal" class="modal">
 
             <!-- Modal content -->
