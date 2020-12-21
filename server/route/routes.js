@@ -354,7 +354,7 @@ const routes = [
 
     /**
      * Lấy tất cả giao dịch (dành cho admin)
-     * /transactions
+     * /transactions/admins
      */
     {
         method: 'GET',
