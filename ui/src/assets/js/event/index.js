@@ -764,4 +764,4 @@ function addProductTable(products) {
     productElement.innerHTML = produchtml;
 
 }
-loadProductData()
+//loadProductData()

@@ -56,4 +56,12 @@ class TransactionService {
             return await api.put(`/transactions/${transactionID}`, data);
         } catch (error) {}
     }
+
+    static async getAllTransaction() {
+        try {
+            return await api.get(`/transactions/admins`);
+        } catch (error) {
+            throw error;
+        }
+    }
 }

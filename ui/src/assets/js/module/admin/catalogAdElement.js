@@ -2,9 +2,9 @@ const template = `
 <div class="menu">
     <div class="menu-title content">Quản lý</div>
     <div class="menu-content">
-    <a href="/admin/catalog"><div class="menu-item content">Danh mục</div></a>
-    <a href="/admin/product"><div class="menu-item content">Sản phẩm</div></a>
-    <a href="/admin/transaction"><div class="menu-item content">Giao dịch</div></a>
+    <a is="router-link" href="/admin/catalog"><div class="menu-item content">Danh mục</div></a>
+    <a is="router-link" href="/admin/product"><div class="menu-item content">Sản phẩm</div></a>
+    <a is="router-link" href="/admin/transaction"><div class="menu-item content">Giao dịch</div></a>
     </div>
 </div>
 `;

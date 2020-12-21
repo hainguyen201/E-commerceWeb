@@ -117,9 +117,13 @@ var loginSuccessful = (user) => {
     let amE = document.querySelector(".cart-amount-items");
     if (user.Role == 1) {
         addIconAdmin();
+        document.querySelector(".admin-or-user").innerHTML = 'ADMIN';
+        document.querySelector("#trans__").style.display = 'none';
         amE.style.display = 'none';
     }
     else{
+        document.querySelector(".admin-or-user").innerHTML = '';
+        document.querySelector("#icon-trans").style.display = 'grid';
         amE.style.display = 'flex';
     }
     localStorage.setItem('USER_ID', user.UserID);
