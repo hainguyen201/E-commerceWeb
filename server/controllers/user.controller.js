@@ -110,6 +110,7 @@ exports.addUser = async(req, res) => {
         this.resultHandler(err, data, req, res, message)
     })
 }
+
 exports.deleteUser = async(req, res, param) => {
     User.deleteUser(param, (err, data) => {
         var message = {

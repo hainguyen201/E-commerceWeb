@@ -9,6 +9,16 @@ const Order = require('../models/order.model')
 const Transaction = require('../models/transaction.model')
 const ProductOrder = require('../models/productorder.model')
 const auth = require('./auth.controller')
+
+
+
+/**
+ * Lấy transaction thông qua userID
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
+
 exports.getTransactionByUserID = async(req, res, param) => {
     var userid = param;
     await transaction.getTransactionByUserID(userid, async(err, data) => {
@@ -19,6 +29,15 @@ exports.getTransactionByUserID = async(req, res, param) => {
         }
     })
 }
+
+
+/**
+ * Lấy transaction thông qua section
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
+
 exports.getTransactionBySession = async(req, res, param) => {
     var sessionid = helper.cookieparser(req.headers.cookie).sessionid
     await transaction.getTransactionBySessionID(sessionid, async(err, data) => {
@@ -29,6 +48,14 @@ exports.getTransactionBySession = async(req, res, param) => {
         }
     })
 }
+
+
+/**
+ * Xác nhận transaction bằng userID
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.confirmTransactionByUserID = async(req, res, param) => {
     var transaction_add = req.body;
     var userid = param;
@@ -80,6 +107,14 @@ exports.confirmTransactionByUserID = async(req, res, param) => {
         }
     })
 }
+
+
+/**
+ * Xác nhận transaction thông qua section
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} paran 
+ */
 exports.confirmTransactionBySession = async(req, res, paran) => {
     var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
     var transaction_add = req.body;
@@ -126,6 +161,13 @@ exports.confirmTransactionBySession = async(req, res, paran) => {
         }
     })
 }
+
+/**
+ * Cập nhật giao dịch bằng ID
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.updateTransactionByTransactionID = async(req, res, param) => {
     var transactionid = param;
     var transaction_update = req.body;
