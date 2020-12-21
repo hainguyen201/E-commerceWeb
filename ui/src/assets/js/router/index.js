@@ -21,38 +21,38 @@ Router.addModule('/transactions', transactionList, mainContainer);
 Router.addModule('/search', SearchElement, mainContainer);
 
 //Auth trước khi mở đường dẫn mới
-console.log('reload resource');
-userService
-    .authService()
-    .then((data) => {
-        let user = data[0];
-        if (user) {
-            loginSuccessful(user);
-            if (user.Role == 1) {
-                Router.addModule(
-                    '/admin/catalog',
-                    CatalogAdElement,
-                    mainContainer
-                );
-                Router.addModule(
-                    '/admin/product',
-                    ProductAdElement,
-                    mainContainer
-                );
-                Router.addModule(
-                    '/admin/transaction',
-                    TransactionAdElement,
-                    mainContainer
-                );
-            }
-        } else {
-            notifSuccess('Bạn chưa đăng nhập tài khoản');
-        }
-        updateShowTotalProductOfCart();
-        Router.open(window.location.pathname);
-    })
-    .catch((err) => {
-        notifFailure(err.toString());
-    });
+// console.log('reload resource');
+// userService
+//     .authService()
+//     .then((data) => {
+//         let user = data[0];
+//         if (user) {
+//             loginSuccessful(user);
+//             if (user.Role == 1) {
+//                 Router.addModule(
+//                     '/admin/catalog',
+//                     CatalogAdElement,
+//                     mainContainer
+//                 );
+//                 Router.addModule(
+//                     '/admin/product',
+//                     ProductAdElement,
+//                     mainContainer
+//                 );
+//                 Router.addModule(
+//                     '/admin/transaction',
+//                     TransactionAdElement,
+//                     mainContainer
+//                 );
+//             }
+//         } else {
+//             notifSuccess('Bạn chưa đăng nhập tài khoản');
+//         }
+//         updateShowTotalProductOfCart();
+//         Router.open(window.location.pathname);
+//     })
+//     .catch((err) => {
+//         notifFailure(err.toString());
+//     });
 
 //notifSuccess("test");
