@@ -73,8 +73,8 @@ function openEditCatalogModal(event, id) {
         'block';
 }
 
-function openAddCatalogModal() {
-    document.getElementById('add-catalog-modal').style.display = 'block';
+function openDeleteProductModal(id) {
+    document.querySelector(`#product-${id} .delete-product-modal`).style.display = 'block'
 }
 
 function openDeleteCatalogModal(id) {
@@ -138,23 +138,102 @@ function addCatalog(event) {
     });
 }
 
-function addCatalogTable(catalogs) {
-    var catalog = `<br>
-    <div class="add-catalog">
-        <button class="btn" onclick="openAddCatalogModal('post')">Thêm danh mục</button>
-        <div id="add-catalog-modal" class="modal">
+function previewImageEdit(id) {
+    var file = document.querySelector(`#product-${id} .edit-product-modal input[name="Image"]`).files[0];
+    var img = document.querySelector(`#product-${id} .edit-product-modal .product-image-preview`)
+
+
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function() {
+        // convert image file to base64 string
+        img.src = reader.result;
+        product_update.Image = reader.result.replace('data:image/jpeg;base64,', '')
+
+    }, false);
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+function previewImageAdd() {
+    var file = document.querySelector('#add-product-modal input[name="Image"]').files[0];
+    var img = document.querySelector('#add-product-modal .product-image-preview')
+
+
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function() {
+        // convert image file to base64 string
+        img.src = reader.result;
+        product_add.Image = reader.result.replace('data:image/jpeg;base64,', '')
+
+    }, false);
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+function loadProductData() {
+    productService.getAllProduct().then((result) => {
+        console.log(result)
+        addProductTable(result.data)
+    })
+}
+
+function addProductTable(products) {
+    var produchtml = `
+    <div class="list-product list-item">
+
+    <br>
+    <div class="add-product">
+        <button class="btn" onclick="openAddProductModal()">Thêm sản phẩm</button>
+        <div id="add-product-modal" class="modal">
 
             <!-- Modal content -->
-            <div class="modal-content catalog-modal-content">
+            <div class="modal-content product-modal-content">
                 <!-- <span class="close">&times;</span> -->
-                <div class="form-catalog">
-                    <div class="catalog-input">
-                        <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
-                    </div>
-                    <br>
-                    <div>
-                        <button class="btn btn-cancel" onclick="closeAddCatalogModal()">Hủy</button>
-                        <button class="btn" onclick="addCatalog(event)">Gửi</button>
+                <div class="form-product">
+                    <div style="margin: 0 auto;">
+                        <div class="product__form">
+                            <div class="product__form-left">
+
+                                <!-- Mã sản phẩm:<br>
+                                <input type="text" name="ProductID" placeholder="mã sản phẩm" class="type-input product-value"> -->
+
+                                <br>
+                                <input type="text" name="ProductName" placeholder="Tên sản phẩm" class="type-input product-value">
+                                <br>
+                                <br>
+                                <input type="number" name="Price" placeholder="Giá sản phẩm" class="type-input product-value">
+                                <br><br>
+                                <input type="text" name="Content" placeholder="Mô tả sản phẩm" class="type-input product-value">
+                                <br><br>
+                                <input type="file" id="avatar" name="Image" accept="image/png, image/jpeg" onchange="previewImageAdd()" class="product-value">
+                                <br>
+                                <br>
+                                <img src="" alt="" class="product-image-preview">
+
+                            </div>
+                            <div class="product__form-right">
+                                <!-- Mã danh mục:<br>
+                                <input type="text" name="Catalog" placeholder="mã danh mục" class="type-input  product-value"> -->
+                                <br>
+                                <input type="number" name="Discount" placeholder="Giảm giá" class="type-input  product-value">
+                                <br><br>
+                                <input type="number" name="Remain" placeholder="Số lượng sản phẩm" class="type-input  product-value">
+                                <br><br>
+                                <select name="CatalogID" id="CatalogName" class="type-input  product-value">
+                                  
+                                </select>
+                            </div>
+                        </div>
+                        <div class="sumit__form">
+                            <br>
+                            <button class="btn btn-cancel" onclick="closeAddProductModal()">Hủy</button>
+                            <input class="submit btn" id="submit-product" type="submit" placeholder="Submit" onclick="addProduct()">
+                            <br>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,12 +242,17 @@ function addCatalogTable(catalogs) {
 
     <br>
     <div class="main-table">
-        <table class="catalog-table-content">
+        <table class="product-table-content item-table-content">
             <thead>
                 <tr>
-                    <th>Mã danh mục</th>
-                    <th>Tên danh mục</th>
-                    <th>Ngày tạo</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá sản phẩm</th>
+                    <th>Nội dung</th>
+                    <th>Giảm giá</th>
+                    <th>Số lượng</th>
+                    <th>Ảnh minh họa</th>
+                    <th>Ngày Tạo</th>
                     <th>Ngày sửa</th>
                     <th>Hoạt động</th>
                 </tr>
@@ -185,34 +269,30 @@ function addCatalogTable(catalogs) {
         <button id="delete-catalog" class="btn" onclick="openDeleteCatalogModal(${_catalog.CatalogID})">Xóa</button>
         <div class="delete-catalog-modal modal">
 
-            <!-- Modal content -->
-            <div class="modal-content catalog-modal-content">
-                <!-- <span class="close">&times;</span> -->
-                <div class="form-catalog">
-                    <div class="confirm-info">Bạn có chắc muốn xóa ?</div>
-                    <br>
-                    <div>
-                        <button class="btn btn-cancel" onclick="closeDeleteCatalogModal(${_catalog.CatalogID})">Hủy</button>
-                        <button class="btn" onclick="deleteCatalog(${_catalog.CatalogID})">Gửi</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <button id="edit-catalog" class="btn" onclick="openEditCatalogModal(event, ${_catalog.CatalogID})">Sửa</button>
-    <div class="edit-catalog-modal modal">
+                            <!-- Modal content -->
+                            <div class="modal-content product-modal-content">
+                                <!-- <span class="close">&times;</span> -->
+                                <div class="form-product">
+                                    <div class="confirm-info">Bạn có chắc muốn xóa ?</div>
+                                    <br>
 
-        <!-- Modal content -->
-        <div class="modal-content catalog-modal-content">
-            <!-- <span class="close">&times;</span> -->
-            <div class="form-catalog">
-                <div class="catalog-input">
-                    <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
+                                    <div>
+                                        <button class="btn btn-cancel" onclick="closeDeleteProductModal(${_product.ProductID})">Hủy</button>
+                                        <button class="btn" onclick="deleteProduct(${_product.ProductID})">Gửi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="edit-product" class="btn" onclick="openEditProductModal(${_product.ProductID})">Sửa</button>
+                        <div class="edit-product-modal modal">
 
-                </div>
-                <br>
-                <div>
-                    <button class="btn btn-cancel" onclick="closeEditCatalogModal(${_catalog.CatalogID})">Hủy</button>
-                    <button class="btn" onclick="editCatalog(event, ${_catalog.CatalogID})">Gửi</button>
+                            <!-- Modal content -->
+                            <div class="modal-content product-modal-content">
+                                <!-- <span class="close">&times;</span> -->
+                                <div class="form-product">
+                                    <div style="margin: 0 auto;">
+                                        <div class="product__form">
+                                            <div class="product__form-left">
 
                 </div>
             </div>

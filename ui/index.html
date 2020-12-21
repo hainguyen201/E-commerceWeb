@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/src/assets/css/header/main.css">
     <link rel="stylesheet" href="/src/assets/css/notif.css">
     <link rel="stylesheet" href="/src/assets/css/cart/cart.css">
-    <link rel="stylesheet" href="/src/assets/css/catalog/catalog.css">
+    <link rel="stylesheet" href="/src/assets/css/product/product.css">
     <link rel="stylesheet" href="/src/assets/css/product/productDetail.css">
     <link rel="stylesheet" href="/src/assets/css/common.css">
     <link rel="stylesheet" href="/src/assets/css/style.css">
@@ -41,10 +41,8 @@
                             </div>
                         </li>
                         <li class="header__navbar-item dropdown user" style="display: none;">
-                            <div class="person-info dropdown" id="icon-persion"
-                                style="background-color: #f4f4f4; border-radius: 100%;position: absolute; top: 5px;">
-                                <img src="/src/assets/img/icon-person.png" alt="icon-person"
-                                    style=" border-radius: 100%; height: 33px;width: 38px;">
+                            <div class="person-info dropdown" id="icon-persion" style="background-color: #f4f4f4; border-radius: 100%;position: absolute; top: 5px;">
+                                <img src="/src/assets/img/icon-person.png" alt="icon-person" style=" border-radius: 100%; height: 33px;width: 38px;">
                             </div>
                             <div class="dropdown-content">
                                 <div><a is="router-link" id="user-name" href="#">USER</a></div>
@@ -74,7 +72,7 @@
                             </div>
                         </a>
                     </div>
-  
+
                 </div>
         </header>
         <div class="_center_everything" id="notification">
@@ -102,8 +100,7 @@
                                 <!-- <span class="close">&times;</span> -->
                                 <div class="form-catalog">
                                     <div class="catalog-input">
-                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
-                                            class='catalog-value type-input'>
+                                        <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
 
                                     </div>
                                     <br>
@@ -136,8 +133,7 @@
                                     <td name="CatalogModifiedDate">2020-12-12</td>
                                     <td style="text-align:center">
                                         <button id="delete-catalog" class="btn">Xóa</button>
-                                        <button id="edit-catalog" class="btn"
-                                            onclick="openEditCatalogModal(event)">Sửa</button>
+                                        <button id="edit-catalog" class="btn" onclick="openEditCatalogModal(event)">Sửa</button>
                                         <div id="edit-catalog-modal" class="modal">
 
                                             <!-- Modal content -->
@@ -145,14 +141,12 @@
                                                 <!-- <span class="close">&times;</span> -->
                                                 <div class="form-catalog">
                                                     <div class="catalog-input">
-                                                        <input type="text" name="CatalogName" placeholder="Tên danh mục"
-                                                            class='catalog-value type-input'>
+                                                        <input type="text" name="CatalogName" placeholder="Tên danh mục" class='catalog-value type-input'>
 
                                                     </div>
                                                     <br>
                                                     <div>
-                                                        <button class="btn btn-cancel"
-                                                            onclick="closeEditCatalogModal()">Hủy</button>
+                                                        <button class="btn btn-cancel" onclick="closeEditCatalogModal()">Hủy</button>
                                                         <button class="btn" onclick="submitCatalog(event)">Gửi</button>
 
                                                     </div>
@@ -172,14 +166,13 @@
         <footer class="footer">
             <!-- <button id="test-cor">test-cors</button> -->
         </footer>
-    </div>
-    <div id="loading-gif" style="height: 100%;width: 100%; top:0px;position: absolute; display: none;">
-        <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
-    </div>
+        </div>
+        <div id="loading-gif" style="height: 100%;width: 100%; top:0px;position: absolute; display: none;">
+            <img src="/src/assets/img/4V0b.gif" alt="loading" width=80 />
+        </div>
 
     </div>
-    <div class="modal-login-signup"
-        style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
+    <div class="modal-login-signup" style="justify-content: center;display: flex;position: absolute;top: 0;left: 0;right: 0;bottom: 0;align-items: center;height: 100%;width: 100%;">
         <div id="di-login-signup" class="dialog">
             <div id="notif">
                 <h2>Đăng nhập</h2>
@@ -235,15 +228,14 @@
                     <div class="element address">
                         <label>Địa chỉ</label>
                         <input type="text" id="s_address" class="name" placeholder="Nhập địa chỉ" />
-                    </div>    
+                    </div>
                     <div class="element">
                         <p id="vvv" style="color: red;font-size: 12px;"></p>
-                    </div>    
+                    </div>
                     <!-- <div class="element sex">
                         <label>Giới tính</label>
                         <div class="sexx">
-                            <input class="sex-male" name="male" type="radio" value="male" /><label
-                                style="margin-right: 190px;">Nam</label>
+                            <input class="sex-male" name="male" type="radio" value="male" /><label style="margin-right: 190px;">Nam</label>
                             <input class="sex-female" name="female" type="radio" value="female" /><label>Nữ</label>
                         </div>
                     </div>
