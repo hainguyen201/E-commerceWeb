@@ -59,4 +59,17 @@ class ProductService {
             throw (err);
         }
     }
+
+    /**
+     * Tìm kiếm sản phẩm theo tên
+     * Lưu ý về tên: sử dụng dấu _ thay cho dấu cách
+     * /products/names/iphone_12_64GB
+     */
+    static async searchProductByName(productName) {
+        try {
+            return await api.get(`/products/names/${productName}`);
+        } catch (error) {
+            throw error;
+        }
+    }
 }

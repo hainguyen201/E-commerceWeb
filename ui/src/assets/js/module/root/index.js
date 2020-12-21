@@ -45,7 +45,7 @@ class RootElement extends HTMLDivElement {
         function createProductElement(product) {
             let template = document.createElement('template');
             let html =
-                '<div class="product">' +
+                '<div class="product__i">' +
                 '<a is="router-link" id="' +
                 product.ProductID +
                 '" href="/products/' +

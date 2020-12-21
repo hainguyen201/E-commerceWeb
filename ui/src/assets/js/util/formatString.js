@@ -26,6 +26,10 @@ Number.prototype.formatMoney = function () {
     return this.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 };
 
+String.prototype.spaceTo_ = function(){
+    return this.toString().replace(/ /g,'_');
+}
+
 /*
 Thực hiện định dạng dữ liệu kiểu thời gian theo định dạng dd/MM/yyyy
 */
@@ -41,3 +45,5 @@ Date.prototype.formatddMMyyyy = function () {
     var year = this.getFullYear();
     return day + '/' + month + '/' + year;
 };
+
+

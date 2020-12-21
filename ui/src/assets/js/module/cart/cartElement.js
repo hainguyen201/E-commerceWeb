@@ -172,8 +172,60 @@ export default class CartElement extends HTMLDivElement {
         //Router.open('/cart');
     }
 
+    /**
+     * Xác nhận giao dịch với user đã đăng nhập
+     * /transactions/:userid
+     {
+        "PhoneReceiver": "09034542789",
+        "DeliveryAddress": "Tự Nhiên, Thường Tín, Hà Nội",
+        "Message": "Giao buổi chiều"
+     }
+     */
     onOrderToTransaction() {
         //Đặt hàng
+        const nameE = document.querySelector('#i-name');
+        const phoneE = document.querySelector('#i-phone');
+        const noteE = document.querySelector('#i-note');
+        const addressE = document.querySelector('#address-order-input');
+        if (
+            isEmptyValue(nameE.value) ||
+            isEmptyValue(phoneE.value) ||
+            isEmptyValue(addressE.value)
+        ) {
+            notifFailure(
+                'Bạn cần nhập Họ tên,số điện thoại, địa chỉ để đặt hàng'
+            );
+            return;
+        }
+        const data = {
+            PhoneReceiver: phoneE.value,
+            DeliveryAddress: addressE.value,
+            Message: noteE.value,
+            Receiver: nameE.value,
+        };
+        if (this.userID) {
+            TransactionService.confirmTransactionByUserID(this.userID, data)
+                .then((result) => {
+                    notifSuccess(
+                        'Đặt hàng thành công, vào mục giao dịch để xem tình trạng đơn'
+                    );
+                    this.connectedCallback();
+                })
+                .catch((err) => {
+                    notifFailure('Đặt hàng thất bại');
+                });
+        } else {
+            TransactionService.confirmTransactionBySession(data)
+                .then((result) => {
+                    notifSuccess(
+                        'Đặt hàng thành công, vào mục giao dịch để xem tình trạng đơn'
+                    );
+                    this.connectedCallback();
+                })
+                .catch((err) => {
+                    notifFailure('Đặt hàng thất bại');
+                });
+        }
     }
 
     connectedCallback() {
@@ -272,27 +324,35 @@ export default class CartElement extends HTMLDivElement {
             if (user) {
                 addressHTML = `<div style="float: right; width: 315px;">
                 <div id="address-order">
-                    <span>Địa chỉ nhận hàng</span>
+                    <span>Thông tin giao hàng</span>
                  
-                    <input value="${user.FullName}" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
-                     <input value="${user.Phone}" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
-                    <textarea style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"/>${user.Address}</textarea>
+                    <input value="${
+                        user.FullName
+                    }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên người nhận"/>
+                     <input type="number" value="${
+                         user.Phone
+                     }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
+                     <input type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
+                    <textarea style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"/>${
+                        user.Address
+                    }</textarea>
                 </div>
                 <div id="cart-total-price">
                     <span style="color:#787878">Thành tiền</span>
                     <span style="color: #fe3834;float: right;font-size: 22px;font-weight: bold;">${totalMoney.formatMoney()}đ</span>
                 </div>
-                <div id="on-order" onclick="${this.id}.onOrder()">
+                <div id="on-order" onclick="${this.id}.onOrderToTransaction()">
                     Đặt hàng
                 </div>
                 </div>`;
             } else {
                 addressHTML = `<div style="float: right; width: 315px;">
                 <div id="address-order">
-                    <span>Địa chỉ nhận hàng</span>
+                    <span>Thông tin giao hàng</span>
     
                     <input style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
-                     <input style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
+                     <input type="number" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
+                     <input type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
                     <textarea style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"></textarea>
                 </div>
                 <div id="cart-total-price">
@@ -310,7 +370,5 @@ export default class CartElement extends HTMLDivElement {
             } else html = headerHTML + listItemsHTML + addressHTML;
             this.innerHTML = html;
         };
-
-        const appendAddressHTML = () => {};
     }
 }
