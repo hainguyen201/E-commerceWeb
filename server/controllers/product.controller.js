@@ -50,6 +50,13 @@ exports.findProductByID = async(req, res, param) => {
         }
     })
 }
+
+/**
+ * Tìm kiếm sản phẩm qua tên
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.findProductByName = async(req, res, param) => {
     await Product.findProductByName(param, (err, data) => {
         if (err) {
@@ -64,12 +71,24 @@ exports.findProductByName = async(req, res, param) => {
         }
     })
 }
-
+/**
+ * Tìm tất cả sản phẩm
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.findAllProducts = async(req, res, param) => {
     await Products.getAllProducts((err, data) => {
         this.resultHandler(err, data, res, req)
     })
 }
+
+/**
+ * Thêm sản phẩm với role
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.addProductWithAuth = async(req, res, param) => {
     await auth.getRole(req, async(err, data) => {
         if (err) {
@@ -84,6 +103,13 @@ exports.addProductWithAuth = async(req, res, param) => {
     })
 
 }
+
+/**
+ * Thêm sản phẩm
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.addProduct = async(req, res, param) => {
     var product = new Product(req.body)
     var image = product.Image
@@ -116,6 +142,13 @@ exports.addProduct = async(req, res, param) => {
             this.resultHandler(err, data, res, req)
         })
 }
+
+/**
+ * Cập nhật sản phẩm với role
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.updateProductWithAuth = async(req, res, param) => {
     await auth.getRole(req, async(err, data) => {
         if (err) {
@@ -129,6 +162,13 @@ exports.updateProductWithAuth = async(req, res, param) => {
         }
     })
 }
+
+/**
+ * Cập nhật sản phẩm
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.updateProduct = async(req, res, param) => {
     //cập nhật ảnh mới
     await auth.getRole(req, async(err, data) => {
@@ -162,6 +202,12 @@ exports.updateProduct = async(req, res, param) => {
     })
 
 }
+/**
+ * Xóa sản phẩm
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.deleteProduct = async(req, res, param) => {
     var productid = param;
     await Product.DeleteProduct(productid, async(err_p, data_p) => {
@@ -175,6 +221,12 @@ exports.deleteProduct = async(req, res, param) => {
         }
     })
 }
+/**
+ * Xóa sản phẩm với role
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} param 
+ */
 exports.deleteProductWithAuth = async(req, res, param) => {
     await auth.getRole(req, async(err, data) => {
         if (err) {
@@ -188,6 +240,10 @@ exports.deleteProductWithAuth = async(req, res, param) => {
         }
     })
 }
+/**
+ * Format product
+ * @param {*} data 
+ */
 exports.productsFormatToClient = function(data) {
     if (data)
         data.forEach(element => {
@@ -200,6 +256,11 @@ exports.productsFormatToClient = function(data) {
         });
     return data;
 }
+
+/**
+ * Format sản phẩm
+ * @param {*} data 
+ */
 exports.productsFormatToServer = function(data) {
     if (data.length > 0) {
         data.forEach(element => {
@@ -208,6 +269,14 @@ exports.productsFormatToServer = function(data) {
         });
     }
 }
+
+/**
+ * Xử lí kết quả
+ * @param {*} err 
+ * @param {*} data 
+ * @param {*} res 
+ * @param {*} req 
+ */
 exports.resultHandler = (err, data, res, req) => {
     if (err) {
         abstractController.sendErr(res, err)

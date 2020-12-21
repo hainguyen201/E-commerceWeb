@@ -3,6 +3,12 @@ const user = require('../models/user.model')
 const helper = require('../utils/helper')
 const abstracontroller = require('./abstract.controller')
 const USER_DEFAULT = 0
+
+/**
+ * Lấy role của user
+ * @param {*} req 
+ * @param {*} result 
+ */
 exports.getRole = async(req, result) => {
     var cookie = req.headers.cookie.replace('sessionid=', "");
     console.log("cookie: ", cookie)
@@ -30,6 +36,12 @@ exports.getRole = async(req, result) => {
         }
     })
 }
+
+/**
+ * Xác thực user
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.UserAuth = async(req, res) => {
     var cookie = helper.cookieparser(req.headers.cookie);
     await session.getSessionByID(cookie.sessionid, async(err, data) => {
