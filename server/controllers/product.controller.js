@@ -91,8 +91,10 @@ exports.addProduct = async(req, res, param) => {
     if (image.length > 0) {
         // thêm sản phẩm và k thêm ảnh
         product.Image = "";
-        console.log(product)
         await Product.addProduct(product, async(err, dataadd) => {
+            if (err) {
+                abstractController.sendErr(res, err)
+            }
             // console.log(dataadd)
             if (dataadd.insertId) {
                 product.Image = dataadd.insertId + ".jpg"
