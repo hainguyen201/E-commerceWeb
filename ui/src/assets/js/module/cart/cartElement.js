@@ -73,9 +73,9 @@ export default class CartElement extends HTMLDivElement {
             event.currentTarget.parentNode.parentNode.parentNode.id;
         if (this.userID) {
             ProductOrderService.deteleProductInCartByUserID(
-                this.userID,
-                productID
-            )
+                    this.userID,
+                    productID
+                )
                 .then((result) => {
                     notifSuccess('Xóa thành công');
                     this.connectedCallback();
@@ -105,9 +105,9 @@ export default class CartElement extends HTMLDivElement {
         } else {
             if (this.userID) {
                 UserService.updateUserByID(this.userID, {
-                    ...this.user,
-                    Address: textAreaAddress.textContent,
-                })
+                        ...this.user,
+                        Address: textAreaAddress.textContent,
+                    })
                     .then((result) => {
                         notifSuccess('Thay đổi địa chỉ thành công');
                     })
@@ -125,9 +125,9 @@ export default class CartElement extends HTMLDivElement {
         const update = () => {
             if (this.userID) {
                 ProductOrderService.editAmountProductByUserID(this.userID, {
-                    ProductID: productID,
-                    Amount: valueAmount,
-                })
+                        ProductID: productID,
+                        Amount: valueAmount,
+                    })
                     .then((result) => {
                         this.connectedCallback();
                         notifSuccess('Thao tác thành công');
@@ -137,9 +137,9 @@ export default class CartElement extends HTMLDivElement {
                     });
             } else {
                 ProductOrderService.editAmountProductBySession({
-                    ProductID: productID,
-                    Amount: valueAmount,
-                })
+                        ProductID: productID,
+                        Amount: valueAmount,
+                    })
                     .then((result) => {
                         this.connectedCallback();
                         notifSuccess('Thao tác thành công');
@@ -328,11 +328,11 @@ export default class CartElement extends HTMLDivElement {
                  
                     <input value="${
                         user.FullName
-                    }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên người nhận"/>
-                     <input type="number" value="${
+                    }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" class="type-input" placeholder="Họ tên người nhận"/>
+                     <input type="number" class="type-input" value="${
                          user.Phone
                      }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
-                     <input type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
+                     <input class="type-input" type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
                     <textarea style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"/>${
                         user.Address
                     }</textarea>
@@ -350,10 +350,10 @@ export default class CartElement extends HTMLDivElement {
                 <div id="address-order">
                     <span>Thông tin giao hàng</span>
     
-                    <input style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
-                     <input type="number" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
-                     <input type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
-                    <textarea style="border: 1px solid #787878;margin-top: 8px;" placeholder="Địa chỉ" type="text" id="address-order-input"></textarea>
+                    <input class="type-input" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name" placeholder="Họ tên"/>
+                     <input class="type-input" type="number" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone" placeholder="Số điện thọai"/>
+                     <input class="type-input" type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note" placeholder="Ghi chú"/>
+                    <textarea style="border: 1px solid #787878;margin-top: 8px;" class="type-input" placeholder="Địa chỉ" type="text" id="address-order-input"></textarea>
                 </div>
                 <div id="cart-total-price">
                     <span style="color:#787878">Thành tiền</span>
