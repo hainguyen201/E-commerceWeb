@@ -136,6 +136,7 @@ exports.confirmTransactionByUserID = async(req, res, param) => {
 exports.confirmTransactionBySession = async(req, res, paran) => {
     var sessionid = helper.cookieparser(req.headers.cookie).sessionid;
     var transaction_add = req.body;
+    transaction_add.SessionID = sessionid;
     await session.getSessionByID(sessionid, async(err, data) => {
         if (err) {
             abstractController.sendErr(res, err)
