@@ -109,7 +109,7 @@
 }
 
 .menu {
-    width: 500px;
+    width: 200px;
     height: 600px;
     margin-right: 16px;
 }
@@ -195,5 +195,6 @@
 }
 
 .product-modal-content {
-    width: 40%;
+   max-width: 50%;
+   min-width: 45%;
 }

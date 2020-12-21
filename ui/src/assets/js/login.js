@@ -114,8 +114,17 @@ const addIconAdmin = () => {
 };
 
 var loginSuccessful = (user) => {
+    let amE = document.querySelector(".cart-amount-items");
     if (user.Role == 1) {
         addIconAdmin();
+        document.querySelector(".admin-or-user").innerHTML = 'ADMIN';
+        document.querySelector("#trans__").style.display = 'none';
+        amE.style.display = 'none';
+    }
+    else{
+        document.querySelector(".admin-or-user").innerHTML = '';
+        document.querySelector("#icon-trans").style.display = 'grid';
+        amE.style.display = 'flex';
     }
     localStorage.setItem('USER_ID', user.UserID);
     li_login.style.display = 'none';
@@ -133,6 +142,8 @@ var logoutSuccessful = () => {
     if (isElement(adminE)) {
         containerIcon.removeChild(adminE);
     }
+    let amE = document.querySelector(".cart-amount-items");
+    amE.style.display = 'flex';
     li_login.style.display = 'inline-block';
     li_user.style.display = 'none';
     // document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));

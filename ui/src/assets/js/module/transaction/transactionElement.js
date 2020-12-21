@@ -110,6 +110,7 @@ export default class TransactionElement extends HTMLDivElement {
         let data = [];
         this.userID = UserID;
         let html = '';
+        
         const appendHTML = (data) => {
             if (data != null && data.length > 0) {
                 data.forEach((item) => {
@@ -127,6 +128,14 @@ export default class TransactionElement extends HTMLDivElement {
                         onclick="${this.id}.openChange(${item.TransactionID})">Thay đổi</span>`;
                         status = 'Đang được giao';
                         color = 'blue';
+                    }
+                    else if(item.TransactionStatus == -1){
+                        status = 'Đã hủy';
+                        color = '#787878';
+                    }
+                    else if(item.TransactionStatus != 1){
+                        status = 'Không xác định';
+                        color = '#000';
                     }
                     html += `<div style="float: right; width: 315px;font-size:14px;margin:3px;">
                  <div id="address-order">
