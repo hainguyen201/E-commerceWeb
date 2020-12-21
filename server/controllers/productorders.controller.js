@@ -10,14 +10,13 @@ const order = require('../models/order.model')
 const { isBuffer } = require('util')
 const Order = require('../models/order.model')
 const ProductOrder = require('../models/productorder.model')
-
-/**
- * Lấy sản phẩm bởi orderID
- * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} param 
- */
+    /**
+     * Lấy sản phẩm bởi orderID
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} param 
+     */
 exports.getProductByOrderID = async(req, res, param) => {
     await productOrder.getProductByOrderID(param, (err, data) => {
         if (err) {
