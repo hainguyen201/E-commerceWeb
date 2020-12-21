@@ -28,13 +28,14 @@ CREATE TABLE `transactions` (
   `TransactionStatus` int DEFAULT NULL COMMENT 'Trạng thái giao dịch do admin cập nhật: 1- đã giao hàng, 0 - đang giao hàng',
   `Payment` decimal(10,0) DEFAULT NULL COMMENT 'Tổng giá trị thanh toán',
   `PhoneReceiver` varchar(45) DEFAULT NULL,
+  `Receiver` varchar(45) DEFAULT NULL,
   `DeliveryAddress` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Thông tin thanh toán cụ thể:địa điểm giao hàng',
   `Message` varchar(255) DEFAULT NULL COMMENT 'Tin nhắn cho người bán',
   `SessionID` varchar(36) DEFAULT NULL,
   `TransactionModifiedDate` date DEFAULT NULL,
   `TransactionCreatedDate` date DEFAULT NULL COMMENT 'Ngày tạo',
   PRIMARY KEY (`TransactionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-INSERT INTO `transactions` VALUES (3,1,0,3000000,'0903487255','Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều',NULL,NULL,NULL),(4,1,1,3000000,'0903487255','Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều',NULL,NULL,NULL),(5,0,1,3000000,NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','193145d0-41f3-11eb-8244-3bbf5bb5d388',NULL,NULL),(9,1,0,4000000,NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','0',NULL,'2020-12-20'),(10,1,0,4000000,NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','0',NULL,'2020-12-20');
+INSERT INTO `transactions` VALUES (3,1,0,3000000,'0903487255',NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều',NULL,NULL,NULL),(4,1,1,3000000,'0903487255',NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều',NULL,NULL,NULL),(5,0,1,3000000,NULL,NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','193145d0-41f3-11eb-8244-3bbf5bb5d388',NULL,NULL),(9,1,0,4000000,NULL,NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','0',NULL,'2020-12-20'),(10,1,0,4000000,NULL,NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','0',NULL,'2020-12-20'),(11,1,0,0,'0903487256',NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','0',NULL,'2020-12-20'),(12,1,0,12000000,'0903487256',NULL,'Tự Nhiên, Thường Tín, Hà Nội','Giao buổi chiều','0',NULL,'2020-12-20'),(13,0,1,9500000,'',NULL,'','0','0','2020-12-20','2020-12-20');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-20 14:46:20
+-- Dump completed on 2020-12-20 21:43:36

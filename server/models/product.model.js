@@ -66,6 +66,7 @@ Product.addProduct = async(product, result) => {
 }
 Product.updateProduct = async(productid, product, result) => {
     var newProduct = new Product(product);
+    product.ProductModifiedDate = helper.getDateNow();
     await AbstractModel.updateDataQuery('products', newProduct, result, 'ProductID', productid)
 }
 Product.DeleteProduct = async(productid, result) => {

@@ -1,55 +1,17 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="../style.css">
+<div id="main-container" style="padding: 25px;">
+    <div class="dashboard">
+        <div class="menu">
+            <div class="menu-title content">Quản lý</div>
+            <div class="menu-content">
+                <div class="menu-item content">Danh mục</div>
+                <div class="menu-item content">Sản phẩm</div>
+                <div class="menu-item content">Giao dịch</div>
 
-<body>
-    <div class="form-product" id="form-product">
-        <div class="product">
-            <div class="product__form">
-                <div class="product__form-left">
-
-                    <!-- Mã sản phẩm:<br>
-                    <input type="text" name="ProductID" placeholder="mã sản phẩm" class="type-input product-value"> -->
-
-                    <br>
-                    <input type="text" name="ProductName" placeholder="Tên sản phẩm" class="type-input product-value">
-                    <br>
-                    <br>
-                    <input type="number" name="Price" placeholder="Giá sản phẩm" class="type-input">
-                    <br><br>
-                    <input type="text" name="Content" placeholder="Mô tả sản phẩm" class="type-input product-value">
-                    <br><br>
-                    <input type="file" id="avatar" name="Image" accept="image/png, image/jpeg" onchange="previewImage()" class="product-value">
-                    <br>
-                    <img src="" alt="" id="product-image-preview">
-
-                </div>
-                <div class="product__form-right">
-                    <!-- Mã danh mục:<br>
-                    <input type="text" name="CategoryID" placeholder="mã danh mục" class="type-input  product-value"> -->
-                    <br>
-                    <input type="number" name="Discount" placeholder="Giảm giá" class="type-input  product-value">
-                    <br><br>
-                    <input type="number" name="Remain" placeholder="Số lượng sản phẩm" class="type-input  product-value">
-                    <br><br>
-                    <select name="CategoryID" id="CategoryName" class="type-input  product-value">
-                      <option placeholder="category1" value="1">Đồ điện tử</option>
-                      <option placeholder="category2" value="2">Thời trang</option>
-                      <option placeholder="category3" value="3">Tiện dụng</option>
-                      <option placeholder="category4" value="4">Sức khỏe</option>
-                    </select>
-                </div>
-            </div>
-            <div class="sumit__form">
-                <br>
-                <button class="btn btn-cancel">Hủy</button>
-                <input class="submit btn" id="submit-product" type="submit" placeholder="Submit" onclick="submitProduct()">
-                <br>
             </div>
         </div>
+        <div class="list-catalog list-item"></div>
+        <div class="list-product list-item"></div>
     </div>
-    <script src="../assets/js/api/api.js"></script>
-    <script src="index.js"></script>
-</body>
 
-</html>
+
+</div>
