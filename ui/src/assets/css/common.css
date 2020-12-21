@@ -195,5 +195,6 @@
 }
 
 .product-modal-content {
-    width: 40%;
+   max-width: 50%;
+   min-width: 45%;
 }
