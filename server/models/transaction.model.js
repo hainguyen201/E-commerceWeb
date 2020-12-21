@@ -8,7 +8,11 @@ const Transaction = function(transaction) {
     this.SessionID = transaction.SessionID ? transaction.SessionID : 0;
     this.TransactionStatus = transaction.TransactionStatus ? transaction.TransactionStatus : 0;
     this.PhoneReceiver = transaction.PhoneReceiver ? transaction.PhoneReceiver : '';
-    this.Receiver = transaction.Receiver ? transaction.Receiver :'';
+    this.Receiver = transaction.Receiver ? transaction.Receiver : '';
+}
+Transaction.getAllTransaction = async(resutl) => {
+    var sqlString = `select * from transactions`
+    await AbstractModel.queryExc(resutl, sqlString);
 }
 Transaction.getTransactionByID = async(transactionid, result) => {
     var sqlString = 'select * from transaction'

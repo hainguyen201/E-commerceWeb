@@ -351,6 +351,16 @@ const routes = [
         path: /^\/productorders\/([0-9a-z]+)/,
         handler: productOrderController.deleteProductOrderWithSession
     },
+
+    /**
+     * Lấy tất cả giao dịch (dành cho admin)
+     * /transactions
+     */
+    {
+        method: 'GET',
+        path: "/transactions/admins",
+        handler: transactionController.getAllTransaction
+    },
     /**
      * Lấy giao dịch đã thực hiện của user đã đăng nhập
      * /transactions/:userid
@@ -360,6 +370,7 @@ const routes = [
         path: /^\/transactions\/([0-9a-z]+)/,
         handler: transactionController.getTransactionByUserID
     },
+
     /**
      * Lấy giao dịch đã thực hiện của user chưa đăng nhập (sử dụng session)
      * /transactions
