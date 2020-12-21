@@ -26,3 +26,15 @@
 #current-catalog {
     margin-bottom: 20px;
 }
+
+._ccc{
+    height: 20px;
+    padding: 5px;
+    border-bottom: 1px solid #787878;
+    cursor: pointer;
+    margin-top: 3px;
+}
+
+._ccc:hover{
+    background-color: aqua;
+}

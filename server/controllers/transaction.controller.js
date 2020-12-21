@@ -10,7 +10,25 @@ const Transaction = require('../models/transaction.model')
 const ProductOrder = require('../models/productorder.model')
 const auth = require('./auth.controller')
 
-
+exports.getAllTransaction = async(req, res, param) => {
+    await auth.getRole(req, async(err, data) => {
+        if (err) {
+            abstractController.sendErr(res, err);
+        } else {
+            if (data == 1) {
+                await Transaction.getAllTransaction(async(err, data) => {
+                    if (err) {
+                        abstractController.sendErr(res, err)
+                    } else {
+                        abstractController.sendData(res, data)
+                    }
+                })
+            } else {
+                abstractController.sendAuth(res);
+            }
+        }
+    })
+}
 
 /**
  * Lấy transaction thông qua userID

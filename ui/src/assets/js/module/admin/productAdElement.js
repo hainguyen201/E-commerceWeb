@@ -2,9 +2,9 @@ const template = `
 <div class="menu">
     <div class="menu-title content">Quản lý</div>
     <div class="menu-content">
-    <a href="/admin/catalog"><div class="menu-item content">Danh mục</div></a>
-    <a href="/admin/product"><div class="menu-item content">Sản phẩm</div></a>
-    <a href="/admin/transaction"><div class="menu-item content">Giao dịch</div></a>
+    <a is="router-link" href="/admin/catalog"><div class="menu-item content">Danh mục</div></a>
+    <a is="router-link" href="/admin/product"><div class="menu-item content">Sản phẩm</div></a>
+    <a is="router-link" href="/admin/transaction"><div class="menu-item content">Giao dịch</div></a>
     </div>
 </div>
 `;
@@ -20,13 +20,49 @@ class ProductAdElement extends HTMLDivElement {
     constructor() {
         super();
         this.classList.add('dashboard');
+        this.id = '_p';
+        this.isFil = false;
         // const templateEl = document.createElement("template");
         // templateEl.innerHTML = template;
         // this.appendChild(templateEl.content.cloneNode(true));
     }
 
+    filterCa(catalogID) {
+        this.catalogID = catalogID;
+        this.isFil = true;
+        this.connectedCallback();
+    }
+
     connectedCallback() {
+        this.innerHTML = '';
+        let addCatalogAfter = () => {
+            catalogService
+                .getListCatalog()
+                .then((data) => {
+                    if (data.length > 0) {
+                        let _caE = `<div style="width: 200px;">
+                   <div onclick="" style="height: 20px;background-color: #93eb97; margin-top:30px;padding:5px;">Lọc danh mục sản phẩm</div>`;
+
+                        data.forEach((item) => {
+                            _caE += `<div id="caa${item.CatalogID}" class="_ccc" onclick="${this.id}.filterCa(${item.CatalogID})" >${item.CatalogName}</div>`;
+                        });
+                        _caE += '</div>';
+                        menuElement.appendChild(createElementByText(_caE));
+                    }
+                })
+                .catch((err) => {
+                    notifFailure(err.toString());
+                });
+        };
+        //     const catalogElement = createElementByText(`<div style="width: 200px;">
+        //     <div onclick="" style="height: 20px;background-color: #93eb97; margin-top:30px;padding:5px;">Lọc danh mục sản phẩm</div>
+        //     <div class="_ccc" onclick="" >aaa</div>
+        //     <div class="_ccc" onclick="" >aaa</div>
+        //     <div class="_ccc" onclick="" >aaa</div>
+        // </div>`);
+
         const menuElement = createElementByText(template);
+        //menuElement.appendChild(catalogElement);
         this.appendChild(menuElement);
         let produchtml;
         let addProductTable = (products) => {
@@ -228,16 +264,28 @@ class ProductAdElement extends HTMLDivElement {
             // productElement.innerHTML = produchtml;
             this.appendChild(createElementByText(produchtml));
         };
-
-        productService
-            .getAllProduct()
-            .then((result) => {
-                console.log(result);
-                addProductTable(result.data);
-            })
-            .catch((err) => {
-                notifFailure('Không thể lấy danh sách sản phẩm');
-            });
+        if (!this.isFil) {
+            productService
+                .getAllProduct()
+                .then((result) => {
+                    addProductTable(result.data);
+                    addCatalogAfter();
+                })
+                .catch((err) => {
+                    notifFailure('Không thể lấy danh sách sản phẩm');
+                });
+        } else {
+            debugger
+            productService
+                .getListProductByCatalogID(this.catalogID)
+                .then((data) => {
+                    addProductTable(data.data);
+                    addCatalogAfter();
+                })
+                .catch((err) => {
+                    notifFailure('Không thể lấy danh sách sản phẩm');
+                });
+        }
     }
 }
 
