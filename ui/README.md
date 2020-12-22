@@ -1,3 +1,3 @@
 chạy ui:
-vào thư mục ui/src
+vào thư mục ui
 chạy lệnh: npm start
