@@ -59,7 +59,7 @@ function openLoginSignupModal() {
 // checkboxMale.addEventListener('change', this.onlyCheckOne);
 // checkboxFemale.addEventListener('change', (e) => this.onlyCheckOne(e));
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modalLoginSignup) {
         onCloseModal();
     }
@@ -76,7 +76,7 @@ let validate = document.querySelector('.validate-login');
 validate.innerHTML = ' ';
 let reEmail = /\S+@\S+\.\S+/;
 let rePass = /^\w{7,15}$/;
-email.onkeydown = function (e) {
+email.onkeydown = function(e) {
     // if (!reEmail.exec(email.value)) {
     //     validate.innerHTML = "Email không hợp lệ";
     // } else validate.innerHTML = "";
@@ -120,8 +120,7 @@ var loginSuccessful = (user) => {
         document.querySelector(".admin-or-user").innerHTML = 'ADMIN';
         document.querySelector("#trans__").style.display = 'none';
         amE.style.display = 'none';
-    }
-    else{
+    } else {
         document.querySelector(".admin-or-user").innerHTML = '';
         document.querySelector("#icon-trans").style.display = 'grid';
         amE.style.display = 'flex';
@@ -133,6 +132,7 @@ var loginSuccessful = (user) => {
     a_user.setAttribute('href', `/users`);
     onCloseModal();
     updateShowTotalProductOfCart();
+
 };
 
 var logoutSuccessful = () => {
@@ -165,7 +165,7 @@ var logoutSuccessful = () => {
 //     document.dispatchEvent(new CustomEvent('page-load-route', { detail: '/' }));
 //     updateShowTotalProductOfCart();
 // };
-btnLogin.onclick = async function (event) {
+btnLogin.onclick = async function(event) {
     if (true) {
         try {
             if (checkValidation()) {
@@ -175,7 +175,7 @@ btnLogin.onclick = async function (event) {
                 );
                 //let data = await userService.loginService('hainguyen', '1234');
                 notifSuccess('Đăng nhập thành công');
-                loginSuccessful(data.data[0]);
+                window.location.reload();
             }
         } catch (error) {
             notifFailure('Tên tài khoản hoặc mật khẩu không chính xác');

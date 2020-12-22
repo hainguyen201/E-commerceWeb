@@ -119,22 +119,22 @@ class TransactionAdElement extends HTMLDivElement {
                          item.TransactionID
                      } ngày ${date}</span>
                     ${changeE}
-                     <input disabled value="${
+                     <input disabled class="type-input" value="${
                          item.Receiver || ''
                      }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-name${
                         item.TransactionID
                     }" placeholder="Họ tên người nhận"/>
-                      <input disabled type="number" value="${
+                      <input " disabled type="number" value="${
                           item.PhoneReceiver
-                      }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-phone${
+                      }" style="border:1px solid #787878;margin-top: 8px;width: 100%;" class="type-input" id="i-phone${
                         item.TransactionID
                     }" placeholder="Số điện thọai"/>
-                      <input value="${
+                      <input class="type-input" value="${
                           item.Message
                       }" disabled type="text" style="border:1px solid #787878;margin-top: 8px;width: 100%;" id="i-note${
                         item.TransactionID
                     }" placeholder="Ghi chú"/>
-                     <textarea disabled style="border: 1px solid #787878;margin-top: 8px;resize: none;border: none;width: 285px; overflow: hidden;
+                     <textarea class="type-input" disabled style="border: 1px solid #787878;margin-top: 8px;resize: none;border: none;width: 285px; overflow: hidden;
                      min-height: 50px;" placeholder="Địa chỉ" type="text" id="i-address${
                          item.TransactionID
                      }"/>${item.DeliveryAddress}</textarea>
