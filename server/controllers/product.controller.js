@@ -58,25 +58,25 @@ exports.findProductByID = async(req, res, param) => {
  * @param {*} param 
  */
 exports.findProductByName = async(req, res, param) => {
-    await Product.findProductByName(param, (err, data) => {
-        if (err) {
-            abstractController.sendErr(res, err)
-        } else {
-            var dt = abstractController.dataForGet;
-            if (data) {
-                dt.data = this.productsFormatToClient(data)
-                dt.success = true
+        await Product.findProductByName(param, (err, data) => {
+            if (err) {
+                abstractController.sendErr(res, err)
+            } else {
+                var dt = abstractController.dataForGet;
+                if (data) {
+                    dt.data = this.productsFormatToClient(data)
+                    dt.success = true
+                }
+                abstractController.sendData(res, data)
             }
-            abstractController.sendData(res, data)
-        }
-    })
-}
-/**
- * Tìm tất cả sản phẩm
- * @param {*} req 
- * @param {*} res 
- * @param {*} param 
- */
+        })
+    }
+    /**
+     * Tìm tất cả sản phẩm
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} param 
+     */
 exports.findAllProducts = async(req, res, param) => {
     await Products.getAllProducts((err, data) => {
         this.resultHandler(err, data, res, req)
@@ -170,80 +170,80 @@ exports.updateProductWithAuth = async(req, res, param) => {
  * @param {*} param 
  */
 exports.updateProduct = async(req, res, param) => {
-    //cập nhật ảnh mới
-    await auth.getRole(req, async(err, data) => {
-        if (err) {
-            abstractController.sendErr(res, err);
-        } else {
-            if (data == 1) {
-                var product = new Product(req.body)
-                var image = product.Image
-                console.log(image.length)
-                if (image.length > 0) {
-                    //cập nhật lại thông tin và không có ảnh
-                    product.Image = param + ".jpg";
-                    await Product.updateProduct(param, product, (err, data) => {
-                        if (err) {
+        //cập nhật ảnh mới
+        await auth.getRole(req, async(err, data) => {
+            if (err) {
+                abstractController.sendErr(res, err);
+            } else {
+                if (data == 1) {
+                    var product = new Product(req.body)
+                    var image = product.Image
+                    console.log(image.length)
+                    if (image.length > 0) {
+                        //cập nhật lại thông tin và không có ảnh
+                        product.Image = param + ".jpg";
+                        await Product.updateProduct(param, product, (err, data) => {
+                            if (err) {
+                                this.resultHandler(err, data, res, req)
+                            } else {
+                                //cập nhật lại ảnh
+                                helper.save_base64(image, product.Image)
+                                this.resultHandler(err, data, res, req);
+                            }
+                        })
+                    } else
+                        await Products.updateProduct(param, product, (err, data) => {
                             this.resultHandler(err, data, res, req)
-                        } else {
-                            //cập nhật lại ảnh
-                            helper.save_base64(image, product.Image)
-                            this.resultHandler(err, data, res, req);
-                        }
-                    })
-                } else
-                    await Products.updateProduct(param, product, (err, data) => {
-                        this.resultHandler(err, data, res, req)
-                    })
-            } else {
-                abstractController.sendAuth(res)
+                        })
+                } else {
+                    abstractController.sendAuth(res)
+                }
             }
-        }
-    })
+        })
 
-}
-/**
- * Xóa sản phẩm
- * @param {*} req 
- * @param {*} res 
- * @param {*} param 
- */
+    }
+    /**
+     * Xóa sản phẩm
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} param 
+     */
 exports.deleteProduct = async(req, res, param) => {
-    var productid = param;
-    await Product.DeleteProduct(productid, async(err_p, data_p) => {
-        if (err_p) {
-            abstractController.sendErr(res, err);
-        } else {
-            //xóa ảnh trong storage
-            var imagepath = productid + '.jpg'
-            helper.deleteImage(imagepath)
-            abstractController.sendData(res, data_p);
-        }
-    })
-}
-/**
- * Xóa sản phẩm với role
- * @param {*} req 
- * @param {*} res 
- * @param {*} param 
- */
-exports.deleteProductWithAuth = async(req, res, param) => {
-    await auth.getRole(req, async(err, data) => {
-        if (err) {
-            abstractController.sendErr(res, err);
-        } else {
-            if (data == 1) {
-                this.deleteProduct(req, res, param)
+        var productid = param;
+        await Product.DeleteProduct(productid, async(err_p, data_p) => {
+            if (err_p) {
+                abstractController.sendErr(res, err);
             } else {
-                abstractController.sendAuth(res);
+                //xóa ảnh trong storage
+                var imagepath = productid + '.jpg'
+                helper.deleteImage(imagepath)
+                abstractController.sendData(res, data_p);
             }
-        }
-    })
-}
-/**
- * Format product
- * @param {*} data 
- */
+        })
+    }
+    /**
+     * Xóa sản phẩm với role
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} param 
+     */
+exports.deleteProductWithAuth = async(req, res, param) => {
+        await auth.getRole(req, async(err, data) => {
+            if (err) {
+                abstractController.sendErr(res, err);
+            } else {
+                if (data == 1) {
+                    this.deleteProduct(req, res, param)
+                } else {
+                    abstractController.sendAuth(res);
+                }
+            }
+        })
+    }
+    /**
+     * Format product
+     * @param {*} data 
+     */
 exports.productsFormatToClient = function(data) {
     if (data)
         data.forEach(element => {
