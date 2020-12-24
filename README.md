@@ -1,4 +1,7 @@
 # E-commerceWeb
+## Khởi tạo Databsae:
+- Cài mysqlserver
+- Import db từ thư mục database
 ## Chạy server:
 - Vào thư mục server/ cài modules npm install
 - chạy server: npm run dev
