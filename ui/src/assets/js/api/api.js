@@ -17,6 +17,7 @@ class Api {
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
             //this.defaultHeaderConfig(xhr);
+            //callback khi request thành công
             xhr.onload = () => {
                 const response = isJsonString(xhr.responseText)
                     ? JSON.parse(xhr.responseText)
@@ -37,21 +38,29 @@ class Api {
                     );
                 }
             };
+            //callback khi request thất bại
             xhr.onerror = () => {
                 //loi mang hoac may chu
                 console.log('get onerror');
                 reject(new CustomError(500, 'Unknow error!'));
             };
+
+            //callback khi transaction bị hủy bỏ
             xhr.onabort = () => {
                 console.log('get onabort');
                 debugger;
             };
+
+            //callback khi request thành công hay thất bại, sau onerror,onabort hoặc onload
             xhr.onloadend = () => {
                 console.log('onloadend');
             };
+
+            //callback khi time out
             xhr.ontimeout = () => {
                 console.log('ontimeout');
             };
+            //Được kích hoạt định kỳ khi request nhận được nhiều dữ liệu hơn
             xhr.onprogress = () => {
                 console.log('onprogress');
             };
